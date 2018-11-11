@@ -1,0 +1,4 @@
+# Unnecessary Files & Folders
+.idea
+yarn.lock
+node_modules
