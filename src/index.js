@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 // app
-import './assets/scss/main.scss';
+import '../node_modules/@imransilvake/scss-framework/dist/css/main.min.css';
 import './assets/scss/app.scss';
 import Root from './app/app-routing';
 

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/core": "7.1.6",
+    "@imransilvake/scss-framework": "^1.0.8",
     "@material-ui/core": "latest",
     "@svgr/webpack": "4.0.3",
     "babel-core": "7.0.0-bridge.0",
