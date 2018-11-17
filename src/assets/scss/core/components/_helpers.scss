@@ -1,0 +1,117 @@
+// === Alignment === //
+.cd-left-align {
+	text-align: left;
+}
+
+.cd-right-align {
+	text-align: right;
+}
+
+.cd-center-align {
+	text-align: center;
+}
+
+// === Visibility === //
+.cd-hide {
+	display: none;
+}
+
+.cd-show {
+	display: block;
+}
+
+.cd-visible {
+	visibility: visible;
+}
+
+.cd-hidden {
+	visibility: hidden;
+}
+
+// platform loop
+@each $platform, $device-list in $cd-devicePoints {
+	$down: 'down';
+	$up: 'up';
+	$direction: '';
+
+	// Check direction based on platform.
+	@if $platform == $platform-desktop {
+		$direction: $down
+	} @else {
+		$direction: $up
+	}
+
+	// devicePoints loop
+	@each $device, $map-value in $device-list {
+		$deviceFirstLetter: str-slice($device, 1, 1);
+
+		// media queries
+		@include cd-media($platform, $device) {
+			// exclude widescreen for desktop platform and mini for mobile desktop: redundancy
+			@if $platform == $platform-desktop and $deviceFirstLetter != 'w' or $platform == $platform-mobile and $deviceFirstLetter != 'm' {
+				.cd-hide-on-#{$deviceFirstLetter}-#{$direction} {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+// === Overflow === //
+.cd-hide-overflow {
+	overflow-y: hidden;
+}
+
+.cd-disable-overflow {
+	overflow-y: scroll;
+
+	* {
+		overflow: hidden;
+	}
+}
+
+// === Position === //
+.cd-vh-center {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.cd-h-center {
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, 0);
+}
+
+.cd-v-center {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
+// === Opacity === //
+.cd-opacity-high {
+	opacity: .5;
+	transition: .5s;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.cd-opacity-low {
+	opacity: 1;
+	transition: .5s;
+
+	&:hover {
+		opacity: .9;
+	}
+}
+
+// === List Style === //
+.cd-remove-bullets, .cd-remove-bullets-nested ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}

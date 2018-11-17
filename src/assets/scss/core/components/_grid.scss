@@ -1,0 +1,41 @@
+.cd-row {
+	display: flex;
+	flex-flow: row wrap;
+
+	.cd-col {
+		flex: 0 0 100%;
+		padding: 0 $cd-gutter;
+
+		// platform loop
+		@each $platform, $device-list in $cd-devicePoints {
+			// devicePoints loop
+			@each $device, $map-value in $device-list {
+				$platformFirstLetter: str-slice($platform, 1, 1);
+				$deviceFirstLetter: str-slice($device, 1, 1);
+
+				// media queries
+				@include cd-media($platform, $device) {
+					// grid columns loop
+					@for $column from 1 through $cd-columns {
+						$width: 100% / $cd-columns * $column;
+
+						// size
+						&.cd-col-p#{$platformFirstLetter}-#{$deviceFirstLetter}-#{$column} {
+							flex: 0 0 $width;
+						}
+
+						// offset
+						&.cd-col-p#{$platformFirstLetter}-offset-#{$deviceFirstLetter}-#{$column} {
+							margin: 0 0 0 100% / $cd-columns * $column;
+						}
+
+						// order
+						&.cd-col-p#{$platformFirstLetter}-order-#{$deviceFirstLetter}-#{$column} {
+							order: $column;
+						}
+					}
+				}
+			}
+		}
+	}
+}

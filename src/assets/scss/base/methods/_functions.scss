@@ -1,0 +1,60 @@
+// Color Palette
+@function cd-palette($palette, $hex-code, $opacity: null) {
+	@if map-has-key($palette, $hex-code) {
+		$color: map-get($palette, $hex-code);
+		$opacity: if($opacity == null, opacity($color), $opacity);
+
+		@if $opacity >= 0 and $opacity <=1 {
+			@return rgba($color, $opacity);
+		} @else {
+			@error 'Opacity value `#{$opacity}` must range from 0-1.';
+		}
+	} @else {
+		@error 'Unable to find a palette code: `#{$hex-code}`.';
+	}
+}
+
+// Property: z-index
+@function cd-zIndex($key) {
+	@if map-has-key($cd-zIndex, $key) {
+		@return map-get($cd-zIndex, $key);
+	} @else {
+		@error 'Unable to find a z-index: `#{$key}`.';
+	}
+}
+
+// Property: font-family
+@function cd-fontFamily($key) {
+	@if map-has-key($cd-fontFamily, $key) {
+		@return map-get($cd-fontFamily, $key);
+	} @else {
+		@error 'Unable to find a font-family: `#{$key}`.';
+	}
+}
+
+// Property: font-size
+@function cd-fontSize($key) {
+	@if map-has-key($cd-fontSize, $key) {
+		@return map-get($cd-fontSize, $key);
+	} @else {
+		@error 'Unable to find a font-size: `#{$key}`.';
+	}
+}
+
+// Property: font-weight
+@function cd-fontWeight($key) {
+	@if map-has-key($cd-fontWeight, $key) {
+		@return map-get($cd-fontWeight, $key);
+	} @else {
+		@error 'Unable to find a font-weight: `#{$key}`.';
+	}
+}
+
+// Property: line-height
+@function cd-lineHeight($key) {
+	@if map-has-key($cd-lineHeight, $key) {
+		@return map-get($cd-lineHeight, $key);
+	} @else {
+		@error 'Unable to find a line-height: `#{$key}`.';
+	}
+}

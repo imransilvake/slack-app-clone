@@ -1,0 +1,113 @@
+// Platforms and Devices
+$platform-desktop:		desktop;
+$platform-mobile:		mobile;
+
+$device-widescreen:		widescreen;
+$device-desktop:		desktop;
+$device-tablet:			tablet;
+$device-smartphone:		smartphone;
+$device-mini:			mini;
+
+// Media Queries
+$cd-devicePoints: (
+	$platform-desktop: (
+		$device-widescreen:	( min-width: 1201px ),
+		$device-desktop:	( max-width: 1200px ),
+		$device-tablet:		( max-width: 992px ),
+		$device-smartphone:	( max-width: 767px ),
+		$device-mini:		( max-width: 480px )
+	),
+	$platform-mobile: (
+		$device-mini:		( max-width: 479px ),
+		$device-smartphone:	( min-width: 480px ),
+		$device-tablet:		( min-width: 767px ),
+		$device-desktop:	( min-width: 992px ),
+		$device-widescreen:	( min-width: 1200px )
+	)
+);
+
+// Container
+$cd-containerPoints: (
+	$device-desktop:		992 - 30 + px,
+	$device-widescreen:		1200 - 30 + px
+);
+
+// Grid System
+$cd-columns: 	12 !default;
+$cd-gutter: 	15px !default;
+
+// Z Index: z-index
+$cd-zIndex: (
+	hide:		-1,
+	initial:	0,
+	normal:		1,
+	float:		2,
+	modal:		3,
+	loader:		4
+);
+
+// Font Family: font-family
+$cd-fontFamily: (
+	roboto:		'Roboto',
+	comics-san:	'Comic Sans MS'
+);
+
+// Font Size: font-size
+$cd-fontSize: (
+	h1:		2.5rem,
+	h2:		2rem,
+	h3:		1.75rem,
+	h4:		1.5rem,
+	h5:		1.25rem,
+	h6:		1rem,
+	s10:	10px,
+	s11:	11px,
+	s12:	12px,
+	s13:	13px,
+	s14:	14px,
+	s15:    15px,
+	s16:    16px,
+	s17:    17px,
+	s18:    18px,
+	s19:    19px,
+	s20:    20px,
+	se1:    1rem,
+	se2:    2rem,
+	se3:    3rem,
+	se4:    4rem,
+	se5:    5rem,
+	se6:    6rem
+);
+
+// Font Weight: font-weight
+$cd-fontWeight: (
+	100:	100,
+	200:	200,
+	300:	300,
+	400:	400,
+	500:	500,
+	600:	600,
+	700:	700,
+	800: 	800,
+	900: 	900
+);
+
+// Line Height line-height
+$cd-lineHeight: (
+	1:		1,
+	1.1:	1.1,
+	1.2:	1.2,
+	1.3:	1.3,
+	1.4:	1.4,
+	1.5:	1.5,
+	1.6:	1.6,
+	1.7:	1.7,
+	1.8: 	1.8,
+	1.9: 	1.9,
+	2:		2,
+	2.1:	2.1,
+	2.2:	2.2,
+	2.3:	2.3,
+	2.4:	2.4,
+	2.5:	2.5
+);

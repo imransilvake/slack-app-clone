@@ -1,0 +1,66 @@
+// Media Queries
+@mixin cd-orientation($orientation) { @media screen and (orientation: $orientation) { @content; } }
+@mixin cd-media($platformFirst, $device, $orientation: '') {
+	@if map-has-key($cd-devicePoints, $platformFirst) {
+		// platform
+		$platform: map-get($cd-devicePoints, $platformFirst);
+
+		// breakpoint with orientation
+		@if $orientation != '' {
+			@if $orientation == 'portrait' or $orientation == 'landscape' {
+				// orientation
+				@include cd-orientation($orientation) {
+					// breakpoint
+					@if map-has-key($platform, $device) {
+						@media #{inspect(map-get($platform, $device))} {
+							@content;
+						}
+					} @else {
+						@error 'Unable to find a breakpoint named: `#{$device}`.';
+					}
+				}
+			} @else {
+				@error 'Wrong orientation is specified: `#{$orientation}`.';
+			}
+		} @else { // breakpoint without orientation
+			// breakpoint
+			@if map-has-key($platform, $device) {
+				@media #{inspect(map-get($platform, $device))} {
+					@content;
+				}
+			} @else {
+				@error 'Unable to find a breakpoint named: `#{$device}`.';
+			}
+		}
+	} @else {
+		@error 'Unable to find a platform named: `#{$platformFirst}`.';
+	}
+}
+
+// Font Face
+@mixin cd-fontFace($fontName, $fontPath, $fontWeight: null, $fontStyle: null, $fontExtentions: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$modes: (
+		eot: '?',
+		svg: '#' + cd-stringReplace($fontName, ' ', '_')
+	);
+
+	$formats: (
+		otf: 'opentype',
+		ttf: 'truetype'
+	);
+
+	@each $fontExtention in $fontExtentions {
+		$mode: if(map-has-key($modes, $fontExtention), $fontExtention + map-get($modes, $fontExtention), $fontExtention);
+		$format: if(map-has-key($formats, $fontExtention), map-get($formats, $fontExtention), $fontExtention);
+		$src: append($src, url(quote($fontPath + '.' + $mode)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($fontName);
+		font-style: $fontStyle;
+		font-weight: $fontWeight;
+		src: $src;
+	}
+}

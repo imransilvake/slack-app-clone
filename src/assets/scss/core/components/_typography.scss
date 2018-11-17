@@ -1,0 +1,44 @@
+body {
+	color: cd-palette($cd-color, 1009);
+	font-family: cd-fontFamily(roboto), sans-serif;
+	line-height: cd-lineHeight(1.4);
+}
+
+h1, h2, h3, h4, h5, h6, p {  margin: 0; }
+
+h1, h2, h3, h4, h5, h6 { font-weight: cd-fontWeight(500); }
+p, span, a { font-weight: cd-fontWeight(400); }
+b, strong {font-weight: cd-fontWeight(700); }
+
+span { font-size: cd-fontSize(s15); }
+h1 { font-size: cd-fontSize(h1); }
+h2 { font-size: cd-fontSize(h2); }
+h3 { font-size: cd-fontSize(h3); }
+h4 { font-size: cd-fontSize(h4); }
+h5 { font-size: cd-fontSize(h5); }
+h6 { font-size: cd-fontSize(h6); }
+p { font-size: cd-fontSize(s15); }
+a { font-size: cd-fontSize(s15); }
+
+code {
+	background-color: cd-palette($cd-background, 2003);
+	display: inline-block;
+	font-size: cd-fontSize(s14);
+	padding: 10px;
+}
+
+pre {
+	font-size: cd-fontSize(s14);
+}
+
+blockquote {
+	background-color: cd-palette($cd-background, 2001);
+	border-left: 2px solid cd-palette($cd-color, 1009);
+	color: cd-palette($cd-border, 3007);
+	font-size: cd-fontSize(s15);
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 10px;
+	white-space: normal;
+	word-break: break-word;
+}

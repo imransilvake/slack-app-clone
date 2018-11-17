@@ -1,0 +1,268 @@
+.cd-navigation-menu-wrapper {
+	.cd-navigation-menu {
+		> li {
+			display: inline;
+
+			&.cd-dropdown {
+				position: relative;
+
+				ul {
+					background-color: $cd-nav-default-bg-color;
+					display: none;
+					position: absolute;
+					width: 200px;
+					z-index: cd-zIndex(float);
+
+					li {
+						a {
+							color: $cd-nav-color;
+							display: block;
+							padding: 6px 10px;
+							text-align: left;
+							width: 100%;
+
+							&:hover {
+								background-color: $cd-nav-hover-bg-color;
+								color: $cd-nav-hover-color;
+							}
+						}
+
+						&.cd-dropdown-sub {
+							position: relative;
+
+							&::after {
+								@extend .cd-transparent-overlay;
+								background-color: transparent;
+								width: 5px;
+							}
+
+							> a {
+								cursor: default;
+							}
+						}
+
+						&:hover {
+							> ul {
+								display: block;
+							}
+						}
+					}
+				}
+
+				&:hover {
+					> ul {
+						display: block;
+					}
+				}
+
+				// === Positions === Bottom: left right === //
+
+				// Bottom Left
+				&.cd-bottom-left {
+					ul {
+						box-shadow: 1px 1px 5px $cd-nav-shadow-color;
+						right: 0;
+
+						li {
+							&.cd-dropdown-sub {
+								&::after {
+									left: -5px;
+								}
+
+								ul {
+									margin-right: 5px;
+									right: 100%;
+									top: 0;
+								}
+							}
+						}
+					}
+				}
+
+				// Bottom Right
+				&.cd-bottom-right {
+					ul {
+						box-shadow: 1px 1px 5px $cd-nav-shadow-color;
+						left: 0;
+
+						li {
+							&.cd-dropdown-sub {
+								&::after {
+									right: -5px;
+								}
+
+								ul {
+									left: 100%;
+									margin-left: 5px;
+									top: 0;
+								}
+							}
+						}
+					}
+				}
+
+				// === Positions === Top: left & right === //
+
+				// Top Left
+				&.cd-top-left {
+					ul {
+						bottom: 100%;
+						box-shadow: 1px 0 5px $cd-nav-shadow-color;
+						margin-bottom: 5px;
+						right: 0;
+
+						li {
+							&.cd-dropdown-sub {
+								&::after {
+									left: -5px;
+								}
+
+								ul {
+									bottom: 0;
+									margin-bottom: -1px;
+									margin-right: 5px;
+									right: 100%;
+								}
+							}
+						}
+					}
+				}
+
+				// Top Right
+				&.cd-top-right {
+					ul {
+						bottom: 100%;
+						box-shadow: 1px 0 5px $cd-nav-shadow-color;
+						left: 0;
+						margin-bottom: 5px;
+
+						li {
+							&.cd-dropdown-sub {
+								&::after {
+									right: -5px;
+								}
+
+								ul {
+									bottom: 0;
+									left: 100%;
+									margin-bottom: -1px;
+									margin-left: 5px;
+								}
+							}
+						}
+					}
+				}
+
+				// === Positions: Bottom & Top === //
+
+				// Bottom
+				&.cd-bottom {
+					ul {
+						li {
+							&.cd-dropdown-sub {
+								background-color: $cd-nav-highlight-bg-color;
+
+								&::after {
+									width: 0;
+								}
+
+								> a {
+									&:hover {
+										background-color: $cd-nav-highlight-bg-color;
+										color: $cd-nav-color;
+									}
+								}
+
+								ul {
+									border-bottom: 1px solid $cd-nav-highlight-bg-color;
+									position: static;
+								}
+							}
+						}
+					}
+
+					> ul {
+						box-shadow: 1px 0 5px $cd-nav-shadow-color;
+					}
+
+					&:hover {
+						ul {
+							display: block;
+						}
+					}
+				}
+
+				// Top
+				&.cd-top {
+					ul {
+						bottom: 100%;
+
+
+						li {
+							&.cd-dropdown-sub {
+								background-color: $cd-nav-highlight-bg-color;
+
+								&::after {
+									width: 0;
+								}
+
+								> a {
+									&:hover {
+										background-color: $cd-nav-highlight-bg-color;
+										color: $cd-nav-color;
+									}
+								}
+
+								ul {
+									border-bottom: 1px solid $cd-nav-highlight-bg-color;
+									position: static;
+								}
+							}
+						}
+					}
+
+					> ul {
+						box-shadow: 1px 0 5px $cd-nav-shadow-color;
+					}
+
+					&:hover {
+						ul {
+							display: block;
+						}
+					}
+				}
+			}
+
+			> a {
+				display: inline-block;
+				padding: 5px;
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, mini) {
+		.cd-navigation-menu {
+			&.cd-m-items-break {
+				> li {
+					background-color: $cd-nav-bg-color;
+					display: block;
+					margin-bottom: 5px;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+	}
+
+	// Common
+	.cd-transparent-overlay {
+		bottom: 0;
+		content: '';
+		height: 100%;
+		position: absolute;
+		top: 0;
+	}
+}
