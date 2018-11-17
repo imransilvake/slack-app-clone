@@ -16,12 +16,12 @@ class Register extends Component {
         email: '',
         password: '',
         passwordConfirm: '',
+        isFormEnabled: false,
         errors: []
     };
-    isFormEnabled = false;
 
     render() {
-        const {username, email, password, passwordConfirm, errors} = this.state;
+        const {username, email, password, passwordConfirm, errors, isFormEnabled} = this.state;
         return (
             <section className="sc-register">
                 <div className="cd-row">
@@ -59,7 +59,7 @@ class Register extends Component {
                             <Button className="sc-button"
                                     variant="contained"
                                     type="submit"
-                                    disabled={!this.isFormEnabled}
+                                    disabled={!isFormEnabled}
                                     fullWidth>
                                 Sign Up
                             </Button>
@@ -81,8 +81,15 @@ class Register extends Component {
      * @param event
      */
     handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value});
-        this.isFormEnabled = this.isFormValid();
+        this.setState({[event.target.name]: event.target.value}, () => {
+            // remove errors
+            if (this.state.errors && this.state.errors.length > 0) {
+                this.setState({errors: null});
+            }
+
+            // validate form
+            this.setState({'isFormEnabled': this.isFormValid()});
+        });
     };
 
     /**
@@ -94,21 +101,18 @@ class Register extends Component {
         // stop default event
         event.preventDefault();
 
-        // check form validation
-        if (this.isFormValid()) {
-            // register user
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then(() => {
-                    // remove errors
-                    this.setState({errors: null});
-                })
-                .catch((error) => {
-                    // add errors
-                    this.setState({errors: [error]});
-                });
-        }
+        // register user
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => {
+                // remove errors
+                this.setState({errors: null});
+            })
+            .catch((error) => {
+                // add errors
+                this.setState({errors: [error]});
+            });
     };
 
     /**
