@@ -16,12 +16,62 @@ class Register extends Component {
         email: '',
         password: '',
         passwordConfirm: '',
+        errors: [],
         isFormEnabled: false,
-        errors: []
+        isAccountCreated: false
     };
 
     render() {
-        const {username, email, password, passwordConfirm, errors, isFormEnabled} = this.state;
+        const {username, email, password, passwordConfirm, errors, isFormEnabled, isAccountCreated} = this.state;
+        const content = () => {
+            switch(isAccountCreated) {
+                case false:
+                    return (
+                        <section className="cd-col sc-form">
+                            {
+                                errors && errors.length > 0 && (
+                                    /* Errors */
+                                    <p className="cd-error">{this.displayErrors(errors)}</p>
+                                )
+                            }
+                            <form className="sc-form-fields" onSubmit={this.handleSubmit}>
+                                <FormControl className="sc-form-field" fullWidth>
+                                    <InputLabel htmlFor="username">Username</InputLabel>
+                                    <Input id="username" name="username" value={username} onChange={this.handleChange}/>
+                                </FormControl>
+                                <FormControl className="sc-form-field" fullWidth>
+                                    <InputLabel htmlFor="email">Email</InputLabel>
+                                    <Input id="email" name="email" value={email} onChange={this.handleChange}/>
+                                </FormControl>
+                                <FormControl className="sc-form-field" fullWidth>
+                                    <InputLabel htmlFor="password">Password</InputLabel>
+                                    <Input id="password" name="password" type="password" value={password} onChange={this.handleChange}/>
+                                </FormControl>
+                                <FormControl className="sc-form-field" fullWidth>
+                                    <InputLabel htmlFor="passwordConfirm">Password Confirm</InputLabel>
+                                    <Input id="passwordConfirm" name="passwordConfirm" type="password" value={passwordConfirm}
+                                           onChange={this.handleChange}/>
+                                </FormControl>
+                                <Button className="sc-button"
+                                        variant="contained"
+                                        type="submit"
+                                        disabled={!isFormEnabled}
+                                        fullWidth>
+                                    Sign Up
+                                </Button>
+                            </form>
+                        </section>
+                    );
+                default:
+                    return (
+                        <section className="cd-col sc-message">
+                            <p>Your account has been created successfully!</p>
+                            <p>Your are automatically redirecting back to the login page shortly!</p>
+                        </section>
+                    );
+            }
+        };
+
         return (
             <section className="sc-register">
                 <div className="cd-row">
@@ -30,41 +80,10 @@ class Register extends Component {
                         <img src={SlackLogo} alt="slack-logo" />
                     </header>
 
-                    {/* Form */}
-                    <div className="cd-col sc-form">
-                        {
-                            errors && errors.length > 0 && (
-                                /* Errors */
-                                <p className="cd-error">{this.displayErrors(errors)}</p>
-                            )
-                        }
-                        <form className="sc-form-fields" onSubmit={this.handleSubmit}>
-                            <FormControl className="sc-form-field" fullWidth>
-                                <InputLabel htmlFor="username">Username</InputLabel>
-                                <Input id="username" name="username" value={username} onChange={this.handleChange}/>
-                            </FormControl>
-                            <FormControl className="sc-form-field" fullWidth>
-                                <InputLabel htmlFor="email">Email</InputLabel>
-                                <Input id="email" name="email" value={email} onChange={this.handleChange}/>
-                            </FormControl>
-                            <FormControl className="sc-form-field" fullWidth>
-                                <InputLabel htmlFor="password">Password</InputLabel>
-                                <Input id="password" name="password" type="password" value={password} onChange={this.handleChange}/>
-                            </FormControl>
-                            <FormControl className="sc-form-field" fullWidth>
-                                <InputLabel htmlFor="passwordConfirm">Password Confirm</InputLabel>
-                                <Input id="passwordConfirm" name="passwordConfirm" type="password" value={passwordConfirm}
-                                       onChange={this.handleChange}/>
-                            </FormControl>
-                            <Button className="sc-button"
-                                    variant="contained"
-                                    type="submit"
-                                    disabled={!isFormEnabled}
-                                    fullWidth>
-                                Sign Up
-                            </Button>
-                        </form>
-                    </div>
+                    {
+                        /* Form | Success Message */
+                        content()
+                    }
 
                     {/* Footer */}
                     <footer className="cd-col sc-link">
@@ -88,7 +107,7 @@ class Register extends Component {
             }
 
             // validate form
-            this.setState({'isFormEnabled': this.isFormValid()});
+            this.setState({isFormEnabled: this.isFormValid()});
         });
     };
 
@@ -106,8 +125,13 @@ class Register extends Component {
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => {
-                // remove errors
-                this.setState({errors: null});
+                // remove errors and show success message
+                this.setState({errors: null, isAccountCreated: true});
+
+                // redirect to login page.
+                setTimeout(() => {
+                    this.props.history.push('/login');
+                }, 4000);
             })
             .catch((error) => {
                 // add errors

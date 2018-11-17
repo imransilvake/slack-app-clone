@@ -21,33 +21,48 @@
 		.cd-col {
 			padding: 0;
 
-			// error
-			.cd-error {
-				background-color: cd-palette($cd-background, 2010);
-				color: cd-palette($cd-color, 1001);
-				margin: 0;
-				padding: 5px;
-				text-align: center;
-			}
+			&.sc-form {
+				margin-bottom: 15px;
 
-			// form
-			.sc-form-fields {
-				padding: 15px 30px 0;
-
-				.sc-form-field {
-					margin-bottom: 15px;
+				// error
+				.cd-error {
+					background-color: cd-palette($cd-background, 2010);
+					color: cd-palette($cd-color, 1001);
+					margin: 0;
+					padding: 5px;
+					text-align: center;
 				}
 
-				.sc-button {
-					border-radius: 1px;
-					margin: 5px 0;
+				// form
+				.sc-form-fields {
+					padding: 15px 30px 0;
+
+					.sc-form-field {
+						margin-bottom: 15px;
+					}
+
+					.sc-button {
+						border-radius: 1px;
+						margin: 5px 0;
+					}
+				}
+			}
+
+			&.sc-message {
+				padding: 15px;
+
+				p {
+					&:first-child {
+						color: cd-palette($cd-color, 1016);
+						font-weight: 700;
+						margin-bottom: 10px;
+					}
 				}
 			}
 
 			// link
 			&.sc-link {
 				border-top: 1px solid cd-palette($cd-border, 3018);
-				margin-top: 15px;
 				padding: 10px 20px;
 				text-align: center;
 			}
