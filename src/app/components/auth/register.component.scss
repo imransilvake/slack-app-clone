@@ -6,26 +6,29 @@
 		max-width: 350px;
 
 		// title
-		h2 {
-			background-color: cd-palette($cd-background, 2001);
+		.sc-header {
 			border-bottom: 1px solid cd-palette($cd-border, 3018);
-			border-top: 1px solid cd-palette($cd-border, 3006, .08);
-			color: cd-palette($cd-color, 1019);
-			padding: 20px;
-			width: 100%;
-		}
-
-		// error
-		.cd-error {
-			background-color: cd-palette($cd-background, 2010);
-			color: cd-palette($cd-color, 1001);
-			margin: 0;
-			padding: 5px;
+			margin-top: 15px;
+			padding-bottom: 15px;
 			text-align: center;
+			width: 100%;
+
+			img {
+				width: 40px;
+			}
 		}
 
 		.cd-col {
 			padding: 0;
+
+			// error
+			.cd-error {
+				background-color: cd-palette($cd-background, 2010);
+				color: cd-palette($cd-color, 1001);
+				margin: 0;
+				padding: 5px;
+				text-align: center;
+			}
 
 			// form
 			.sc-form-fields {

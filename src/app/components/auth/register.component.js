@@ -1,6 +1,6 @@
 // react
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 // app
 import firebase from './../../../firebase';
@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import SlackLogo from '../../../assets/svg/general/slack-logo.svg';
 
 class Register extends Component {
     state = {
@@ -24,9 +25,13 @@ class Register extends Component {
         return (
             <section className="sc-register">
                 <div className="cd-row">
+                    {/* Header */}
+                    <header className="sc-header">
+                        <img src={SlackLogo} alt="slack-logo" />
+                    </header>
+
                     {/* Form */}
                     <div className="cd-col sc-form">
-                        <h2>Register</h2>
                         {
                             errors && errors.length > 0 && (
                                 /* Errors */
@@ -56,15 +61,15 @@ class Register extends Component {
                                     type="submit"
                                     disabled={!this.isFormEnabled}
                                     fullWidth>
-                                Register
+                                Sign Up
                             </Button>
                         </form>
                     </div>
 
-                    {/* Link */}
-                    <div className="cd-col sc-link">
+                    {/* Footer */}
+                    <footer className="cd-col sc-link">
                         <p>Already a user? <Link className="cd-link" to="/login">Login</Link></p>
-                    </div>
+                    </footer>
                 </div>
             </section>
         );
@@ -77,9 +82,7 @@ class Register extends Component {
      */
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});
-        this.isFormEnabled = !this.isFormEmpty(this.state) &&
-            this.isEmailValid(this.state.email) &&
-            this.isPasswordValid(this.state);
+        this.isFormEnabled = this.isFormValid();
     };
 
     /**
@@ -114,27 +117,12 @@ class Register extends Component {
      * @returns {boolean}
      */
     isFormValid = () => {
-        let errors = [];
-        let error;
-
         if (this.isFormEmpty(this.state)) {
-            // throw error
-            error = {message: 'The form is empty!'};
-            this.setState({errors: errors.concat(error)});
             return false;
         } else if (!this.isEmailValid(this.state.email)) {
-            // throw error
-            error = {message: 'Email is invalid!'};
-            this.setState({errors: errors.concat(error)});
-            return false;
-        } else if (!this.isPasswordValid(this.state)) {
-            // throw error
-            error = {message: 'Password is invalid!'};
-            this.setState({errors: errors.concat(error)});
             return false;
         } else {
-            // form valid
-            return true;
+            return this.isPasswordValid(this.state);
         }
     };
 
@@ -167,7 +155,7 @@ class Register extends Component {
      * @param passwordConfirm
      */
     isPasswordValid = ({password, passwordConfirm}) => {
-        if (password.length < 6 || passwordConfirm < 6) {
+        if (password.length < 6 || passwordConfirm.length < 6) {
             return false;
         } else {
             return password === passwordConfirm;
