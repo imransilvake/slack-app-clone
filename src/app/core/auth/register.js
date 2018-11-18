@@ -49,7 +49,11 @@ class Register extends Component {
                                 </FormControl>
                                 <FormControl className="sc-form-field" fullWidth>
                                     <InputLabel htmlFor="email">Email</InputLabel>
-                                    <Input id="email" name="email" value={email} onChange={this.handleChange}/>
+                                    <Input id="email"
+                                           name="email"
+                                           value={email}
+                                           error={this.handleInputError(errors, 'email')}
+                                           onChange={this.handleChange}/>
                                 </FormControl>
                                 <FormControl className="sc-form-field" fullWidth>
                                     <InputLabel htmlFor="password">Password</InputLabel>
@@ -207,7 +211,22 @@ class Register extends Component {
      * @param errors
      * @returns {*}
      */
-    displayErrors = (errors) => errors.map((error, i) => <p key={i}>{error.message}</p>);
+    displayErrors = (errors) => errors.map((error, i) => <span key={i}>{error.message}</span>);
+
+    /**
+     * handle Input Error
+     *
+     * @param errors
+     * @param fieldName
+     * @returns {*|boolean}
+     */
+    handleInputError = (errors, fieldName) => {
+        return (
+            errors && errors.some(
+                error => error.message.toLocaleLowerCase().includes(fieldName)
+            )
+        );
+    };
 }
 
 export default Register;
