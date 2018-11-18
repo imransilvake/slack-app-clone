@@ -9,6 +9,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SlackLogo from '../../../assets/svg/general/slack-logo.svg';
+import LoadingAnimation from './../../utilities/loading-animation/loading-animation';
 
 class Register extends Component {
     state = {
@@ -18,11 +19,18 @@ class Register extends Component {
         passwordConfirm: '',
         errors: [],
         isFormEnabled: false,
-        isAccountCreated: false
+        isAccountCreated: false,
+        isAnimationLoading: false
     };
 
     render() {
-        const {username, email, password, passwordConfirm, errors, isFormEnabled, isAccountCreated} = this.state;
+        const {username, email, password, passwordConfirm, errors, isFormEnabled, isAccountCreated, isAnimationLoading} = this.state;
+
+        // loading animation
+        if (isAnimationLoading) {
+            return <LoadingAnimation/>
+        }
+
         const content = () => {
             switch(isAccountCreated) {
                 case false:
@@ -120,13 +128,16 @@ class Register extends Component {
         // stop default event
         event.preventDefault();
 
+        // show loading animation
+        this.setState({isAnimationLoading: true});
+
         // register user
         firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => {
-                // remove errors and show success message
-                this.setState({errors: null, isAccountCreated: true});
+                // remove errors, show success message, remove loading animation
+                this.setState({errors: null, isAccountCreated: true, isAnimationLoading: false});
 
                 // redirect to login page.
                 setTimeout(() => {

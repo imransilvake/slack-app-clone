@@ -5,10 +5,10 @@ import * as serviceWorker from './serviceWorker';
 
 // app
 import './styles.scss';
-import Root from './app/app-routing';
+import App from './app/app';
 
 ReactDOM.render(
-    <Root/>,
+    <App/>,
     document.getElementById('root')
 );
 
