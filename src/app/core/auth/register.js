@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // app
 import firebase from './../../../firebase';
+import md5 from 'md5';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -18,6 +19,7 @@ class Register extends Component {
         password: '',
         passwordConfirm: '',
         errors: [],
+        usersRef: firebase.database().ref('users'),
         isFormEnabled: false,
         isAccountCreated: false,
         isAnimationLoading: false
@@ -32,7 +34,7 @@ class Register extends Component {
         }
 
         const content = () => {
-            switch(isAccountCreated) {
+            switch (isAccountCreated) {
                 case false:
                     return (
                         <section className="cd-col sc-form">
@@ -57,11 +59,13 @@ class Register extends Component {
                                 </FormControl>
                                 <FormControl className="sc-form-field" fullWidth>
                                     <InputLabel htmlFor="password">Password</InputLabel>
-                                    <Input id="password" name="password" type="password" value={password} onChange={this.handleChange}/>
+                                    <Input id="password" name="password" type="password" value={password}
+                                           onChange={this.handleChange}/>
                                 </FormControl>
                                 <FormControl className="sc-form-field" fullWidth>
                                     <InputLabel htmlFor="passwordConfirm">Password Confirm</InputLabel>
-                                    <Input id="passwordConfirm" name="passwordConfirm" type="password" value={passwordConfirm}
+                                    <Input id="passwordConfirm" name="passwordConfirm" type="password"
+                                           value={passwordConfirm}
                                            onChange={this.handleChange}/>
                                 </FormControl>
                                 <Button className="sc-button"
@@ -89,7 +93,7 @@ class Register extends Component {
                 <div className="cd-row">
                     {/* Header */}
                     <header className="sc-header">
-                        <img src={SlackLogo} alt="slack-logo" />
+                        <img src={SlackLogo} alt="slack-logo"/>
                     </header>
 
                     {
@@ -139,14 +143,31 @@ class Register extends Component {
         firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(() => {
-                // remove errors, show success message, remove loading animation
-                this.setState({errors: null, isAccountCreated: true, isAnimationLoading: false});
+            .then((createdUser) => {
+                createdUser.user.updateProfile({
+                    displayName: this.state.username,
+                    photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+                })
+                .then(() => {
+                    this.saveUser(createdUser)
+                        .then(() => {
+                            // remove errors, show success message, remove loading animation
+                            this.setState({errors: null, isAccountCreated: true, isAnimationLoading: false});
 
-                // redirect to login page.
-                setTimeout(() => {
-                    this.props.history.push('/login');
-                }, 4000);
+                            // redirect to login page
+                            setTimeout(() => {
+                                this.props.history.push('/login');
+                            }, 4000);
+                        })
+                        .catch((error) => {
+                            // add errors
+                            this.setState({errors: [error], isAnimationLoading: false});
+                        });
+                })
+                .catch((error) => {
+                    // add errors
+                    this.setState({errors: [error], isAnimationLoading: false});
+                });
             })
             .catch((error) => {
                 // add errors
@@ -226,6 +247,20 @@ class Register extends Component {
                 error => error.message.toLocaleLowerCase().includes(fieldName)
             )
         );
+    };
+
+    /**
+     * save user to firebase
+     *
+     * @param createdUser
+     * @returns {Promise<any>}
+     */
+    saveUser = (createdUser) => {
+        return this.state.usersRef.child(createdUser.user.uid)
+            .set({
+                name: createdUser.user.displayName,
+                avatar: createdUser.user.photoURL
+            });
     };
 }
 
