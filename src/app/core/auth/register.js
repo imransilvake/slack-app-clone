@@ -146,7 +146,7 @@ class Register extends Component {
             })
             .catch((error) => {
                 // add errors
-                this.setState({errors: [error]});
+                this.setState({errors: [error], isAnimationLoading: false});
             });
     };
 
