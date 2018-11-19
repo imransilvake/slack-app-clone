@@ -89,7 +89,7 @@ class Register extends Component {
         };
 
         return (
-            <section className="sc-register">
+            <section className="sc-auth-wrapper">
                 <div className="cd-row">
                     {/* Header */}
                     <header className="sc-header">
@@ -102,7 +102,7 @@ class Register extends Component {
                     }
 
                     {/* Footer */}
-                    <footer className="cd-col sc-link">
+                    <footer className="cd-col sc-footer">
                         <p>Already a user? <Link className="cd-link" to="/login">Login</Link></p>
                     </footer>
                 </div>
@@ -160,17 +160,17 @@ class Register extends Component {
                             }, 4000);
                         })
                         .catch((error) => {
-                            // add errors
+                            // error
                             this.setState({errors: [error], isAnimationLoading: false});
                         });
                 })
                 .catch((error) => {
-                    // add errors
+                    // error
                     this.setState({errors: [error], isAnimationLoading: false});
                 });
             })
             .catch((error) => {
-                // add errors
+                // errors
                 this.setState({errors: [error], isAnimationLoading: false});
             });
     };

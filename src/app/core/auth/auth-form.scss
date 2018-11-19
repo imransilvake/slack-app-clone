@@ -1,11 +1,11 @@
-.sc-register {
+.sc-auth-wrapper {
 	.cd-row {
 		background-color: cd-palette($cd-background, 2001);
 		box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4000, .07);
 		margin: 30px auto 0;
 		max-width: 350px;
 
-		// title
+		// header
 		.sc-header {
 			border-bottom: 1px solid cd-palette($cd-border, 3018);
 			margin-top: 15px;
@@ -64,13 +64,13 @@
 					}
 				}
 			}
+		}
 
-			// link
-			&.sc-link {
-				border-top: 1px solid cd-palette($cd-border, 3018);
-				padding: 10px 20px;
-				text-align: center;
-			}
+		// footer
+		.sc-footer {
+			border-top: 1px solid cd-palette($cd-border, 3018);
+			padding: 10px 20px;
+			text-align: center;
 		}
 
 		// media
