@@ -1,6 +1,6 @@
 {
-    "name": "my-app",
-    "version": "0.1.0",
+    "name": "slack-chat-app",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "start": "react-scripts start",
