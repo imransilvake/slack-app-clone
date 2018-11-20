@@ -68,7 +68,7 @@ class Register extends Component {
                                            value={passwordConfirm}
                                            onChange={this.handleChange}/>
                                 </FormControl>
-                                <Button className="sc-button"
+                                <Button className="sc-button sc-register"
                                         variant="contained"
                                         type="submit"
                                         disabled={!isFormEnabled}

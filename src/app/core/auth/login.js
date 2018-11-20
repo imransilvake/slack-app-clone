@@ -62,7 +62,7 @@ class Login extends Component {
                                        error={this.handleInputError(errors, 'password')}
                                        onChange={this.handleChange}/>
                             </FormControl>
-                            <Button className="sc-button"
+                            <Button className="sc-button sc-login"
                                     variant="contained"
                                     type="submit"
                                     disabled={!isFormEnabled}

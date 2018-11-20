@@ -46,8 +46,15 @@
 						margin: 5px 0;
 
 						&:not(:disabled) {
-							background-color: cd-palette($cd-background, 2020);
 							color: cd-palette($cd-color, 1001);
+
+							&.sc-login {
+								background-color: cd-palette($cd-background, 2021);
+							}
+
+							&.sc-register {
+								background-color: cd-palette($cd-background, 2022);
+							}
 						}
 					}
 				}
