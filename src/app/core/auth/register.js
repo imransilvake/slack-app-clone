@@ -93,7 +93,9 @@ class Register extends Component {
                 <div className="cd-row">
                     {/* Header */}
                     <header className="sc-header">
-                        <img src={SlackLogo} alt="slack-logo"/>
+                        <Link to="/">
+                            <img src={SlackLogo} alt="slack-logo"/>
+                        </Link>
                     </header>
 
                     {
