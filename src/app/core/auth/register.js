@@ -94,7 +94,12 @@ class Register extends Component {
                     {/* Header */}
                     <header className="sc-header">
                         <Link to="/">
-                            <img src={SlackLogo} alt="slack-logo"/>
+                            <div className="cd-tooltip">
+                                <img src={SlackLogo} alt="slack-logo"/>
+                                <span className="cd-arrow cd-right">
+                                    Go to Home
+                                </span>
+                            </div>
                         </Link>
                     </header>
 

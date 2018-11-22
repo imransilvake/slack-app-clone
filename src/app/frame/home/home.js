@@ -2,7 +2,10 @@
 import React, { Component } from 'react';
 
 // app
-import HomeBanner from './../../../assets/images/home/01.png';
+import HomeBannerL from './../../../assets/images/home/01.png';
+import HomeBannerS from './../../../assets/images/home/02.jpg';
+import Button from '@material-ui/core/Button/Button';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
     render() {
@@ -17,6 +20,11 @@ class Home extends Component {
                             <span>Work</span>
                             <span>Flow</span>
                         </h6>
+
+                        {/* Banner - Small Displays */}
+                        <div className="sc-banner cd-hide-on-t-up">
+                            <img src={HomeBannerS} alt="Home Banner" />
+                        </div>
                     </div>
                     <div className="sc-content">
                         <h5>
@@ -24,11 +32,25 @@ class Home extends Component {
                             less stressed, and just a little bit happier.
                         </h5>
                     </div>
+                    <div className="sc-buttons">
+                        <Link to="/login">
+                            <Button className="sc-login"
+                                    variant="contained">
+                                Sign In
+                            </Button>
+                        </Link>
+                        <Link to="/register">
+                            <Button className="sc-register"
+                                    variant="contained">
+                                Sign Up
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
 
-                {/* Banner */}
-                <div className="cd-col cd-col-pm-t-6">
-                    <img src={HomeBanner} alt="Home Banner" />
+                {/* Banner - Large Displays */}
+                <div className="cd-col cd-col-pm-t-6 cd-hide-on-s-down">
+                    <img src={HomeBannerL} alt="Home Banner" />
                 </div>
             </section>
         );

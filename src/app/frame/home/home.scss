@@ -1,33 +1,35 @@
 .sc-home {
 	background-color: cd-palette($cd-background, 2001);
 	box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4000, .07);
-	margin-top: 40px;
+	margin: 40px 0 20px;
 	padding: 40px 0;
 
 	.cd-col {
 		padding: 0 50px;
 
 		.sc-title {
+			h1 {
+				font-weight: cd-fontWeight(700);
+				margin-top: -5px;
+			}
+
 			h6 {
 				span {
+					font-size: cd-fontSize(s18);
+					font-weight: cd-fontWeight(700);
+
 					&:nth-of-type(1) {
 						color: cd-palette($cd-color, 1021);
-						font-size: 18px;
-						font-weight: 700;
 						margin-right: 5px;
 					}
 
 					&:nth-of-type(2) {
 						color: cd-palette($cd-color, 1022);
-						font-size: 18px;
-						font-weight: 700;
 						margin-right: 5px;
 					}
 
 					&:nth-of-type(3) {
 						color: cd-palette($cd-color, 1020);
-						font-size: 18px;
-						font-weight: 700;
 					}
 				}
 			}
@@ -36,6 +38,28 @@
 		.sc-content {
 			h5 {
 				margin-top: 30px;
+			}
+		}
+
+		.sc-buttons {
+			margin-top: 30px;
+
+			button {
+				border-radius: 0;
+				color: cd-palette($cd-color, 1001);
+
+				&.sc-login {
+					background-color: cd-palette($cd-background, 2020);
+					margin-right: 15px;
+				}
+
+				&.sc-register {
+					background-color: cd-palette($cd-background, 2022);
+				}
+
+				span {
+					font-weight: cd-fontWeight(700);
+				}
 			}
 		}
 
@@ -52,12 +76,39 @@
 
 	// media
 	@include cd-media(desktop, tablet) {
+		margin: 15px 0;
+
 		.cd-col {
 			padding: 0 35px;
+
+			.sc-content {
+				h5 {
+					font-size: cd-fontSize(s18);
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, smartphone) {
+		margin: 15px 0;
+		padding: 25px 0;
+
+		.cd-col {
+			&:first-child {
+				text-align: center;
+			}
+
+			.sc-title {
+				.sc-banner {
+					margin: 25px 0 15px;
+				}
+			}
 		}
 	}
 
 	@include cd-media(desktop, mini) {
+		padding: 25px 0;
+
 		.cd-col {
 			padding: 0 25px;
 		}
