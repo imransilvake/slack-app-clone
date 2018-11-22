@@ -1,4 +1,4 @@
-# Slack Chat Application
+# Slack App Clone
 A Full-stack Chat application from Frontend to Backend with React, Redux, Firebase, and custom SCSS Framework.
 
 
