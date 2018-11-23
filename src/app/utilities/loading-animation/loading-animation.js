@@ -9,8 +9,7 @@ const LoadingAnimation = () => {
                 <svg version="1.1"
                      xmlns="http://www.w3.org/2000/svg"
                      x="0px" y="0px"
-                     viewBox="9.5 -14.5 105 100"
-                >
+                     viewBox="10 -15 106 100">
                     <g className="st0">
                         <line x1="39" y1="-3" x2="39" y2="78"/>
                     </g>

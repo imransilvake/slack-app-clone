@@ -24,10 +24,9 @@
 	svg {
 		animation: rotateIcon 3s cubic-bezier(.72, .42, .21, .94) infinite;
 		animation-delay: -.5s;
-		font-size: 8rem;
-		height: 1rem;
+		height: 7rem;
 		transform: rotate(-15deg);
-		width: 1rem;
+		width: 7rem;
 
 		.st0 {
 			@include lineAnimation(shrinkIcon-1);
