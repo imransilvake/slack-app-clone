@@ -17,17 +17,17 @@
 	}
 
 	@mixin lineAnimation($animation) {
-		mix-blend-mode: color-burn;
 		animation: $animation 3s infinite cubic-bezier(.79, .14, .15, .86);
+		mix-blend-mode: color-burn;
 	}
 
 	svg {
-		animation-delay: -.5s;
 		animation: rotateIcon 3s cubic-bezier(.72, .42, .21, .94) infinite;
-		font-size: 8em;
-		height: 1em;
+		animation-delay: -.5s;
+		font-size: 8rem;
+		height: 1rem;
 		transform: rotate(-15deg);
-		width: 1em;
+		width: 1rem;
 
 		.st0 {
 			@include lineAnimation(shrinkIcon-1);
@@ -84,7 +84,7 @@
 			stroke-dasharray: 77, 85;
 			stroke-dashoffset: -1px;
 		}
-		52% { stroke-dashoffset: -0px; }
+		52% { stroke-dashoffset: -0; }
 		85% { stroke-dasharray: 77, 85; }
 		100% { stroke-dasharray: 0, 85; }
 	}
