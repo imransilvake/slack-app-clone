@@ -8,13 +8,13 @@ import Login from './core/auth/login';
 import Register from './core/auth/register';
 
 const AppRouting = () => (
-    <Router>
-        <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
-        </Switch>
-    </Router>
+	<Router>
+		<Switch>
+			<Route exact path="/" component={Home}/>
+			<Route path="/login" component={Login}/>
+			<Route path="/register" component={Register}/>
+		</Switch>
+	</Router>
 );
 
 export default AppRouting;
