@@ -11,7 +11,7 @@ class App extends Component {
 				{/* Header */}
 
 				{/* Routing */}
-				<AppRouting/>
+				<AppRouting />
 
 				{/* Footer */}
 			</div>

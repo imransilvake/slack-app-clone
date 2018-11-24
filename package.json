@@ -6,7 +6,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "lint:scss": "stylelint src/**/*.scss --syntax scss",
-        "lint:es": "eslint src/**/*.js",
+        "lint:es": "eslint --ext .jsx --ext .js src/app/",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -21,13 +21,12 @@
         "react-router-dom": "^4.3.1"
     },
     "devDependencies": {
-        "eslint": "^5.9.0",
+        "eslint-config-airbnb": "^17.1.0",
         "eslint-plugin-react": "^7.11.1",
         "node-sass": "^4.10.0",
         "stylelint": "^9.8.0",
         "stylelint-order": "^2.0.0"
     },
-
     "browserslist": [
         ">0.2%",
         "not dead",

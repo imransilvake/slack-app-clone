@@ -1,31 +1,86 @@
 {
-	"extends": [
-		"eslint:recommended",
-		"plugin:react/recommended"
-	],
+	"parser": "babel-eslint",
 	"parserOptions": {
-		"ecmaVersion": 6,
+		"ecmaVersion": 8,
 		"sourceType": "module",
 		"ecmaFeatures": {
 			"jsx": true
 		}
 	},
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"airbnb"
+	],
 	"rules": {
-		"indent": [
-			"error",
-			"tab"
+		"react/jsx-filename-extension": [
+			1,
+			{ "extensions": [".js", ".jsx"] }
 		],
-		"linebreak-style": [
-			"error",
-			"unix"
+		"react/prefer-stateless-function": [
+			0,
+			{ "ignorePureComponents": false }
 		],
-		"quotes": [
+		"react/jsx-indent": ["error", "tab"],
+		"comma-dangle": [
 			"error",
-			"single"
+			{ "functions": "ignore" }
 		],
-		"semi": [
-			"off",
-			"always"
-		]
+		"no-tabs": 0,
+		"max-len": 0,
+		"arrow-body-style": 0,
+		"object-curly-newline": 0,
+		"react/destructuring-assignment": 0,
+		"react/no-array-index-key": 0,
+		"react/prop-types": 0,
+		"import/no-unresolved": "off",
+		"react/jsx-indent-props": [true, "tab"],
+		"react/jsx-closing-bracket-location": [true, "tag-aligned"],
+		"react/jsx-one-expression-per-line": [false],
+		"react/sort-comp": [1, {
+			"order": [
+				"lifecycle",
+				"render",
+				"static-methods",
+				"everything-else"
+			],
+			"groups": {
+				"lifecycle": [
+					"displayName",
+					"propTypes",
+					"contextTypes",
+					"childContextTypes",
+					"mixins",
+					"statics",
+					"defaultProps",
+					"getDefaultProps",
+					"state",
+					"constructor",
+					"getInitialState",
+					"getChildContext",
+					"getDerivedStateFromProps",
+					"componentWillMount",
+					"UNSAFE_componentWillMount",
+					"componentDidMount",
+					"componentWillReceiveProps",
+					"UNSAFE_componentWillReceiveProps",
+					"shouldComponentUpdate",
+					"componentWillUpdate",
+					"UNSAFE_componentWillUpdate",
+					"getSnapshotBeforeUpdate",
+					"componentDidUpdate",
+					"componentDidCatch",
+					"componentWillUnmount"
+				]
+			}
+		}],
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "single"],
+		"semi": ["off", "always"]
 	}
 }
