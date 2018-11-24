@@ -5,7 +5,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 ## Content
 - [ ] Pre-Setup
   - [X] SCSS Inclusion
-  - [X] SCSS & JSX Linting
+  - [X] Linting (SCSS & JSX)
   - [ ] Translation
   - [ ] Environment
 - [X] Authentication

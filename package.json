@@ -11,7 +11,7 @@
         "eject": "react-scripts eject"
     },
     "dependencies": {
-        "@imransilvake/scss-framework": "^2.0.4",
+        "@imransilvake/scss-framework": "^2.0.6",
         "@material-ui/core": "latest",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
