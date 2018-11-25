@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 // app
 import Button from '@material-ui/core/Button/Button';
-import HomeBannerL from '../../../assets/images/home/01.png';
-import HomeBannerS from '../../../assets/images/home/02.jpg';
+import HomeBannerL from '../../../../assets/images/home/01.png';
+import HomeBannerS from '../../../../assets/images/home/02.jpg';
 
 class Home extends Component {
 	render() {

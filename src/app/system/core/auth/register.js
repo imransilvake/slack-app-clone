@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 // firebase
-import firebase from '../../../firebase';
+import firebase from '../../../../firebase';
 
 // app
 import md5 from 'md5';
@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import SlackLogo from '../../../assets/svg/general/slack-logo.svg';
+import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Register extends Component {
