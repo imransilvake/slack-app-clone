@@ -2,13 +2,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+// firebase
+import firebase from '../../../firebase';
+
 // app
 import md5 from 'md5';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import firebase from '../../../firebase';
 import SlackLogo from '../../../assets/svg/general/slack-logo.svg';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
@@ -173,9 +175,9 @@ class Register extends Component {
 								// remove errors, show success message, remove loading animation
 								this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false });
 
-								// redirect to home page
+								// redirect to chat route
 								setTimeout(() => {
-									this.props.history.push('/');
+									this.props.history.push('/chat');
 								}, 4000);
 							})
 							.catch((error) => {

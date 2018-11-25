@@ -37,6 +37,7 @@
 		"react/destructuring-assignment": 0,
 		"react/no-array-index-key": 0,
 		"react/prop-types": 0,
+		"import/order": 0,
 		"import/no-unresolved": "off",
 		"react/jsx-indent-props": [true, "tab"],
 		"react/jsx-closing-bracket-location": [true, "tag-aligned"],
@@ -64,6 +65,9 @@
 					"getChildContext",
 					"getDerivedStateFromProps",
 					"componentWillMount",
+					"componentDidUpdate",
+					"componentDidCatch",
+					"componentWillUnmount",
 					"UNSAFE_componentWillMount",
 					"componentDidMount",
 					"componentWillReceiveProps",
@@ -71,10 +75,7 @@
 					"shouldComponentUpdate",
 					"componentWillUpdate",
 					"UNSAFE_componentWillUpdate",
-					"getSnapshotBeforeUpdate",
-					"componentDidUpdate",
-					"componentDidCatch",
-					"componentWillUnmount"
+					"getSnapshotBeforeUpdate"
 				]
 			}
 		}],

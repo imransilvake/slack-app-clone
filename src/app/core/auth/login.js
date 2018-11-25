@@ -2,12 +2,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+// firebase
+import firebase from '../../../firebase';
+
 // app
 import FormControl from '@material-ui/core/FormControl/FormControl';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
-import firebase from '../../../firebase';
 import SlackLogo from '../../../assets/svg/general/slack-logo.svg';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
@@ -129,8 +131,8 @@ class Login extends Component {
 				// remove errors, show success message, remove loading animation
 				this.setState({ errors: null, isAnimationLoading: false });
 
-				// redirect to home page
-				this.props.history.push('/');
+				// redirect to chat route
+				this.props.history.push('/chat');
 			})
 			.catch((error) => {
 				// error

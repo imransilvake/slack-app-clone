@@ -1,8 +1,17 @@
 // react
 import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+// redux
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // app
-import AppRouting from './app-routing';
+import AppRouter from './app-router';
+
+// redux store
+const store = createStore(() => {}, composeWithDevTools());
 
 class App extends Component {
 	render() {
@@ -10,8 +19,12 @@ class App extends Component {
 			<div className="sc-app">
 				{/* Header */}
 
-				{/* Routing */}
-				<AppRouting />
+				{/* Router Outlet */}
+				<Provider store={store}>
+					<BrowserRouter>
+						<AppRouter />
+					</BrowserRouter>
+				</Provider>
 
 				{/* Footer */}
 			</div>
