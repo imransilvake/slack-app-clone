@@ -12,7 +12,7 @@ import firebase from '../firebase';
 import Login from './system/core/auth/login';
 import Register from './system/core/auth/register';
 import Home from './system/frame/home/home';
-import Chat from './system/frame/chat/chat';
+import Chat from './system/core/chat/chat';
 import { setUser, clearUser } from './store/actions';
 import LoadingAnimation from './system/utilities/loading-animation/loading-animation';
 
