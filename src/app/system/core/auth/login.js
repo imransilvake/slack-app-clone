@@ -28,12 +28,7 @@ class Login extends Component {
 	render() {
 		const { email, password, errors, isFormEnabled, isAnimationLoading } = this.state;
 
-		// loading animation
-		if (isAnimationLoading) {
-			return <LoadingAnimation/>
-		}
-
-		return (
+		return isAnimationLoading ? <LoadingAnimation/> : (
 			<section className="sc-auth-wrapper">
 				<div className="cd-row">
 					{/* Header */}

@@ -33,11 +33,6 @@ class Register extends Component {
 	render() {
 		const { username, email, password, passwordConfirm, errors, isFormEnabled, isAccountCreated, isAnimationLoading } = this.state;
 
-		// loading animation
-		if (isAnimationLoading) {
-			return <LoadingAnimation />
-		}
-
 		const content = () => {
 			switch (isAccountCreated) {
 				case false:
@@ -102,7 +97,7 @@ class Register extends Component {
 			}
 		};
 
-		return (
+		return isAnimationLoading ? <LoadingAnimation/> : (
 			<section className="sc-auth-wrapper">
 				<div className="cd-row">
 					{/* Header */}
