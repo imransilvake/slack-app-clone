@@ -9,9 +9,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // app
 import AppRouter from './app-router';
+import rootReducer from './store/reducers';
 
 // redux store
-const store = createStore(() => {}, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools());
 
 class App extends Component {
 	render() {
@@ -22,7 +23,7 @@ class App extends Component {
 				{/* Router Outlet */}
 				<Provider store={store}>
 					<BrowserRouter>
-						<AppRouter />
+						<AppRouter/>
 					</BrowserRouter>
 				</Provider>
 

@@ -40,65 +40,65 @@ class Register extends Component {
 
 		const content = () => {
 			switch (isAccountCreated) {
-			case false:
-				return (
-					<section className="cd-col sc-form">
-						{
-							errors && errors.length > 0 && (
-								/* Errors */
-								<p className="cd-error">{this.displayErrors(errors)}</p>
-							)
-						}
-						<form className="sc-form-fields" onSubmit={this.handleSubmit}>
-							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="username">Username</InputLabel>
-								<Input id="username" name="username" value={username} onChange={this.handleChange} />
-							</FormControl>
-							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="email">Email</InputLabel>
-								<Input
-									id="email"
-									name="email"
-									value={email}
-									error={this.handleInputError(errors, 'email')}
-									onChange={this.handleChange} />
-							</FormControl>
-							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="password">Password</InputLabel>
-								<Input
-									id="password"
-									name="password"
-									type="password"
-									value={password}
-									onChange={this.handleChange} />
-							</FormControl>
-							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="passwordConfirm">Password Confirm</InputLabel>
-								<Input
-									id="passwordConfirm"
-									name="passwordConfirm"
-									type="password"
-									value={passwordConfirm}
-									onChange={this.handleChange} />
-							</FormControl>
-							<Button
-								className="sc-button sc-register"
-								variant="contained"
-								type="submit"
-								disabled={!isFormEnabled}
-								fullWidth>
-								Sign Up
-							</Button>
-						</form>
-					</section>
-				);
-			default:
-				return (
-					<section className="cd-col sc-message">
-						<p>Your account has been created successfully!</p>
-						<p>Your are automatically redirecting back to the login page shortly!</p>
-					</section>
-				);
+				case false:
+					return (
+						<section className="cd-col sc-form">
+							{
+								errors && errors.length > 0 && (
+									/* Errors */
+									<p className="cd-error">{this.displayErrors(errors)}</p>
+								)
+							}
+							<form className="sc-form-fields" onSubmit={this.handleSubmit}>
+								<FormControl className="sc-form-field" fullWidth>
+									<InputLabel htmlFor="username">Username</InputLabel>
+									<Input id="username" name="username" value={username} onChange={this.handleChange} />
+								</FormControl>
+								<FormControl className="sc-form-field" fullWidth>
+									<InputLabel htmlFor="email">Email</InputLabel>
+									<Input
+										id="email"
+										name="email"
+										value={email}
+										error={this.handleInputError(errors, 'email')}
+										onChange={this.handleChange} />
+								</FormControl>
+								<FormControl className="sc-form-field" fullWidth>
+									<InputLabel htmlFor="password">Password</InputLabel>
+									<Input
+										id="password"
+										name="password"
+										type="password"
+										value={password}
+										onChange={this.handleChange} />
+								</FormControl>
+								<FormControl className="sc-form-field" fullWidth>
+									<InputLabel htmlFor="passwordConfirm">Password Confirm</InputLabel>
+									<Input
+										id="passwordConfirm"
+										name="passwordConfirm"
+										type="password"
+										value={passwordConfirm}
+										onChange={this.handleChange} />
+								</FormControl>
+								<Button
+									className="sc-button sc-register"
+									variant="contained"
+									type="submit"
+									disabled={!isFormEnabled}
+									fullWidth>
+									Sign Up
+								</Button>
+							</form>
+						</section>
+					);
+				default:
+					return (
+						<section className="cd-col sc-message">
+							<p>Your account has been created successfully!</p>
+							<p>Your are automatically redirecting back to the login page shortly!</p>
+						</section>
+					);
 			}
 		};
 

@@ -30,7 +30,7 @@ class Login extends Component {
 
 		// loading animation
 		if (isAnimationLoading) {
-			return <LoadingAnimation />
+			return <LoadingAnimation/>
 		}
 
 		return (
@@ -40,7 +40,7 @@ class Login extends Component {
 					<header className="sc-header">
 						<Link to="/">
 							<div className="cd-tooltip">
-								<img src={SlackLogo} alt="slack-logo" />
+								<img src={SlackLogo} alt="slack-logo"/>
 								<span className="cd-arrow cd-left">Go to Home</span>
 							</div>
 						</Link>
@@ -51,7 +51,7 @@ class Login extends Component {
 						{
 							errors && errors.length > 0 && (
 								/* Errors */
-								<p className="cd-error">{ this.displayErrors(errors) }</p>
+								<p className="cd-error">{this.displayErrors(errors)}</p>
 							)
 						}
 						<form className="sc-form-fields" onSubmit={this.handleSubmit}>
@@ -62,7 +62,7 @@ class Login extends Component {
 									name="email"
 									value={email}
 									error={this.handleInputError(errors, 'email')}
-									onChange={this.handleChange} />
+									onChange={this.handleChange}/>
 							</FormControl>
 							<FormControl className="sc-form-field" fullWidth>
 								<InputLabel htmlFor="password">Password</InputLabel>
@@ -72,7 +72,7 @@ class Login extends Component {
 									type="password"
 									value={password}
 									error={this.handleInputError(errors, 'password')}
-									onChange={this.handleChange} />
+									onChange={this.handleChange}/>
 							</FormControl>
 							<Button
 								className="sc-button sc-login"

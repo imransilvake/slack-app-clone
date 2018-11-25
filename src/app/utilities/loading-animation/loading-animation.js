@@ -13,16 +13,16 @@ const LoadingAnimation = () => {
 					y="0px"
 					viewBox="10 -15 106 100">
 					<g className="st0">
-						<line x1="39" y1="-3" x2="39" y2="78" />
+						<line x1="39" y1="-3" x2="39" y2="78"/>
 					</g>
 					<g className="st1">
-						<line x1="21" y1="60" x2="102" y2="60" />
+						<line x1="21" y1="60" x2="102" y2="60"/>
 					</g>
 					<g className="st2">
-						<line x1="84" y1="78" x2="84" y2="-3" />
+						<line x1="84" y1="78" x2="84" y2="-3"/>
 					</g>
 					<g className="st3">
-						<line x1="102" y1="15" x2="21" y2="15" />
+						<line x1="102" y1="15" x2="21" y2="15"/>
 					</g>
 				</svg>
 			</div>

@@ -38,6 +38,7 @@
 		"react/no-array-index-key": 0,
 		"react/prop-types": 0,
 		"import/order": 0,
+		"react/jsx-tag-spacing": 0,
 		"import/no-unresolved": "off",
 		"react/jsx-indent-props": [true, "tab"],
 		"react/jsx-closing-bracket-location": [true, "tag-aligned"],
@@ -79,7 +80,7 @@
 				]
 			}
 		}],
-		"indent": ["error", "tab"],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"linebreak-style": ["error", "unix"],
 		"quotes": ["error", "single"],
 		"semi": ["off", "always"]

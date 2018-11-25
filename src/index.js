@@ -8,7 +8,7 @@ import './styles.scss';
 import App from './app/app';
 
 ReactDOM.render(
-	<App />,
+	<App/>,
 	document.getElementById('root')
 );
 

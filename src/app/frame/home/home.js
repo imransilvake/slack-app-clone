@@ -23,7 +23,7 @@ class Home extends Component {
 
 						{/* Banner - Small Displays */}
 						<div className="sc-banner cd-hide-on-t-up">
-							<img src={HomeBannerS} alt="Home Banner" />
+							<img src={HomeBannerS} alt="Home Banner"/>
 						</div>
 					</div>
 					<div className="sc-content">
@@ -49,7 +49,7 @@ class Home extends Component {
 
 				{/* Banner - Large Displays */}
 				<div className="cd-col cd-col-pm-t-6 cd-hide-on-s-down">
-					<img src={HomeBannerL} alt="Home Banner" />
+					<img src={HomeBannerL} alt="Home Banner"/>
 				</div>
 			</section>
 		);
