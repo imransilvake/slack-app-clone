@@ -14,16 +14,13 @@ import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Login extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			email: '',
-			password: '',
-			errors: [],
-			isFormEnabled: false,
-			isAnimationLoading: false
-		};
-	}
+	state = {
+		email: '',
+		password: '',
+		errors: [],
+		isFormEnabled: false,
+		isAnimationLoading: false
+	};
 
 	render() {
 		const { email, password, errors, isFormEnabled, isAnimationLoading } = this.state;

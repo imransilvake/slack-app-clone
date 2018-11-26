@@ -1,0 +1,27 @@
+.sc-user-panel {
+	Button {
+		padding: 10px 15px;
+		text-align: left;
+		text-transform: unset;
+		width: 100%;
+
+		span {
+			color: cd-palette($cd-color, 1001);
+			display: block;
+
+			h5 {
+				font-weight: cd-fontWeight(700);
+			}
+
+			p {
+				color: cd-palette($cd-color, 1005, .5);
+				font-size: cd-fontSize(s14);
+			}
+		}
+
+		&:hover {
+			background-color: cd-palette($cd-background, 2025);
+			border-bottom-color: cd-palette($cd-border, 3025);
+		}
+	}
+}

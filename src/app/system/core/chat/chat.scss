@@ -1,0 +1,36 @@
+.sc-chat {
+	.sc-sidebar {
+		background-color: cd-palette($cd-background, 2024);
+		bottom: 0;
+		color: cd-palette($cd-color, 1001);
+		height: 100vh;
+		left: 0;
+		padding: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	.cd-row {
+		margin-left: 240px;
+	}
+
+	// media
+	@include cd-media(mobile, tablet) {
+		.sc-sidebar {
+			max-width: 240px;
+		}
+	}
+
+	@include cd-media(desktop, smartphone) {
+		.sc-sidebar {
+			bottom: unset;
+			height: unset;
+		}
+
+		.cd-row {
+			margin-left: 0;
+			margin-top: 60px;
+		}
+	}
+}

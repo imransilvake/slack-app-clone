@@ -15,20 +15,17 @@ import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Register extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			username: '',
-			email: '',
-			password: '',
-			passwordConfirm: '',
-			errors: [],
-			usersRef: firebase.database().ref('users'),
-			isFormEnabled: false,
-			isAccountCreated: false,
-			isAnimationLoading: false
-		};
-	}
+	state = {
+		username: '',
+		email: '',
+		password: '',
+		passwordConfirm: '',
+		errors: [],
+		usersRef: firebase.database().ref('users'),
+		isFormEnabled: false,
+		isAccountCreated: false,
+		isAnimationLoading: false
+	};
 
 	render() {
 		const { username, email, password, passwordConfirm, errors, isFormEnabled, isAccountCreated, isAnimationLoading } = this.state;
