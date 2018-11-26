@@ -18,7 +18,7 @@ import LoadingAnimation from './system/utilities/loading-animation/loading-anima
 
 class AppRouter extends Component {
 	componentDidMount() {
-		// check user login state and redirect to the app route
+		// redirect to the chat route on user logged-in state
 		firebase
 			.auth()
 			.onAuthStateChanged((user) => {
@@ -29,11 +29,11 @@ class AppRouter extends Component {
 					// navigate to chat route
 					this.props.history.push('/chat');
 				} else {
-					// clear user from store
-					this.props.clearUser();
-
 					// navigate to home route
 					this.props.history.push('/');
+
+					// clear user from store
+					this.props.clearUser();
 				}
 			});
 	}

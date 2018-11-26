@@ -1,0 +1,15 @@
+// user-panel
+.user-panel-menu {
+	> div {
+		border-radius: 0;
+		top: 55px !important;
+
+		ul {
+			padding: 0;
+
+			li {
+				padding: 10px 15px;
+			}
+		}
+	}
+}

@@ -12,34 +12,30 @@ import Divider from '@material-ui/core/Divider/Divider';
 
 class UserPanel extends Component {
 	state = {
-		anchorEl: null,
+		menuOpen: false,
 		currentUser: this.props.currentUser
 	};
 
 	render() {
-		const { anchorEl, currentUser } = this.state;
+		const { menuOpen, currentUser } = this.state;
 
 		return (
 			<section className="sc-user-panel">
 				{/* Button */}
-				<Button
-					aria-owns={anchorEl ? 'user-panel-menu' : undefined}
-					aria-haspopup="true"
-					onClick={this.handleClick}>
-					<h5>Personal</h5>
-					<p>{ currentUser.displayName }</p>
+				<Button onClick={this.handleClick}>
+					<h5 className="sc-type">Slack</h5>
+					<p className="sc-name">{currentUser.displayName}</p>
+					<img className="sc-avatar" src={currentUser.photoURL} alt={currentUser.displayName}/>
 				</Button>
 
 				{/* Menu - User Panel */}
-				<Menu
-					id="user-panel-menu"
-					anchorEl={anchorEl}
+				<Menu className="user-panel-menu"
 					onClick={this.handleCloseMenu}
-					open={Boolean(anchorEl)}>
+					open={menuOpen}>
 					<MenuItem onClick={this.handleCloseMenu} disabled>
-						Signed in as { currentUser.displayName }
+						Signed in as {currentUser.displayName}
 					</MenuItem>
-					<Divider />
+					<Divider/>
 					<MenuItem onClick={this.handleCloseMenu}>
 						Change Avatar
 					</MenuItem>
@@ -53,18 +49,16 @@ class UserPanel extends Component {
 
 	/**
 	 * handle button click
-	 *
-	 * @param event
 	 */
-	handleClick = (event) => {
-		this.setState({ anchorEl: event.currentTarget });
+	handleClick = () => {
+		this.setState({ menuOpen: true });
 	};
 
 	/**
 	 * handle close menu
 	 */
 	handleCloseMenu = () => {
-		this.setState({ anchorEl: null });
+		this.setState({ menuOpen: false });
 	};
 
 	/**

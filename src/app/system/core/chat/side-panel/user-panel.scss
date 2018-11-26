@@ -1,6 +1,8 @@
 .sc-user-panel {
 	Button {
+		border-bottom: 1px solid cd-palette($cd-border, 3025);
 		padding: 10px 15px;
+		position: relative;
 		text-align: left;
 		text-transform: unset;
 		width: 100%;
@@ -9,19 +11,27 @@
 			color: cd-palette($cd-color, 1001);
 			display: block;
 
-			h5 {
+			.sc-type {
 				font-weight: cd-fontWeight(700);
 			}
 
-			p {
+			.sc-name {
 				color: cd-palette($cd-color, 1005, .5);
 				font-size: cd-fontSize(s14);
+			}
+
+			.sc-avatar {
+				border-radius: 15px;
+				height: 30px;
+				position: absolute;
+				right: 15px;
+				top: 15px;
+				width: 30px;
 			}
 		}
 
 		&:hover {
 			background-color: cd-palette($cd-background, 2025);
-			border-bottom-color: cd-palette($cd-border, 3025);
 		}
 	}
 }

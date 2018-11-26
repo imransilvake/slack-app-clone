@@ -5,7 +5,7 @@ const LoadingAnimation = () => {
 	return (
 		<section className="sc-loading-animation">
 			<div className="cd-vh-center">
-				{ /* slack animation */}
+				{ /* slack */}
 				<svg
 					version="1.1"
 					xmlns="http://www.w3.org/2000/svg"

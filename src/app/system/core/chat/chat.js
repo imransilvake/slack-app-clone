@@ -8,16 +8,19 @@ import { connect } from 'react-redux';
 import SidePanel from './side-panel/side-panel';
 import MessageArea from './message-area/message-area';
 import MetaPanel from './meta-panel/meta-panel';
+import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Chat extends Component {
 	render() {
 		const { currentUser } = this.props;
 
-		return (
+		return !this.props.currentUser ? <LoadingAnimation/> : (
 			<section className="sc-chat">
 				{/* Side Panel */}
-				<div className="sc-sidebar">
-					<SidePanel currentUser={currentUser}/>
+				<div className="cd-row">
+					<div className="cd-col sc-sidebar">
+						<SidePanel currentUser={currentUser}/>
+					</div>
 				</div>
 
 				<div className="cd-row">

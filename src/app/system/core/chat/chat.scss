@@ -29,8 +29,10 @@
 		}
 
 		.cd-row {
-			margin-left: 0;
-			margin-top: 60px;
+			&:last-child {
+				margin-left: 0;
+				margin-top: 60px;
+			}
 		}
 	}
 }
