@@ -11,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
+import i18n from '../../../../assets/i18n/i18n';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Login extends Component {
@@ -32,8 +33,8 @@ class Login extends Component {
 					<header className="sc-header">
 						<Link to="/">
 							<div className="cd-tooltip">
-								<img src={SlackLogo} alt="slack-logo"/>
-								<span className="cd-arrow cd-left">Go to Home</span>
+								<img src={SlackLogo} alt={i18n.t('LOGIN.HEADER.LOGO.ALT')}/>
+								<span className="cd-arrow cd-left">{i18n.t('LOGIN.HEADER.LOGO.TOOLTIP')}</span>
 							</div>
 						</Link>
 					</header>
@@ -48,7 +49,7 @@ class Login extends Component {
 						}
 						<form className="sc-form-fields" onSubmit={this.handleSubmit}>
 							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="email">Email</InputLabel>
+								<InputLabel htmlFor="email">{i18n.t('LOGIN.CONTENT.FORM.USERNAME')}</InputLabel>
 								<Input
 									id="email"
 									name="email"
@@ -57,7 +58,7 @@ class Login extends Component {
 									onChange={this.handleChange}/>
 							</FormControl>
 							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="password">Password</InputLabel>
+								<InputLabel htmlFor="password">{i18n.t('LOGIN.CONTENT.FORM.EMAIL')}</InputLabel>
 								<Input
 									id="password"
 									name="password"
@@ -72,14 +73,14 @@ class Login extends Component {
 								type="submit"
 								disabled={!isFormEnabled}
 								fullWidth>
-								Sign In
+								{i18n.t('LOGIN.CONTENT.BUTTON_TEXT')}
 							</Button>
 						</form>
 					</section>
 
 					{/* Footer */}
 					<footer className="cd-col sc-footer">
-						<p>Do not have an account? <Link className="cd-link" to="/register">Register</Link></p>
+						<p>{i18n.t('LOGIN.FOOTER.T1')} <Link className="cd-link" to="/register">{i18n.t('LOGIN.FOOTER.T2')}</Link></p>
 					</footer>
 				</div>
 			</section>

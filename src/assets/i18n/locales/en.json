@@ -1,0 +1,65 @@
+{
+	"HOME": {
+		"TITLE": "Slack",
+		"SUBTITLE": {
+			"T1": "Let",
+			"T2": "Work",
+			"T3": "Flow"
+		},
+		"BANNER_ALT": "Home Banner",
+		"CONTENT": "Slack creates alignment and shared understanding across your team, making you more productive, less stressed, and just a little bit happier.",
+		"BUTTONS": {
+			"T1": "Sign In",
+			"T2": "Sign Up"
+		}
+	},
+	"LOGIN": {
+		"HEADER": {
+			"LOGO": {
+				"ALT": "Slack Logo",
+				"TOOLTIP": "Go to Home"
+			}
+		},
+		"CONTENT": {
+			"FORM": {
+				"USERNAME": "Username",
+				"EMAIL": "Email"
+			},
+			"BUTTON_TEXT": "Sign In"
+		},
+		"FOOTER": {
+			"T1": "Do not have an account?",
+			"T2": "Register"
+		}
+	},
+	"REGISTER": {
+		"HEADER": {
+			"LOGO": {
+				"ALT": "Slack Logo",
+				"TOOLTIP": "Go to Home"
+			}
+		},
+		"CONTENT": {
+			"FORM": {
+				"USERNAME": "Username",
+				"EMAIL": "Email",
+				"PASSWORD": "Password",
+				"CONFIRM_PASSWORD": "Confirm Password"
+			},
+			"MESSAGE": {
+				"T1": "Your account has been created successfully!",
+				"T2": "Your are automatically redirecting back to the login page shortly!"
+			},
+			"BUTTON_TEXT": "Sign Up"
+		},
+		"FOOTER": {
+			"T1": "Already a user?",
+			"T2": "Login"
+		}
+	},
+	"CHAT": {
+		"SIDE_PANEL": {
+
+		}
+	}
+}

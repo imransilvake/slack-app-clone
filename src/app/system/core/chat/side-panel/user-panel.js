@@ -29,7 +29,8 @@ class UserPanel extends Component {
 				</Button>
 
 				{/* Menu - User Panel */}
-				<Menu className="user-panel-menu"
+				<Menu
+					className="user-panel-menu"
 					onClick={this.handleCloseMenu}
 					open={menuOpen}>
 					<MenuItem onClick={this.handleCloseMenu} disabled>

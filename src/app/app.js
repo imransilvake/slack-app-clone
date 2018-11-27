@@ -18,9 +18,9 @@ class App extends Component {
 	render() {
 		return (
 			<section className="sc-app">
-				{/* Router Outlet */}
 				<Provider store={store}>
 					<BrowserRouter>
+						{/* Router Outlet */}
 						<AppRouter/>
 					</BrowserRouter>
 				</Provider>

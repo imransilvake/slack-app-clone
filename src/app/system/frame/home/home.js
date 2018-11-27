@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button/Button';
 import HomeBannerL from '../../../../assets/images/home/01.png';
 import HomeBannerS from '../../../../assets/images/home/02.jpg';
+import i18n from '../../../../assets/i18n/i18n';
 
 class Home extends Component {
 	render() {
@@ -14,34 +15,34 @@ class Home extends Component {
 				{/* Content */}
 				<div className="cd-col cd-col-pm-t-6">
 					<div className="sc-title">
-						<h1>Slack</h1>
+						<h1>{i18n.t('HOME.TITLE')}</h1>
 						<h6>
-							<span>Let</span>
-							<span>Work</span>
-							<span>Flow</span>
+							<span>{i18n.t('HOME.SUBTITLE.T1')}</span>
+							<span>{i18n.t('HOME.SUBTITLE.T2')}</span>
+							<span>{i18n.t('HOME.SUBTITLE.T3')}</span>
 						</h6>
 
 						{/* Banner - Small Displays */}
 						<div className="sc-banner cd-hide-on-t-up">
-							<img src={HomeBannerS} alt="Home Banner"/>
+							<img src={HomeBannerS} alt={i18n.t('HOME.SUBTITLE.T3')}/>
 						</div>
 					</div>
 					<div className="sc-content">
-						<h5>Slack creates alignment and shared understanding across your team, making you more productive, less stressed, and just a little bit happier.</h5>
+						<h5>{i18n.t('HOME.CONTENT')}</h5>
 					</div>
 					<div className="sc-buttons">
 						<Link to="/login">
 							<Button
 								className="sc-login"
 								variant="contained">
-								Sign In
+								{i18n.t('HOME.BUTTONS.T1')}
 							</Button>
 						</Link>
 						<Link to="/register">
 							<Button
 								className="sc-register"
 								variant="contained">
-								Sign Up
+								{i18n.t('HOME.BUTTONS.T2')}
 							</Button>
 						</Link>
 					</div>
@@ -49,7 +50,7 @@ class Home extends Component {
 
 				{/* Banner - Large Displays */}
 				<div className="cd-col cd-col-pm-t-6 cd-hide-on-s-down">
-					<img src={HomeBannerL} alt="Home Banner"/>
+					<img src={HomeBannerL} alt={i18n.t('HOME.SUBTITLE.T3')}/>
 				</div>
 			</section>
 		);

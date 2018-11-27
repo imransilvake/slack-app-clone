@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
+import i18n from '../../../../assets/i18n/i18n';
 
 class Register extends Component {
 	state = {
@@ -43,35 +44,35 @@ class Register extends Component {
 							}
 							<form className="sc-form-fields" onSubmit={this.handleSubmit}>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="username">Username</InputLabel>
-									<Input id="username" name="username" value={username} onChange={this.handleChange} />
+									<InputLabel htmlFor="username">{i18n.t('REGISTER.CONTENT.FORM.USERNAME')}</InputLabel>
+									<Input id="username" name="username" value={username} onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="email">Email</InputLabel>
+									<InputLabel htmlFor="email">{i18n.t('REGISTER.CONTENT.FORM.EMAIL')}</InputLabel>
 									<Input
 										id="email"
 										name="email"
 										value={email}
 										error={this.handleInputError(errors, 'email')}
-										onChange={this.handleChange} />
+										onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="password">Password</InputLabel>
+									<InputLabel htmlFor="password">{i18n.t('REGISTER.CONTENT.FORM.PASSWORD')}</InputLabel>
 									<Input
 										id="password"
 										name="password"
 										type="password"
 										value={password}
-										onChange={this.handleChange} />
+										onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="passwordConfirm">Password Confirm</InputLabel>
+									<InputLabel htmlFor="passwordConfirm">{i18n.t('REGISTER.CONTENT.FORM.CONFIRM_PASSWORD')}</InputLabel>
 									<Input
 										id="passwordConfirm"
 										name="passwordConfirm"
 										type="password"
 										value={passwordConfirm}
-										onChange={this.handleChange} />
+										onChange={this.handleChange}/>
 								</FormControl>
 								<Button
 									className="sc-button sc-register"
@@ -79,7 +80,7 @@ class Register extends Component {
 									type="submit"
 									disabled={!isFormEnabled}
 									fullWidth>
-									Sign Up
+									{i18n.t('REGISTER.CONTENT.BUTTON_TEXT')}
 								</Button>
 							</form>
 						</section>
@@ -87,8 +88,8 @@ class Register extends Component {
 				default:
 					return (
 						<section className="cd-col sc-message">
-							<p>Your account has been created successfully!</p>
-							<p>Your are automatically redirecting back to the login page shortly!</p>
+							<p>{i18n.t('REGISTER.CONTENT.MESSAGE.T1')}</p>
+							<p>{i18n.t('REGISTER.CONTENT.MESSAGE.T2')}</p>
 						</section>
 					);
 			}
@@ -101,10 +102,8 @@ class Register extends Component {
 					<header className="sc-header">
 						<Link to="/">
 							<div className="cd-tooltip">
-								<img src={SlackLogo} alt="slack-logo" />
-								<span className="cd-arrow cd-right">
-                                    Go to Home
-								</span>
+								<img src={SlackLogo} alt={i18n.t('REGISTER.HEADER.LOGO.ALT')}/>
+								<span className="cd-arrow cd-right">{i18n.t('REGISTER.HEADER.LOGO.TOOLTIP')}</span>
 							</div>
 						</Link>
 					</header>
@@ -116,7 +115,7 @@ class Register extends Component {
 
 					{/* Footer */}
 					<footer className="cd-col sc-footer">
-						<p>Already a user? <Link className="cd-link" to="/login">Login</Link></p>
+						<p>{i18n.t('REGISTER.FOOTER.T1')} <Link className="cd-link" to="/login">{i18n.t('REGISTER.FOOTER.T2')}</Link></p>
 					</footer>
 				</div>
 			</section>
@@ -194,9 +193,7 @@ class Register extends Component {
 	 * @returns {boolean}
 	 */
 	isFormValid = () => {
-		if (this.isFormEmpty(this.state)) {
-			return false;
-		} if (!this.isEmailValid(this.state.email)) {
+		if (this.isFormEmpty(this.state) || !this.isEmailValid(this.state.email)) {
 			return false;
 		}
 		return this.isPasswordValid(this.state);
