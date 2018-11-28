@@ -24,8 +24,9 @@
         "react-router-dom": "^4.3.1",
         "react-scripts": "2.1.1",
         "redux": "^4.0.1",
-        "redux-devtools-extension": "^2.13.6"
-    },
+        "redux-devtools-extension": "^2.13.6",
+		"prop-types": "latest"
+	},
     "devDependencies": {
         "eslint-config-airbnb": "^17.1.0",
         "eslint-plugin-react": "^7.11.1",

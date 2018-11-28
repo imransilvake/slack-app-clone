@@ -59,7 +59,27 @@
 	},
 	"CHAT": {
 		"SIDE_PANEL": {
-
+			"USER_PANEL": {
+				"TITLE": "Slack",
+				"SIGNED_IN": "Signed in as {{ username }}",
+				"CHANGE_AVATAR": "Change Avatar",
+				"LOGOUT": "Logout"
+			},
+			"CHANNELS": {
+				"CREATE_CHANNEL": "Create a Channel",
+				"MODAL": {
+					"HEADER": {
+						"LOGO": {
+							"ALT": "Slack Logo"
+						}
+					},
+					"FORM": {
+						"CHANNEL_NAME": "Channel Name",
+						"CHANNEL_DETAILS": "Channel Details"
+					},
+					"BUTTON_TEXT": "Add Channel"
+				}
+			}
 		}
 	}
 }

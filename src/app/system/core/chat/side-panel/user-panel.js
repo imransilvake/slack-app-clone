@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu/Menu';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Button from '@material-ui/core/Button/Button';
 import Divider from '@material-ui/core/Divider/Divider';
+import i18n from '../../../../../assets/i18n/i18n';
 
 class UserPanel extends Component {
 	state = {
@@ -23,7 +24,7 @@ class UserPanel extends Component {
 			<section className="sc-user-panel">
 				{/* Button */}
 				<Button onClick={this.handleClick}>
-					<h5 className="sc-type">Slack</h5>
+					<h5 className="sc-type">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.TITLE')}</h5>
 					<p className="sc-name">{currentUser.displayName}</p>
 					<img className="sc-avatar" src={currentUser.photoURL} alt={currentUser.displayName}/>
 				</Button>
@@ -34,14 +35,14 @@ class UserPanel extends Component {
 					onClick={this.handleCloseMenu}
 					open={menuOpen}>
 					<MenuItem onClick={this.handleCloseMenu} disabled>
-						Signed in as {currentUser.displayName}
+						{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.SIGNED_IN', { username: currentUser.displayName })}
 					</MenuItem>
 					<Divider/>
 					<MenuItem onClick={this.handleCloseMenu}>
-						Change Avatar
+						{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.CHANGE_AVATAR')}
 					</MenuItem>
 					<MenuItem onClick={this.handleSignOut}>
-						Logout
+						{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.LOGOUT')}
 					</MenuItem>
 				</Menu>
 			</section>

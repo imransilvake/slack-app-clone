@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 // app
 import UserPanel from './user-panel';
+import Channels from './channels';
 
 class SidePanel extends Component {
 	render() {
@@ -14,6 +15,9 @@ class SidePanel extends Component {
 				<header>
 					<UserPanel currentUser={currentUser}/>
 				</header>
+
+				{/* Content */}
+				<Channels/>
 			</section>
 		);
 	}
