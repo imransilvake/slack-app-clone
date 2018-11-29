@@ -17,7 +17,7 @@ class SidePanel extends Component {
 				</header>
 
 				{/* Content */}
-				<Channels/>
+				<Channels currentUser={currentUser}/>
 			</section>
 		);
 	}

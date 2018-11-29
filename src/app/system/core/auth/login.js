@@ -49,7 +49,7 @@ class Login extends Component {
 						}
 						<form className="sc-form-fields" onSubmit={this.handleSubmit}>
 							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="email">{i18n.t('LOGIN.CONTENT.FORM.USERNAME')}</InputLabel>
+								<InputLabel htmlFor="email">{i18n.t('LOGIN.CONTENT.FORM.EMAIL')}</InputLabel>
 								<Input
 									id="email"
 									name="email"
@@ -58,7 +58,7 @@ class Login extends Component {
 									onChange={this.handleChange}/>
 							</FormControl>
 							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="password">{i18n.t('LOGIN.CONTENT.FORM.EMAIL')}</InputLabel>
+								<InputLabel htmlFor="password">{i18n.t('LOGIN.CONTENT.FORM.PASSWORD')}</InputLabel>
 								<Input
 									id="password"
 									name="password"
@@ -128,7 +128,6 @@ class Login extends Component {
 				this.props.history.push('/chat');
 			})
 			.catch((error) => {
-				// error
 				this.setState({ errors: [error], isAnimationLoading: false });
 			});
 	};

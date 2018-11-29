@@ -172,17 +172,14 @@ class Register extends Component {
 								}, 4000);
 							})
 							.catch((error) => {
-								// error
 								this.setState({ errors: [error], isAnimationLoading: false });
 							});
 					})
 					.catch((error) => {
-						// error
 						this.setState({ errors: [error], isAnimationLoading: false });
 					});
 			})
 			.catch((error) => {
-				// errors
 				this.setState({ errors: [error], isAnimationLoading: false });
 			});
 	};

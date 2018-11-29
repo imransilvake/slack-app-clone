@@ -1,6 +1,12 @@
 // react
 import React, { Component } from 'react';
 
+// redux
+import { connect } from 'react-redux';
+
+// firebase
+import firebase from '../../../../../firebase';
+
 // app
 import Icon from '@material-ui/core/Icon/Icon';
 import i18n from '../../../../../assets/i18n/i18n';
@@ -10,24 +16,40 @@ import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
 import SlackLogo from '../../../../../assets/svg/general/slack-logo.svg';
+import { setCurrentChannel } from '../../../../store/actions';
+import LoadingAnimation from '../../../utilities/loading-animation/loading-animation';
 
 class Channels extends Component {
 	state = {
+		currentUser: this.props.currentUser,
 		openModal: false,
 		channels: [],
 		channelName: '',
 		channelDetails: '',
-		isFormEnabled: false
+		channelsRef: firebase.database().ref('channels'),
+		activeChannel: '',
+		errors: [],
+		isFormEnabled: false,
+		isAnimationLoading: false,
+		firstLoad: true
 	};
 
-	render() {
-		const { channels, channelName, channelDetails, isFormEnabled } = this.state;
+	componentDidMount() {
+		this.addChannelListener();
+	}
 
-		return (
+	componentWillUnmount() {
+		this.removeChannelListener();
+	}
+
+	render() {
+		const { channels, channelName, channelDetails, isFormEnabled, errors, isAnimationLoading } = this.state;
+
+		return isAnimationLoading ? <LoadingAnimation/> : (
 			<section className="sc-channels">
 				{/* Title */}
 				<div className="sc-title">
-					<h6>Channels ({ channels.length })</h6>
+					<h6>Channels<span>{channels.length}</span></h6>
 					<div className="cd-tooltip sc-icon-wrapper">
 						<div className="sc-icon">
 							<Icon onClick={this.handleOpenModal}>add_circle</Icon>
@@ -37,12 +59,8 @@ class Channels extends Component {
 				</div>
 
 				{/* Channel */}
-				<ul className="cd-remove-bullets">
-					<li><p>Channel 1</p></li>
-					<li><p>Channel 2</p></li>
-					<li><p>Channel 3</p></li>
-					<li><p>Channel 4</p></li>
-					<li><p>Channel 5</p></li>
+				<ul className="cd-remove-bullets sc-channels-list">
+					{this.displayChannels(channels)}
 				</ul>
 
 				{/* Modal */}
@@ -57,6 +75,12 @@ class Channels extends Component {
 
 						{/* Form */}
 						<section className="cd-col sc-form">
+							{
+								errors && errors.length > 0 && (
+									/* Errors */
+									<p className="cd-error">{this.displayErrors(errors)}</p>
+								)
+							}
 							<form className="sc-form-fields" onSubmit={this.handleFormSubmit}>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="channel-name">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME')}</InputLabel>
@@ -129,6 +153,40 @@ class Channels extends Component {
 	handleFormSubmit = (event) => {
 		// stop default event
 		event.preventDefault();
+
+		// show loading animation
+		this.setState({ isAnimationLoading: true });
+
+		// create channel object
+		const { currentUser, channelsRef, channelName, channelDetails } = this.state;
+		const { key } = channelsRef.push().key;
+		const newChannel = {
+			id: key,
+			name: channelName,
+			details: channelDetails,
+			createdBy: {
+				name: currentUser.displayName,
+				avatar: currentUser.photoURL
+			}
+		};
+
+		// update channel
+		channelsRef
+			.child(key)
+			.update(newChannel)
+			.then(() => {
+				// reset modal
+				this.resetForm();
+
+				// close modal
+				this.handleCloseModal();
+
+				// error
+				this.setState({ isAnimationLoading: false });
+			})
+			.catch((error) => {
+				this.setState({ errors: [error], isAnimationLoading: false });
+			});
 	};
 
 	/**
@@ -150,6 +208,102 @@ class Channels extends Component {
 	isFormEmpty = ({ channelName, channelDetails }) => {
 		return !channelName.length || !channelDetails.length;
 	};
+
+	/**
+	 * reset form
+	 */
+	resetForm = () => {
+		this.setState({ channelName: '', channelDetails: '' });
+	};
+
+	/**
+	 * display errors
+	 *
+	 * @param errors
+	 * @returns {*}
+	 */
+	displayErrors = errors => errors.map((error, i) => <span key={i}>{error.message}</span>);
+
+	/**
+	 * add channel listener
+	 */
+	addChannelListener = () => {
+		const loadedChannels = [];
+		this.state.channelsRef
+			.on('child_added', (snap) => {
+				// push channels
+				loadedChannels.push(snap.val());
+
+				// set to channels and set first channel
+				this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
+			});
+	};
+
+	/**
+	 * display channels
+	 *
+	 * @param channels
+	 */
+	displayChannels = channels => (
+		channels && channels.length > 0 && channels.map(channel => (
+			<li
+				key={channel.id}
+				name={channel.name}
+				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}>
+				<button type="button" onClick={() => this.changeChannel(channel)}>
+					#{channel.name}
+				</button>
+			</li>
+		))
+	);
+
+	/**
+	 * change channel
+	 *
+	 * @param channel
+	 */
+	changeChannel = (channel) => {
+		// set current channel
+		this.props.setCurrentChannel(channel);
+
+		// set active channel
+		this.setActiveChannel(channel);
+	};
+
+	/**
+	 * set first channel
+	 */
+	setFirstChannel = () => {
+		const firstChannel = this.state.channels[0];
+
+		// set first channel
+		if (this.state.firstLoad && this.state.channels.length > 0) {
+			// set current channel
+			this.props.setCurrentChannel(firstChannel);
+
+			// set active channel
+			this.setActiveChannel(firstChannel);
+		}
+
+		// unset firstLoad
+		this.setState({ firstLoad: false })
+	};
+
+	/**
+	 * set active channel
+	 *
+	 * @param channel
+	 */
+	setActiveChannel = (channel) => {
+		this.setState({ activeChannel: channel.id });
+	};
+
+	/**
+	 * remove channel listener
+	 */
+	removeChannelListener = () => {
+		this.state.channelsRef.off();
+	};
 }
 
-export default Channels;
+export default connect(null, { setCurrentChannel })(Channels);

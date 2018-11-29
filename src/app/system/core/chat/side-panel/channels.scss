@@ -9,6 +9,18 @@
 			border-bottom: 1px solid cd-palette($cd-border, 3025);
 			font-weight: cd-fontWeight(700);
 			padding: 5px 0;
+
+			span {
+				background-color: cd-palette($cd-background, 2025);
+				border-radius: 50%;
+				display: inline-block;
+				font-size: cd-fontSize(s13);
+				height: 18px;
+				line-height: cd-lineHeight(1.4);
+				margin-left: 5px;
+				text-align: center;
+				width: 18px;
+			}
 		}
 
 		.sc-icon-wrapper {
@@ -31,14 +43,30 @@
 		}
 	}
 
-	ul {
+	.sc-channels-list {
 		margin-top: 5px;
 
-		li {
-			padding: 4px;
+		.sc-item {
+			button {
+				background: transparent;
+				border: none;
+				color: cd-palette($cd-color, 1006);
+				font-size: cd-fontSize(s14);
+				outline: 0;
+				padding: 8px 10px;
 
-			&:hover {
-				background-color: cd-palette($cd-background, 2025);
+				&:hover {
+					background-color: cd-palette($cd-background, 2025);
+					color: cd-palette($cd-color, 1005);
+					cursor: pointer;
+				}
+			}
+
+			&.sc-active {
+				button {
+					background-color: cd-palette($cd-background, 2025);
+					color: cd-palette($cd-color, 1005);
+				}
 			}
 		}
 	}

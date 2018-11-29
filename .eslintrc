@@ -39,6 +39,7 @@
 		"react/prop-types": 0,
 		"import/order": 0,
 		"react/jsx-tag-spacing": 0,
+		"jsx-a11y/click-events-have-key-events": 0,
 		"import/no-unresolved": "off",
 		"react/jsx-indent-props": [true, "tab"],
 		"react/jsx-closing-bracket-location": [true, "tag-aligned"],
@@ -65,18 +66,14 @@
 					"getInitialState",
 					"getChildContext",
 					"getDerivedStateFromProps",
+					"componentDidMount",
 					"componentWillMount",
+					"componentWillUnmount",
 					"componentDidUpdate",
 					"componentDidCatch",
-					"componentWillUnmount",
-					"UNSAFE_componentWillMount",
-					"componentDidMount",
 					"componentWillReceiveProps",
-					"UNSAFE_componentWillReceiveProps",
 					"shouldComponentUpdate",
-					"componentWillUpdate",
-					"UNSAFE_componentWillUpdate",
-					"getSnapshotBeforeUpdate"
+					"componentWillUpdate"
 				]
 			}
 		}],
