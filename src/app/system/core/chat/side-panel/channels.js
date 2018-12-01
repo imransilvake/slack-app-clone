@@ -15,7 +15,7 @@ import FormControl from '@material-ui/core/FormControl/FormControl';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
-import SlackLogo from '../../../../../assets/svg/general/slack-logo.svg';
+import { RegexLNL } from '../../../utilities/helpers/regex';
 import { setCurrentChannel } from '../../../../store/actions';
 import LoadingAnimation from '../../../utilities/loading-animation/loading-animation';
 
@@ -54,7 +54,7 @@ class Channels extends Component {
 						<div className="sc-icon">
 							<Icon onClick={this.handleOpenModal}>add_circle</Icon>
 						</div>
-						<span className="cd-arrow cd-top">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.CREATE_CHANNEL')}</span>
+						<span className="cd-arrow cd-top cd-fixed-right">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.CREATE_CHANNEL')}</span>
 					</div>
 				</div>
 
@@ -67,47 +67,59 @@ class Channels extends Component {
 				<Modal
 					open={this.state.openModal}
 					onClose={this.handleCloseModal}>
-					<div className="cd-h-center sc-channels-modal">
-						{/* Header */}
-						<header className="sc-header">
-							<img src={SlackLogo} alt={i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.HEADER.LOGO.ALT')}/>
-						</header>
+					<div className="sc-modal-wrapper">
+						<div className="sc-channels-modal">
+							{/* Header */}
+							<header className="sc-header">
+								<h3>{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.HEADER.CREATE_CHANNEL')}</h3>
+								<p>{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.HEADER.DESCRIPTION')}</p>
+							</header>
 
-						{/* Form */}
-						<section className="cd-col sc-form">
-							{
-								errors && errors.length > 0 && (
-									/* Errors */
-									<p className="cd-error">{this.displayErrors(errors)}</p>
-								)
-							}
-							<form className="sc-form-fields" onSubmit={this.handleFormSubmit}>
-								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="channel-name">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME')}</InputLabel>
-									<Input
-										id="channel-name"
-										name="channelName"
-										value={channelName}
-										onChange={this.handleInputChange}/>
-								</FormControl>
-								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="password">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_DETAILS')}</InputLabel>
-									<Input
-										id="channel-details"
-										name="channelDetails"
-										value={channelDetails}
-										onChange={this.handleInputChange}/>
-								</FormControl>
-								<Button
-									className="sc-button"
-									variant="contained"
-									type="submit"
-									disabled={!isFormEnabled}
-									fullWidth>
-									{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.BUTTON_TEXT')}
-								</Button>
-							</form>
-						</section>
+							{/* Form */}
+							<section className="cd-col sc-form">
+								{
+									errors && errors.length > 0 && (
+										/* Errors */
+										<p className="cd-error">{this.displayErrors(errors)}</p>
+									)
+								}
+								<form className="sc-form-fields" onSubmit={this.handleFormSubmit}>
+									<FormControl className="sc-form-field" fullWidth>
+										<InputLabel htmlFor="channel-name">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME.TITLE')}</InputLabel>
+										<Input
+											id="channel-name"
+											name="channelName"
+											value={channelName}
+											onChange={this.handleInputChange}
+											placeholder="e.g. react"/>
+										<p className="ts-note">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME.DESCRIPTION')}</p>
+									</FormControl>
+									<FormControl className="sc-form-field" fullWidth>
+										<InputLabel htmlFor="channel-details">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_DETAILS.TITLE')}</InputLabel>
+										<Input
+											id="channel-details"
+											name="channelDetails"
+											value={channelDetails}
+											onChange={this.handleInputChange}/>
+										<p className="ts-note">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_DETAILS.DESCRIPTION')}</p>
+									</FormControl>
+									<Button
+										className="sc-button sc-create-channel"
+										variant="contained"
+										type="submit"
+										disabled={!isFormEnabled}>
+										{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.BUTTONS.T2')}
+									</Button>
+									<Button
+										className="sc-button sc-cancel"
+										variant="contained"
+										type="button"
+										onClick={this.handleCloseModal}>
+										{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.BUTTONS.T1')}
+									</Button>
+								</form>
+							</section>
+						</div>
 					</div>
 				</Modal>
 			</section>
@@ -159,7 +171,7 @@ class Channels extends Component {
 
 		// create channel object
 		const { currentUser, channelsRef, channelName, channelDetails } = this.state;
-		const { key } = channelsRef.push().key;
+		const key = channelsRef.push().key;
 		const newChannel = {
 			id: key,
 			name: channelName,
@@ -195,7 +207,7 @@ class Channels extends Component {
 	 * @returns {boolean}
 	 */
 	isFormValid = () => {
-		return !this.isFormEmpty(this.state);
+		return !this.isFormEmpty(this.state) && this.isChannelNameValid(this.state.channelName);
 	};
 
 	/**
@@ -207,6 +219,16 @@ class Channels extends Component {
 	 */
 	isFormEmpty = ({ channelName, channelDetails }) => {
 		return !channelName.length || !channelDetails.length;
+	};
+
+	/**
+	 * check channelName validity
+	 *
+	 * @param channelName
+	 * @returns {boolean}
+	 */
+	isChannelNameValid = (channelName) => {
+		return RegexLNL(channelName);
 	};
 
 	/**
@@ -234,7 +256,8 @@ class Channels extends Component {
 				// push channels
 				loadedChannels.push(snap.val());
 
-				// set to channels and set first channel
+				// set to channels
+				// set first channel
 				this.setState({ channels: loadedChannels }, () => this.setFirstChannel());
 			});
 	};
@@ -251,7 +274,7 @@ class Channels extends Component {
 				name={channel.name}
 				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}>
 				<button type="button" onClick={() => this.changeChannel(channel)}>
-					#{channel.name}
+					# {channel.name}
 				</button>
 			</li>
 		))

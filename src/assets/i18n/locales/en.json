@@ -66,18 +66,26 @@
 				"LOGOUT": "Logout"
 			},
 			"CHANNELS": {
-				"CREATE_CHANNEL": "Create a Channel",
+				"CREATE_CHANNEL": "Create a channel",
 				"MODAL": {
 					"HEADER": {
-						"LOGO": {
-							"ALT": "Slack Logo"
-						}
+						"CREATE_CHANNEL": "Create a channel",
+						"DESCRIPTION": "Channels are where your members communicate. They’re best when organized around a topic — #react, for example."
 					},
 					"FORM": {
-						"CHANNEL_NAME": "Channel Name",
-						"CHANNEL_DETAILS": "Channel Details"
+						"CHANNEL_NAME": {
+							"TITLE": "Channel Name",
+							"DESCRIPTION": "Name only contains: lowercase, numbers, characters between (2-20), hyphen"
+						},
+						"CHANNEL_DETAILS": {
+							"TITLE": "Channel Details",
+							"DESCRIPTION": "What’s this channel about?"
+						}
 					},
-					"BUTTON_TEXT": "Add Channel"
+					"BUTTONS": {
+						"T1": "Cancel",
+						"T2": "Create Channel"
+					}
 				}
 			}
 		}

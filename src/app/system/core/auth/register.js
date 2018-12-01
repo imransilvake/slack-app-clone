@@ -12,8 +12,9 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
-import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 import i18n from '../../../../assets/i18n/i18n';
+import { RegexEmailValidity } from '../../utilities/helpers/regex';
+import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Register extends Component {
 	state = {
@@ -215,7 +216,7 @@ class Register extends Component {
 	 * @param email
 	 */
 	isEmailValid = (email) => {
-		return /\S+@\S+\.\S+/.test(email);
+		return RegexEmailValidity(email);
 	};
 
 	/**
