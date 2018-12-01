@@ -85,7 +85,9 @@ class Channels extends Component {
 								}
 								<form className="sc-form-fields" onSubmit={this.handleFormSubmit}>
 									<FormControl className="sc-form-field" fullWidth>
-										<InputLabel htmlFor="channel-name">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME.TITLE')}</InputLabel>
+										<InputLabel htmlFor="channel-name">
+											{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME.TITLE')}
+										</InputLabel>
 										<Input
 											id="channel-name"
 											name="channelName"
@@ -95,7 +97,9 @@ class Channels extends Component {
 										<p className="ts-note">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME.DESCRIPTION')}</p>
 									</FormControl>
 									<FormControl className="sc-form-field" fullWidth>
-										<InputLabel htmlFor="channel-details">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_DETAILS.TITLE')}</InputLabel>
+										<InputLabel htmlFor="channel-details">
+											{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_DETAILS.TITLE')}
+										</InputLabel>
 										<Input
 											id="channel-details"
 											name="channelDetails"
@@ -171,9 +175,9 @@ class Channels extends Component {
 
 		// create channel object
 		const { currentUser, channelsRef, channelName, channelDetails } = this.state;
-		const key = channelsRef.push().key;
+		const keyId = channelsRef.push().key;
 		const newChannel = {
-			id: key,
+			id: keyId,
 			name: channelName,
 			details: channelDetails,
 			createdBy: {
@@ -184,7 +188,7 @@ class Channels extends Component {
 
 		// update channel
 		channelsRef
-			.child(key)
+			.child(keyId)
 			.update(newChannel)
 			.then(() => {
 				// reset modal

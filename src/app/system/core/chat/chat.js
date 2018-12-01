@@ -17,6 +17,14 @@ class Chat extends Component {
 		mobileOpen: false
 	};
 
+	componentDidMount() {
+		window.addEventListener('resize', this.handleChangeOnResize);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.handleChangeOnResize);
+	}
+
 	render() {
 		const { currentUser } = this.props;
 
@@ -32,7 +40,7 @@ class Chat extends Component {
 				{/* Side Panel - Desktop */}
 				<div className="cd-row">
 					<div className="cd-hide-on-s-down">
-						<SidePanel currentUser={currentUser} isMobileView={true}/>
+						<SidePanel currentUser={currentUser} isMobileView/>
 					</div>
 					<div className="cd-hide-on-t-up cd-mobile-header">
 						<IconButton onClick={this.handleDrawerToggle}>
@@ -64,6 +72,15 @@ class Chat extends Component {
 	handleDrawerToggle = () => {
 		this.setState(state => ({ mobileOpen: !state.mobileOpen }));
 	};
+
+	/**
+	 * handle change on resize
+	 */
+	handleChangeOnResize = () => {
+		if (this.state.mobileOpen) {
+			this.handleDrawerToggle();
+		}
+	}
 }
 
 // props
