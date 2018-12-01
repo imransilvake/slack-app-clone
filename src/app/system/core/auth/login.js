@@ -12,6 +12,7 @@ import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import i18n from '../../../../assets/i18n/i18n';
+import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Login extends Component {
@@ -31,7 +32,7 @@ class Login extends Component {
 				<div className="cd-row">
 					{/* Header */}
 					<header className="sc-header">
-						<Link to="/">
+						<Link to={ENV.ROUTING.HOME}>
 							<div className="cd-tooltip">
 								<img src={SlackLogo} alt={i18n.t('LOGIN.HEADER.LOGO.ALT')}/>
 								<span className="cd-arrow cd-left">{i18n.t('LOGIN.HEADER.LOGO.TOOLTIP')}</span>
@@ -80,7 +81,7 @@ class Login extends Component {
 
 					{/* Footer */}
 					<footer className="cd-col sc-footer">
-						<p>{i18n.t('LOGIN.FOOTER.T1')} <Link className="cd-link" to="/register">{i18n.t('LOGIN.FOOTER.T2')}</Link></p>
+						<p>{i18n.t('LOGIN.FOOTER.T1')} <Link className="cd-link" to={ENV.ROUTING.AUTH.REGISTER}>{i18n.t('LOGIN.FOOTER.T2')}</Link></p>
 					</footer>
 				</div>
 			</section>
@@ -125,7 +126,7 @@ class Login extends Component {
 				this.setState({ errors: null, isAnimationLoading: false });
 
 				// redirect to chat route
-				this.props.history.push('/chat');
+				this.props.history.push(ENV.ROUTING.CHAT);
 			})
 			.catch((error) => {
 				this.setState({ errors: [error], isAnimationLoading: false });

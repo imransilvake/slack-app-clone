@@ -1,4 +1,4 @@
-# Unnecessary Files & Folders
+# unnecessary files & folders
 .idea
 yarn.lock
 package-lock.json

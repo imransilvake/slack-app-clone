@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button/Button';
 import HomeBannerL from '../../../../assets/images/home/01.png';
 import HomeBannerS from '../../../../assets/images/home/02.jpg';
 import i18n from '../../../../assets/i18n/i18n';
+import ENV from '../../../../environment/index';
 
 class Home extends Component {
 	render() {
@@ -31,14 +32,14 @@ class Home extends Component {
 						<h5>{i18n.t('HOME.CONTENT')}</h5>
 					</div>
 					<div className="sc-buttons">
-						<Link to="/login">
+						<Link to={ENV.ROUTING.AUTH.LOGIN}>
 							<Button
 								className="sc-login"
 								variant="contained">
 								{i18n.t('HOME.BUTTONS.T1')}
 							</Button>
 						</Link>
-						<Link to="/register">
+						<Link to={ENV.ROUTING.AUTH.REGISTER}>
 							<Button
 								className="sc-register"
 								variant="contained">

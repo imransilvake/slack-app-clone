@@ -14,6 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import i18n from '../../../../assets/i18n/i18n';
 import { RegexEmailValidity } from '../../utilities/helpers/regex';
+import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
 
 class Register extends Component {
@@ -101,7 +102,7 @@ class Register extends Component {
 				<div className="cd-row">
 					{/* Header */}
 					<header className="sc-header">
-						<Link to="/">
+						<Link to={ENV.ROUTING.HOME}>
 							<div className="cd-tooltip">
 								<img src={SlackLogo} alt={i18n.t('REGISTER.HEADER.LOGO.ALT')}/>
 								<span className="cd-arrow cd-right">{i18n.t('REGISTER.HEADER.LOGO.TOOLTIP')}</span>
@@ -116,7 +117,7 @@ class Register extends Component {
 
 					{/* Footer */}
 					<footer className="cd-col sc-footer">
-						<p>{i18n.t('REGISTER.FOOTER.T1')} <Link className="cd-link" to="/login">{i18n.t('REGISTER.FOOTER.T2')}</Link></p>
+						<p>{i18n.t('REGISTER.FOOTER.T1')} <Link className="cd-link" to={ENV.ROUTING.AUTH.LOGIN}>{i18n.t('REGISTER.FOOTER.T2')}</Link></p>
 					</footer>
 				</div>
 			</section>
@@ -169,7 +170,7 @@ class Register extends Component {
 
 								// redirect to chat route
 								setTimeout(() => {
-									this.props.history.push('/chat');
+									this.props.history.push(ENV.ROUTING.CHAT);
 								}, 4000);
 							})
 							.catch((error) => {

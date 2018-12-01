@@ -13,6 +13,7 @@ import Login from './system/core/auth/login';
 import Register from './system/core/auth/register';
 import Home from './system/frame/home/home';
 import Chat from './system/core/chat/chat';
+import ENV from '../environment/index';
 import { setUser, clearUser } from './store/actions';
 import LoadingAnimation from './system/utilities/loading-animation/loading-animation';
 
@@ -27,10 +28,10 @@ class AppRouter extends Component {
 					this.props.setUser(user);
 
 					// navigate to chat route
-					this.props.history.push('/chat');
+					this.props.history.push(ENV.ROUTING.CHAT);
 				} else {
 					// navigate to home route
-					this.props.history.push('/');
+					this.props.history.push(ENV.ROUTING.HOME);
 
 					// clear user from store
 					this.props.clearUser();
@@ -41,10 +42,10 @@ class AppRouter extends Component {
 	render() {
 		return this.props.isAnimationLoading ? <LoadingAnimation/> : (
 			<Switch>
-				<Route exact path="/" component={Home}/>
-				<Route path="/login" component={Login}/>
-				<Route path="/register" component={Register}/>
-				<Route path="/chat" component={Chat}/>
+				<Route exact path={ENV.ROUTING.HOME} component={Home}/>
+				<Route path={ENV.ROUTING.AUTH.LOGIN} component={Login}/>
+				<Route path={ENV.ROUTING.AUTH.REGISTER} component={Register}/>
+				<Route path={ENV.ROUTING.CHAT} component={Chat}/>
 			</Switch>
 		);
 	}
