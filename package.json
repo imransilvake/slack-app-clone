@@ -3,12 +3,13 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "REACT_APP_SECRET_CODE=development react-scripts start",
+        "build": "sh -ac './environment/ .env.${REACT_APP_ENV}; react-scripts build'",
+        "build:staging": "REACT_APP_ENV=staging npm run build",
+        "build:production": "REACT_APP_ENV=production npm run build",
+        "serve": "serve -s build",
         "lint:scss": "stylelint '**/*.scss'; exit 0",
-        "lint:es": "eslint --ext .jsx --ext .js src/app/",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "lint:es": "eslint --ext .jsx --ext .js src/app/"
     },
     "dependencies": {
         "@imransilvake/scss-framework": "^2.0.6",
