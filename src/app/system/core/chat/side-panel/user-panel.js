@@ -13,7 +13,7 @@ import i18n from '../../../../../assets/i18n/i18n';
 
 class UserPanel extends Component {
 	state = {
-		menuOpen: false,
+		menuOpen: null,
 		currentUser: this.props.currentUser
 	};
 
@@ -23,7 +23,7 @@ class UserPanel extends Component {
 		return (
 			<section className="sc-user-panel">
 				{/* Button */}
-				<Button onClick={this.handleClick}>
+				<Button onClick={this.handleClickMenu}>
 					<h5 className="sc-type">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.TITLE')}</h5>
 					<p className="sc-name">{currentUser.displayName}</p>
 					<img className="sc-avatar" src={currentUser.photoURL} alt={currentUser.displayName}/>
@@ -31,9 +31,10 @@ class UserPanel extends Component {
 
 				{/* Menu - User Panel */}
 				<Menu
-					className="user-panel-menu"
+					className="sc-user-panel-menu"
 					onClick={this.handleCloseMenu}
-					open={menuOpen}>
+					anchorEl={menuOpen}
+					open={Boolean(menuOpen)}>
 					<MenuItem onClick={this.handleCloseMenu} disabled>
 						{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.SIGNED_IN', { username: currentUser.displayName })}
 					</MenuItem>
@@ -51,16 +52,18 @@ class UserPanel extends Component {
 
 	/**
 	 * handle button click
+	 *
+	 * @param event
 	 */
-	handleClick = () => {
-		this.setState({ menuOpen: true });
+	handleClickMenu = (event) => {
+		this.setState({ menuOpen: event.currentTarget });
 	};
 
 	/**
 	 * handle close menu
 	 */
 	handleCloseMenu = () => {
-		this.setState({ menuOpen: false });
+		this.setState({ menuOpen: null });
 	};
 
 	/**

@@ -84,5 +84,9 @@
 		@include cd-media(desktop, smartphone) {
 			max-width: 300px;
 		}
+
+		@include cd-media(desktop, mini) {
+			margin: 15px auto 0;
+		}
 	}
 }

@@ -67,7 +67,7 @@ class Channels extends Component {
 				<Modal
 					open={this.state.openModal}
 					onClose={this.handleCloseModal}>
-					<div className="sc-modal-wrapper">
+					<div className="sc-channels-modal-wrapper">
 						<div className="sc-channels-modal">
 							{/* Header */}
 							<header className="sc-header">
@@ -273,9 +273,13 @@ class Channels extends Component {
 				key={channel.id}
 				name={channel.name}
 				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}>
-				<button type="button" onClick={() => this.changeChannel(channel)}>
+				<Button
+					variant="contained"
+					type="button"
+					onClick={() => this.changeChannel(channel)}
+					fullWidth>
 					# {channel.name}
-				</button>
+				</Button>
 			</li>
 		))
 	);

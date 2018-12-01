@@ -49,11 +49,15 @@
 		margin-top: 5px;
 
 		.sc-item {
-			button {
+			Button {
 				background-color: transparent;
+				border-radius: 0;
 				border: none;
+				box-shadow: none;
 				color: cd-palette($cd-color, 1006);
 				font-size: cd-fontSize(s15);
+				height: auto;
+				min-height: auto;
 				outline: 0;
 				padding: 8px 10px;
 
@@ -62,10 +66,14 @@
 					color: cd-palette($cd-color, 1005);
 					cursor: pointer;
 				}
+
+				span {
+					justify-content: left;
+				}
 			}
 
 			&.sc-active {
-				button {
+				Button {
 					background-color: cd-palette($cd-background, 2025);
 					color: cd-palette($cd-color, 1005);
 				}
@@ -74,8 +82,8 @@
 	}
 }
 
-// modal - form
-.sc-modal-wrapper {
+// modal - channels form
+.sc-channels-modal-wrapper {
 	background-color: cd-palette($cd-background, 2001);
 	bottom: 0;
 	height: 100%;

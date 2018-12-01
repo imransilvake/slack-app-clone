@@ -1,5 +1,6 @@
 .sc-user-panel {
 	Button {
+		border-radius: 0;
 		padding: 10px 15px;
 		position: relative;
 		text-align: left;
@@ -31,6 +32,23 @@
 
 		&:hover {
 			background-color: cd-palette($cd-background, 2025);
+		}
+	}
+}
+
+// menu - user info
+.sc-user-panel-menu {
+	> div {
+		border-radius: 0;
+		margin-left: 15px;
+		top: 55px !important;
+
+		ul {
+			padding: 0;
+
+			li {
+				padding: 10px 15px;
+			}
 		}
 	}
 }
