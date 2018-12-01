@@ -20,38 +20,5 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] [Translation](https://github.com/i18next/react-i18next)
 
 
-## Environments
-In order to serve the build folder, run the following command first:
-```
-yarn global add serve
-```
-
-###### Local
-```
-build: yarn build
-serve: yarn start
-```
-
-###### Staging
-```
-build: yarn build:staging
-serve: yarn serve
-```
-
-###### Production
-```
-build: yarn build:production
-serve: yarn serve
-```
-
-
-## Linting
-###### JSX
-```
-yarn lint:es
-```
-
-###### SCSS
-```
-yarn lint:scss
-```
+## Information
+Check [React-Seed](https://github.com/imransilvake/SCSS-Framework) to understand how to build and serve this project as well as how to use SCSS and JS linting.
