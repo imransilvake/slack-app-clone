@@ -21,4 +21,4 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 
 
 ## Information
-Check [React-Seed](https://github.com/imransilvake/SCSS-Framework) to understand how to build and serve this project as well as how to use SCSS and JS linting.
+Check [React-Seed](https://github.com/imransilvake/React-Seed) to understand how to build and serve this project as well as how to use SCSS and JS linting.
