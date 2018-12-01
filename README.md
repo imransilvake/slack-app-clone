@@ -20,13 +20,12 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] [Translation](https://github.com/i18next/react-i18next)
 
 
-## Commands
+## Environments
 In order to serve the build folder, run the following command first:
 ```
 yarn global add serve
 ```
 
-#### Environments: Serve & Build
 ###### Local
 ```
 build: yarn build
