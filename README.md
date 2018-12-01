@@ -26,19 +26,19 @@ In order to serve the build folder, run the following command first:
 yarn global add serve
 ```
 
-###### Local
+#### Local
 ```
 build: yarn build
 serve: yarn start
 ```
 
-###### Staging
+#### Staging
 ```
 build: yarn build:staging
 serve: yarn serve
 ```
 
-###### Production
+#### Production
 ```
 build: yarn build:production
 serve: yarn serve
@@ -46,12 +46,12 @@ serve: yarn serve
 
 
 ## Linting
-###### JSX
+#### JSX
 ```
 yarn lint:es
 ```
 
-###### SCSS
+#### SCSS
 ```
 yarn lint:scss
 ```
