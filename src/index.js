@@ -8,6 +8,9 @@ import './styles.scss';
 import './assets/i18n/i18n';
 import App from './app/app';
 
+// remove after v4.0.0
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
+
 ReactDOM.render(
 	<App/>,
 	document.getElementById('root')

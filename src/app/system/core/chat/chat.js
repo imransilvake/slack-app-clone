@@ -8,17 +8,36 @@ import { connect } from 'react-redux';
 import SidePanel from './side-panel/side-panel';
 import MessageArea from './message-area/message-area';
 import MetaPanel from './meta-panel/meta-panel';
+import Drawer from '@material-ui/core/Drawer/Drawer';
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton/IconButton';
 
 class Chat extends Component {
+	state = {
+		mobileOpen: false
+	};
+
 	render() {
 		const { currentUser } = this.props;
 
 		return this.props.currentUser && (
 			<section className="sc-chat">
-				{/* Side Panel */}
+				{/*  Side Panel - Mobile */}
+				<Drawer
+					open={this.state.mobileOpen}
+					onClose={this.handleDrawerToggle}>
+					<SidePanel currentUser={currentUser} isMobileView={false}/>
+				</Drawer>
+
+				{/* Side Panel - Desktop */}
 				<div className="cd-row">
-					<div className="cd-col sc-sidebar">
-						<SidePanel currentUser={currentUser}/>
+					<div className="cd-hide-on-s-down">
+						<SidePanel currentUser={currentUser} isMobileView={true}/>
+					</div>
+					<div className="cd-hide-on-t-up cd-mobile-header">
+						<IconButton onClick={this.handleDrawerToggle}>
+							<MenuIcon/>
+						</IconButton>
 					</div>
 				</div>
 
@@ -36,6 +55,15 @@ class Chat extends Component {
 			</section>
 		);
 	}
+
+	/**
+	 * handle drawer toggle
+	 *
+	 * @returns {Function}
+	 */
+	handleDrawerToggle = () => {
+		this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+	};
 }
 
 // props

@@ -1,0 +1,17 @@
+.sc-side-panel {
+	.sc-sidebar {
+		background-color: cd-palette($cd-background, 2024);
+		color: cd-palette($cd-color, 1001);
+		height: 100vh;
+		padding: 0;
+		width: 240px;
+
+		&.sc-view-fixed {
+			bottom: 0;
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
+}

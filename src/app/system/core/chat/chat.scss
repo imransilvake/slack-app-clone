@@ -1,37 +1,25 @@
 .sc-chat {
-	.sc-sidebar {
-		background-color: cd-palette($cd-background, 2024);
-		bottom: 0;
-		color: cd-palette($cd-color, 1001);
-		height: 100vh;
-		left: 0;
-		padding: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-	}
-
 	.cd-row {
 		margin-left: 240px;
+
+		.cd-mobile-header {
+			background-color: cd-palette($cd-background, 2024);
+			padding: 6px;
+			width: 100%;
+
+			button {
+				color: cd-palette($cd-color, 1001);
+			}
+		}
 	}
 
 	// media
-	@include cd-media(mobile, tablet) {
-		.sc-sidebar {
-			max-width: 240px;
-		}
-	}
-
 	@include cd-media(desktop, smartphone) {
-		.sc-sidebar {
-			bottom: unset;
-			height: unset;
-		}
-
 		.cd-row {
-			&:last-child {
-				margin-left: 0;
-				margin-top: 60px;
+			margin-left: 0;
+
+			&:first-child {
+				margin: 0 -15px 15px;
 			}
 		}
 	}
