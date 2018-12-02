@@ -17,14 +17,18 @@ const store = createStore(rootReducer, composeWithDevTools());
 class App extends Component {
 	render() {
 		return (
-			<section className="sc-app">
-				<Provider store={store}>
-					<BrowserRouter>
-						{/* Router Outlet */}
+			<Provider store={store}>
+				<BrowserRouter>
+					<React.Fragment>
+						{/* Header */}
+
+						{/* Router */}
 						<AppRouter/>
-					</BrowserRouter>
-				</Provider>
-			</section>
+
+						{/* Footer */}
+					</React.Fragment>
+				</BrowserRouter>
+			</Provider>
 		);
 	}
 }
