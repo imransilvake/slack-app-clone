@@ -98,7 +98,7 @@ class Register extends Component {
 		};
 
 		return isAnimationLoading ? <LoadingAnimation/> : (
-			<section className="sc-auth-wrapper">
+			<section className="cd-container sc-auth-wrapper">
 				<div className="cd-row">
 					{/* Header */}
 					<header className="sc-header">

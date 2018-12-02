@@ -12,7 +12,7 @@ import ENV from '../../../../environment/index';
 class Home extends Component {
 	render() {
 		return (
-			<section className="sc-home cd-row">
+			<section className="cd-container sc-home cd-row">
 				{/* Content */}
 				<div className="cd-col cd-col-pm-t-6">
 					<div className="sc-title">

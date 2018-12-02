@@ -1,7 +1,7 @@
 .sc-home {
 	background-color: cd-palette($cd-background, 2001);
 	box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4000, .07);
-	margin: 40px 0 20px;
+	margin: 40px auto 20px;
 	padding: 40px 0;
 
 	.cd-col {
@@ -76,7 +76,7 @@
 
 	// media
 	@include cd-media(desktop, tablet) {
-		margin: 15px 0;
+		margin: 15px;
 
 		.cd-col {
 			padding: 0 35px;
@@ -90,7 +90,6 @@
 	}
 
 	@include cd-media(desktop, smartphone) {
-		margin: 15px 0;
 		padding: 25px 0;
 
 		.cd-col {

@@ -29,7 +29,7 @@ class Chat extends Component {
 		const { currentUser } = this.props;
 
 		return this.props.currentUser && (
-			<section className="sc-chat">
+			<section className="cd-container-fluid sc-chat">
 				{/*  Side Panel - Mobile */}
 				<Drawer
 					open={this.state.mobileOpen}
