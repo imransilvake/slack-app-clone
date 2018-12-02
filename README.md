@@ -15,9 +15,9 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 #### External 
 - [X] [Create React App](https://github.com/facebook/create-react-app)
 - [X] [Redux](https://redux.js.org/)
+- [X] [Translation](https://github.com/i18next/react-i18next)
 - [X] [Firebase](https://firebase.google.com/)
 - [X] [Material-UI](https://material-ui.com/)
-- [X] [Translation](https://github.com/i18next/react-i18next)
 
 
 ## Information
