@@ -111,6 +111,18 @@
 
 		.cd-col {
 			padding: 0 25px;
+
+			.sc-buttons {
+				Button {
+					&.sc-login {
+						margin-right: 10px;
+					}
+
+					span {
+						font-size: cd-fontSize(s13);
+					}
+				}
+			}
 		}
 	}
 }

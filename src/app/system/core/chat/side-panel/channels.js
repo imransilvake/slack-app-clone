@@ -49,7 +49,7 @@ class Channels extends Component {
 			<section className="sc-channels">
 				{/* Title */}
 				<div className="sc-title">
-					<h6>Channels<span>{channels.length}</span></h6>
+					<h6>{i18n.t('CHAT.SIDE_PANEL.CHANNELS.TITLE')}<span>{channels.length}</span></h6>
 					<div className="cd-tooltip sc-icon-wrapper">
 						<div className="sc-icon">
 							<Icon onClick={this.handleOpenModal}>add_circle</Icon>

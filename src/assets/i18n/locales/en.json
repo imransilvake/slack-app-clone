@@ -66,6 +66,7 @@
 				"LOGOUT": "Logout"
 			},
 			"CHANNELS": {
+				"TITLE": "Channels",
 				"CREATE_CHANNEL": "Create a channel",
 				"MODAL": {
 					"HEADER": {
