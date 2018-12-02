@@ -89,6 +89,18 @@
 					}
 				}
 			}
+		},
+		"MESSAGES_PANEL": {
+			"MESSAGES": {
+				"CHANNEL_INTRO": {
+					"T1": "You created this channel on {{ date }}. ",
+					"T2": "This is the very beginning of the {{ name }} channel. ",
+					"T3": "This channel is for workspace-wide communication and announcements."
+				}
+			},
+			"FORM": {
+				"T1": "Send"
+			}
 		}
 	}
 }

@@ -1,0 +1,11 @@
+.sc-message-form {
+	.sc-button {
+		border-radius: 1px;
+		margin: 5px 0;
+
+		&:not(:disabled) {
+			background-color: cd-palette($cd-background, 2021);
+			color: cd-palette($cd-color, 1001);
+		}
+	}
+}

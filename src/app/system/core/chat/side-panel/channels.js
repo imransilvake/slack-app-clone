@@ -180,6 +180,7 @@ class Channels extends Component {
 			id: keyId,
 			name: channelName,
 			details: channelDetails,
+			timestamp: firebase.database.ServerValue.TIMESTAMP,
 			createdBy: {
 				name: currentUser.displayName,
 				avatar: currentUser.photoURL

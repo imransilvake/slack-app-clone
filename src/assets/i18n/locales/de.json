@@ -89,6 +89,18 @@
 					}
 				}
 			}
+		},
+		"MESSAGES_PANEL": {
+			"MESSAGES": {
+				"CHANNEL_INTRO": {
+					"T1": "Sie haben diesen Kanal am erstellt {{ date }}. ",
+					"T2": "Dies ist der Anfang des {{ name }} Kanals. ",
+					"T3": "Dieser Kanal ist für die Kommunikation und Ansagen im gesamten Arbeitsbereich vorgesehen."
+				}
+			},
+			"FORM": {
+				"T1": "Senden"
+			}
 		}
 	}
 }

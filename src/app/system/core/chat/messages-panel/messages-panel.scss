@@ -1,0 +1,14 @@
+.sc-message-panel {
+	.sc-messages {
+		background-color: cd-palette($cd-background, 2001);
+		height: 400px;
+		overflow: auto;
+		padding: 15px;
+
+		.sc-channel-info {
+			border-bottom: 1px solid cd-palette($cd-border, 3004);
+			margin-bottom: 25px;
+			padding-bottom: 25px;
+		}
+	}
+}

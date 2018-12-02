@@ -1,0 +1,34 @@
+.sc-message-content {
+	border-bottom: 1px solid cd-palette($cd-border, 3002);
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+
+	&:last-child {
+		border: 0;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.sc-avatar {
+		border-radius: 5px;
+		height: 35px;
+		vertical-align: top;
+		width: 35px;
+	}
+
+	.sc-content {
+		display: inline-block;
+		margin-left: 10px;
+		width: calc(100% - 45px);
+
+		.sc-name {
+			span {
+				background-color: cd-palette($cd-background, 2002);
+				border-radius: 9px;
+				font-size: cd-fontSize(s12);
+				margin-left: 5px;
+				padding: 1px 5px;
+			}
+		}
+	}
+}

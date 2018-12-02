@@ -23,6 +23,7 @@
         "i18next": "^12.1.0",
         "i18next-browser-languagedetector": "^2.2.4",
         "md5": "^2.2.1",
+        "moment": "^2.22.2",
         "prop-types": "latest",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
