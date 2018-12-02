@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 // app
 import SidePanel from './side-panel/side-panel';
-import MessageArea from './message-area/message-area';
+import MessagesPanel from './messages-panel/messages-panel';
 import MetaPanel from './meta-panel/meta-panel';
 import Drawer from '@material-ui/core/Drawer/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -52,7 +52,7 @@ class Chat extends Component {
 				<div className="cd-row">
 					{/* Message Area */}
 					<div className="cd-col cd-col-pm-m-8 cd-col-pm-s-9 cd-col-pm-t-9 sc-message-area">
-						<MessageArea/>
+						<MessagesPanel/>
 					</div>
 
 					{/* Meta Panel */}

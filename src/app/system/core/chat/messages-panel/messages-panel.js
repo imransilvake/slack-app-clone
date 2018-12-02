@@ -1,7 +1,7 @@
 // react
 import React, { Component } from 'react';
 
-class MessageArea extends Component {
+class MessagesPanel extends Component {
 	render() {
 		return (
 			<h6>Message Area</h6>
@@ -9,4 +9,4 @@ class MessageArea extends Component {
 	}
 }
 
-export default MessageArea;
+export default MessagesPanel;

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import UserPanel from './user-panel';
 import Channels from './channels';
-import ColorPanel from '../color-panel/color-panel';
+import ColorPanel from './color-panel';
 
 class SidePanel extends Component {
 	render() {
