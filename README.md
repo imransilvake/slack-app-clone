@@ -35,6 +35,8 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] [Firebase](https://firebase.google.com/)
 - [X] [Material-UI](https://material-ui.com/)
 - [X] [Moment](https://momentjs.com/)
+- [X] [Redux Devtools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
+- [X] [Classnames](https://github.com/JedWatson/classnames)
 
 
 ## Information
