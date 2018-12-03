@@ -2,8 +2,33 @@
 	// different user
 	&.sc-different {
 		border-top: 1px solid cd-palette($cd-border, 3002);
-		margin: 15px 0 5px;
+		margin: 15px 0 10px;
 		padding-top: 15px;
+		position: relative;
+
+		.sc-timeline {
+			font-size: cd-fontSize(s12);
+			font-weight: cd-fontWeight(500);
+			left: 0;
+			position: absolute;
+			right: 0;
+			text-align: center;
+			top: -9px;
+			z-index: 1;
+
+			&::after {
+				background-color: cd-palette($cd-background, 2001);
+				bottom: 0;
+				content: '';
+				left: 0;
+				margin: auto;
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 130px;
+				z-index: -1;
+			}
+		}
 
 		.sc-content {
 			display: inline-block;
@@ -26,14 +51,15 @@
 
 	// continuous user
 	&.sc-continuous {
-		margin-bottom: 5px;
+		margin-bottom: 8px;
 
 		.sc-content {
-			padding-left: 45px;
+			margin-left: 40px;
+			padding-left: 5px;
+			padding-right: 5px;
 
 			&:hover {
 				background-color: cd-palette($cd-background, 2002);
-				border-radius: 9px;
 				cursor: help;
 			}
 

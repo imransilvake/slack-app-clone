@@ -19,6 +19,8 @@ class MessageContent extends Component {
 
 		return (
 			<article className={messageContentClass}>
+				{!continuousReply && <span className="sc-timeline">{this.messageTimeFromNow(message.timestamp, 'dddd - l')}</span>}
+
 				{ /* avatar */}
 				{!continuousReply && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
 
@@ -34,7 +36,9 @@ class MessageContent extends Component {
 					}
 					<p className="sc-type cd-tooltip">
 						{message.content}
-						<span className="cd-arrow cd-bottom">{this.messageTimeFromNow(message.timestamp)}</span>
+						<span className="cd-arrow cd-top cd-fixed-left">
+							{this.messageTimeFromNow(message.timestamp, 'llll')}
+						</span>
 					</p>
 				</div>
 			</article>
@@ -56,8 +60,15 @@ class MessageContent extends Component {
 	 * message time from now
 	 *
 	 * @param timestamp
+	 * @param format
 	 */
-	messageTimeFromNow = timestamp => moment(timestamp).fromNow();
+	messageTimeFromNow = (timestamp, format) => {
+		if (format) {
+			return moment(timestamp).format(format);
+		}
+
+		return moment(timestamp).fromNow();
+	};
 }
 
 export default MessageContent;

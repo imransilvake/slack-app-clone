@@ -4,5 +4,13 @@
 		height: 400px;
 		overflow: auto;
 		padding: 15px;
+
+		.sc-channel-info {
+			padding: 0 0 10px;
+
+			h3 {
+				color: cd-palette($cd-color, 1025);
+			}
+		}
 	}
 }
