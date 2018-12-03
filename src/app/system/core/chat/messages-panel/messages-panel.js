@@ -32,7 +32,7 @@ class MessagesPanel extends Component {
 	}
 
 	render() {
-		const { messagesRef, currentChannel, currentUser, messages } = this.state;
+		const { messagesRef, currentChannel, currentUser, messages, isMessagesLoading } = this.state;
 
 		return currentChannel && currentUser && (
 			<section className="sc-message-panel">
@@ -41,17 +41,25 @@ class MessagesPanel extends Component {
 
 				{/* Content */}
 				<section className="sc-messages">
+					{/* Channel Information */}
 					<div className="sc-channel-info">
 						<h3># {currentChannel.name}</h3>
 						<p>
 							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T1', {
 								date: this.channelCreatedDate(currentChannel.timestamp)
 							})}
-							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T2', {name: currentChannel.name})}
+							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T2', { name: currentChannel.name })}
 							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T3')}
 						</p>
 					</div>
-					{this.displayMessages(messages)}
+
+					{/* Display Messages */}
+					{
+						isMessagesLoading && (
+							<p>Loading...</p>
+						)
+					}
+					{ this.displayMessages(messages) }
 				</section>
 
 				{/* Form */}
@@ -68,7 +76,7 @@ class MessagesPanel extends Component {
 	 *
 	 * @param timestamp
 	 */
-	channelCreatedDate = (timestamp) => moment(timestamp).format('MMMM Do, YYYY');
+	channelCreatedDate = timestamp => moment(timestamp).format('MMMM Do, YYYY');
 
 	/**
 	 * add listeners
@@ -85,12 +93,21 @@ class MessagesPanel extends Component {
 	 * @param channelId
 	 */
 	addMessageListener = (channelId) => {
+		let userId = null;
 		const loadedMessages = [];
 		this.state.messagesRef
 			.child(channelId)
 			.on('child_added', (snap) => {
+				const message = {
+					data: snap.val(),
+					continuousReply: userId ? userId === snap.val().user.id : !!(userId)
+				};
+
+				// set previous user id
+				userId = snap.val().user.id;
+
 				// push messages
-				loadedMessages.push(snap.val());
+				loadedMessages.push(message);
 
 				// set to messages
 				this.setState({ messages: loadedMessages, isMessagesLoading: false });
@@ -105,8 +122,9 @@ class MessagesPanel extends Component {
 	displayMessages = messages => (
 		messages.length > 0 && messages.map(message => (
 			<MessageContent
-				key={message.timestamp}
-				message={message}
+				key={message.data.timestamp}
+				message={message.data}
+				continuousReply={message.continuousReply}
 				currentUser={this.state.currentUser}/>
 		))
 	);
