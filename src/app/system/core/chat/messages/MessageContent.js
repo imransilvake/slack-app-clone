@@ -19,7 +19,12 @@ class MessageContent extends Component {
 
 		return (
 			<article className={messageContentClass}>
-				{!continuousReply && <span className="sc-timeline">{this.messageTimeFromNow(message.timestamp, 'dddd - l')}</span>}
+				{ /* time */}
+				{
+					!continuousReply && (
+						<span className="sc-time-one">{this.messageTimeFromNow(message.timestamp, 'dddd, MMMM Do')}</span>
+					)
+				}
 
 				{ /* avatar */}
 				{!continuousReply && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
@@ -27,6 +32,19 @@ class MessageContent extends Component {
 				{ /* content */}
 				<div className={contentClass}>
 					{
+						// if continuous messages from the same user
+						continuousReply && (
+							<p className="sc-time-two cd-tooltip">
+								{this.messageTimeFromNow(message.timestamp, 'LT')}
+								<span className="cd-arrow cd-top cd-fixed-left">
+									{this.messageTimeFromNow(message.timestamp, 'llll')}
+								</span>
+							</p>
+						)
+					}
+
+					{
+						// if message by different user
 						!continuousReply && (
 							<h6 className="sc-name">
 								{message.user.name}
@@ -34,12 +52,9 @@ class MessageContent extends Component {
 							</h6>
 						)
 					}
-					<p className="sc-type cd-tooltip">
-						{message.content}
-						<span className="cd-arrow cd-top cd-fixed-left">
-							{this.messageTimeFromNow(message.timestamp, 'llll')}
-						</span>
-					</p>
+
+					{ /* description */}
+					<p className="sc-description">{message.content}</p>
 				</div>
 			</article>
 		);

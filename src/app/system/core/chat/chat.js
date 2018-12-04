@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // app
-import SidePanel from './side-panel/side-panel';
-import MessagesPanel from './messages-panel/messages-panel';
+import SidePanel from './side/side-panel';
+import MessagesPanel from './messages/MessagesPanel';
 import Drawer from '@material-ui/core/Drawer/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton/IconButton';
@@ -55,12 +55,10 @@ class Chat extends Component {
 
 				{/* Message Panel */}
 				<div className="cd-row">
-					<div className="cd-col">
-						<MessagesPanel
-							key={currentChannel && currentChannel.id}
-							currentChannel={currentChannel}
-							currentUser={currentUser}/>
-					</div>
+					<MessagesPanel
+						key={currentChannel && currentChannel.id}
+						currentChannel={currentChannel}
+						currentUser={currentUser}/>
 				</div>
 			</section>
 		);

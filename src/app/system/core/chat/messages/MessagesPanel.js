@@ -5,9 +5,9 @@ import React, { Component } from 'react';
 import firebase from '../../../../../firebase';
 
 // app
-import MessagesSearch from './messages-search';
-import MessageContent from './message-content';
-import MessagesForm from './messages-form';
+import MessagesHeader from './MessagesHeader';
+import MessageContent from './MessageContent';
+import MessagesForm from './MessagesForm';
 import i18n from '../../../../../assets/i18n/i18n';
 import moment from 'moment';
 
@@ -37,7 +37,7 @@ class MessagesPanel extends Component {
 		return currentChannel && currentUser && (
 			<section className="sc-message-panel">
 				{/* Search */}
-				<MessagesSearch/>
+				<MessagesHeader/>
 
 				{/* Content */}
 				<section className="sc-messages">
@@ -59,7 +59,7 @@ class MessagesPanel extends Component {
 							<p>Loading...</p>
 						)
 					}
-					{ this.displayMessages(messages) }
+					{this.displayMessages(messages)}
 				</section>
 
 				{/* Form */}

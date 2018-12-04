@@ -2,11 +2,12 @@
 	// different user
 	&.sc-different {
 		border-top: 1px solid cd-palette($cd-border, 3002);
-		margin: 15px 0 10px;
-		padding-top: 15px;
+		margin: 20px 0 10px;
+		padding-top: 20px;
 		position: relative;
 
-		.sc-timeline {
+		// time
+		.sc-time-one {
 			font-size: cd-fontSize(s12);
 			font-weight: cd-fontWeight(500);
 			left: 0;
@@ -14,7 +15,7 @@
 			right: 0;
 			text-align: center;
 			top: -9px;
-			z-index: 1;
+			z-index: cd-zIndex(normal);
 
 			&::after {
 				background-color: cd-palette($cd-background, 2001);
@@ -25,11 +26,12 @@
 				position: absolute;
 				right: 0;
 				top: 0;
-				width: 130px;
-				z-index: -1;
+				width: 150px;
+				z-index: cd-zIndex(hide);
 			}
 		}
 
+		// content
 		.sc-content {
 			display: inline-block;
 			margin-left: 10px;
@@ -53,23 +55,42 @@
 	&.sc-continuous {
 		margin-bottom: 8px;
 
+		// content
 		.sc-content {
-			margin-left: 40px;
-			padding-left: 5px;
+			margin: 0 0 0 -15px;
+			padding-left: 55px;
 			padding-right: 5px;
+			position: relative;
 
 			&:hover {
 				background-color: cd-palette($cd-background, 2002);
-				cursor: help;
+
+				// time
+				.sc-time-two {
+					color: cd-palette($cd-color, 1006);
+					cursor: help;
+					display: block;
+					font-size: cd-fontSize(s12);
+					left: 6px;
+					position: absolute;
+					top: 3px;
+				}
 			}
 
-			p {
+			// time - hidden initially
+			.sc-time-two {
+				display: none;
+			}
+
+			// description
+			.sc-description {
 				display: inline-block;
 				font-size: cd-fontSize(s14);
 			}
 		}
 	}
 
+	// last child
 	&:last-child {
 		margin-bottom: 0;
 	}
