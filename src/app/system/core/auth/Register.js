@@ -13,9 +13,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import i18n from '../../../../assets/i18n/i18n';
-import { RegexEmailValidity } from '../../utilities/helpers/regex';
 import ENV from '../../../../environment/index';
-import LoadingAnimation from '../../utilities/loading-animation/loading-animation';
+import LoadingAnimation from '../../utilities/loading-animation/LoadingAnimation';
+import { RegexEmailValidity } from '../../utilities/helpers/Regex';
 
 class Register extends Component {
 	state = {
@@ -46,11 +46,15 @@ class Register extends Component {
 							}
 							<form className="sc-form-fields" onSubmit={this.handleSubmit}>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="username">{i18n.t('REGISTER.CONTENT.FORM.USERNAME')}</InputLabel>
+									<InputLabel htmlFor="username">
+										{i18n.t('REGISTER.CONTENT.FORM.USERNAME')}
+									</InputLabel>
 									<Input id="username" name="username" value={username} onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="email">{i18n.t('REGISTER.CONTENT.FORM.EMAIL')}</InputLabel>
+									<InputLabel htmlFor="email">
+										{i18n.t('REGISTER.CONTENT.FORM.EMAIL')}
+									</InputLabel>
 									<Input
 										id="email"
 										name="email"
@@ -59,7 +63,9 @@ class Register extends Component {
 										onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="password">{i18n.t('REGISTER.CONTENT.FORM.PASSWORD')}</InputLabel>
+									<InputLabel htmlFor="password">
+										{i18n.t('REGISTER.CONTENT.FORM.PASSWORD')}
+									</InputLabel>
 									<Input
 										id="password"
 										name="password"
@@ -68,7 +74,9 @@ class Register extends Component {
 										onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="passwordConfirm">{i18n.t('REGISTER.CONTENT.FORM.CONFIRM_PASSWORD')}</InputLabel>
+									<InputLabel htmlFor="passwordConfirm">
+										{i18n.t('REGISTER.CONTENT.FORM.CONFIRM_PASSWORD')}
+									</InputLabel>
 									<Input
 										id="passwordConfirm"
 										name="passwordConfirm"
@@ -117,7 +125,12 @@ class Register extends Component {
 
 					{/* Footer */}
 					<footer className="cd-col sc-footer">
-						<p>{i18n.t('REGISTER.FOOTER.T1')} <Link className="cd-link" to={ENV.ROUTING.AUTH.LOGIN}>{i18n.t('REGISTER.FOOTER.T2')}</Link></p>
+						<p>
+							{i18n.t('REGISTER.FOOTER.T1')}
+							<Link className="cd-link" to={ENV.ROUTING.AUTH.LOGIN}>
+								{i18n.t('REGISTER.FOOTER.T2')}
+							</Link>
+						</p>
 					</footer>
 				</div>
 			</section>

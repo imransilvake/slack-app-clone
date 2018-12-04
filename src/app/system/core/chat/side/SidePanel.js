@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 
 // app
 import classNames from 'classnames/bind';
-import UserPanel from './user-panel';
-import Channels from './channels';
-import ColorPanel from './color-panel';
+import ColorPanel from './ColorPanel';
+import UserPanel from './UserPanel';
+import Channels from './Channels';
 
 class SidePanel extends Component {
 	render() {
@@ -18,7 +18,7 @@ class SidePanel extends Component {
 		return (
 			<section className="sc-side-panel-wrapper">
 				{/* Color Area */}
-				<div className="cd-col sc-color-panel-wrapper">
+				<div className="sc-color-panel-wrapper">
 					<ColorPanel/>
 				</div>
 

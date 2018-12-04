@@ -1,11 +1,11 @@
 // authentication
-@import 'auth/auth-form';
+@import 'auth/Auth';
 
 // chat
-@import 'chat/chat';
-@import 'chat/side/color-panel';
-@import 'chat/side/side-panel';
-@import 'chat/side/user-panel';
+@import 'chat/Chat';
+@import 'chat/side/ColorPanel';
+@import 'chat/side/SidePanel';
+@import 'chat/side/UserPanel';
 @import 'chat/side/channels';
 @import 'chat/messages/MessagesPanel';
 @import 'chat/messages/MessagesHeader';

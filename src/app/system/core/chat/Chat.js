@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // app
-import SidePanel from './side/side-panel';
+import SidePanel from './side/SidePanel';
 import MessagesPanel from './messages/MessagesPanel';
 import Drawer from '@material-ui/core/Drawer/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';

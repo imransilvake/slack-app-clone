@@ -15,9 +15,9 @@ import FormControl from '@material-ui/core/FormControl/FormControl';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
-import { RegexLNL } from '../../../utilities/helpers/regex';
+import { RegexLNL } from '../../../utilities/helpers/Regex';
 import { setCurrentChannel } from '../../../../store/actions';
-import LoadingAnimation from '../../../utilities/loading-animation/loading-animation';
+import LoadingAnimation from '../../../utilities/loading-animation/LoadingAnimation';
 
 class Channels extends Component {
 	state = {
@@ -54,7 +54,9 @@ class Channels extends Component {
 						<div className="sc-icon">
 							<Icon onClick={this.handleOpenModal}>add_circle</Icon>
 						</div>
-						<span className="cd-arrow cd-top cd-fixed-right">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.CREATE_CHANNEL')}</span>
+						<span className="cd-arrow cd-top cd-fixed-right">
+							{i18n.t('CHAT.SIDE_PANEL.CHANNELS.CREATE_CHANNEL')}
+						</span>
 					</div>
 				</div>
 

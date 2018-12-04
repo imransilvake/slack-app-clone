@@ -9,13 +9,13 @@ import { connect } from 'react-redux';
 import firebase from '../firebase';
 
 // app
-import Login from './system/core/auth/login';
-import Register from './system/core/auth/register';
-import Home from './system/frame/home/home';
-import Chat from './system/core/chat/chat';
+import Login from './system/core/auth/Login';
+import Register from './system/core/auth/Register';
+import Home from './system/frame/home/Home';
+import Chat from './system/core/chat/Chat';
 import ENV from '../environment/index';
 import { setUser, clearUser } from './store/actions';
-import LoadingAnimation from './system/utilities/loading-animation/loading-animation';
+import LoadingAnimation from './system/utilities/loading-animation/LoadingAnimation';
 
 class AppRouter extends Component {
 	componentDidMount() {
