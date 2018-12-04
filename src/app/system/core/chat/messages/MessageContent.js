@@ -7,37 +7,37 @@ import moment from 'moment';
 
 class MessageContent extends Component {
 	render() {
-		const { message, currentUser, continuousReply } = this.props;
+		const { message, currentUser, continuousMessage } = this.props;
 		const messageContentClass = classNames({
-			'sc-message-content sc-different': !continuousReply,
-			'sc-message-content sc-continuous': continuousReply
+			'sc-message-content sc-different': !continuousMessage,
+			'sc-message-content sc-continuous': continuousMessage
 		});
 		const contentClass = classNames({
 			'sc-content': true,
-			'sc-self': this.isMessageByAuthenticatedUser(message, currentUser) && !continuousReply
+			'sc-self': this.isMessageByAuthenticatedUser(message, currentUser) && !continuousMessage
 		});
 
 		return (
 			<article className={messageContentClass}>
 				{ /* time */}
 				{
-					!continuousReply && (
-						<span className="sc-time-one">{this.messageTimeFromNow(message.timestamp, 'dddd, MMMM Do')}</span>
+					!continuousMessage && (
+						<span className="sc-time-one">{this.formatMessageTime(message.timestamp, 'dddd, MMMM Do')}</span>
 					)
 				}
 
 				{ /* avatar */}
-				{!continuousReply && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
+				{!continuousMessage && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
 
 				{ /* content */}
 				<div className={contentClass}>
 					{
 						// if continuous messages from the same user
-						continuousReply && (
+						continuousMessage && (
 							<p className="sc-time-two cd-tooltip">
-								{this.messageTimeFromNow(message.timestamp, 'LT')}
+								{this.formatMessageTime(message.timestamp, 'LT')}
 								<span className="cd-arrow cd-top cd-fixed-left">
-									{this.messageTimeFromNow(message.timestamp, 'llll')}
+									{this.formatMessageTime(message.timestamp, 'llll')}
 								</span>
 							</p>
 						)
@@ -45,10 +45,10 @@ class MessageContent extends Component {
 
 					{
 						// if message by different user
-						!continuousReply && (
+						!continuousMessage && (
 							<h6 className="sc-name">
 								{message.user.name}
-								<span>{this.messageTimeFromNow(message.timestamp)}</span>
+								<span>{this.formatMessageTime(message.timestamp)}</span>
 							</h6>
 						)
 					}
@@ -72,12 +72,12 @@ class MessageContent extends Component {
 	};
 
 	/**
-	 * message time from now
+	 * format message time
 	 *
 	 * @param timestamp
 	 * @param format
 	 */
-	messageTimeFromNow = (timestamp, format) => {
+	formatMessageTime = (timestamp, format) => {
 		if (format) {
 			return moment(timestamp).format(format);
 		}

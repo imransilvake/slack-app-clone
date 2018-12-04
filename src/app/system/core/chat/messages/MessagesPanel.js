@@ -93,18 +93,21 @@ class MessagesPanel extends Component {
 	 * @param channelId
 	 */
 	addMessageListener = (channelId) => {
-		let userId = null;
+		let previousSnapshot = null;
 		const loadedMessages = [];
 		this.state.messagesRef
 			.child(channelId)
 			.on('child_added', (snap) => {
+				const snapshot = snap.val();
+
+				// message
 				const message = {
-					data: snap.val(),
-					continuousReply: userId ? userId === snap.val().user.id : !!(userId)
+					data: snapshot,
+					isContinuousMessage: previousSnapshot && this.validateMessagePattern(previousSnapshot, snapshot)
 				};
 
-				// set previous user id
-				userId = snap.val().user.id;
+				// set previous snapshot
+				previousSnapshot = snapshot;
 
 				// push messages
 				loadedMessages.push(message);
@@ -124,10 +127,26 @@ class MessagesPanel extends Component {
 			<MessageContent
 				key={message.data.timestamp}
 				message={message.data}
-				continuousReply={message.continuousReply}
+				continuousMessage={message.isContinuousMessage}
 				currentUser={this.state.currentUser}/>
 		))
 	);
+
+	/**
+	 * validate:
+	 * 1) if message is from the same user
+	 * 2) if message is sent on the same day
+	 *
+	 * @param previousSnapshot
+	 * @param snapshot
+	 * @returns {boolean}
+	 */
+	validateMessagePattern = (previousSnapshot, snapshot) => {
+		return (
+			previousSnapshot.user.id === snapshot.user.id &&
+			moment(snapshot.timestamp).isSame(previousSnapshot.timestamp, 'day') // granularity: day
+		)
+	};
 
 	/**
 	 * remove channel listener
