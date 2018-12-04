@@ -30,7 +30,7 @@ class MessagesForm extends Component {
 					value={message}
 					placeholder="Write a message!"
 					onChange={this.handleChange}
-					error={this.handleInputError(errors, 'email')}
+					error={this.handleInputError(errors, 'message')}
 					fullWidth/>
 
 				<Button
