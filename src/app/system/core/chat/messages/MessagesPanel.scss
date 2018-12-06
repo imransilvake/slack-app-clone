@@ -3,12 +3,12 @@
 
 	.sc-messages {
 		background-color: cd-palette($cd-background, 2001);
-		height: calc(100vh - 50px - 78px);
+		height: calc(100vh - 50px - 75px);
 		overflow: auto;
 		padding: 15px;
 
 		.sc-channel-info {
-			padding: 0 0 10px;
+			padding: 10px 25px;
 
 			h3 {
 				color: cd-palette($cd-color, 1025);

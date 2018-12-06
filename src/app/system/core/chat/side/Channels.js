@@ -15,7 +15,7 @@ import FormControl from '@material-ui/core/FormControl/FormControl';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
-import { RegexLNL } from '../../../utilities/helpers/Regex';
+import { regexLNL } from '../../../utilities/helpers/Regex';
 import { setCurrentChannel } from '../../../../store/actions';
 import LoadingAnimation from '../../../utilities/loading-animation/LoadingAnimation';
 
@@ -235,7 +235,7 @@ class Channels extends Component {
 	 * @returns {boolean}
 	 */
 	isChannelNameValid = (channelName) => {
-		return RegexLNL(channelName);
+		return regexLNL(channelName);
 	};
 
 	/**

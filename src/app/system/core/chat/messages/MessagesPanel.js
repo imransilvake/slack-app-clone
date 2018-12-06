@@ -102,7 +102,7 @@ class MessagesPanel extends Component {
 
 				// message
 				const message = {
-					data: snapshot,
+					snapshot,
 					isContinuousMessage: previousSnapshot && this.validateMessagePattern(previousSnapshot, snapshot)
 				};
 
@@ -116,21 +116,6 @@ class MessagesPanel extends Component {
 				this.setState({ messages: loadedMessages, isMessagesLoading: false });
 			});
 	};
-
-	/**
-	 * display all messages
-	 *
-	 * @param messages
-	 */
-	displayMessages = messages => (
-		messages.length > 0 && messages.map(message => (
-			<MessageContent
-				key={message.data.timestamp}
-				message={message.data}
-				continuousMessage={message.isContinuousMessage}
-				currentUser={this.state.currentUser}/>
-		))
-	);
 
 	/**
 	 * validate:
@@ -147,6 +132,21 @@ class MessagesPanel extends Component {
 			moment(snapshot.timestamp).isSame(previousSnapshot.timestamp, 'day') // granularity: day
 		)
 	};
+
+	/**
+	 * display all messages
+	 *
+	 * @param messages
+	 */
+	displayMessages = messages => (
+		messages.length > 0 && messages.map(message => (
+			<MessageContent
+				key={message.snapshot.timestamp}
+				message={message.snapshot}
+				isContinuousMessage={message.isContinuousMessage}
+				currentUser={this.state.currentUser}/>
+		))
+	);
 
 	/**
 	 * remove channel listener

@@ -5,7 +5,7 @@
  * @returns {boolean}
  * @constructor
  */
-export function RegexEmailValidity(value) {
+export function regexEmailValidity(value) {
 	return /\S+@\S+\.\S+/.test(value);
 }
 
@@ -16,6 +16,6 @@ export function RegexEmailValidity(value) {
  * @returns {boolean}
  * @constructor
  */
-export function RegexLNL(value) {
+export function regexLNL(value) {
 	return /^([a-zA-Z0-9-]){2,20}$/.test(value);
 }

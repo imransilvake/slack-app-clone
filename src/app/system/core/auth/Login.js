@@ -14,7 +14,7 @@ import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import i18n from '../../../../assets/i18n/i18n';
 import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/LoadingAnimation';
-import { RegexEmailValidity } from '../../utilities/helpers/Regex';
+import { regexEmailValidity } from '../../utilities/helpers/Regex';
 
 class Login extends Component {
 	state = {
@@ -168,7 +168,7 @@ class Login extends Component {
 	 * @param email
 	 */
 	isEmailValid = (email) => {
-		return RegexEmailValidity(email);
+		return regexEmailValidity(email);
 	};
 
 	/**

@@ -40,12 +40,22 @@
 			.sc-name {
 				margin-top: -2px;
 
-				span {
-					background-color: cd-palette($cd-background, 2002);
+				> span {
 					border-radius: 9px;
 					font-size: cd-fontSize(s12);
 					margin-left: 5px;
 					padding: 1px 5px;
+
+					// time
+					&.sc-time {
+						background-color: cd-palette($cd-background, 2002);
+					}
+
+					// author
+					&.sc-author {
+						background-color: cd-palette($cd-background, 2016);
+						color: cd-palette($cd-color, 1001);
+					}
 				}
 			}
 		}

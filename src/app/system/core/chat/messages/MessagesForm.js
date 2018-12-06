@@ -5,49 +5,46 @@ import React, { Component } from 'react';
 import firebase from '../../../../../firebase';
 
 // app
-import Input from '@material-ui/core/Input/Input';
-import Button from '@material-ui/core/Button/Button';
 import i18n from '../../../../../assets/i18n/i18n';
+import Textarea from '@material-ui/core/InputBase/Textarea';
 
 class MessagesForm extends Component {
 	state = {
 		currentChannel: this.props.currentChannel,
 		currentUser: this.props.currentUser,
 		message: '',
-		errors: [],
-		isFormEnabled: false
+		errors: []
 	};
 
 	render() {
-		const { message, isFormEnabled, errors } = this.state;
+		const { message, errors } = this.state;
 
 		return (
 			<section className="sc-message-form">
-				<Input
-					id="message"
-					name="message"
-					type="text"
-					value={message}
-					placeholder="Write a message!"
-					onChange={this.handleChange}
-					error={this.handleInputError(errors, 'message')}
-					fullWidth/>
+				{/* Error */}
+				<div className="sc-error">
+					{
+						errors && errors.length > 0 && (
+							<p>{this.displayErrors(errors)}</p>
+						)
+					}
+				</div>
 
-				<Button
-					className="sc-button sc-register"
-					variant="contained"
-					type="submit"
-					onClick={this.handleSendMessage}
-					disabled={!isFormEnabled || !message}
-					fullWidth>
-					{i18n.t('CHAT.MESSAGES_PANEL.FORM.T1')}
-				</Button>
-				{
-					errors && errors.length > 0 && (
-						/* Errors */
-						<p className="cd-error">{this.displayErrors(errors)}</p>
-					)
-				}
+				{/* Form */}
+				<div className="sc-form">
+					{/* Textarea */}
+					<Textarea
+						name="message"
+						rows="2"
+						value={message}
+						onChange={this.handleChange}
+						onKeyDown={this.handleSendMessage}
+						placeholder={i18n.t('CHAT.MESSAGES_PANEL.FORM.TEXTAREA_PLACEHOLDER')}
+					/>
+
+					{/* Buttons */}
+					<div className="sc-buttons">buttons</div>
+				</div>
 			</section>
 		);
 	}
@@ -59,8 +56,10 @@ class MessagesForm extends Component {
 	 */
 	handleChange = (event) => {
 		this.setState({ [event.target.name]: event.target.value }, () => {
-			// validate form
-			this.setState({ isFormEnabled: this.isMessageValid() });
+			// remove errors
+			if (this.state.errors && this.state.errors.length > 0) {
+				this.setState({ errors: null });
+			}
 		});
 	};
 
@@ -70,27 +69,32 @@ class MessagesForm extends Component {
 	 * @param event
 	 */
 	handleSendMessage = (event) => {
-		// stop default event
-		event.preventDefault();
+		// pressed key: Enter
+		if (event.keyCode === 13) {
+			// pressed key: Shift
+			if (!event.shiftKey) {
+				// stop default event
+				event.preventDefault();
 
-		// destructuring
-		const { messagesRef } = this.props;
-		const { currentChannel } = this.state;
+				// destructuring
+				const { messagesRef } = this.props;
+				const { currentChannel } = this.state;
 
-		// send message
-		messagesRef
-			.child(currentChannel.id)
-			.push()
-			.set(this.createMessage())
-			.then(() => {
-				// hide loading
-				// empty message
-				// empty errors
-				this.setState({ message: '', errors: [] });
-			})
-			.catch((error) => {
-				this.setState({ errors: [error] });
-			});
+				// send message
+				messagesRef
+					.child(currentChannel.id)
+					.push()
+					.set(this.createMessage())
+					.then(() => {
+						// empty message
+						// empty errors
+						this.setState({ message: '', errors: [] });
+					})
+					.catch((error) => {
+						this.setState({ errors: [error] });
+					});
+			}
+		}
 	};
 
 	/**
@@ -126,21 +130,6 @@ class MessagesForm extends Component {
 	 * @returns {*}
 	 */
 	displayErrors = errors => errors.map((error, i) => <span key={i}>{error.message}</span>);
-
-	/**
-	 * handle Input Error
-	 *
-	 * @param errors
-	 * @param fieldName
-	 * @returns {*|boolean}
-	 */
-	handleInputError = (errors, fieldName) => {
-		return (
-			errors && errors.some(
-				error => error.message.toLocaleLowerCase().includes(fieldName)
-			)
-		);
-	};
 }
 
 export default MessagesForm;

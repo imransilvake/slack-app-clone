@@ -3,57 +3,62 @@ import React, { Component } from 'react';
 
 // app
 import classNames from 'classnames/bind';
-import moment from 'moment';
+import formatMessageTime from '../../../utilities/helpers/Date';
 
 class MessageContent extends Component {
 	render() {
-		const { message, currentUser, continuousMessage } = this.props;
+		const { message, currentUser, isContinuousMessage } = this.props;
 		const messageContentClass = classNames({
-			'sc-message-content sc-different': !continuousMessage,
-			'sc-message-content sc-continuous': continuousMessage
+			'sc-message-content sc-different': !isContinuousMessage,
+			'sc-message-content sc-continuous': isContinuousMessage
 		});
-		const contentClass = classNames({
-			'sc-content': true,
-			'sc-self': this.isMessageByAuthenticatedUser(message, currentUser) && !continuousMessage
+		const selfClass = classNames({
+			'sc-name': true,
+			'sc-self': this.isMessageByAuthenticatedUser(message, currentUser) && !isContinuousMessage
 		});
 
 		return (
 			<article className={messageContentClass}>
-				{ /* time */}
+				{/* time */}
 				{
-					!continuousMessage && (
-						<span className="sc-time-one">{this.formatMessageTime(message.timestamp, 'dddd, MMMM Do')}</span>
+					!isContinuousMessage && (
+						<span className="sc-time-one">{formatMessageTime(message.timestamp, 'dddd, MMMM Do')}</span>
 					)
 				}
 
-				{ /* avatar */}
-				{!continuousMessage && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
+				{/* avatar */}
+				{!isContinuousMessage && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
 
-				{ /* content */}
-				<div className={contentClass}>
+				{/* content */}
+				<div className="sc-content">
+					{/* continuous messages from the same user */}
 					{
-						// if continuous messages from the same user
-						continuousMessage && (
+						isContinuousMessage && (
 							<p className="sc-time-two cd-tooltip">
-								{this.formatMessageTime(message.timestamp, 'LT')}
+								{formatMessageTime(message.timestamp, 'LT')}
 								<span className="cd-arrow cd-top cd-fixed-left">
-									{this.formatMessageTime(message.timestamp, 'llll')}
+									{formatMessageTime(message.timestamp, 'llll')}
 								</span>
 							</p>
 						)
 					}
 
+					{/* message by different user */}
 					{
-						// if message by different user
-						!continuousMessage && (
-							<h6 className="sc-name">
+						!isContinuousMessage && (
+							<h6 className={selfClass}>
 								{message.user.name}
-								<span>{this.formatMessageTime(message.timestamp)}</span>
+								<span className="sc-time cd-tooltip">
+									{formatMessageTime(message.timestamp, 'LT')}
+									<span className="cd-arrow cd-top cd-fixed-left">
+										{formatMessageTime(message.timestamp, 'llll')}
+									</span>
+								</span>
 							</h6>
 						)
 					}
 
-					{ /* description */}
+					{/* description */}
 					<p className="sc-description">{message.content}</p>
 				</div>
 			</article>
@@ -69,20 +74,6 @@ class MessageContent extends Component {
 	 */
 	isMessageByAuthenticatedUser = (message, currentUser) => {
 		return message.user.id === currentUser.uid;
-	};
-
-	/**
-	 * format message time
-	 *
-	 * @param timestamp
-	 * @param format
-	 */
-	formatMessageTime = (timestamp, format) => {
-		if (format) {
-			return moment(timestamp).format(format);
-		}
-
-		return moment(timestamp).fromNow();
 	};
 }
 

@@ -99,7 +99,7 @@
 				}
 			},
 			"FORM": {
-				"T1": "Senden"
+				"TEXTAREA_PLACEHOLDER": "Eine Nachricht schreiben!"
 			}
 		}
 	}
