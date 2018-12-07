@@ -60,7 +60,8 @@ class Register extends Component {
 										name="email"
 										value={email}
 										error={this.handleInputError(errors, 'email')}
-										onChange={this.handleChange}/>
+										onChange={this.handleChange}
+									/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="password">
@@ -71,7 +72,8 @@ class Register extends Component {
 										name="password"
 										type="password"
 										value={password}
-										onChange={this.handleChange}/>
+										onChange={this.handleChange}
+									/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="passwordConfirm">
@@ -82,7 +84,8 @@ class Register extends Component {
 										name="passwordConfirm"
 										type="password"
 										value={passwordConfirm}
-										onChange={this.handleChange}/>
+										onChange={this.handleChange}
+									/>
 								</FormControl>
 								<Button
 									className="sc-button sc-register"

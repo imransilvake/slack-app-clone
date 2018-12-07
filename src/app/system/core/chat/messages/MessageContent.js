@@ -9,10 +9,12 @@ class MessageContent extends Component {
 	render() {
 		const { message, currentUser, isContinuousMessage } = this.props;
 		const messageContentClass = classNames({
-			'sc-message-content sc-different': !isContinuousMessage,
-			'sc-message-content sc-continuous': isContinuousMessage
+			'sc-message-content': true,
+			'sc-different': !isContinuousMessage,
+			'sc-continuous': isContinuousMessage
 		});
-		const selfClass = classNames({
+
+		const selfMessageClass = classNames({
 			'sc-name': true,
 			'sc-self': this.isMessageByAuthenticatedUser(message, currentUser) && !isContinuousMessage
 		});
@@ -22,7 +24,9 @@ class MessageContent extends Component {
 				{/* time */}
 				{
 					!isContinuousMessage && (
-						<span className="sc-time-one">{formatMessageTime(message.timestamp, 'dddd, MMMM Do')}</span>
+						<span className="sc-time-one">
+							{formatMessageTime(message.timestamp, 'dddd, MMMM Do')}
+						</span>
 					)
 				}
 
@@ -31,32 +35,11 @@ class MessageContent extends Component {
 
 				{/* content */}
 				<div className="sc-content">
-					{/* continuous messages from the same user */}
-					{
-						isContinuousMessage && (
-							<p className="sc-time-two cd-tooltip">
-								{formatMessageTime(message.timestamp, 'LT')}
-								<span className="cd-arrow cd-top cd-fixed-left">
-									{formatMessageTime(message.timestamp, 'llll')}
-								</span>
-							</p>
-						)
-					}
+					{/* non-continuous message */}
+					{!isContinuousMessage && this.nonContinuousMessage(message, selfMessageClass)}
 
-					{/* message by different user */}
-					{
-						!isContinuousMessage && (
-							<h6 className={selfClass}>
-								{message.user.name}
-								<span className="sc-time cd-tooltip">
-									{formatMessageTime(message.timestamp, 'LT')}
-									<span className="cd-arrow cd-top cd-fixed-left">
-										{formatMessageTime(message.timestamp, 'llll')}
-									</span>
-								</span>
-							</h6>
-						)
-					}
+					{/* continuous message */}
+					{isContinuousMessage && this.continuousMessage(message.timestamp)}
 
 					{/* description */}
 					<p className="sc-description">{message.content}</p>
@@ -75,6 +58,40 @@ class MessageContent extends Component {
 	isMessageByAuthenticatedUser = (message, currentUser) => {
 		return message.user.id === currentUser.uid;
 	};
+
+	/**
+	 * not a continuous message
+	 *
+	 * @param message
+	 * @param selfMessageClass
+	 * @returns {*}
+	 */
+	nonContinuousMessage = (message, selfMessageClass) => (
+		<h6 className={selfMessageClass}>
+			{message.user.name}
+			<span className="sc-time cd-tooltip">
+				{formatMessageTime(message.timestamp, 'LT')}
+				<span className="cd-arrow cd-top cd-fixed-left">
+					{formatMessageTime(message.timestamp, 'llll')}
+				</span>
+			</span>
+		</h6>
+	);
+
+	/**
+	 * continuous message
+	 *
+	 * @param timestamp
+	 * @returns {*}
+	 */
+	continuousMessage = timestamp => (
+		<p className="sc-time-two cd-tooltip">
+			{formatMessageTime(timestamp, 'LT')}
+			<span className="cd-arrow cd-top cd-fixed-left">
+				{formatMessageTime(timestamp, 'llll')}
+			</span>
+		</p>
+	);
 }
 
 export default MessageContent;

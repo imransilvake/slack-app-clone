@@ -23,6 +23,7 @@ class MessagesPanel extends Component {
 	componentDidMount() {
 		const { currentUser, currentChannel } = this.state;
 		if (currentUser && currentChannel) {
+			// init listeners
 			this.addListeners(currentChannel.id);
 		}
 	}
@@ -53,20 +54,20 @@ class MessagesPanel extends Component {
 						</p>
 					</div>
 
-					{/* Display Messages */}
+					{/* Messages */}
 					{
-						isMessagesLoading && (
-							<p>Loading...</p>
-						)
+						// Loading Message
+						// Display Messages
+						isMessagesLoading ? <p>Loading...</p> : this.displayMessages(messages)
 					}
-					{this.displayMessages(messages)}
 				</section>
 
 				{/* Form */}
 				<MessagesForm
 					messagesRef={messagesRef}
 					currentChannel={currentChannel}
-					currentUser={currentUser}/>
+					currentUser={currentUser}
+				/>
 			</section>
 		);
 	}
@@ -144,7 +145,8 @@ class MessagesPanel extends Component {
 				key={message.snapshot.timestamp}
 				message={message.snapshot}
 				isContinuousMessage={message.isContinuousMessage}
-				currentUser={this.state.currentUser}/>
+				currentUser={this.state.currentUser}
+			/>
 		))
 	);
 

@@ -95,7 +95,8 @@ class Channels extends Component {
 											name="channelName"
 											value={channelName}
 											onChange={this.handleInputChange}
-											placeholder="e.g. react"/>
+											placeholder="e.g. react"
+										/>
 										<p className="ts-note">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_NAME.DESCRIPTION')}</p>
 									</FormControl>
 									<FormControl className="sc-form-field" fullWidth>
@@ -106,7 +107,8 @@ class Channels extends Component {
 											id="channel-details"
 											name="channelDetails"
 											value={channelDetails}
-											onChange={this.handleInputChange}/>
+											onChange={this.handleInputChange}
+										/>
 										<p className="ts-note">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_DETAILS.DESCRIPTION')}</p>
 									</FormControl>
 									<Button

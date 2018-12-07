@@ -35,7 +35,8 @@ class Chat extends Component {
 					onClose={this.handleDrawerToggle}>
 					<SidePanel
 						currentUser={currentUser}
-						isMobileView={false}/>
+						isMobileView={false}
+					/>
 				</Drawer>
 
 				{/* Side Panel - Desktop */}
@@ -44,7 +45,8 @@ class Chat extends Component {
 						<SidePanel
 							key={currentUser && currentUser.uid}
 							currentUser={currentUser}
-							isMobileView/>
+							isMobileView
+						/>
 					</div>
 					<div className="cd-hide-on-t-up cd-mobile-header">
 						<IconButton onClick={this.handleDrawerToggle}>
@@ -58,7 +60,8 @@ class Chat extends Component {
 					<MessagesPanel
 						key={currentChannel && currentChannel.id}
 						currentChannel={currentChannel}
-						currentUser={currentUser}/>
+						currentUser={currentUser}
+					/>
 				</div>
 			</section>
 		);

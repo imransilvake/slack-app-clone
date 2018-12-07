@@ -57,7 +57,8 @@ class Login extends Component {
 									name="email"
 									value={email}
 									error={this.handleInputError(errors, 'email')}
-									onChange={this.handleChange}/>
+									onChange={this.handleChange}
+								/>
 							</FormControl>
 							<FormControl className="sc-form-field" fullWidth>
 								<InputLabel htmlFor="password">{i18n.t('LOGIN.CONTENT.FORM.PASSWORD')}</InputLabel>
@@ -67,7 +68,8 @@ class Login extends Component {
 									type="password"
 									value={password}
 									error={this.handleInputError(errors, 'password')}
-									onChange={this.handleChange}/>
+									onChange={this.handleChange}
+								/>
 							</FormControl>
 							<Button
 								className="sc-button sc-login"

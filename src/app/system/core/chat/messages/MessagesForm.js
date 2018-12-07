@@ -70,7 +70,7 @@ class MessagesForm extends Component {
 	 */
 	handleSendMessage = (event) => {
 		// pressed key: Enter
-		if (event.keyCode === 13) {
+		if (event.keyCode === 13 && this.isMessageValid()) {
 			// pressed key: Shift
 			if (!event.shiftKey) {
 				// stop default event
