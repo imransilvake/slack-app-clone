@@ -6,6 +6,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - User authentication with Firebase (Sign-up & Login)
 - Form validation for our Login and Register forms
 - Sending and receiving messages instantly with the real-time Firebase Database
+- Edit and Delete Messages
 - Uploading and displaying image messages using Firebase Storage
 - Notifications to display new messages in other channels
 - Sending Direct Messages to other users in our chat
