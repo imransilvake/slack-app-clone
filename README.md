@@ -25,7 +25,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] Implement Public Channels
 - [X] Implement Message Form
 - [ ] Show Messages
-- [ ] Eidt/Delete Messages
+- [ ] Edit/Delete Messages
 - [ ] Add Media to Messages
 
 
