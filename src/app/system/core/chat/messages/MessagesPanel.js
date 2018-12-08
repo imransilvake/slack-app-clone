@@ -107,7 +107,8 @@ class MessagesPanel extends Component {
 				// message
 				const message = {
 					snapshot,
-					isContinuousMessage: this.validateMessagePattern(previousSnapshot, snapshot)
+					isMessageOnSameDay: this.messageOnSameDay(previousSnapshot, snapshot),
+					isMessageOnSameDayBySameUser: this.messageOnSameDayBySameUser(previousSnapshot, snapshot)
 				};
 
 				// set previous snapshot
@@ -116,7 +117,7 @@ class MessagesPanel extends Component {
 				// push messages
 				loadedMessages.push(message);
 
-				// set to messages
+				// set messages
 				this.setState({ messages: loadedMessages, isMessagesLoading: false }, () => {
 					// scroll to last message
 					this.scrollToLastMessage();
@@ -125,19 +126,33 @@ class MessagesPanel extends Component {
 	};
 
 	/**
-	 * validate:
-	 * 1) if message is from the same user
-	 * 2) if message is sent on the same day
+	 * if message is sent on the same day
 	 *
 	 * @param previousSnapshot
 	 * @param snapshot
 	 * @returns {boolean}
 	 */
-	validateMessagePattern = (previousSnapshot, snapshot) => {
+	messageOnSameDay = (previousSnapshot, snapshot) => {
 		return (
 			!!(previousSnapshot) &&
-			previousSnapshot.user.id === snapshot.user.id &&
 			moment(snapshot.timestamp).isSame(previousSnapshot.timestamp, 'day') // granularity: day
+		)
+	};
+
+	/**
+	 * check:
+	 * 1) if message is sent on the same day
+	 * 2) if message is from the same user
+	 *
+	 * @param previousSnapshot
+	 * @param snapshot
+	 * @returns {boolean}
+	 */
+	messageOnSameDayBySameUser = (previousSnapshot, snapshot) => {
+		return (
+			!!(previousSnapshot) &&
+			this.messageOnSameDay(previousSnapshot, snapshot) &&
+			previousSnapshot.user.id === snapshot.user.id
 		)
 	};
 
@@ -151,7 +166,8 @@ class MessagesPanel extends Component {
 			<MessageContent
 				key={message.snapshot.timestamp}
 				message={message.snapshot}
-				isContinuousMessage={message.isContinuousMessage}
+				isMessageOnSameDayBySameUser={message.isMessageOnSameDayBySameUser}
+				isMessageOnSameDay={message.isMessageOnSameDay}
 				isLastMessage={messages.length - 1 === index}
 				currentUser={this.state.currentUser}
 			/>

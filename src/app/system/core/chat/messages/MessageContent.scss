@@ -1,33 +1,25 @@
 .sc-message-content {
 	// different user
 	&.sc-different {
-		border-top: 1px solid cd-palette($cd-border, 3002);
-		margin: 20px 0 10px;
-		padding-top: 20px;
 		position: relative;
 
 		// time
 		.sc-time-one {
-			font-size: cd-fontSize(s12);
-			font-weight: cd-fontWeight(500);
-			left: 0;
-			position: absolute;
-			right: 0;
+			border-bottom: 1px solid cd-palette($cd-border, 3002, .8);
+			line-height: 0;
+			margin: 25px 0;
 			text-align: center;
-			top: -9px;
-			z-index: cd-zIndex(normal);
+			width: 100%;
 
-			&::after {
+			&.sc-border-dark {
+				border-bottom: 1px solid cd-palette($cd-border, 3003);
+			}
+
+			span {
 				background-color: cd-palette($cd-background, 2001);
-				bottom: 0;
-				content: '';
-				left: 0;
-				margin: auto;
-				position: absolute;
-				right: 0;
-				top: 0;
-				width: 150px;
-				z-index: cd-zIndex(hide);
+				font-size: cd-fontSize(s13);
+				font-weight: cd-fontWeight(500);
+				padding: 0 10px;
 			}
 		}
 

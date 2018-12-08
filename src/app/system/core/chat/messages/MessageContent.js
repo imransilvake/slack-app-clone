@@ -7,40 +7,49 @@ import formatMessageTime from '../../../utilities/helpers/Date';
 
 class MessageContent extends Component {
 	render() {
-		const { message, currentUser, isContinuousMessage, isLastMessage } = this.props;
+		const { message, currentUser, isMessageOnSameDay, isMessageOnSameDayBySameUser, isLastMessage } = this.props;
 		const messageContentClass = classNames({
 			'sc-message-content': true,
-			'sc-different': !isContinuousMessage,
-			'sc-continuous': isContinuousMessage,
+			'sc-different': !isMessageOnSameDayBySameUser,
+			'sc-continuous': isMessageOnSameDayBySameUser,
 			'last-message': isLastMessage
+		});
+
+		const timeLineClass = classNames({
+			'sc-time-one': true,
+			'sc-border-dark': !isMessageOnSameDay
 		});
 
 		const selfMessageClass = classNames({
 			'sc-name': true,
-			'sc-self': this.isMessageByAuthenticatedUser(message, currentUser) && !isContinuousMessage
+			'sc-self': this.isMessageByCurrentUser(message, currentUser) && !isMessageOnSameDayBySameUser
 		});
 
 		return (
 			<article className={messageContentClass}>
-				{/* time */}
+				{/* message time */}
 				{
-					!isContinuousMessage && (
-						<span className="sc-time-one">
-							{formatMessageTime(message.timestamp, 'dddd, MMMM Do')}
-						</span>
+					!isMessageOnSameDayBySameUser && (
+						<div className={timeLineClass}>
+							{ !isMessageOnSameDay && (
+								<span>
+									{ formatMessageTime(message.timestamp, 'dddd, MMMM Do')}
+								</span>
+							)}
+						</div>
 					)
 				}
 
 				{/* avatar */}
-				{!isContinuousMessage && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
+				{!isMessageOnSameDayBySameUser && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
 
 				{/* content */}
 				<div className="sc-content">
 					{/* non-continuous message */}
-					{!isContinuousMessage && this.nonContinuousMessage(message, selfMessageClass)}
+					{!isMessageOnSameDayBySameUser && this.nonContinuousMessage(message, selfMessageClass)}
 
 					{/* continuous message */}
-					{isContinuousMessage && this.continuousMessage(message.timestamp)}
+					{isMessageOnSameDayBySameUser && this.continuousMessage(message.timestamp)}
 
 					{/* description */}
 					<p className="sc-description">{message.content}</p>
@@ -50,13 +59,13 @@ class MessageContent extends Component {
 	}
 
 	/**
-	 * detect if the message is from authenticated user
+	 * detect if the message is from current user
 	 *
 	 * @param message
 	 * @param currentUser
 	 * @returns {string}
 	 */
-	isMessageByAuthenticatedUser = (message, currentUser) => {
+	isMessageByCurrentUser = (message, currentUser) => {
 		return message.user.id === currentUser.uid;
 	};
 
