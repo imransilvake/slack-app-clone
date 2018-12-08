@@ -42,6 +42,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] [Material-UI](https://material-ui.com/)
 - [X] [Moment](https://momentjs.com/)
 - [X] [Classnames](https://github.com/JedWatson/classnames)
+- [X] [React Scroll](https://github.com/fisshy/react-scroll)
 
 
 ## Information

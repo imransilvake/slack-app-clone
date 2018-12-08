@@ -7,11 +7,12 @@ import formatMessageTime from '../../../utilities/helpers/Date';
 
 class MessageContent extends Component {
 	render() {
-		const { message, currentUser, isContinuousMessage } = this.props;
+		const { message, currentUser, isContinuousMessage, isLastMessage } = this.props;
 		const messageContentClass = classNames({
 			'sc-message-content': true,
 			'sc-different': !isContinuousMessage,
-			'sc-continuous': isContinuousMessage
+			'sc-continuous': isContinuousMessage,
+			'last-message': isLastMessage
 		});
 
 		const selfMessageClass = classNames({

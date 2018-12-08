@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 // firebase
 import firebase from '../../../../../firebase';
 
+// scroll
+import { scroller } from 'react-scroll'
+
 // app
 import MessagesHeader from './MessagesHeader';
 import MessageContent from './MessageContent';
@@ -41,7 +44,7 @@ class MessagesPanel extends Component {
 				<MessagesHeader/>
 
 				{/* Content */}
-				<section className="sc-messages">
+				<section className="sc-messages" id="sc-messages">
 					{/* Channel Information */}
 					<div className="sc-channel-info">
 						<h3># {currentChannel.name}</h3>
@@ -104,7 +107,7 @@ class MessagesPanel extends Component {
 				// message
 				const message = {
 					snapshot,
-					isContinuousMessage: previousSnapshot && this.validateMessagePattern(previousSnapshot, snapshot)
+					isContinuousMessage: this.validateMessagePattern(previousSnapshot, snapshot)
 				};
 
 				// set previous snapshot
@@ -114,7 +117,10 @@ class MessagesPanel extends Component {
 				loadedMessages.push(message);
 
 				// set to messages
-				this.setState({ messages: loadedMessages, isMessagesLoading: false });
+				this.setState({ messages: loadedMessages, isMessagesLoading: false }, () => {
+					// scroll to last message
+					this.scrollToLastMessage();
+				});
 			});
 	};
 
@@ -129,6 +135,7 @@ class MessagesPanel extends Component {
 	 */
 	validateMessagePattern = (previousSnapshot, snapshot) => {
 		return (
+			!!(previousSnapshot) &&
 			previousSnapshot.user.id === snapshot.user.id &&
 			moment(snapshot.timestamp).isSame(previousSnapshot.timestamp, 'day') // granularity: day
 		)
@@ -140,15 +147,33 @@ class MessagesPanel extends Component {
 	 * @param messages
 	 */
 	displayMessages = messages => (
-		messages.length > 0 && messages.map(message => (
+		messages.length > 0 && messages.map((message, index) => (
 			<MessageContent
 				key={message.snapshot.timestamp}
 				message={message.snapshot}
 				isContinuousMessage={message.isContinuousMessage}
+				isLastMessage={messages.length - 1 === index}
 				currentUser={this.state.currentUser}
 			/>
 		))
 	);
+
+	/**
+	 * scroll to the last message
+	 *
+	 * @param params
+	 */
+	scrollToLastMessage = (params) => {
+		const options = {
+			duration: 1000,
+			delay: 100,
+			...params,
+			smooth: true,
+			containerId: 'sc-messages',
+			offset: 50 // scrolls to element + 50 pixels down the page
+		};
+		scroller.scrollTo('last-message', options);
+	};
 
 	/**
 	 * remove channel listener
