@@ -7,6 +7,7 @@ import firebase from '../../../../../firebase';
 // app
 import i18n from '../../../../../assets/i18n/i18n';
 import Textarea from '@material-ui/core/InputBase/Textarea';
+import { regexEmptyString } from '../../../utilities/helpers/Regex';
 
 class MessagesForm extends Component {
 	state = {
@@ -103,7 +104,8 @@ class MessagesForm extends Component {
 	 * @returns {boolean}
 	 */
 	isMessageValid = () => {
-		return this.state.message && this.state.message.length > 10;
+		const { message } = this.state;
+		return !!(message) && this.state.message.length > 0 && regexEmptyString(message);
 	};
 
 	/**

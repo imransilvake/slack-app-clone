@@ -31,9 +31,9 @@ class MessageContent extends Component {
 				{
 					!isMessageOnSameDayBySameUser && (
 						<div className={timeLineClass}>
-							{ !isMessageOnSameDay && (
+							{!isMessageOnSameDay && (
 								<span>
-									{ formatMessageTime(message.timestamp, 'dddd, MMMM Do')}
+									{formatMessageTime(message.timestamp, 'dddd, MMMM Do')}
 								</span>
 							)}
 						</div>
@@ -41,7 +41,8 @@ class MessageContent extends Component {
 				}
 
 				{/* avatar */}
-				{!isMessageOnSameDayBySameUser && <img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
+				{!isMessageOnSameDayBySameUser &&
+				<img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
 
 				{/* content */}
 				<div className="sc-content">

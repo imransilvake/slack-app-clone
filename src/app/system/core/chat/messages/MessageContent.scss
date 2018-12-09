@@ -72,10 +72,12 @@
 					color: cd-palette($cd-color, 1006);
 					cursor: help;
 					display: block;
-					font-size: cd-fontSize(s12);
-					left: 6px;
+					font-size: cd-fontSize(s10);
+					left: 0;
 					position: absolute;
-					top: 3px;
+					text-align: center;
+					top: 5px;
+					width: 60px;
 				}
 			}
 

@@ -13,6 +13,7 @@ import MessageContent from './MessageContent';
 import MessagesForm from './MessagesForm';
 import i18n from '../../../../../assets/i18n/i18n';
 import moment from 'moment';
+import formatMessageTime from '../../../utilities/helpers/Date';
 
 class MessagesPanel extends Component {
 	state = {
@@ -24,11 +25,7 @@ class MessagesPanel extends Component {
 	};
 
 	componentDidMount() {
-		const { currentUser, currentChannel } = this.state;
-		if (currentUser && currentChannel) {
-			// init listeners
-			this.addListeners(currentChannel.id);
-		}
+		this.addListeners();
 	}
 
 	componentWillUnmount() {
@@ -50,19 +47,18 @@ class MessagesPanel extends Component {
 						<h3># {currentChannel.name}</h3>
 						<p>
 							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T1', {
-								date: this.channelCreatedDate(currentChannel.timestamp)
+								date: formatMessageTime(currentChannel.timestamp, 'MMMM Do, YYYY')
 							})}
 							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T2', { name: currentChannel.name })}
 							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T3')}
 						</p>
 					</div>
 
+					{/* Loading */}
+					{ isMessagesLoading && <p>Loading...</p> }
+
 					{/* Messages */}
-					{
-						// Loading Message
-						// Display Messages
-						isMessagesLoading ? <p>Loading...</p> : this.displayMessages(messages)
-					}
+					{ messages.length === 0 && !isMessagesLoading ? <p>no data...</p> : this.displayMessages(messages) }
 				</section>
 
 				{/* Form */}
@@ -76,19 +72,15 @@ class MessagesPanel extends Component {
 	}
 
 	/**
-	 * channel created date
-	 *
-	 * @param timestamp
-	 */
-	channelCreatedDate = timestamp => moment(timestamp).format('MMMM Do, YYYY');
-
-	/**
 	 * add listeners
 	 *
-	 * @param channelId
 	 */
-	addListeners = (channelId) => {
-		this.addMessageListener(channelId);
+	addListeners = () => {
+		const { currentUser, currentChannel } = this.state;
+		if (currentUser && currentChannel) {
+			// message listener
+			this.addMessageListener(currentChannel.id);
+		}
 	};
 
 	/**
@@ -123,6 +115,16 @@ class MessagesPanel extends Component {
 					this.scrollToLastMessage();
 				});
 			});
+
+		// check if child has any item(s)
+		this.state.messagesRef
+			.child(channelId)
+			.once('value', (res) => {
+				if (!res.exists()) {
+					this.setState({ isMessagesLoading: false });
+				}
+			})
+			.then();
 	};
 
 	/**
