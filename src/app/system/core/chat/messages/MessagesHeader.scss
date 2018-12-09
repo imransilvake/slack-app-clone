@@ -1,3 +1,38 @@
 .sc-messages-header {
-	height: 50px;
+	background-color: cd-palette($cd-background, 2022);
+	height: 60px;
+
+	.cd-row {
+		.cd-col {
+			h5 {
+				padding-top: 4px;
+			}
+
+			.sc-info {
+				align-items: center;
+				display: flex;
+
+				.sc-icon {
+					font-size: cd-fontSize(s14);
+
+					span {
+						font-size: cd-fontSize(s13);
+						vertical-align: middle;
+
+						&.sc-value {
+							margin-right: 2px;
+						}
+					}
+
+					&:not(:last-child) {
+						&::after {
+							content: '|';
+							margin-left: 5px;
+							padding-right: 5px;
+						}
+					}
+				}
+			}
+		}
+	}
 }

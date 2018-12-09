@@ -3,7 +3,7 @@
 
 	.sc-messages {
 		background-color: cd-palette($cd-background, 2001);
-		height: calc(100vh - 50px - 75px);
+		height: calc(100vh - 60px - 75px);
 		overflow-y: auto;
 		padding: 15px;
 
@@ -79,10 +79,10 @@
 	// media
 	@include cd-media(desktop, smartphone) {
 		.sc-messages {
-			// 50px: messages header
-			// 78px: form
+			// 60px: messages header
+			// 75px: form
 			// 60px: header
-			height: calc(100vh - 50px - 78px - 60px);
+			height: calc(100vh - 60px - 75px - 60px);
 		}
 	}
 }

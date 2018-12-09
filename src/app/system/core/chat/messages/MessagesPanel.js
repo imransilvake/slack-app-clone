@@ -38,7 +38,10 @@ class MessagesPanel extends Component {
 		return currentChannel && currentUser && (
 			<section className="sc-message-panel">
 				{/* Search */}
-				<MessagesHeader/>
+				<MessagesHeader
+					currentChannel={currentChannel}
+					totalMessages={messages.length}
+				/>
 
 				{/* Content */}
 				<section className="sc-messages" id="sc-messages">
