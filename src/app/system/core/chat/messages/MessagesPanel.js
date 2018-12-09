@@ -58,7 +58,7 @@ class MessagesPanel extends Component {
 					{ isMessagesLoading && this.loadingMessage() }
 
 					{/* Messages */}
-					{ messages.length === 0 && !isMessagesLoading ? this.noMessageFound() : this.displayMessages(messages) }
+					{ messages.length === 0 && !isMessagesLoading ? this.emptyChannelMessage() : this.displayMessages(messages) }
 				</section>
 
 				{/* Form */}
@@ -206,21 +206,15 @@ class MessagesPanel extends Component {
 				<div className="sc-fake-la sc-fake-el-la-three"/>
 				<div className="sc-fake-la sc-fake-el-la-four"/>
 			</div>
-			<div className="sc-fake">
-				<div className="sc-fake-la sc-fake-el-la-one"/>
-				<div className="sc-fake-la sc-fake-el-la-two"/>
-				<div className="sc-fake-la sc-fake-el-la-three"/>
-				<div className="sc-fake-la sc-fake-el-la-four"/>
-			</div>
 		</div>
 	);
 
 	/**
-	 * display no message found
+	 * display message on empty channel
 	 *
 	 * @returns {*}
 	 */
-	noMessageFound = () => (
+	emptyChannelMessage = () => (
 		<div className="sc-start-conversation">
 			<p>Start a Conversation Today!</p>
 		</div>
