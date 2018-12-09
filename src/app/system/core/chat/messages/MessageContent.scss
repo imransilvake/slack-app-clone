@@ -34,6 +34,7 @@
 
 				> span {
 					border-radius: 9px;
+					display: inline;
 					font-size: cd-fontSize(s12);
 					margin-left: 5px;
 					padding: 1px 5px;
@@ -90,7 +91,8 @@
 			.sc-description {
 				display: inline-block;
 				font-size: cd-fontSize(s14);
-				white-space: pre;
+				white-space: pre-wrap;
+				word-break: break-word;
 			}
 		}
 	}

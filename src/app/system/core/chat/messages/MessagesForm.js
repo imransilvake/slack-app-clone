@@ -8,6 +8,7 @@ import firebase from '../../../../../firebase';
 import i18n from '../../../../../assets/i18n/i18n';
 import Textarea from '@material-ui/core/InputBase/Textarea';
 import { regexEmptyString } from '../../../utilities/helpers/Regex';
+import Icon from '@material-ui/core/es/Icon/Icon';
 
 class MessagesForm extends Component {
 	state = {
@@ -44,7 +45,10 @@ class MessagesForm extends Component {
 					/>
 
 					{/* Buttons */}
-					<div className="sc-buttons">buttons</div>
+					<div className="sc-buttons">
+						<Icon>insert_photo</Icon>
+						<Icon>sentiment_satisfied_alt</Icon>
+					</div>
 				</div>
 			</section>
 		);
