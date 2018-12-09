@@ -73,11 +73,11 @@
 					cursor: help;
 					display: block;
 					font-size: cd-fontSize(s10);
-					left: 0;
+					left: 5px;
 					position: absolute;
 					text-align: center;
 					top: 5px;
-					width: 60px;
+					width: 50px;
 				}
 			}
 
@@ -90,6 +90,7 @@
 			.sc-description {
 				display: inline-block;
 				font-size: cd-fontSize(s14);
+				white-space: pre;
 			}
 		}
 	}

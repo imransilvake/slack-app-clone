@@ -96,7 +96,8 @@
 					"T1": "Sie haben diesen Kanal am erstellt {{ date }}. ",
 					"T2": "Dies ist der Anfang des {{ name }} Kanals. ",
 					"T3": "Dieser Kanal ist für die Kommunikation und Ansagen im gesamten Arbeitsbereich vorgesehen."
-				}
+				},
+				"EMPTY_CHANNEL": "Beginnen Sie noch heute eine Unterhaltung!"
 			},
 			"FORM": {
 				"TEXTAREA_PLACEHOLDER": "Eine Nachricht schreiben!"

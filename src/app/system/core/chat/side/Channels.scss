@@ -47,6 +47,8 @@
 	// channels list
 	.sc-channels-list {
 		margin-top: 5px;
+		max-height: 190px;
+		overflow-y: auto;
 
 		.sc-item {
 			Button {

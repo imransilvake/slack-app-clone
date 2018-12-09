@@ -216,7 +216,7 @@ class MessagesPanel extends Component {
 	 */
 	emptyChannelMessage = () => (
 		<div className="sc-start-conversation">
-			<p>Start a Conversation Today!</p>
+			<p>{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.EMPTY_CHANNEL')}</p>
 		</div>
 	);
 
