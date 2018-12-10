@@ -18,6 +18,19 @@
 			.sc-name {
 				color: cd-palette($cd-color, 1005, .5);
 				font-size: cd-fontSize(s14);
+				padding-left: 15px;
+				position: relative;
+
+				span {
+					background-color: cd-palette($cd-background, 2016);
+					border-radius: 50%;
+					display: block;
+					height: 8px;
+					left: 0;
+					position: absolute;
+					top: 5px;
+					width: 8px;
+				}
 			}
 
 			.sc-avatar {

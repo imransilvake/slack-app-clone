@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 // app
 import Icon from '@material-ui/core/es/Icon/Icon';
+import Input from '@material-ui/core/Input';
 
 class MessagesHeader extends Component {
 	render() {
@@ -12,11 +13,14 @@ class MessagesHeader extends Component {
 			<section className="sc-messages-header">
 				<div className="cd-row">
 					{/* Information */}
-					<div className="cd-col cd-col-pm-t-6">
-						<h5>
-							<span>#</span>{currentChannel.name}
+					<div className="cd-col cd-col-pm-m-6 cd-col-pm-s-6">
+						{/* Title */}
+						<h5 className="sc-title">
+							<span># </span>{currentChannel.name}
 							<Icon>star_border</Icon>
 						</h5>
+
+						{/* Icons */}
 						<div className="sc-info">
 							<span className="sc-icon sc-l1">
 								<span className="sc-value">{totalMessages}</span>
@@ -33,8 +37,16 @@ class MessagesHeader extends Component {
 					</div>
 
 					{/* Search */}
-					<div className="cd-col cd-col-pm-t-6">
-						search
+					<div className="cd-col cd-col-pm-m-6 cd-col-pm-s-6">
+						<div className="sc-search">
+							<Input
+								id="search"
+								name="search"
+								onChange={this.handleInputChange}
+								placeholder="Search"
+							/>
+							<Icon>search</Icon>
+						</div>
 					</div>
 				</div>
 			</section>

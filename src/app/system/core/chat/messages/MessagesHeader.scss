@@ -4,59 +4,96 @@
 
 	.cd-row {
 		.cd-col {
-			h5 {
-				padding-top: 3px;
+			&:first-child {
+				.sc-title {
+					font-weight: cd-fontWeight(700);
+					padding-top: 3px;
 
-				.material-icons {
-					font-size: cd-fontSize(s18);
-					margin-left: 4px;
-					vertical-align: middle;
-
-					&:hover {
-						color: cd-palette($cd-color, 1021);
-						cursor: pointer;
-					}
-				}
-			}
-
-			.sc-info {
-				align-items: center;
-				display: flex;
-
-				> .sc-icon {
-					&.sc-l1 {
-						.material-icons {
-							font-size: cd-fontSize(s15);
-						}
-					}
-
-					&.sc-l2 {
-						.material-icons {
-							font-size: cd-fontSize(s18);
-						}
+					.material-icons {
+						font-size: cd-fontSize(s18);
+						margin-left: 4px;
+						vertical-align: middle;
 
 						&:hover {
 							color: cd-palette($cd-color, 1021);
 							cursor: pointer;
 						}
 					}
+				}
 
-					span {
-						vertical-align: middle;
-					}
+				.sc-info {
+					align-items: center;
+					display: flex;
 
-					.sc-value {
-						margin-right: 2px;
-					}
+					> .sc-icon {
+						&.sc-l1 {
+							.material-icons {
+								font-size: cd-fontSize(s15);
+							}
+						}
 
-					&:not(:last-child) {
-						&::after {
-							content: '|';
-							margin-left: 5px;
-							padding-right: 5px;
+						&.sc-l2 {
+							.material-icons {
+								font-size: cd-fontSize(s18);
+							}
+
+							&:hover {
+								color: cd-palette($cd-color, 1021);
+								cursor: pointer;
+							}
+						}
+
+						span {
 							vertical-align: middle;
 						}
+
+						.sc-value {
+							margin-right: 2px;
+						}
+
+						&:not(:last-child) {
+							&::after {
+								content: '|';
+								margin-left: 5px;
+								padding-right: 5px;
+								vertical-align: middle;
+							}
+						}
 					}
+				}
+			}
+
+			&:last-child {
+				text-align: right;
+
+				.sc-search {
+					margin-top: 14px;
+					position: relative;
+
+					input {
+						padding-right: 26px;
+					}
+
+					.material-icons {
+						position: absolute;
+						right: 0;
+						top: 4px;
+					}
+				}
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, smartphone) {
+		.cd-row {
+			.cd-col {
+				&:first-child {
+					padding-right: 8px;
+				}
+
+				&:last-child {
+					padding-left: 8px;
 				}
 			}
 		}

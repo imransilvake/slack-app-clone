@@ -13,48 +13,50 @@
 			"T2": "Anmelden"
 		}
 	},
-	"LOGIN": {
-		"HEADER": {
-			"LOGO": {
-				"ALT": "Slack Logo",
-				"TOOLTIP": "Zur Startseite"
+	"AUTH": {
+		"LOGIN": {
+			"HEADER": {
+				"LOGO": {
+					"ALT": "Slack Logo",
+					"TOOLTIP": "Zur Startseite"
+				}
+			},
+			"CONTENT": {
+				"FORM": {
+					"EMAIL": "Email",
+					"PASSWORD": "Passwort"
+				},
+				"BUTTON_TEXT": "Einloggen"
+			},
+			"FOOTER": {
+				"T1": "Haben Sie kein Konto? ",
+				"T2": "Registrieren"
 			}
 		},
-		"CONTENT": {
-			"FORM": {
-				"EMAIL": "Email",
-				"PASSWORD": "Passwort"
+		"REGISTER": {
+			"HEADER": {
+				"LOGO": {
+					"ALT": "Slack Logo",
+					"TOOLTIP": "Zur Startseite"
+				}
 			},
-			"BUTTON_TEXT": "Einloggen"
-		},
-		"FOOTER": {
-			"T1": "Haben Sie kein Konto?",
-			"T2": "Registrieren"
-		}
-	},
-	"REGISTER": {
-		"HEADER": {
-			"LOGO": {
-				"ALT": "Slack Logo",
-				"TOOLTIP": "Zur Startseite"
+			"CONTENT": {
+				"FORM": {
+					"USERNAME": "Benutzername",
+					"EMAIL": "Email",
+					"PASSWORD": "Passwort",
+					"CONFIRM_PASSWORD": "Passwort Bestätigen"
+				},
+				"MESSAGE": {
+					"T1": "Ihr Konto wurde erfolgreich erstellt!",
+					"T2": "Sie werden in Kürze automatisch zur Anmeldeseite zurückgeleitet!"
+				},
+				"BUTTON_TEXT": "Anmelden"
+			},
+			"FOOTER": {
+				"T1": "Schon ein Benutzer? ",
+				"T2": "Einloggen"
 			}
-		},
-		"CONTENT": {
-			"FORM": {
-				"USERNAME": "Benutzername",
-				"EMAIL": "Email",
-				"PASSWORD": "Passwort",
-				"CONFIRM_PASSWORD": "Passwort Bestätigen"
-			},
-			"MESSAGE": {
-				"T1": "Ihr Konto wurde erfolgreich erstellt!",
-				"T2": "Sie werden in Kürze automatisch zur Anmeldeseite zurückgeleitet!"
-			},
-			"BUTTON_TEXT": "Anmelden"
-		},
-		"FOOTER": {
-			"T1": "Schon ein Benutzer?",
-			"T2": "Einloggen"
 		}
 	},
 	"CHAT": {

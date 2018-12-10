@@ -35,8 +35,8 @@ class Login extends Component {
 					<header className="sc-header">
 						<Link to={ENV.ROUTING.HOME}>
 							<div className="cd-tooltip">
-								<img src={SlackLogo} alt={i18n.t('LOGIN.HEADER.LOGO.ALT')}/>
-								<span className="cd-arrow cd-left">{i18n.t('LOGIN.HEADER.LOGO.TOOLTIP')}</span>
+								<img src={SlackLogo} alt={i18n.t('AUTH.LOGIN.HEADER.LOGO.ALT')}/>
+								<span className="cd-arrow cd-left">{i18n.t('AUTH.LOGIN.HEADER.LOGO.TOOLTIP')}</span>
 							</div>
 						</Link>
 					</header>
@@ -51,7 +51,7 @@ class Login extends Component {
 						}
 						<form className="sc-form-fields" onSubmit={this.handleSubmit}>
 							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="email">{i18n.t('LOGIN.CONTENT.FORM.EMAIL')}</InputLabel>
+								<InputLabel htmlFor="email">{i18n.t('AUTH.LOGIN.CONTENT.FORM.EMAIL')}</InputLabel>
 								<Input
 									id="email"
 									name="email"
@@ -61,7 +61,7 @@ class Login extends Component {
 								/>
 							</FormControl>
 							<FormControl className="sc-form-field" fullWidth>
-								<InputLabel htmlFor="password">{i18n.t('LOGIN.CONTENT.FORM.PASSWORD')}</InputLabel>
+								<InputLabel htmlFor="password">{i18n.t('AUTH.LOGIN.CONTENT.FORM.PASSWORD')}</InputLabel>
 								<Input
 									id="password"
 									name="password"
@@ -77,7 +77,7 @@ class Login extends Component {
 								type="submit"
 								disabled={!isFormEnabled}
 								fullWidth>
-								{i18n.t('LOGIN.CONTENT.BUTTON_TEXT')}
+								{i18n.t('AUTH.LOGIN.CONTENT.BUTTON_TEXT')}
 							</Button>
 						</form>
 					</section>
@@ -85,9 +85,9 @@ class Login extends Component {
 					{/* Footer */}
 					<footer className="cd-col sc-footer">
 						<p>
-							{i18n.t('LOGIN.FOOTER.T1')}
+							{i18n.t('AUTH.LOGIN.FOOTER.T1')}
 							<Link className="cd-link" to={ENV.ROUTING.AUTH.REGISTER}>
-								{i18n.t('LOGIN.FOOTER.T2')}
+								{i18n.t('AUTH.LOGIN.FOOTER.T2')}
 							</Link>
 						</p>
 					</footer>

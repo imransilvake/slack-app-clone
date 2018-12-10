@@ -47,13 +47,13 @@ class Register extends Component {
 							<form className="sc-form-fields" onSubmit={this.handleSubmit}>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="username">
-										{i18n.t('REGISTER.CONTENT.FORM.USERNAME')}
+										{i18n.t('AUTH.REGISTER.CONTENT.FORM.USERNAME')}
 									</InputLabel>
 									<Input id="username" name="username" value={username} onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="email">
-										{i18n.t('REGISTER.CONTENT.FORM.EMAIL')}
+										{i18n.t('AUTH.REGISTER.CONTENT.FORM.EMAIL')}
 									</InputLabel>
 									<Input
 										id="email"
@@ -65,7 +65,7 @@ class Register extends Component {
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="password">
-										{i18n.t('REGISTER.CONTENT.FORM.PASSWORD')}
+										{i18n.t('AUTH.REGISTER.CONTENT.FORM.PASSWORD')}
 									</InputLabel>
 									<Input
 										id="password"
@@ -77,7 +77,7 @@ class Register extends Component {
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="passwordConfirm">
-										{i18n.t('REGISTER.CONTENT.FORM.CONFIRM_PASSWORD')}
+										{i18n.t('AUTH.REGISTER.CONTENT.FORM.CONFIRM_PASSWORD')}
 									</InputLabel>
 									<Input
 										id="passwordConfirm"
@@ -93,7 +93,7 @@ class Register extends Component {
 									type="submit"
 									disabled={!isFormEnabled}
 									fullWidth>
-									{i18n.t('REGISTER.CONTENT.BUTTON_TEXT')}
+									{i18n.t('AUTH.REGISTER.CONTENT.BUTTON_TEXT')}
 								</Button>
 							</form>
 						</section>
@@ -101,8 +101,8 @@ class Register extends Component {
 				default:
 					return (
 						<section className="cd-col sc-message">
-							<p>{i18n.t('REGISTER.CONTENT.MESSAGE.T1')}</p>
-							<p>{i18n.t('REGISTER.CONTENT.MESSAGE.T2')}</p>
+							<p>{i18n.t('AUTH.REGISTER.CONTENT.MESSAGE.T1')}</p>
+							<p>{i18n.t('AUTH.REGISTER.CONTENT.MESSAGE.T2')}</p>
 						</section>
 					);
 			}
@@ -115,8 +115,8 @@ class Register extends Component {
 					<header className="sc-header">
 						<Link to={ENV.ROUTING.HOME}>
 							<div className="cd-tooltip">
-								<img src={SlackLogo} alt={i18n.t('REGISTER.HEADER.LOGO.ALT')}/>
-								<span className="cd-arrow cd-right">{i18n.t('REGISTER.HEADER.LOGO.TOOLTIP')}</span>
+								<img src={SlackLogo} alt={i18n.t('AUTH.REGISTER.HEADER.LOGO.ALT')}/>
+								<span className="cd-arrow cd-right">{i18n.t('AUTH.REGISTER.HEADER.LOGO.TOOLTIP')}</span>
 							</div>
 						</Link>
 					</header>
@@ -129,9 +129,9 @@ class Register extends Component {
 					{/* Footer */}
 					<footer className="cd-col sc-footer">
 						<p>
-							{i18n.t('REGISTER.FOOTER.T1')}
+							{i18n.t('AUTH.REGISTER.FOOTER.T1')}
 							<Link className="cd-link" to={ENV.ROUTING.AUTH.LOGIN}>
-								{i18n.t('REGISTER.FOOTER.T2')}
+								{i18n.t('AUTH.REGISTER.FOOTER.T2')}
 							</Link>
 						</p>
 					</footer>

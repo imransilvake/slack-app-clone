@@ -25,7 +25,7 @@ class UserPanel extends Component {
 				{/* Button */}
 				<Button onClick={this.handleClickMenu}>
 					<h5 className="sc-type">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.TITLE')}</h5>
-					<p className="sc-name">{currentUser.displayName}</p>
+					<p className="sc-name"><span/>{currentUser.displayName}</p>
 					<img className="sc-avatar" src={currentUser.photoURL} alt={currentUser.displayName}/>
 				</Button>
 
