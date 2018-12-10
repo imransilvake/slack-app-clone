@@ -15,6 +15,7 @@ class Home extends Component {
 			<section className="cd-container sc-home cd-row">
 				{/* Content */}
 				<div className="cd-col cd-col-pm-t-6">
+					{/* Title */}
 					<div className="sc-title">
 						<h1>{i18n.t('HOME.TITLE')}</h1>
 						<h6>
@@ -28,9 +29,13 @@ class Home extends Component {
 							<img src={HomeBannerS} alt={i18n.t('HOME.SUBTITLE.T3')}/>
 						</div>
 					</div>
+
+					{/* Content */}
 					<div className="sc-content">
 						<h5>{i18n.t('HOME.CONTENT')}</h5>
 					</div>
+
+					{/* Buttons */}
 					<div className="sc-buttons">
 						<Link to={ENV.ROUTING.AUTH.LOGIN}>
 							<Button

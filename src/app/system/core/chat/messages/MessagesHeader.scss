@@ -5,23 +5,48 @@
 	.cd-row {
 		.cd-col {
 			h5 {
-				padding-top: 4px;
+				padding-top: 3px;
+
+				.material-icons {
+					font-size: cd-fontSize(s18);
+					margin-left: 4px;
+					vertical-align: middle;
+
+					&:hover {
+						color: cd-palette($cd-color, 1021);
+						cursor: pointer;
+					}
+				}
 			}
 
 			.sc-info {
 				align-items: center;
 				display: flex;
 
-				.sc-icon {
-					font-size: cd-fontSize(s14);
+				> .sc-icon {
+					&.sc-l1 {
+						.material-icons {
+							font-size: cd-fontSize(s15);
+						}
+					}
+
+					&.sc-l2 {
+						.material-icons {
+							font-size: cd-fontSize(s18);
+						}
+
+						&:hover {
+							color: cd-palette($cd-color, 1021);
+							cursor: pointer;
+						}
+					}
 
 					span {
-						font-size: cd-fontSize(s13);
 						vertical-align: middle;
+					}
 
-						&.sc-value {
-							margin-right: 2px;
-						}
+					.sc-value {
+						margin-right: 2px;
 					}
 
 					&:not(:last-child) {
@@ -29,6 +54,7 @@
 							content: '|';
 							margin-left: 5px;
 							padding-right: 5px;
+							vertical-align: middle;
 						}
 					}
 				}

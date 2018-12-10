@@ -47,7 +47,7 @@ class MessagesForm extends Component {
 					{/* Buttons */}
 					<div className="sc-buttons">
 						<Icon>insert_photo</Icon>
-						<Icon>sentiment_satisfied_alt</Icon>
+						<Icon>insert_emoticon</Icon>
 					</div>
 				</div>
 			</section>

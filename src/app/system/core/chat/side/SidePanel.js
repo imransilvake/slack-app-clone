@@ -22,14 +22,14 @@ class SidePanel extends Component {
 					<ColorPanel/>
 				</div>
 
-				{/* Content Area */}
+				{/* Content */}
 				<div className={sidePanelClass}>
 					{/* Header */}
 					<header className="sc-header">
 						<UserPanel currentUser={currentUser}/>
 					</header>
 
-					{/* Content */}
+					{/* Channels */}
 					<Channels currentUser={currentUser}/>
 				</div>
 			</section>

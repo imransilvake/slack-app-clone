@@ -177,25 +177,23 @@ class Register extends Component {
 				createdUser.user.updateProfile({
 					displayName: this.state.username,
 					photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
-				})
-					.then(() => {
-						this.saveUser(createdUser)
-							.then(() => {
-								// remove errors, show success message, remove loading animation
-								this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false });
+				}).then(() => {
+					this.saveUser(createdUser)
+						.then(() => {
+							// remove errors, show success message, remove loading animation
+							this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false });
 
-								// redirect to chat route
-								setTimeout(() => {
-									this.props.history.push(ENV.ROUTING.CHAT);
-								}, 4000);
-							})
-							.catch((error) => {
-								this.setState({ errors: [error], isAnimationLoading: false });
-							});
-					})
-					.catch((error) => {
-						this.setState({ errors: [error], isAnimationLoading: false });
-					});
+							// redirect to chat route
+							setTimeout(() => {
+								this.props.history.push(ENV.ROUTING.CHAT);
+							}, 4000);
+						})
+						.catch((error) => {
+							this.setState({ errors: [error], isAnimationLoading: false });
+						});
+				}).catch((error) => {
+					this.setState({ errors: [error], isAnimationLoading: false });
+				});
 			})
 			.catch((error) => {
 				this.setState({ errors: [error], isAnimationLoading: false });

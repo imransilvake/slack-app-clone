@@ -21,6 +21,7 @@ class MessagesPanel extends Component {
 		currentChannel: this.props.currentChannel,
 		currentUser: this.props.currentUser,
 		messages: [],
+		uniqueUsers: [],
 		isMessagesLoading: true
 	};
 
@@ -33,13 +34,14 @@ class MessagesPanel extends Component {
 	}
 
 	render() {
-		const { messagesRef, currentChannel, currentUser, messages, isMessagesLoading } = this.state;
+		const { messagesRef, currentChannel, currentUser, messages, uniqueUsers, isMessagesLoading } = this.state;
 
 		return currentChannel && currentUser && (
 			<section className="sc-message-panel">
 				{/* Search */}
 				<MessagesHeader
 					currentChannel={currentChannel}
+					uniqueUsers={uniqueUsers}
 					totalMessages={messages.length}
 				/>
 
@@ -93,6 +95,7 @@ class MessagesPanel extends Component {
 	 */
 	addMessageListener = (channelId) => {
 		let previousSnapshot = null;
+		const loadedUniqueUsers = [];
 		const loadedMessages = [];
 		this.state.messagesRef
 			.child(channelId)
@@ -112,8 +115,13 @@ class MessagesPanel extends Component {
 				// push messages
 				loadedMessages.push(message);
 
-				// set messages
-				this.setState({ messages: loadedMessages, isMessagesLoading: false }, () => {
+				// unique users
+				if (loadedUniqueUsers && !loadedUniqueUsers.some(u => u.id === snapshot.user.id)) {
+					loadedUniqueUsers.push(snapshot.user);
+				}
+
+				// set messages, set unique users remove loading
+				this.setState({ messages: loadedMessages, uniqueUsers: loadedUniqueUsers, isMessagesLoading: false }, () => {
 					// scroll to last message
 					this.scrollToLastMessage();
 				});

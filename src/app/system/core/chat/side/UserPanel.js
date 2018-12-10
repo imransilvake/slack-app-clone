@@ -29,7 +29,7 @@ class UserPanel extends Component {
 					<img className="sc-avatar" src={currentUser.photoURL} alt={currentUser.displayName}/>
 				</Button>
 
-				{/* Menu - User Panel */}
+				{/* Menu */}
 				<Menu
 					className="sc-user-panel-menu"
 					onClick={this.handleCloseMenu}
