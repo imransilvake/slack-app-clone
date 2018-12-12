@@ -124,6 +124,7 @@ class MessagesForm extends Component {
 			user: {
 				id: this.state.currentUser.uid,
 				name: this.state.currentUser.displayName,
+				email: this.state.currentUser.email,
 				avatar: this.state.currentUser.photoURL
 			}
 		};

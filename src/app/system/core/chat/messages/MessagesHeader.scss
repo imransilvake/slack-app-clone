@@ -8,17 +8,6 @@
 				.sc-title {
 					font-weight: cd-fontWeight(700);
 					padding-top: 3px;
-
-					.material-icons {
-						font-size: cd-fontSize(s18);
-						margin-left: 4px;
-						vertical-align: middle;
-
-						&:hover {
-							color: cd-palette($cd-color, 1021);
-							cursor: pointer;
-						}
-					}
 				}
 
 				.sc-info {
@@ -37,9 +26,11 @@
 								font-size: cd-fontSize(s18);
 							}
 
-							&:hover {
-								color: cd-palette($cd-color, 1021);
-								cursor: pointer;
+							&.sc-active-button {
+								&:hover {
+									color: cd-palette($cd-color, 1021);
+									cursor: pointer;
+								}
 							}
 						}
 
@@ -53,6 +44,7 @@
 
 						&:not(:last-child) {
 							&::after {
+								color: cd-palette($cd-color, 1026);
 								content: '|';
 								margin-left: 5px;
 								padding-right: 5px;
@@ -94,6 +86,62 @@
 
 				&:last-child {
 					padding-left: 8px;
+				}
+			}
+		}
+	}
+}
+
+// menu - user info
+.sc-users-list-menu {
+	> div {
+		border-radius: 0;
+		margin-left: 15px;
+		top: 55px !important;
+
+		ul {
+			max-height: 400px;
+			min-width: 200px;
+			overflow-y: auto;
+			padding: 5px 0;
+
+			li {
+				border-bottom: 1px solid cd-palette($cd-border, 3002);
+				display: block;
+				height: auto;
+				padding: 6px 15px;
+
+				&:hover {
+					background-color: cd-palette($cd-background, 2002);
+				}
+
+				&:last-child {
+					border-bottom: none;
+					padding-bottom: 0;
+				}
+
+				.sc-item {
+					.sc-avatar {
+						border-radius: 5px;
+						height: 35px;
+						vertical-align: top;
+						width: 35px;
+					}
+
+					.sc-content {
+						display: inline-block;
+						margin-left: 10px;
+						width: calc(100% - 45px);
+
+						.sc-name {
+							margin-top: -2px;
+						}
+
+						.sc-email {
+							font-size: 14px;
+							margin-top: -7px;
+						}
+					}
 				}
 			}
 		}
