@@ -21,12 +21,14 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 
 ## Content
 - [X] Authentication
-- [X] Setup Redux
 - [X] Implement Public Channels
 - [X] Implement Message Form
 - [ ] Show Messages
-- [ ] Edit/Delete Messages
-- [ ] Add Media to Messages
+	- [X] Layout Messages
+	- [ ] Implement Infinite Scrolling
+	- [ ] Edit/Delete Messages
+	- [ ] Add Media to Messages
+- [ ] Add User Status
 
 
 ## Libraries and Frameworks
