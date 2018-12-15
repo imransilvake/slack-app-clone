@@ -16,7 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
 import { regexLNL } from '../../../utilities/helpers/Regex';
-import { setCurrentChannel } from '../../../../store/actions';
+import { setChannel } from '../../../../store/actions';
 import LoadingAnimation from '../../../utilities/loading-animation/LoadingAnimation';
 
 class Channels extends Component {
@@ -300,7 +300,7 @@ class Channels extends Component {
 	 */
 	changeChannel = (channel) => {
 		// set current channel
-		this.props.setCurrentChannel(channel);
+		this.props.setChannel(channel);
 
 		// set active channel
 		this.setActiveChannel(channel);
@@ -310,12 +310,13 @@ class Channels extends Component {
 	 * set first channel
 	 */
 	setFirstChannel = () => {
-		const firstChannel = this.state.channels[0];
+		const { channels, firstLoad } = this.state;
+		const firstChannel = channels[0];
 
 		// set first channel
-		if (this.state.firstLoad && this.state.channels.length > 0) {
+		if (firstLoad && channels.length > 0) {
 			// set current channel
-			this.props.setCurrentChannel(firstChannel);
+			this.props.setChannel(firstChannel);
 
 			// set active channel
 			this.setActiveChannel(firstChannel);
@@ -342,4 +343,4 @@ class Channels extends Component {
 	};
 }
 
-export default connect(null, { setCurrentChannel })(Channels);
+export default connect(null, { setChannel })(Channels);

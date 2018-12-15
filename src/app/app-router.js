@@ -40,7 +40,8 @@ class AppRouter extends Component {
 	}
 
 	render() {
-		return this.props.isAnimationLoading ? <LoadingAnimation/> : (
+		const { isAnimationLoading } = this.props;
+		return isAnimationLoading ? <LoadingAnimation/> : (
 			<Switch>
 				<Route exact path={ENV.ROUTING.HOME} component={Home}/>
 				<Route path={ENV.ROUTING.AUTH.LOGIN} component={Login}/>

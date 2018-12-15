@@ -25,13 +25,14 @@ class Chat extends Component {
 	}
 
 	render() {
+		const { mobileOpen } = this.state;
 		const { currentUser, currentChannel } = this.props;
 
-		return this.props.currentUser && (
+		return currentUser && (
 			<section className="cd-container-fluid sc-chat">
 				{/*  Side Panel - Mobile */}
 				<Drawer
-					open={this.state.mobileOpen}
+					open={mobileOpen}
 					onClose={this.handleDrawerToggle}>
 					<SidePanel
 						currentUser={currentUser}
@@ -43,7 +44,7 @@ class Chat extends Component {
 				<div className="cd-row">
 					<div className="cd-hide-on-s-down">
 						<SidePanel
-							key={currentUser && currentUser.uid}
+							key={currentUser.uid}
 							currentUser={currentUser}
 							isMobileView
 						/>
@@ -58,7 +59,7 @@ class Chat extends Component {
 				{/* Message Panel */}
 				<div className="cd-row">
 					{
-						currentChannel && currentUser && (
+						currentChannel && (
 							<MessagesPanel
 								key={currentChannel.id}
 								currentChannel={currentChannel}

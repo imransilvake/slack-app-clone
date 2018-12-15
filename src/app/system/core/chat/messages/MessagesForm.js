@@ -111,7 +111,7 @@ class MessagesForm extends Component {
 	 */
 	isMessageValid = () => {
 		const { message } = this.state;
-		return !!(message) && this.state.message.length > 0 && regexEmptyString(message);
+		return !!(message) && message.length > 0 && regexEmptyString(message);
 	};
 
 	/**
@@ -120,14 +120,16 @@ class MessagesForm extends Component {
 	 * @returns {{timestamp: Object, content: string, user: {id: string, name: *, avatar: string}}}
 	 */
 	createMessage = () => {
+		const { currentUser, message } = this.state;
+
 		return {
 			timestamp: firebase.database.ServerValue.TIMESTAMP,
-			content: this.state.message,
+			content: message,
 			user: {
-				id: this.state.currentUser.uid,
-				name: this.state.currentUser.displayName,
-				email: this.state.currentUser.email,
-				avatar: this.state.currentUser.photoURL
+				id: currentUser.uid,
+				name: currentUser.displayName,
+				email: currentUser.email,
+				avatar: currentUser.photoURL
 			}
 		};
 	};
