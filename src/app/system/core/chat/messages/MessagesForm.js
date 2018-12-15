@@ -81,6 +81,9 @@ class MessagesForm extends Component {
 				// stop default event
 				event.preventDefault();
 
+				// empty message
+				this.setState({ message: '' });
+
 				// destructuring
 				const { messagesRef } = this.props;
 				const { currentChannel } = this.state;
@@ -91,9 +94,8 @@ class MessagesForm extends Component {
 					.push()
 					.set(this.createMessage())
 					.then(() => {
-						// empty message
 						// empty errors
-						this.setState({ message: '', errors: [] });
+						this.setState({ errors: [] });
 					})
 					.catch((error) => {
 						this.setState({ errors: [error] });

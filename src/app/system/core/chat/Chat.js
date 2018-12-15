@@ -57,11 +57,15 @@ class Chat extends Component {
 
 				{/* Message Panel */}
 				<div className="cd-row">
-					<MessagesPanel
-						key={currentChannel && currentChannel.id}
-						currentChannel={currentChannel}
-						currentUser={currentUser}
-					/>
+					{
+						currentChannel && currentUser && (
+							<MessagesPanel
+								key={currentChannel.id}
+								currentChannel={currentChannel}
+								currentUser={currentUser}
+							/>
+						)
+					}
 				</div>
 			</section>
 		);

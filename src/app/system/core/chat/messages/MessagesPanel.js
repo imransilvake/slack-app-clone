@@ -22,28 +22,49 @@ class MessagesPanel extends Component {
 		currentUser: this.props.currentUser,
 		messages: [],
 		uniqueUsers: [],
-		isMessagesLoading: true
+		isMessagesLoading: true,
+		keyReference: null,
+		isInfiniteScrolling: true,
+		isAccessLocked: false,
+		elementScrollTop: 0
 	};
 
 	componentDidMount() {
-		this.addListeners();
+		const { currentChannel } = this.state;
+
+		// add message listener
+		this.addMessageListener(currentChannel.id);
+
+		// add scroll listener
+		const messagesWrapper = document.getElementById('sc-messages');
+		if (messagesWrapper) {
+			messagesWrapper.addEventListener('scroll', this.addScrollListener);
+		}
 	}
 
 	componentWillUnmount() {
-		this.removeMessagesListener();
+		// remove message listener
+		this.state.messagesRef.off();
+
+		// remove scroll listener
+		this.removeScrollListener();
 	}
 
 	render() {
 		const { messagesRef, currentChannel, currentUser, messages, uniqueUsers, isMessagesLoading } = this.state;
 
-		return currentChannel && currentUser && (
+		return (
 			<section className="sc-message-panel">
-				{/* Search */}
-				<MessagesHeader
-					currentChannel={currentChannel}
-					uniqueUsers={uniqueUsers}
-					totalMessages={messages.length}
-				/>
+				{
+					/* Header */
+					currentChannel && messages && (
+						<MessagesHeader
+							currentChannel={currentChannel}
+							uniqueUsers={uniqueUsers}
+							totalMessages={messages.length}
+						/>
+					)
+				}
 
 				{/* Content */}
 				<section className="sc-messages" id="sc-messages">
@@ -62,31 +83,24 @@ class MessagesPanel extends Component {
 					{/* Loading */}
 					{ isMessagesLoading && this.loadingMessage() }
 
-					{/* Messages */}
-					{ messages.length === 0 && !isMessagesLoading ? this.emptyChannelMessage() : this.displayMessages(messages) }
+					{/* Message: Empty or List */}
+					{ !messages && !isMessagesLoading ? this.emptyChannelMessage() : this.displayMessages(messages) }
 				</section>
 
-				{/* Form */}
-				<MessagesForm
-					messagesRef={messagesRef}
-					currentChannel={currentChannel}
-					currentUser={currentUser}
-				/>
+				{
+					/* Form */
+					currentUser && currentChannel && messagesRef && messages && (
+						<MessagesForm
+							messagesRef={messagesRef}
+							currentChannel={currentChannel}
+							currentUser={currentUser}
+							totalMessages={messages.length}
+						/>
+					)
+				}
 			</section>
 		);
 	}
-
-	/**
-	 * add listeners
-	 *
-	 */
-	addListeners = () => {
-		const { currentUser, currentChannel } = this.state;
-		if (currentUser && currentChannel) {
-			// message listener
-			this.addMessageListener(currentChannel.id);
-		}
-	};
 
 	/**
 	 * add message listener
@@ -94,13 +108,63 @@ class MessagesPanel extends Component {
 	 * @param channelId
 	 */
 	addMessageListener = (channelId) => {
-		let previousSnapshot = null;
+		// load new messages
+		this.loadNewMessages(channelId);
+	};
+
+	/**
+	 * add scroll listener
+	 *
+	 * @param event
+	 */
+	addScrollListener = (event) => {
+		const { isInfiniteScrolling, elementScrollTop, isAccessLocked } = this.state;
+
+		// infinite scrolling until active
+		if (isInfiniteScrolling) {
+			// validate event target
+			if (event && event.target && event.target.scrollTop) {
+				const scrollTop = event.target.scrollTop;
+				if (elementScrollTop > scrollTop && elementScrollTop <= 250 && !isAccessLocked) {
+					// lock access temporarily
+					this.setState({ isAccessLocked: true });
+
+					// load old messages
+					this.loadOldMessages();
+				}
+
+				// update scrollTop
+				this.setState({ elementScrollTop: scrollTop });
+			}
+		} else {
+			// remove scroll listener
+			this.removeScrollListener();
+		}
+	};
+
+	/**
+	 * load new messages
+	 *
+	 * @param channelId
+	 */
+	loadNewMessages = (channelId) => {
+		const messagesLimit = 30;
 		const loadedUniqueUsers = [];
-		const loadedMessages = [];
+		let loadedMessages = [];
+		let previousSnapshot = null;
+
 		this.state.messagesRef
 			.child(channelId)
+			.orderByChild('timestamp')
+			.limitToLast(messagesLimit)
 			.on('child_added', (snap) => {
+				const { keyReference, messages } = this.state;
 				const snapshot = snap.val();
+
+				// save key for infinite scrolling
+				if (!keyReference) {
+					this.setState({ keyReference: snapshot.timestamp });
+				}
 
 				// message
 				const message = {
@@ -112,7 +176,8 @@ class MessagesPanel extends Component {
 				// set previous snapshot
 				previousSnapshot = snapshot;
 
-				// push messages
+				// push existing messages and a new message
+				loadedMessages = messages;
 				loadedMessages.push(message);
 
 				// unique users
@@ -120,22 +185,108 @@ class MessagesPanel extends Component {
 					loadedUniqueUsers.push(snapshot.user);
 				}
 
-				// set messages, set unique users remove loading
-				this.setState({ messages: loadedMessages, uniqueUsers: loadedUniqueUsers, isMessagesLoading: false }, () => {
+				// set messages, set unique users, remove loading
+				this.setState({
+					messages: loadedMessages,
+					uniqueUsers: loadedUniqueUsers,
+					isMessagesLoading: false }, () => {
 					// scroll to last message
 					this.scrollToLastMessage();
 				});
 			});
+	};
 
-		// check if child has any item(s)
+	/**
+	 * load old messages
+	 */
+	loadOldMessages = () => {
+		const { currentChannel, keyReference, messages, uniqueUsers } = this.state;
+		const messagesLimit = 11;
+		const loadedMessages = [];
+		let setKey = false;
+		let previousSnapshot = null;
+
 		this.state.messagesRef
-			.child(channelId)
-			.once('value', (res) => {
-				if (!res.exists()) {
+			.child(currentChannel.id)
+			.orderByChild('timestamp')
+			.endAt(keyReference)
+			.limitToLast(messagesLimit)
+			.on('value', (snap) => {
+				if (snap.exists()) {
+					// all snapshots
+					const snapshots = this.combineAllMessages(messages, snap);
+
+					// loop
+					snapshots.forEach(snapshot => {
+						// remember key
+						if (!setKey) {
+							this.setState({ keyReference: snapshot.timestamp });
+							setKey = true;
+						}
+
+						// message
+						const message = {
+							snapshot,
+							isMessageOnSameDay: this.messageOnSameDay(previousSnapshot, snapshot),
+							isMessageOnSameDayBySameUser: this.messageOnSameDayBySameUser(previousSnapshot, snapshot)
+						};
+
+						// set previous snapshot
+						previousSnapshot = snapshot;
+
+						// push messages
+						loadedMessages.push(message);
+
+						// unique users
+						if (uniqueUsers && !uniqueUsers.some(u => u.id === snapshot.user.id)) {
+							uniqueUsers.push(snapshot.user);
+						}
+					});
+
+					// set messages
+					// set unique users
+					// set infinite scrolling
+					this.setState({
+						messages: loadedMessages,
+						uniqueUsers: uniqueUsers,
+						isInfiniteScrolling: Object.keys(snap.val()).length === messagesLimit
+					}, () => {
+						// unlock access to load more messages
+						this.setState({ isAccessLocked: false });
+					});
+				} else {
+					// remove loading
 					this.setState({ isMessagesLoading: false });
 				}
-			})
-			.then();
+			});
+	};
+
+	/**
+	 * combine messages
+	 *
+	 * @param messages
+	 * @param snap
+	 * @returns {Array}
+	 */
+	combineAllMessages = (messages, snap) => {
+		const snaps = snap.val();
+		let snapshots = [];
+
+		// new messages
+		for (let key in snaps) {
+			if (snaps.hasOwnProperty(key)) {
+				snapshots.push(snaps[key])
+			}
+		}
+
+		// old messages
+		messages
+			.slice(1) // remove first element
+			.forEach(message => {
+				snapshots.push(message.snapshot);
+			});
+
+		return snapshots;
 	};
 
 	/**
@@ -175,7 +326,7 @@ class MessagesPanel extends Component {
 	 * @param messages
 	 */
 	displayMessages = messages => (
-		messages.length > 0 && messages.map((message, index) => (
+		messages && messages.length > 0 && messages.map((message, index) => (
 			<MessageContent
 				key={message.snapshot.timestamp}
 				message={message.snapshot}
@@ -232,11 +383,15 @@ class MessagesPanel extends Component {
 	);
 
 	/**
-	 * remove channel listener
+	 * remove scroll listener
 	 */
-	removeMessagesListener = () => {
-		this.state.messagesRef.off();
-	};
+	removeScrollListener = () => {
+		// remove scroll listener
+		const messagesWrapper = document.getElementById('sc-messages');
+		if (messagesWrapper) {
+			messagesWrapper.removeEventListener('scroll', this.addScrollListener);
+		}
+	}
 }
 
 export default MessagesPanel;

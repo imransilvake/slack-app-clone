@@ -8,10 +8,12 @@
 		padding: 15px;
 
 		.sc-channel-info {
+			background-color: cd-palette($cd-background, 2002);
 			padding: 10px 15px;
 
 			h3 {
 				color: cd-palette($cd-color, 1025);
+				font-weight: cd-fontWeight(700);
 				margin-bottom: 5px;
 			}
 		}
