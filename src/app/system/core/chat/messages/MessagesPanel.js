@@ -203,7 +203,6 @@ class MessagesPanel extends Component {
 		const { currentChannel, keyReference, messages, uniqueUsers } = this.state;
 		const messagesLimit = 11;
 		const loadedMessages = [];
-		let setKey = false;
 		let previousSnapshot = null;
 
 		this.state.messagesRef
@@ -217,11 +216,10 @@ class MessagesPanel extends Component {
 					const snapshots = this.combineAllMessages(messages, snap);
 
 					// loop
-					snapshots.forEach(snapshot => {
+					snapshots.forEach((snapshot, index) => {
 						// remember key
-						if (!setKey) {
+						if (index === 0) {
 							this.setState({ keyReference: snapshot.timestamp });
-							setKey = true;
 						}
 
 						// message
