@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 import * as actionTypes from '../actions/types';
 
 /* ---------------
-	Reducer: USER
+	Reducer: User
 	-------------
 */
 
@@ -33,6 +33,7 @@ const userReducer = (state = initialUserState, action) => {
 	}
 };
 
+
 /* ------------------
 	Reducer: Channel
 	----------------
@@ -56,9 +57,45 @@ const channelReducer = (state = initialChannelState, action) => {
 	}
 };
 
+
+/* ------------------
+	Reducer: Message
+	----------------
+*/
+
+// initial channel state
+const initialMessageState = [];
+
+// reducer: Message
+const messageReducer = (state = initialMessageState, action) => {
+	switch (action.type) {
+		case actionTypes.SET_MESSAGES:
+			const matchedIndex = state.findIndex(x => x.channelId === action.payload.channelId);
+			const payload = {
+				channelId: action.payload.channelId,
+				messages: action.payload.messages,
+				uniqueUsers: action.payload.uniqueUsers,
+				isInfiniteScrolling: action.payload.isInfiniteScrolling,
+				keyReference: action.payload.keyReference
+			};
+
+			// update state
+			if (matchedIndex > -1) {
+				state[matchedIndex] = payload;
+			} else {
+				state.push(payload);
+			}
+
+			return state;
+		default:
+			return state;
+	}
+};
+
 const rootReducer = combineReducers({
 	user: userReducer,
-	channel: channelReducer
+	channel: channelReducer,
+	message: messageReducer
 });
 
 export default rootReducer;

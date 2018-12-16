@@ -14,12 +14,12 @@ import MessagesForm from './MessagesForm';
 import i18n from '../../../../../assets/i18n/i18n';
 import moment from 'moment';
 import formatMessageTime from '../../../utilities/helpers/Date';
+import { setMessages } from './../../../../store/actions';
+import connect from 'react-redux/es/connect/connect';
 
 class MessagesPanel extends Component {
 	state = {
 		messagesRef: firebase.database().ref('messages'),
-		currentChannel: this.props.currentChannel,
-		currentUser: this.props.currentUser,
 		messages: [],
 		uniqueUsers: [],
 		isMessagesLoading: true,
@@ -30,10 +30,8 @@ class MessagesPanel extends Component {
 	};
 
 	componentDidMount() {
-		const { currentChannel } = this.state;
-
 		// add message listener
-		this.addMessageListener(currentChannel.id);
+		this.addMessageListener(this.props.currentChannel.id);
 
 		// add scroll listener
 		const messagesWrapper = document.getElementById('sc-messages');
@@ -43,28 +41,22 @@ class MessagesPanel extends Component {
 	}
 
 	componentWillUnmount() {
-		// remove message listener
-		this.state.messagesRef.off();
-
 		// remove scroll listener
 		this.removeScrollListener();
 	}
 
 	render() {
-		const { messagesRef, currentChannel, currentUser, messages, uniqueUsers, isMessagesLoading } = this.state;
+		const { currentChannel, currentUser } = this.props;
+		const { messagesRef, messages, uniqueUsers, isMessagesLoading } = this.state;
 
-		return (
+		return messagesRef && messages && (
 			<section className="sc-message-panel">
-				{
-					/* Header */
-					currentChannel && messages && (
-						<MessagesHeader
-							currentChannel={currentChannel}
-							uniqueUsers={uniqueUsers}
-							totalMessages={messages.length}
-						/>
-					)
-				}
+				{/* Header */}
+				<MessagesHeader
+					currentChannel={currentChannel}
+					uniqueUsers={uniqueUsers}
+					totalMessages={messages.length}
+				/>
 
 				{/* Content */}
 				<section className="sc-messages" id="sc-messages">
@@ -87,17 +79,13 @@ class MessagesPanel extends Component {
 					{ !messages && !isMessagesLoading ? this.emptyChannelMessage() : this.displayMessages(messages) }
 				</section>
 
-				{
-					/* Form */
-					currentUser && currentChannel && messagesRef && messages && (
-						<MessagesForm
-							messagesRef={messagesRef}
-							currentChannel={currentChannel}
-							currentUser={currentUser}
-							totalMessages={messages.length}
-						/>
-					)
-				}
+				{/* Form */}
+				<MessagesForm
+					messagesRef={messagesRef}
+					currentChannel={currentChannel}
+					currentUser={currentUser}
+					totalMessages={messages.length}
+				/>
 			</section>
 		);
 	}
@@ -108,8 +96,25 @@ class MessagesPanel extends Component {
 	 * @param channelId
 	 */
 	addMessageListener = (channelId) => {
-		// load new messages
-		this.loadNewMessages(channelId);
+		const { savedMessages } = this.props;
+
+		if (savedMessages && savedMessages.length > 0 && savedMessages.some(x => x.channelId === channelId)) {
+			savedMessages.forEach(x => {
+				if (x.channelId === channelId) {
+					// load saved messages (redux)
+					this.setState({
+						messages: x.messages,
+						uniqueUsers: x.uniqueUsers,
+						keyReference: x.keyReference,
+						isInfiniteScrolling: x.isInfiniteScrolling,
+						isMessagesLoading: false
+					});
+				}
+			});
+		} else {
+			// load new messages
+			this.loadNewMessages(channelId);
+		}
 	};
 
 	/**
@@ -125,7 +130,7 @@ class MessagesPanel extends Component {
 			// validate event target
 			if (event && event.target && event.target.scrollTop) {
 				const scrollTop = event.target.scrollTop;
-				if (elementScrollTop > scrollTop && elementScrollTop <= 250 && !isAccessLocked) {
+				if (elementScrollTop > scrollTop && elementScrollTop <= 20 && !isAccessLocked) {
 					// lock access temporarily
 					this.setState({ isAccessLocked: true });
 
@@ -158,7 +163,7 @@ class MessagesPanel extends Component {
 			.orderByChild('timestamp')
 			.limitToLast(messagesLimit)
 			.on('child_added', (snap) => {
-				const { keyReference, messages } = this.state;
+				const { keyReference, messages, isInfiniteScrolling } = this.state;
 				const snapshot = snap.val();
 
 				// save key for infinite scrolling
@@ -186,10 +191,17 @@ class MessagesPanel extends Component {
 				}
 
 				// set messages, set unique users, remove loading
-				this.setState({
-					messages: loadedMessages,
-					uniqueUsers: loadedUniqueUsers,
-					isMessagesLoading: false }, () => {
+				this.setState({ messages: loadedMessages, uniqueUsers: loadedUniqueUsers, isMessagesLoading: false }, () => {
+					// save loaded messages to redux
+					const channelMessagesState = {
+						channelId: channelId,
+						messages: loadedMessages,
+						uniqueUsers: loadedUniqueUsers,
+						isInfiniteScrolling: isInfiniteScrolling,
+						keyReference: keyReference
+					};
+					this.saveChannelMessagesState(channelMessagesState);
+
 					// scroll to last message
 					this.scrollToLastMessage();
 				});
@@ -200,8 +212,9 @@ class MessagesPanel extends Component {
 	 * load old messages
 	 */
 	loadOldMessages = () => {
-		const { currentChannel, keyReference, messages, uniqueUsers } = this.state;
-		const messagesLimit = 11;
+		const { currentChannel } = this.props;
+		const { keyReference, messages, uniqueUsers, isInfiniteScrolling } = this.state;
+		const messagesLimit = 51;
 		const loadedMessages = [];
 		let previousSnapshot = null;
 
@@ -251,6 +264,16 @@ class MessagesPanel extends Component {
 					}, () => {
 						// unlock access to load more messages
 						this.setState({ isAccessLocked: false });
+
+						// save loaded messages to redux
+						const channelMessagesState = {
+							channelId: currentChannel.id,
+							messages: loadedMessages,
+							uniqueUsers: uniqueUsers,
+							isInfiniteScrolling: isInfiniteScrolling,
+							keyReference: keyReference
+						};
+						this.saveChannelMessagesState(channelMessagesState);
 					});
 				} else {
 					// remove loading
@@ -285,6 +308,21 @@ class MessagesPanel extends Component {
 			});
 
 		return snapshots;
+	};
+
+	/**
+	 * save channel messages state
+	 *
+	 * @param data
+	 */
+	saveChannelMessagesState = (data) => {
+		this.props.setMessages(
+			data.channelId,
+			data.messages,
+			data.uniqueUsers,
+			data.isInfiniteScrolling,
+			data.keyReference
+		);
 	};
 
 	/**
@@ -331,7 +369,7 @@ class MessagesPanel extends Component {
 				isMessageOnSameDayBySameUser={message.isMessageOnSameDayBySameUser}
 				isMessageOnSameDay={message.isMessageOnSameDay}
 				isLastMessage={messages.length - 1 === index}
-				currentUser={this.state.currentUser}
+				currentUser={this.props.currentUser}
 			/>
 		))
 	);
@@ -392,4 +430,12 @@ class MessagesPanel extends Component {
 	}
 }
 
-export default MessagesPanel;
+// props
+const mapStateFromProps = state => ({
+	savedMessages: state.message
+});
+
+export default connect(
+	mapStateFromProps,
+	{ setMessages }
+)(MessagesPanel);

@@ -23,6 +23,7 @@ export const clearUser = () => {
 	}
 };
 
+
 /* ----------------------
 	Channel Action Types
 	--------------------
@@ -33,6 +34,25 @@ export const setChannel = (channel) => {
 		type: actionTypes.SET_CURRENT_CHANNEL,
 		payload: {
 			currentChannel: channel
+		}
+	};
+};
+
+
+/* -----------------------
+	Messages Action Types
+	---------------------
+*/
+
+export const setMessages = (channelId, messages, uniqueUsers, isInfiniteScrolling, keyReference) => {
+	return {
+		type: actionTypes.SET_MESSAGES,
+		payload: {
+			channelId: channelId,
+			messages: messages,
+			uniqueUsers: uniqueUsers,
+			isInfiniteScrolling: isInfiniteScrolling,
+			keyReference: keyReference
 		}
 	};
 };

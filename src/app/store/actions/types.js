@@ -17,3 +17,12 @@ export const CLEAR_USER = 'CLEAR_USER';
 
 // set user
 export const SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL';
+
+
+/* -----------------------
+	Messages Action Types
+	---------------------
+*/
+
+// set user
+export const SET_MESSAGES = 'SET_MESSAGES';
