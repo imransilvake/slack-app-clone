@@ -14,7 +14,7 @@ import MessagesForm from './MessagesForm';
 import i18n from '../../../../../assets/i18n/i18n';
 import moment from 'moment';
 import formatMessageTime from '../../../utilities/helpers/Date';
-import { setMessages } from './../../../../store/actions';
+import { setMessages } from '../../../../store/actions';
 import connect from 'react-redux/es/connect/connect';
 
 class MessagesPanel extends Component {
@@ -41,6 +41,11 @@ class MessagesPanel extends Component {
 	}
 
 	componentWillUnmount() {
+		// unlink message ref child
+		this.state.messagesRef
+			.child(this.props.currentChannel.id)
+			.off('child_added');
+
 		// remove scroll listener
 		this.removeScrollListener();
 	}
@@ -99,7 +104,7 @@ class MessagesPanel extends Component {
 		const { savedMessages } = this.props;
 
 		if (savedMessages && savedMessages.length > 0 && savedMessages.some(x => x.channelId === channelId)) {
-			savedMessages.forEach(x => {
+			savedMessages.forEach((x) => {
 				if (x.channelId === channelId) {
 					// load saved messages (redux)
 					this.setState({
@@ -194,13 +199,13 @@ class MessagesPanel extends Component {
 				this.setState({ messages: loadedMessages, uniqueUsers: loadedUniqueUsers, isMessagesLoading: false }, () => {
 					// save loaded messages to redux
 					const channelMessagesState = {
-						channelId: channelId,
+						channelId,
 						messages: loadedMessages,
 						uniqueUsers: loadedUniqueUsers,
-						isInfiniteScrolling: isInfiniteScrolling,
-						keyReference: keyReference
+						isInfiniteScrolling,
+						keyReference
 					};
-					this.saveChannelMessagesState(channelMessagesState);
+					this.props.setMessages(channelMessagesState);
 
 					// scroll to last message
 					this.scrollToLastMessage();
@@ -223,7 +228,7 @@ class MessagesPanel extends Component {
 			.orderByChild('timestamp')
 			.endAt(keyReference)
 			.limitToLast(messagesLimit)
-			.on('value', (snap) => {
+			.once('value', (snap) => {
 				if (snap.exists()) {
 					// all snapshots
 					const snapshots = this.combineAllMessages(messages, snap);
@@ -259,7 +264,7 @@ class MessagesPanel extends Component {
 					// set infinite scrolling
 					this.setState({
 						messages: loadedMessages,
-						uniqueUsers: uniqueUsers,
+						uniqueUsers,
 						isInfiniteScrolling: Object.keys(snap.val()).length === messagesLimit
 					}, () => {
 						// unlock access to load more messages
@@ -269,17 +274,19 @@ class MessagesPanel extends Component {
 						const channelMessagesState = {
 							channelId: currentChannel.id,
 							messages: loadedMessages,
-							uniqueUsers: uniqueUsers,
-							isInfiniteScrolling: isInfiniteScrolling,
-							keyReference: keyReference
+							uniqueUsers,
+							isInfiniteScrolling,
+							keyReference
 						};
-						this.saveChannelMessagesState(channelMessagesState);
+						this.props.setMessages(channelMessagesState);
 					});
 				} else {
 					// remove loading
 					this.setState({ isMessagesLoading: false });
 				}
-			});
+			})
+			.then()
+			.catch();
 	};
 
 	/**
@@ -291,10 +298,10 @@ class MessagesPanel extends Component {
 	 */
 	combineAllMessages = (messages, snap) => {
 		const snaps = snap.val();
-		let snapshots = [];
+		const snapshots = [];
 
 		// new messages
-		for (let key in snaps) {
+		for (const key in snaps) {
 			if (snaps.hasOwnProperty(key)) {
 				snapshots.push(snaps[key])
 			}
@@ -303,26 +310,11 @@ class MessagesPanel extends Component {
 		// old messages
 		messages
 			.slice(1) // remove first element
-			.forEach(message => {
+			.forEach((message) => {
 				snapshots.push(message.snapshot);
 			});
 
 		return snapshots;
-	};
-
-	/**
-	 * save channel messages state
-	 *
-	 * @param data
-	 */
-	saveChannelMessagesState = (data) => {
-		this.props.setMessages(
-			data.channelId,
-			data.messages,
-			data.uniqueUsers,
-			data.isInfiniteScrolling,
-			data.keyReference
-		);
 	};
 
 	/**

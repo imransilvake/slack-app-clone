@@ -44,15 +44,9 @@ export const setChannel = (channel) => {
 	---------------------
 */
 
-export const setMessages = (channelId, messages, uniqueUsers, isInfiniteScrolling, keyReference) => {
+export const setMessages = (data) => {
 	return {
 		type: actionTypes.SET_MESSAGES,
-		payload: {
-			channelId: channelId,
-			messages: messages,
-			uniqueUsers: uniqueUsers,
-			isInfiniteScrolling: isInfiniteScrolling,
-			keyReference: keyReference
-		}
+		payload: data
 	};
 };
