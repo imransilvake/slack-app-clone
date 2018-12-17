@@ -30,24 +30,36 @@ class MessagesPanel extends Component {
 	};
 
 	componentDidMount() {
+		const { currentChannel } = this.props;
+
 		// add message listener
-		this.addMessageListener(this.props.currentChannel.id);
+		this.addMessageListener(currentChannel.id);
 
 		// add scroll listener
-		const messagesWrapper = document.getElementById('sc-messages');
-		if (messagesWrapper) {
-			messagesWrapper.addEventListener('scroll', this.addScrollListener);
-		}
+		this.messagesWrapper = document.getElementById('sc-messages');
+		if (this.messagesWrapper) this.messagesWrapper.addEventListener('scroll', this.addScrollListener);
 	}
 
 	componentWillUnmount() {
+		const { messagesRef, messages, uniqueUsers, isInfiniteScrolling, keyReference } = this.state;
+		const { currentChannel } = this.props;
+
+		// save loaded messages to redux
+		this.props.setMessages({
+			channelId: currentChannel.id,
+			messages,
+			uniqueUsers,
+			isInfiniteScrolling,
+			keyReference
+		});
+
 		// unlink message ref child
-		this.state.messagesRef
-			.child(this.props.currentChannel.id)
+		messagesRef
+			.child(currentChannel.id)
 			.off('child_added');
 
 		// remove scroll listener
-		this.removeScrollListener();
+		this.messagesWrapper.removeEventListener('scroll', this.addScrollListener);
 	}
 
 	render() {
@@ -102,7 +114,6 @@ class MessagesPanel extends Component {
 	 */
 	addMessageListener = (channelId) => {
 		const { savedMessages } = this.props;
-
 		if (savedMessages && savedMessages.length > 0 && savedMessages.some(x => x.channelId === channelId)) {
 			savedMessages.forEach((x) => {
 				if (x.channelId === channelId) {
@@ -134,8 +145,8 @@ class MessagesPanel extends Component {
 		if (isInfiniteScrolling) {
 			// validate event target
 			if (event && event.target && event.target.scrollTop) {
-				const scrollTop = event.target.scrollTop;
-				if (elementScrollTop > scrollTop && elementScrollTop <= 20 && !isAccessLocked) {
+				const { scrollTop } = event.target;
+				if (elementScrollTop > scrollTop && elementScrollTop <= 200 && !isAccessLocked) {
 					// lock access temporarily
 					this.setState({ isAccessLocked: true });
 
@@ -146,9 +157,6 @@ class MessagesPanel extends Component {
 				// update scrollTop
 				this.setState({ elementScrollTop: scrollTop });
 			}
-		} else {
-			// remove scroll listener
-			this.removeScrollListener();
 		}
 	};
 
@@ -168,7 +176,7 @@ class MessagesPanel extends Component {
 			.orderByChild('timestamp')
 			.limitToLast(messagesLimit)
 			.on('child_added', (snap) => {
-				const { keyReference, messages, isInfiniteScrolling } = this.state;
+				const { keyReference, messages } = this.state;
 				const snapshot = snap.val();
 
 				// save key for infinite scrolling
@@ -197,16 +205,6 @@ class MessagesPanel extends Component {
 
 				// set messages, set unique users, remove loading
 				this.setState({ messages: loadedMessages, uniqueUsers: loadedUniqueUsers, isMessagesLoading: false }, () => {
-					// save loaded messages to redux
-					const channelMessagesState = {
-						channelId,
-						messages: loadedMessages,
-						uniqueUsers: loadedUniqueUsers,
-						isInfiniteScrolling,
-						keyReference
-					};
-					this.props.setMessages(channelMessagesState);
-
 					// scroll to last message
 					this.scrollToLastMessage();
 				});
@@ -218,7 +216,7 @@ class MessagesPanel extends Component {
 	 */
 	loadOldMessages = () => {
 		const { currentChannel } = this.props;
-		const { keyReference, messages, uniqueUsers, isInfiniteScrolling } = this.state;
+		const { keyReference, messages, uniqueUsers } = this.state;
 		const messagesLimit = 51;
 		const loadedMessages = [];
 		let previousSnapshot = null;
@@ -262,23 +260,9 @@ class MessagesPanel extends Component {
 					// set messages
 					// set unique users
 					// set infinite scrolling
-					this.setState({
-						messages: loadedMessages,
-						uniqueUsers,
-						isInfiniteScrolling: Object.keys(snap.val()).length === messagesLimit
-					}, () => {
+					this.setState({ messages: loadedMessages, uniqueUsers, isInfiniteScrolling: Object.keys(snap.val()).length === messagesLimit }, () => {
 						// unlock access to load more messages
 						this.setState({ isAccessLocked: false });
-
-						// save loaded messages to redux
-						const channelMessagesState = {
-							channelId: currentChannel.id,
-							messages: loadedMessages,
-							uniqueUsers,
-							isInfiniteScrolling,
-							keyReference
-						};
-						this.props.setMessages(channelMessagesState);
 					});
 				} else {
 					// remove loading
@@ -302,7 +286,7 @@ class MessagesPanel extends Component {
 
 		// new messages
 		for (const key in snaps) {
-			if (snaps.hasOwnProperty(key)) {
+			if (Object.prototype.hasOwnProperty.call(snaps, key)) {
 				snapshots.push(snaps[key])
 			}
 		}
@@ -409,17 +393,6 @@ class MessagesPanel extends Component {
 			<p>{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.EMPTY_CHANNEL')}</p>
 		</div>
 	);
-
-	/**
-	 * remove scroll listener
-	 */
-	removeScrollListener = () => {
-		// remove scroll listener
-		const messagesWrapper = document.getElementById('sc-messages');
-		if (messagesWrapper) {
-			messagesWrapper.removeEventListener('scroll', this.addScrollListener);
-		}
-	}
 }
 
 // props
