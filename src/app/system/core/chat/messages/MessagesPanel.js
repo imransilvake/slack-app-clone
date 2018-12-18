@@ -90,10 +90,10 @@ class MessagesPanel extends Component {
 					</div>
 
 					{/* Loading */}
-					{ isMessagesLoading && this.loadingMessage() }
+					{isMessagesLoading && this.loadingMessage()}
 
 					{/* Message: Empty or List */}
-					{ !messages && !isMessagesLoading ? this.emptyChannelMessage() : this.displayMessages(messages) }
+					{!messages && !isMessagesLoading ? this.emptyChannelMessage() : this.displayMessages(messages)}
 				</section>
 
 				{/* Form */}
@@ -204,7 +204,11 @@ class MessagesPanel extends Component {
 				}
 
 				// set messages, set unique users, remove loading
-				this.setState({ messages: loadedMessages, uniqueUsers: loadedUniqueUsers, isMessagesLoading: false }, () => {
+				this.setState({
+					messages: loadedMessages,
+					uniqueUsers: loadedUniqueUsers,
+					isMessagesLoading: false
+				}, () => {
 					// scroll to last message
 					this.scrollToLastMessage();
 				});
@@ -260,7 +264,11 @@ class MessagesPanel extends Component {
 					// set messages
 					// set unique users
 					// set infinite scrolling
-					this.setState({ messages: loadedMessages, uniqueUsers, isInfiniteScrolling: Object.keys(snap.val()).length === messagesLimit }, () => {
+					this.setState({
+						messages: loadedMessages,
+						uniqueUsers,
+						isInfiniteScrolling: Object.keys(snap.val()).length === messagesLimit
+					}, () => {
 						// unlock access to load more messages
 						this.setState({ isAccessLocked: false });
 					});
