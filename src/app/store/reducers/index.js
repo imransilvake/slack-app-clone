@@ -69,24 +69,16 @@ const initialMessageState = [];
 // reducer: Message
 const messageReducer = (state = initialMessageState, action) => {
 	switch (action.type) {
-		case actionTypes.SET_MESSAGES:
+		case actionTypes.SET_MESSAGES: {
 			const matchedIndex = state.findIndex(x => x.channelId === action.payload.channelId);
-			const payload = {
-				channelId: action.payload.channelId,
-				messages: action.payload.messages,
-				uniqueUsers: action.payload.uniqueUsers,
-				isInfiniteScrolling: action.payload.isInfiniteScrolling,
-				keyReference: action.payload.keyReference
-			};
+			const lists = state;
 
-			// update state
-			if (matchedIndex > -1) {
-				state[matchedIndex] = payload;
-			} else {
-				state.push(payload);
-			}
+			// validate channelId and then update to new state
+			if (matchedIndex > -1) lists[matchedIndex] = action.payload;
+			else lists.push(action.payload);
 
-			return state;
+			return lists;
+		}
 		default:
 			return state;
 	}
