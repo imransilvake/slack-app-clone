@@ -89,11 +89,22 @@ class MessagesPanel extends Component {
 						</p>
 					</div>
 
-					{/* Loading */}
-					{isMessagesLoading && this.loadingMessage()}
+					{
+						/* Loading */
+						isMessagesLoading && (
+							<div className="sc-loading-message">
+								<div className="sc-fake">
+									<div className="sc-fake-la sc-fake-el-la-one"/>
+									<div className="sc-fake-la sc-fake-el-la-two"/>
+									<div className="sc-fake-la sc-fake-el-la-three"/>
+									<div className="sc-fake-la sc-fake-el-la-four"/>
+								</div>
+							</div>
+						)
+					}
 
 					{/* Message: Empty or List */}
-					{!messages && !isMessagesLoading ? this.emptyChannelMessage() : this.displayMessages(messages)}
+					{!messages && !isMessagesLoading ? this.displayEmptyMessage() : this.displayMessages(messages)}
 				</section>
 
 				{/* Form */}
@@ -114,22 +125,47 @@ class MessagesPanel extends Component {
 	 */
 	addMessageListener = (channelId) => {
 		const { savedMessages } = this.props;
+
+		// load cached redux state
 		if (savedMessages && savedMessages.length > 0 && savedMessages.some(x => x.channelId === channelId)) {
 			savedMessages.forEach((x) => {
+				// validate channel
 				if (x.channelId === channelId) {
-					// load saved messages (redux)
 					this.setState({
 						messages: x.messages,
 						uniqueUsers: x.uniqueUsers,
 						keyReference: x.keyReference,
 						isInfiniteScrolling: x.isInfiniteScrolling,
 						isMessagesLoading: false
+					}, () => {
+						// load new message
+						// this.firebaseRealTimeListener(channelId);
 					});
 				}
 			});
 		} else {
-			// load new messages
-			this.loadNewMessages(channelId);
+			this.state.messagesRef
+				.child(channelId)
+				.orderByChild('timestamp')
+				.limitToLast(1)
+				.once('child_added', )
+				.then((snap) => {
+					if (snap.exists()) {
+						const snapshot = snap.val();
+
+						// set key reference
+						this.setState({
+							keyReference: snapshot.timestamp,
+							isMessagesLoading: false
+						}, () => {
+							// load new message
+							this.firebaseRealTimeListener(channelId);
+
+							// load messages
+							this.loadMessages(channelId);
+						});
+					}
+				});
 		}
 	};
 
@@ -150,8 +186,8 @@ class MessagesPanel extends Component {
 					// lock access temporarily
 					this.setState({ isAccessLocked: true });
 
-					// load old messages
-					this.loadOldMessages();
+					// load messages
+					this.loadMessages();
 				}
 
 				// update scrollTop
@@ -161,13 +197,13 @@ class MessagesPanel extends Component {
 	};
 
 	/**
-	 * load new messages
+	 * listen to firebase in real-time to load new message
 	 *
 	 * @param channelId
 	 */
-	loadNewMessages = (channelId) => {
-		const messagesLimit = 30;
-		const loadedUniqueUsers = [];
+	firebaseRealTimeListener = (channelId) => {
+		const messagesLimit = 1;
+		const uniqueUsers = [];
 		let loadedMessages = [];
 		let previousSnapshot = null;
 
@@ -176,13 +212,8 @@ class MessagesPanel extends Component {
 			.orderByChild('timestamp')
 			.limitToLast(messagesLimit)
 			.on('child_added', (snap) => {
-				const { keyReference, messages } = this.state;
+				const { messages } = this.state;
 				const snapshot = snap.val();
-
-				// save key for infinite scrolling
-				if (!keyReference) {
-					this.setState({ keyReference: snapshot.timestamp });
-				}
 
 				// message
 				const message = {
@@ -194,38 +225,40 @@ class MessagesPanel extends Component {
 				// set previous snapshot
 				previousSnapshot = snapshot;
 
-				// push existing messages and a new message
+				// push message
 				loadedMessages = messages;
 				loadedMessages.push(message);
 
 				// unique users
-				if (loadedUniqueUsers && !loadedUniqueUsers.some(u => u.id === snapshot.user.id)) {
-					loadedUniqueUsers.push(snapshot.user);
+				if (uniqueUsers && !uniqueUsers.some(u => u.id === snapshot.user.id)) {
+					uniqueUsers.push(snapshot.user);
 				}
 
-				// set messages, set unique users, remove loading
+				// set messages
+				// set unique users
+				// remove loading
 				this.setState({
 					messages: loadedMessages,
-					uniqueUsers: loadedUniqueUsers,
+					uniqueUsers,
 					isMessagesLoading: false
 				}, () => {
 					// scroll to last message
-					this.scrollToLastMessage();
+					// this.scrollToLastMessage();
 				});
 			});
 	};
 
 	/**
-	 * load old messages
+	 * load messages
 	 */
-	loadOldMessages = () => {
+	loadMessages = () => {
 		const { currentChannel } = this.props;
-		const { keyReference, messages, uniqueUsers } = this.state;
+		const { keyReference, messages, uniqueUsers, messagesRef } = this.state;
 		const messagesLimit = 51;
 		const loadedMessages = [];
 		let previousSnapshot = null;
 
-		this.state.messagesRef
+		messagesRef
 			.child(currentChannel.id)
 			.orderByChild('timestamp')
 			.endAt(keyReference)
@@ -235,7 +268,7 @@ class MessagesPanel extends Component {
 					// all snapshots
 					const snapshots = this.combineAllMessages(messages, snap);
 
-					// loop
+					// iterate snapshots
 					snapshots.forEach((snapshot, index) => {
 						// remember key
 						if (index === 0) {
@@ -252,7 +285,7 @@ class MessagesPanel extends Component {
 						// set previous snapshot
 						previousSnapshot = snapshot;
 
-						// push messages
+						// push message
 						loadedMessages.push(message);
 
 						// unique users
@@ -272,12 +305,12 @@ class MessagesPanel extends Component {
 						// unlock access to load more messages
 						this.setState({ isAccessLocked: false });
 					});
-				} else {
-					// remove loading
-					this.setState({ isMessagesLoading: false });
 				}
 			})
-			.then()
+			.then(() => {
+				// scroll to last message
+				this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+			})
 			.catch();
 	};
 
@@ -359,6 +392,17 @@ class MessagesPanel extends Component {
 	);
 
 	/**
+	 * display empty message
+	 *
+	 * @returns {*}
+	 */
+	displayEmptyMessage = () => (
+		<div className="sc-start-conversation">
+			<p>{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.EMPTY_CHANNEL')}</p>
+		</div>
+	);
+
+	/**
 	 * scroll to the last message
 	 *
 	 * @param params
@@ -367,40 +411,13 @@ class MessagesPanel extends Component {
 		const options = {
 			duration: 1000,
 			delay: 100,
-			...params,
 			smooth: true,
+			...params,
 			containerId: 'sc-messages',
 			offset: 50 // scrolls to element + 50 pixels down the page
 		};
 		scroller.scrollTo('last-message', options);
 	};
-
-	/**
-	 * display loading message
-	 *
-	 * @returns {*}
-	 */
-	loadingMessage = () => (
-		<div className="sc-loading-message">
-			<div className="sc-fake">
-				<div className="sc-fake-la sc-fake-el-la-one"/>
-				<div className="sc-fake-la sc-fake-el-la-two"/>
-				<div className="sc-fake-la sc-fake-el-la-three"/>
-				<div className="sc-fake-la sc-fake-el-la-four"/>
-			</div>
-		</div>
-	);
-
-	/**
-	 * display message on empty channel
-	 *
-	 * @returns {*}
-	 */
-	emptyChannelMessage = () => (
-		<div className="sc-start-conversation">
-			<p>{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.EMPTY_CHANNEL')}</p>
-		</div>
-	);
 }
 
 // props

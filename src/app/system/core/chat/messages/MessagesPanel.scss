@@ -23,12 +23,7 @@
 				margin-top: 25px;
 
 				.sc-fake-la {
-					animation-duration: 4s;
-					animation-fill-mode: forwards;
-					animation-iteration-count: infinite;
-					animation-name: fakeMessageContent;
-					animation-timing-function: linear;
-					background: linear-gradient(to right, cd-palette($cd-background, 2003) 8%, cd-palette($cd-background, 2005) 18%, cd-palette($cd-background, 2003) 33%);
+					background: cd-palette($cd-background, 2003);
 				}
 
 				.sc-fake-el-la-one {
@@ -37,8 +32,6 @@
 				}
 
 				.sc-fake-el-la-two {
-					animation-duration: 15s;
-					background: linear-gradient(to right, cd-palette($cd-background, 2003) 0%, cd-palette($cd-background, 2005) 9%, cd-palette($cd-background, 2003) 75%);
 					border-radius: 4px;
 					float: left;
 					height: 35px;
@@ -55,12 +48,6 @@
 					height: 10px;
 					margin-bottom: 5px;
 					margin-left: 45px;
-				}
-
-				@keyframes fakeMessageContent {
-					0% { background-position: -608px 0 }
-					50% { background-position: -100px 0 }
-					100%{ background-position: 608px 0 }
 				}
 			}
 		}
