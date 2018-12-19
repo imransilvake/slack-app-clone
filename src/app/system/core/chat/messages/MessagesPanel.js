@@ -148,7 +148,7 @@ class MessagesPanel extends Component {
 				.child(channelId)
 				.orderByChild('timestamp')
 				.limitToLast(1)
-				.once('child_added', )
+				.once('child_added')
 				.then((snap) => {
 					if (snap.exists()) {
 						const snapshot = snap.val();
@@ -158,11 +158,11 @@ class MessagesPanel extends Component {
 							keyReference: snapshot.timestamp,
 							isMessagesLoading: false
 						}, () => {
-							// load new message
-							this.firebaseRealTimeListener(channelId);
-
 							// load messages
 							this.loadMessages(channelId);
+
+							// load new message
+							this.firebaseRealTimeListener(channelId);
 						});
 					}
 				});
@@ -203,16 +203,13 @@ class MessagesPanel extends Component {
 	 */
 	firebaseRealTimeListener = (channelId) => {
 		const messagesLimit = 1;
-		const uniqueUsers = [];
-		let loadedMessages = [];
-		let previousSnapshot = null;
-
 		this.state.messagesRef
 			.child(channelId)
 			.orderByChild('timestamp')
 			.limitToLast(messagesLimit)
-			.on('child_added', (snap) => {
-				const { messages } = this.state;
+			.on('child_changed', (snap) => {
+				const { messages, uniqueUsers } = this.state;
+				const previousSnapshot = messages[messages.length - 1].snapshot;
 				const snapshot = snap.val();
 
 				// message
@@ -222,12 +219,8 @@ class MessagesPanel extends Component {
 					isMessageOnSameDayBySameUser: this.messageOnSameDayBySameUser(previousSnapshot, snapshot)
 				};
 
-				// set previous snapshot
-				previousSnapshot = snapshot;
-
 				// push message
-				loadedMessages = messages;
-				loadedMessages.push(message);
+				messages.push(message);
 
 				// unique users
 				if (uniqueUsers && !uniqueUsers.some(u => u.id === snapshot.user.id)) {
@@ -238,12 +231,12 @@ class MessagesPanel extends Component {
 				// set unique users
 				// remove loading
 				this.setState({
-					messages: loadedMessages,
+					messages,
 					uniqueUsers,
 					isMessagesLoading: false
 				}, () => {
 					// scroll to last message
-					// this.scrollToLastMessage();
+					this.scrollToLastMessage();
 				});
 			});
 	};
@@ -293,23 +286,26 @@ class MessagesPanel extends Component {
 							uniqueUsers.push(snapshot.user);
 						}
 					});
-
-					// set messages
-					// set unique users
-					// set infinite scrolling
-					this.setState({
-						messages: loadedMessages,
-						uniqueUsers,
-						isInfiniteScrolling: Object.keys(snap.val()).length === messagesLimit
-					}, () => {
-						// unlock access to load more messages
-						this.setState({ isAccessLocked: false });
-					});
 				}
 			})
 			.then(() => {
+				const loadedMessagesLength = loadedMessages.length;
+				const messagesLength = messages.length;
+
+				// set messages
+				// set unique users
+				// set infinite scrolling
+				this.setState({
+					messages: loadedMessages,
+					uniqueUsers,
+					isInfiniteScrolling: loadedMessagesLength !== messagesLength
+				}, () => {
+					// unlock access to load more messages
+					this.setState({ isAccessLocked: false });
+				});
+
 				// scroll to last message
-				this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+				if (!messagesLength) this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
 			})
 			.catch();
 	};
