@@ -202,11 +202,10 @@ class MessagesPanel extends Component {
 	 * @param channelId
 	 */
 	firebaseRealTimeListener = (channelId) => {
-		const messagesLimit = 1;
 		this.state.messagesRef
 			.child(channelId)
 			.orderByChild('timestamp')
-			.limitToLast(messagesLimit)
+			.limitToLast(1)
 			.on('child_changed', (snap) => {
 				const { messages, uniqueUsers } = this.state;
 				const previousSnapshot = messages[messages.length - 1].snapshot;
@@ -258,8 +257,13 @@ class MessagesPanel extends Component {
 			.limitToLast(messagesLimit)
 			.once('value', (snap) => {
 				if (snap.exists()) {
-					// all snapshots
-					const snapshots = this.combineAllMessages(messages, snap);
+					const snaps = snap.val();
+					const snapshots = Object.values(snaps);
+
+					// old messages + existing messages
+					messages
+						.slice(1) // remove first element
+						.forEach(message => snapshots.push(message.snapshot));
 
 					// iterate snapshots
 					snapshots.forEach((snapshot, index) => {
@@ -308,34 +312,6 @@ class MessagesPanel extends Component {
 				if (!messagesLength) this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
 			})
 			.catch();
-	};
-
-	/**
-	 * combine messages
-	 *
-	 * @param messages
-	 * @param snap
-	 * @returns {Array}
-	 */
-	combineAllMessages = (messages, snap) => {
-		const snaps = snap.val();
-		const snapshots = [];
-
-		// new messages
-		for (const key in snaps) {
-			if (Object.prototype.hasOwnProperty.call(snaps, key)) {
-				snapshots.push(snaps[key])
-			}
-		}
-
-		// old messages
-		messages
-			.slice(1) // remove first element
-			.forEach((message) => {
-				snapshots.push(message.snapshot);
-			});
-
-		return snapshots;
 	};
 
 	/**
