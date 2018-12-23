@@ -25,12 +25,12 @@ class MessagesPanel extends Component {
 		isMessagesLoading: true,
 		keyReference: null,
 		isInfiniteScrolling: true,
-		isAccessLocked: false,
+		isReduxMessagesAccessLocked: false,
 		elementScrollTop: 0
 	};
 
 	componentDidMount() {
-		const { currentChannel } = this.props;
+		const { currentChannel, savedMessages } = this.props;
 
 		// add message listener
 		this.addMessageListener(currentChannel.id);
@@ -38,20 +38,27 @@ class MessagesPanel extends Component {
 		// add scroll listener
 		this.messagesWrapper = document.getElementById('sc-messages');
 		if (this.messagesWrapper) this.messagesWrapper.addEventListener('scroll', this.addScrollListener);
+
+		// validate current channel data on redux
+		if (savedMessages && savedMessages.length && savedMessages.some(x => x.channelId === currentChannel.id)) {
+			this.setState({ isReduxMessagesAccessLocked: true });
+		}
 	}
 
 	componentWillUnmount() {
-		const { messagesRef, messages, uniqueUsers, isInfiniteScrolling, keyReference } = this.state;
+		const { messagesRef, messages, uniqueUsers, isInfiniteScrolling, keyReference, isReduxMessagesAccessLocked } = this.state;
 		const { currentChannel } = this.props;
 
 		// save loaded messages to redux
-		this.props.setMessages({
-			channelId: currentChannel.id,
-			messages,
-			uniqueUsers,
-			isInfiniteScrolling,
-			keyReference
-		});
+		if (!isReduxMessagesAccessLocked) {
+			this.props.setMessages({
+				channelId: currentChannel.id,
+				messages,
+				uniqueUsers,
+				isInfiniteScrolling,
+				keyReference
+			});
+		}
 
 		// unlink message ref child
 		messagesRef
@@ -127,7 +134,7 @@ class MessagesPanel extends Component {
 		const { savedMessages } = this.props;
 
 		// load cached redux state
-		if (savedMessages && savedMessages.length > 0 && savedMessages.some(x => x.channelId === channelId)) {
+		if (savedMessages && savedMessages.length && savedMessages.some(x => x.channelId === channelId)) {
 			savedMessages.forEach((x) => {
 				// validate channel
 				if (x.channelId === channelId) {
@@ -138,8 +145,11 @@ class MessagesPanel extends Component {
 						isInfiniteScrolling: x.isInfiniteScrolling,
 						isMessagesLoading: false
 					}, () => {
+						// scroll to last message
+						this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+
 						// load new message
-						// this.firebaseRealTimeListener(channelId);
+						this.firebaseRealTimeListener(channelId);
 					});
 				}
 			});
@@ -175,16 +185,16 @@ class MessagesPanel extends Component {
 	 * @param event
 	 */
 	addScrollListener = (event) => {
-		const { isInfiniteScrolling, elementScrollTop, isAccessLocked } = this.state;
+		const { isInfiniteScrolling, elementScrollTop } = this.state;
 
 		// infinite scrolling until active
 		if (isInfiniteScrolling) {
 			// validate event target
 			if (event && event.target && event.target.scrollTop) {
 				const { scrollTop } = event.target;
-				if (elementScrollTop > scrollTop && elementScrollTop <= 200 && !isAccessLocked) {
-					// lock access temporarily
-					this.setState({ isAccessLocked: true });
+				if (elementScrollTop > scrollTop && elementScrollTop <= 200) {
+					// unlock redux access for storing new messages
+					this.setState({ isReduxMessagesAccessLocked: false });
 
 					// load messages
 					this.loadMessages();
@@ -234,6 +244,9 @@ class MessagesPanel extends Component {
 					uniqueUsers,
 					isMessagesLoading: false
 				}, () => {
+					// unlock redux access for storing new messages
+					this.setState({ isReduxMessagesAccessLocked: false });
+
 					// scroll to last message
 					this.scrollToLastMessage();
 				});
@@ -241,7 +254,7 @@ class MessagesPanel extends Component {
 	};
 
 	/**
-	 * load messages
+	 * load messages on scroll
 	 */
 	loadMessages = () => {
 		const { currentChannel } = this.props;
@@ -303,9 +316,6 @@ class MessagesPanel extends Component {
 					messages: loadedMessages,
 					uniqueUsers,
 					isInfiniteScrolling: loadedMessagesLength !== messagesLength
-				}, () => {
-					// unlock access to load more messages
-					this.setState({ isAccessLocked: false });
 				});
 
 				// scroll to last message
