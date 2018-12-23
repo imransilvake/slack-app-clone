@@ -12,7 +12,8 @@
 			display: block;
 
 			.sc-type {
-				font-weight: cd-fontWeight(700);
+				text-transform: capitalize;
+				width: 80%;
 			}
 
 			.sc-name {
@@ -20,17 +21,6 @@
 				font-size: cd-fontSize(s14);
 				padding-left: 15px;
 				position: relative;
-
-				span {
-					background-color: cd-palette($cd-background, 2016);
-					border-radius: 50%;
-					display: block;
-					height: 8px;
-					left: 0;
-					position: absolute;
-					top: 5px;
-					width: 8px;
-				}
 			}
 
 			.sc-avatar {
@@ -60,7 +50,47 @@
 			padding: 0;
 
 			li {
-				padding: 10px 15px;
+				padding: 10px;
+				position: relative;
+
+				&:first-child {
+					background-color: cd-palette($cd-background, 2025);
+					cursor: default;
+
+					.sc-status {
+						height: 24px;
+						position: relative;
+
+						.sc-circle {
+							cursor: pointer;
+							height: 15px;
+							width: 15px;
+
+							// loop
+							@for $i from 1 through 3 {
+								&.sc-shift-#{$i} {
+									margin-left: #{39.4 * $i + px};
+								}
+							}
+
+							&.sc-shift-1 {
+								background-color: cd-palette($cd-background, 2022);
+							}
+
+							&.sc-shift-2 {
+								background-color: cd-palette($cd-background, 2021);
+							}
+
+							&.sc-shift-3 {
+								background-color: cd-palette($cd-background, 2019);
+							}
+						}
+					}
+				}
+
+				.material-icons {
+					margin-right: 5px;
+				}
 			}
 		}
 	}

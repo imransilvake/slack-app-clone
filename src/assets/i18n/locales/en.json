@@ -42,7 +42,7 @@
 			},
 			"CONTENT": {
 				"FORM": {
-					"USERNAME": "Username",
+					"NAME": "Name",
 					"EMAIL": "Email",
 					"PASSWORD": "Password",
 					"CONFIRM_PASSWORD": "Confirm Password"
@@ -62,7 +62,6 @@
 	"CHAT": {
 		"SIDE_PANEL": {
 			"USER_PANEL": {
-				"TITLE": "Slack",
 				"SIGNED_IN": "Signed in as {{ username }}",
 				"CHANGE_AVATAR": "Change Avatar",
 				"LOGOUT": "Logout"

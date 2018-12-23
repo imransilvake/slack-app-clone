@@ -137,7 +137,7 @@ class MessagesPanel extends Component {
 		if (savedMessages && savedMessages.length && savedMessages.some(x => x.channelId === channelId)) {
 			savedMessages.forEach((x) => {
 				// validate channel
-				if (x.channelId === channelId) {
+				if (x && x.channelId === channelId) {
 					this.setState({
 						messages: x.messages,
 						uniqueUsers: x.uniqueUsers,
@@ -146,7 +146,7 @@ class MessagesPanel extends Component {
 						isMessagesLoading: false
 					}, () => {
 						// scroll to last message
-						this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+						if(x.messages && x.messages.length) this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
 
 						// update new message
 						this.updateNewMessage(channelId);

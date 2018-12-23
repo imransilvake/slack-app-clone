@@ -19,7 +19,7 @@ import { regexEmailValidity } from '../../utilities/helpers/Regex';
 
 class Register extends Component {
 	state = {
-		username: '',
+		name: '',
 		email: '',
 		password: '',
 		passwordConfirm: '',
@@ -31,7 +31,7 @@ class Register extends Component {
 	};
 
 	render() {
-		const { username, email, password, passwordConfirm, errors, isFormEnabled, isAccountCreated, isAnimationLoading } = this.state;
+		const { name, email, password, passwordConfirm, errors, isFormEnabled, isAccountCreated, isAnimationLoading } = this.state;
 
 		const content = () => {
 			switch (isAccountCreated) {
@@ -46,10 +46,10 @@ class Register extends Component {
 							}
 							<form className="sc-form-fields" onSubmit={this.handleSubmit}>
 								<FormControl className="sc-form-field" fullWidth>
-									<InputLabel htmlFor="username">
-										{i18n.t('AUTH.REGISTER.CONTENT.FORM.USERNAME')}
+									<InputLabel htmlFor="name">
+										{i18n.t('AUTH.REGISTER.CONTENT.FORM.NAME')}
 									</InputLabel>
-									<Input id="username" name="username" value={username} onChange={this.handleChange}/>
+									<Input id="name" name="name" value={name} onChange={this.handleChange}/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="email">
@@ -175,7 +175,7 @@ class Register extends Component {
 			.createUserWithEmailAndPassword(this.state.email, this.state.password)
 			.then((createdUser) => {
 				createdUser.user.updateProfile({
-					displayName: this.state.username,
+					displayName: this.state.name,
 					photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
 				}).then(() => {
 					this.saveUser(createdUser)
@@ -210,14 +210,14 @@ class Register extends Component {
 	/**
 	 * check whether form is empty or not
 	 *
-	 * @param username
+	 * @param name
 	 * @param email
 	 * @param password
 	 * @param passwordConfirm
 	 * @returns {boolean}
 	 */
-	isFormEmpty = ({ username, email, password, passwordConfirm }) => {
-		return !username.length || !email.length || !password.length || !passwordConfirm.length;
+	isFormEmpty = ({ name, email, password, passwordConfirm }) => {
+		return !name.length || !email.length || !password.length || !passwordConfirm.length;
 	};
 
 	/**

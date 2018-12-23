@@ -42,7 +42,7 @@
 			},
 			"CONTENT": {
 				"FORM": {
-					"USERNAME": "Benutzername",
+					"NAME": "Name",
 					"EMAIL": "Email",
 					"PASSWORD": "Passwort",
 					"CONFIRM_PASSWORD": "Passwort Bestätigen"
@@ -62,7 +62,6 @@
 	"CHAT": {
 		"SIDE_PANEL": {
 			"USER_PANEL": {
-				"TITLE": "Slack",
 				"SIGNED_IN": "Als {{ username }} angemeldet",
 				"CHANGE_AVATAR": "Avatar ändern",
 				"LOGOUT": "Ausloggen"
