@@ -148,8 +148,8 @@ class MessagesPanel extends Component {
 						// scroll to last message
 						this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
 
-						// load new message
-						this.firebaseRealTimeListener(channelId);
+						// update new message
+						this.updateNewMessage(channelId);
 					});
 				}
 			});
@@ -171,8 +171,8 @@ class MessagesPanel extends Component {
 							// load messages
 							this.loadMessages(channelId);
 
-							// load new message
-							this.firebaseRealTimeListener(channelId);
+							// update new message
+							this.updateNewMessage(channelId);
 						});
 					}
 				});
@@ -207,11 +207,11 @@ class MessagesPanel extends Component {
 	};
 
 	/**
-	 * listen to firebase in real-time to load new message
+	 * listen to firebase in real-time to update new message
 	 *
 	 * @param channelId
 	 */
-	firebaseRealTimeListener = (channelId) => {
+	updateNewMessage = (channelId) => {
 		this.state.messagesRef
 			.child(channelId)
 			.orderByChild('timestamp')
