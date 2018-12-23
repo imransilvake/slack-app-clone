@@ -10,15 +10,27 @@ import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Button from '@material-ui/core/Button/Button';
 import i18n from '../../../../../assets/i18n/i18n';
 import Icon from '@material-ui/core/es/Icon/Icon';
+import connect from 'react-redux/es/connect/connect';
+import { updateUser } from '../../../../store/actions';
+import classNames from 'classnames/bind';
 
 class UserPanel extends Component {
 	state = {
 		menuOpen: null,
-		currentUser: this.props.currentUser
+		usersRef: firebase.database().ref('users')
 	};
 
 	render() {
-		const { menuOpen, currentUser } = this.state;
+		const { menuOpen } = this.state;
+		const { currentUser } = this.props;
+
+		const circleClass = classNames({
+			'sc-circle': true,
+			'sc-1': currentUser.code === '1',
+			'sc-2': currentUser.code === '2',
+			'sc-3': currentUser.code === '3',
+			'sc-4': currentUser.code === '4'
+		});
 
 		return (
 			<section className="sc-user-panel">
@@ -26,7 +38,8 @@ class UserPanel extends Component {
 				<Button onClick={this.handleClickMenu}>
 					<h5 className="sc-type sc-text-truncate">{currentUser.displayName}</h5>
 					<p className="sc-name">
-						<span className="sc-circle"/>active
+						<span className={circleClass}/>
+						{i18n.t(`CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.${currentUser.code}`)}
 					</p>
 					<img className="sc-avatar" src={currentUser.photoURL} alt={currentUser.displayName}/>
 				</Button>
@@ -34,23 +47,23 @@ class UserPanel extends Component {
 				{/* Menu */}
 				<Menu
 					className="sc-user-panel-menu"
-					onClick={this.handleCloseMenu}
 					anchorEl={menuOpen}
+					onClick={this.handleCloseMenu}
 					open={Boolean(menuOpen)}>
-					<MenuItem onClick={this.handleCloseMenu}>
+					<MenuItem>
 						<div className="sc-status">
-							<p className="sc-circle cd-tooltip">
-								<span className="cd-right">Active</span>
-							</p>
-							<p className="sc-circle cd-tooltip sc-shift-1">
-								<span className="cd-right">Away</span>
-							</p>
-							<p className="sc-circle cd-tooltip sc-shift-2">
-								<span className="cd-left">Busy</span>
-							</p>
-							<p className="sc-circle cd-tooltip sc-shift-3">
-								<span className="cd-left">Offline</span>
-							</p>
+							<button type="button" className="sc-circle sc-1 cd-tooltip" onClick={this.changeStatus} value="1">
+								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.1')}</span>
+							</button>
+							<button type="button" className="sc-circle sc-2 cd-tooltip" onClick={this.changeStatus} value="2">
+								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.2')}</span>
+							</button>
+							<button type="button" className="sc-circle sc-3 cd-tooltip" onClick={this.changeStatus} value="3">
+								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.3')}</span>
+							</button>
+							<button type="button" className="sc-circle sc-4 cd-tooltip" onClick={this.changeStatus} value="4">
+								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.4')}</span>
+							</button>
 						</div>
 					</MenuItem>
 					<MenuItem onClick={this.handleCloseMenu}>
@@ -83,15 +96,37 @@ class UserPanel extends Component {
 	};
 
 	/**
+	 * change user status
+	 *
+	 * @param event
+	 */
+	changeStatus = (event) => {
+		const { usersRef } = this.state;
+		const { currentUser } = this.props;
+		const status = { code: event.target.value };
+
+		// update on firebase
+		usersRef
+			.child(currentUser.uid)
+			.update(status)
+			.then(() => {
+				// update on redux
+				this.props.updateUser({ ...currentUser, ...status });
+			});
+
+		// close menu
+		this.handleCloseMenu();
+	};
+
+	/**
 	 * handle sign-out
 	 */
 	handleSignOut = () => {
 		firebase
 			.auth()
 			.signOut()
-			.then()
-			.catch();
+			.then();
 	};
 }
 
-export default UserPanel;
+export default connect(null, { updateUser })(UserPanel);

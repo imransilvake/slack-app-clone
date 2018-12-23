@@ -21,6 +21,7 @@
 				font-size: cd-fontSize(s14);
 				padding-left: 15px;
 				position: relative;
+				text-transform: lowercase;
 			}
 
 			.sc-avatar {
@@ -47,6 +48,7 @@
 		top: 55px !important;
 
 		ul {
+			min-width: 170px;
 			padding: 0;
 
 			li {
@@ -62,27 +64,17 @@
 						position: relative;
 
 						.sc-circle {
+							border: none;
 							cursor: pointer;
 							height: 15px;
+							padding: 0;
 							width: 15px;
 
 							// loop
-							@for $i from 1 through 3 {
-								&.sc-shift-#{$i} {
-									margin-left: #{39.4 * $i + px};
+							@for $i from 2 through 4 {
+								&.sc-#{$i} {
+									margin-left: #{44.4 * ($i - 1) + px};
 								}
-							}
-
-							&.sc-shift-1 {
-								background-color: cd-palette($cd-background, 2022);
-							}
-
-							&.sc-shift-2 {
-								background-color: cd-palette($cd-background, 2021);
-							}
-
-							&.sc-shift-3 {
-								background-color: cd-palette($cd-background, 2019);
 							}
 						}
 					}

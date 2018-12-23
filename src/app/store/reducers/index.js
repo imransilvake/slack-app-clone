@@ -23,6 +23,11 @@ const userReducer = (state = initialUserState, action) => {
 				currentUser: action.payload.currentUser,
 				isAnimationLoading: false
 			};
+		case actionTypes.UPDATE_USER:
+			return {
+				currentUser: action.payload.currentUser,
+				isAnimationLoading: false
+			};
 		case actionTypes.CLEAR_USER:
 			return {
 				...initialUserState,

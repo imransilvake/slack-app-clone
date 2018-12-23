@@ -16,6 +16,16 @@ export const setUser = (user) => {
 	};
 };
 
+// update user
+export const updateUser = (user) => {
+	return {
+		type: actionTypes.UPDATE_USER,
+		payload: {
+			currentUser: user
+		}
+	};
+};
+
 // clear user
 export const clearUser = () => {
 	return {

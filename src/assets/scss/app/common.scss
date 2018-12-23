@@ -1,5 +1,4 @@
 .sc-circle {
-	background-color: cd-palette($cd-background, 2016);
 	border-radius: 50%;
 	display: block;
 	height: 10px;
@@ -7,4 +6,24 @@
 	position: absolute;
 	top: 4px;
 	width: 10px;
+
+	// active
+	&.sc-1 {
+		background-color: cd-palette($cd-background, 2016);
+	}
+
+	// away
+	&.sc-2 {
+		background-color: cd-palette($cd-background, 2022);
+	}
+
+	// busy
+	&.sc-3 {
+		background-color: cd-palette($cd-background, 2021);
+	}
+
+	// offline
+	&.sc-4 {
+		background-color: cd-palette($cd-background, 2019);
+	}
 }

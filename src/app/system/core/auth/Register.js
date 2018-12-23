@@ -166,22 +166,28 @@ class Register extends Component {
 		// stop default event
 		event.preventDefault();
 
+		const { email, password, name, usersRef } = this.state;
+
 		// show loading animation
 		this.setState({ isAnimationLoading: true });
 
 		// register user
 		firebase
 			.auth()
-			.createUserWithEmailAndPassword(this.state.email, this.state.password)
+			.createUserWithEmailAndPassword(email, password)
 			.then((createdUser) => {
 				createdUser.user.updateProfile({
-					displayName: this.state.name,
+					displayName: name,
 					photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
 				}).then(() => {
 					this.saveUser(createdUser)
 						.then(() => {
 							// remove errors, show success message, remove loading animation
 							this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false });
+
+							// remove user ref
+							usersRef.child(createdUser.user.uid).off();
+							usersRef.off();
 						})
 						.catch((error) => {
 							this.setState({ errors: [error], isAnimationLoading: false });
@@ -272,10 +278,12 @@ class Register extends Component {
 	 * @returns {Promise<any>}
 	 */
 	saveUser = (createdUser) => {
-		return this.state.usersRef.child(createdUser.user.uid)
+		return this.state.usersRef
+			.child(createdUser.user.uid)
 			.set({
 				name: createdUser.user.displayName,
-				avatar: createdUser.user.photoURL
+				avatar: createdUser.user.photoURL,
+				code: '1'
 			});
 	};
 }

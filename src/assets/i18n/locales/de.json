@@ -62,7 +62,12 @@
 	"CHAT": {
 		"SIDE_PANEL": {
 			"USER_PANEL": {
-				"SIGNED_IN": "Als {{ username }} angemeldet",
+				"STATUS_CODE": {
+					"1": "Aktiv",
+					"2": "Weg",
+					"3": "Beschäftigt",
+					"4": "Offline"
+				},
 				"CHANGE_AVATAR": "Avatar ändern",
 				"LOGOUT": "Ausloggen"
 			},
