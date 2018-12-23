@@ -132,6 +132,9 @@ class Login extends Component {
 			.then(() => {
 				// remove errors, show success message, remove loading animation
 				this.setState({ errors: null, isAnimationLoading: false });
+
+				// navigate to chat route
+				this.props.history.push(ENV.ROUTING.CHAT);
 			})
 			.catch((error) => {
 				this.setState({ errors: [error], isAnimationLoading: false });

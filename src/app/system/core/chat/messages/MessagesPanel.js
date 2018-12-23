@@ -61,9 +61,7 @@ class MessagesPanel extends Component {
 		}
 
 		// unlink message ref child
-		messagesRef
-			.child(currentChannel.id)
-			.off('child_added');
+		messagesRef.child(currentChannel.id).off('child_added');
 
 		// remove scroll listener
 		this.messagesWrapper.removeEventListener('scroll', this.addScrollListener);

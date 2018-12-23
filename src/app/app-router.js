@@ -37,7 +37,9 @@ class AppRouter extends Component {
 							this.props.setUser({ ...user, code });
 
 							// navigate to chat route
-							this.props.history.push(ENV.ROUTING.CHAT);
+							if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
+								this.props.history.push(ENV.ROUTING.CHAT);
+							}
 						});
 				} else {
 					// navigate to home route

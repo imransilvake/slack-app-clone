@@ -166,7 +166,7 @@ class Register extends Component {
 		// stop default event
 		event.preventDefault();
 
-		const { email, password, name, usersRef } = this.state;
+		const { email, password, name } = this.state;
 
 		// show loading animation
 		this.setState({ isAnimationLoading: true });
@@ -185,9 +185,8 @@ class Register extends Component {
 							// remove errors, show success message, remove loading animation
 							this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false });
 
-							// remove user ref
-							usersRef.child(createdUser.user.uid).off();
-							usersRef.off();
+							// navigate to chat route
+							this.props.history.push(ENV.ROUTING.CHAT);
 						})
 						.catch((error) => {
 							this.setState({ errors: [error], isAnimationLoading: false });
