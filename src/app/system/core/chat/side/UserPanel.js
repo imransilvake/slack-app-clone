@@ -52,16 +52,36 @@ class UserPanel extends Component {
 					open={Boolean(menuOpen)}>
 					<MenuItem>
 						<div className="sc-status">
-							<button type="button" className="sc-circle sc-1 cd-tooltip" onClick={this.changeStatus} value="1">
+							<button
+								type="button"
+								className="sc-circle sc-1 cd-tooltip"
+								onClick={this.changeStatus}
+								value="1"
+								disabled={currentUser.code === '1'}>
 								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.1')}</span>
 							</button>
-							<button type="button" className="sc-circle sc-2 cd-tooltip" onClick={this.changeStatus} value="2">
+							<button
+								type="button"
+								className="sc-circle sc-2 cd-tooltip"
+								onClick={this.changeStatus}
+								value="2"
+								disabled={currentUser.code === '2'}>
 								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.2')}</span>
 							</button>
-							<button type="button" className="sc-circle sc-3 cd-tooltip" onClick={this.changeStatus} value="3">
+							<button
+								type="button"
+								className="sc-circle sc-3 cd-tooltip"
+								onClick={this.changeStatus}
+								value="3"
+								disabled={currentUser.code === '3'}>
 								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.3')}</span>
 							</button>
-							<button type="button" className="sc-circle sc-4 cd-tooltip" onClick={this.changeStatus} value="4">
+							<button
+								type="button"
+								className="sc-circle sc-4 cd-tooltip"
+								onClick={this.changeStatus}
+								value="4"
+								disabled={currentUser.code === '4'}>
 								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.4')}</span>
 							</button>
 						</div>

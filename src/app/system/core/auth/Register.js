@@ -183,10 +183,10 @@ class Register extends Component {
 					this.saveUser(createdUser)
 						.then(() => {
 							// remove errors, show success message, remove loading animation
-							this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false });
-
-							// navigate to chat route
-							this.props.history.push(ENV.ROUTING.CHAT);
+							this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false }, () => {
+								// navigate to chat route
+								this.props.history.push(ENV.ROUTING.CHAT);
+							});
 						})
 						.catch((error) => {
 							this.setState({ errors: [error], isAnimationLoading: false });

@@ -67,6 +67,7 @@
 							border: none;
 							cursor: pointer;
 							height: 15px;
+							outline: 0;
 							padding: 0;
 							width: 15px;
 
@@ -74,6 +75,40 @@
 							@for $i from 2 through 4 {
 								&.sc-#{$i} {
 									margin-left: #{44.4 * ($i - 1) + px};
+								}
+							}
+
+							&:hover {
+								opacity: .9;
+
+								&:not(:disabled) {
+									z-index: cd-zIndex(normal);
+								}
+							}
+
+							&:disabled {
+								cursor: default;
+
+								&.cd-tooltip {
+									position: relative;
+
+									&::after {
+										background-color: cd-palette($cd-background, 2025);
+										border-radius: 50%;
+										bottom: 0;
+										content: '';
+										height: 11px;
+										left: 2px;
+										position: absolute;
+										right: 0;
+										top: 2px;
+										width: 11px;
+										z-index: cd-zIndex(initial);
+									}
+
+									span {
+										display: none;
+									}
 								}
 							}
 						}

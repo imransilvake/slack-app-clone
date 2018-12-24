@@ -31,14 +31,14 @@ class AppRouter extends Component {
 						.once('value')
 						.then((snap) => {
 							const snapshot = snap.val();
-							const code = snapshot ? snapshot.code : 1;
+							const status = { code: snapshot ? snapshot.code : 1 };
 
 							// set user to store
-							this.props.setUser({ ...user, code });
+							this.props.setUser({ ...user, ...status });
 
 							// navigate to chat route
 							if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
-								this.props.history.push(ENV.ROUTING.CHAT);
+								// this.props.history.push(ENV.ROUTING.CHAT);
 							}
 						});
 				} else {
