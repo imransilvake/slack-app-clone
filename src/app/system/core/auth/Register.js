@@ -16,6 +16,8 @@ import i18n from '../../../../assets/i18n/i18n';
 import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/LoadingAnimation';
 import { regexEmailValidity } from '../../utilities/helpers/Regex';
+import connect from 'react-redux/es/connect/connect';
+import { setUser } from '../../../store/actions';
 
 class Register extends Component {
 	state = {
@@ -102,7 +104,12 @@ class Register extends Component {
 					return (
 						<section className="cd-col sc-message">
 							<p>{i18n.t('AUTH.REGISTER.CONTENT.MESSAGE.T1')}</p>
-							<p>{i18n.t('AUTH.REGISTER.CONTENT.MESSAGE.T2')}</p>
+							<p>
+								{i18n.t('AUTH.REGISTER.CONTENT.MESSAGE.T2')}
+								<Link className="cd-link" to={ENV.ROUTING.CHAT}>
+									{i18n.t('AUTH.REGISTER.CONTENT.MESSAGE.LINK')}
+								</Link>
+							</p>
 						</section>
 					);
 			}
@@ -184,8 +191,13 @@ class Register extends Component {
 						.then(() => {
 							// remove errors, show success message, remove loading animation
 							this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false }, () => {
-								// navigate to chat route
-								this.props.history.push(ENV.ROUTING.CHAT);
+								setTimeout(() => {
+									// set user to redux
+									this.props.setUser({ ...createdUser.user, code: '1' });
+
+									// navigate to chat route
+									this.props.history.push(ENV.ROUTING.CHAT);
+								}, 3000);
 							});
 						})
 						.catch((error) => {
@@ -287,4 +299,4 @@ class Register extends Component {
 	};
 }
 
-export default Register;
+export default connect(null, { setUser })(Register);

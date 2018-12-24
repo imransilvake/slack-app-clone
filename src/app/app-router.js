@@ -24,23 +24,26 @@ class AppRouter extends Component {
 			.auth()
 			.onAuthStateChanged((user) => {
 				if (user) {
-					// real-time database user
-					firebase
-						.database()
-						.ref(`users/${user.uid}`)
-						.once('value')
-						.then((snap) => {
-							const snapshot = snap.val();
-							const status = { code: snapshot ? snapshot.code : 1 };
+					if (user.displayName) {
+						// real-time database user
+						firebase
+							.database()
+							.ref(`users/${user.uid}`)
+							.once('value')
+							.then((snap) => {
+								const snapshot = snap.val();
+								const status = { code: snapshot ? snapshot.code : '1' };
 
-							// set user to store
-							this.props.setUser({ ...user, ...status });
+								// set user to store
+								const userData = { ...user, ...status };
+								this.props.setUser(userData);
 
-							// navigate to chat route
-							if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
-								// this.props.history.push(ENV.ROUTING.CHAT);
-							}
-						});
+								// navigate to chat route
+								if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
+									this.props.history.push(ENV.ROUTING.CHAT);
+								}
+							});
+					}
 				} else {
 					// navigate to home route
 					this.props.history.push(ENV.ROUTING.HOME);

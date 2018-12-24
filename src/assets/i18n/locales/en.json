@@ -49,7 +49,8 @@
 				},
 				"MESSAGE": {
 					"T1": "Your account has been created successfully!",
-					"T2": "Your are automatically redirecting back to the login page shortly!"
+					"T2": "Your are automatically redirecting back to the login page shortly or click: ",
+					"LINK": "App"
 				},
 				"BUTTON_TEXT": "Sign Up"
 			},
