@@ -108,6 +108,13 @@
 			},
 			"FORM": {
 				"TEXTAREA_PLACEHOLDER": "Write a Message!"
+			},
+			"FILE_UPLOAD": {
+				"WRONG_TYPE": "Wrong Type: {{ type }}",
+				"TOOLTIP": "Upload File",
+				"UPLOAD": {
+					"CANCELLED": "Upload is cancelled!"
+				}
 			}
 		}
 	}

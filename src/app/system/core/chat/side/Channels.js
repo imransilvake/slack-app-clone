@@ -22,7 +22,7 @@ import LoadingAnimation from '../../../utilities/loading-animation/LoadingAnimat
 class Channels extends Component {
 	state = {
 		currentUser: this.props.currentUser,
-		openModal: false,
+		openChannelModal: false,
 		channels: [],
 		channelName: '',
 		channelDetails: '',
@@ -65,9 +65,9 @@ class Channels extends Component {
 					{this.displayChannels(channels)}
 				</ul>
 
-				{/* Modal */}
+				{/* Channel Modal */}
 				<Modal
-					open={this.state.openModal}
+					open={this.state.openChannelModal}
 					onClose={this.handleCloseModal}>
 					<div className="sc-modal-wrapper">
 						<div className="sc-modal sc-add-channel-modal">
@@ -138,14 +138,14 @@ class Channels extends Component {
 	 * handle open modal
 	 */
 	handleOpenModal = () => {
-		this.setState({ openModal: true });
+		this.setState({ openChannelModal: true });
 	};
 
 	/**
 	 * handle close modal
 	 */
 	handleCloseModal = () => {
-		this.setState({ openModal: false });
+		this.setState({ openChannelModal: false });
 	};
 
 	/**

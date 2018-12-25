@@ -17,11 +17,11 @@ class MessagesForm extends Component {
 		currentUser: this.props.currentUser,
 		message: '',
 		errors: [],
-		modalOpen: null
+		openFileModal: false
 	};
 
 	render() {
-		const { message, errors, modalOpen } = this.state;
+		const { message, errors, openFileModal } = this.state;
 
 		return (
 			<section className="sc-message-form">
@@ -53,11 +53,15 @@ class MessagesForm extends Component {
 					</div>
 				</div>
 
-				{/* File Upload Modal */}
-				<FileUploadModal
-					modalOpen={modalOpen}
-					onClick={this.handleCloseFileModal}
-				/>
+				{
+					// File Upload Modal
+					openFileModal && (
+						<FileUploadModal
+							openFileModal={openFileModal}
+							onClick={this.handleCloseFileModal}
+						/>
+					)
+				}
 			</section>
 		);
 	}
@@ -153,15 +157,15 @@ class MessagesForm extends Component {
 	/**
 	 * handle open file modal
 	 */
-	handleClickFileModal = (event) => {
-		this.setState({ modalOpen: event.currentTarget });
+	handleClickFileModal = () => {
+		this.setState({ openFileModal: true });
 	};
 
 	/**
 	 * handle close file modal
 	 */
 	handleCloseFileModal = () => {
-		this.setState({ modalOpen: null });
+		this.setState({ openFileModal: false });
 	};
 }
 

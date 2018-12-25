@@ -13,11 +13,11 @@
 
 			span {
 				background-color: cd-palette($cd-background, 2025);
-				border-radius: 50%;
+				border-radius: 2px;
 				display: inline-block;
-				font-size: cd-fontSize(s13);
+				font-size: cd-fontSize(s11);
 				height: 18px;
-				line-height: cd-lineHeight(1.4);
+				line-height: cd-lineHeight(1.9);
 				margin-left: 5px;
 				text-align: center;
 				width: 18px;
@@ -61,7 +61,7 @@
 				height: auto;
 				min-height: auto;
 				outline: 0;
-				padding: 8px 10px;
+				padding: 6px 8px;
 
 				&:hover {
 					background-color: cd-palette($cd-background, 2025);

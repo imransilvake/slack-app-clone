@@ -216,7 +216,7 @@ class MessagesPanel extends Component {
 			.limitToLast(1)
 			.on('child_changed', (snap) => {
 				const { messages, uniqueUsers } = this.state;
-				const previousSnapshot = messages[messages.length - 1].snapshot;
+				const previousSnapshot = messages.length && messages[messages.length - 1].snapshot;
 				const snapshot = snap.val();
 
 				// message
@@ -317,7 +317,8 @@ class MessagesPanel extends Component {
 				});
 
 				// scroll to last message
-				if (!messagesLength) this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+				if (loadedMessagesLength !== 0 && !messagesLength)
+					this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
 			})
 			.catch();
 	};
