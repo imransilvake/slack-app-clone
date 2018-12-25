@@ -85,82 +85,71 @@
 	}
 }
 
-// modal - channels form
-.sc-channels-modal-wrapper {
+// modal - add channel
+.sc-add-channel-modal {
 	background-color: cd-palette($cd-background, 2001);
-	bottom: 0;
-	height: 100%;
-	left: 0;
-	overflow: auto;
-	position: absolute;
-	right: 0;
-	top: 0;
+	margin: 80px auto 0;
+	max-width: 700px;
+	outline: 0;
+	width: 70%;
 
-	.sc-channels-modal {
-		background-color: cd-palette($cd-background, 2001);
-		margin: 80px auto 0;
-		max-width: 700px;
-		outline: 0;
-		width: 70%;
-
-		// header
-		.sc-header {
-			h3 {
-				font-weight: cd-fontWeight(700);
-			}
-
-			p {
-				color: cd-palette($cd-color, 1006);
-				margin-top: 10px;
-			}
+	// header
+	.sc-header {
+		h3 {
+			font-weight: cd-fontWeight(700);
 		}
 
-		// form
-		.sc-form {
-			margin-bottom: 15px;
+		p {
+			color: cd-palette($cd-color, 1006);
+			margin-top: 10px;
+		}
+	}
 
-			// error
-			.cd-error {
-				background-color: cd-palette($cd-background, 2010);
-				color: cd-palette($cd-color, 1001);
-				margin: 0;
-				padding: 5px;
-				text-align: center;
+	// form
+	.sc-form {
+		margin-bottom: 15px;
+
+		// error
+		.cd-error {
+			background-color: cd-palette($cd-background, 2010);
+			color: cd-palette($cd-color, 1001);
+			margin: 0;
+			padding: 5px;
+			text-align: center;
+		}
+
+		// form fields
+		.sc-form-fields {
+			padding: 15px 0 0;
+
+			.sc-form-field {
+				margin-bottom: 15px;
+
+				.ts-note {
+					color: cd-palette($cd-color, 1006);
+					font-size: cd-fontSize(s12);
+					margin-top: 5px;
+				}
 			}
 
-			// form fields
-			.sc-form-fields {
-				padding: 15px 0 0;
+			.sc-button {
+				border-radius: 1px;
+				float: right;
+				margin: 15px 0 0;
 
-				.sc-form-field {
-					margin-bottom: 15px;
-
-					.ts-note {
-						color: cd-palette($cd-color, 1006);
-						font-size: cd-fontSize(s12);
-						margin-top: 5px;
-					}
+				&.sc-cancel {
+					margin-right: 5px;
 				}
 
-				.sc-button {
-					border-radius: 1px;
-					float: right;
-					margin: 15px 0 0;
+				&:not(:disabled) {
+					color: cd-palette($cd-color, 1001);
 
 					&.sc-cancel {
-						margin-right: 5px;
+						background-color: cd-palette($cd-background, 2021);
 					}
 
-					&:not(:disabled) {
-						color: cd-palette($cd-color, 1001);
-
-						&.sc-cancel {
-							background-color: cd-palette($cd-background, 2021);
-						}
-
-						&.sc-create-channel {
-							background-color: cd-palette($cd-background, 2020);
-						}
+					&.sc-create-channel {
+						background-color: cd-palette($cd-background, 2020);
 					}
 				}
 			}
@@ -168,28 +157,14 @@
 	}
 
 	// media
-	@include cd-media(desktop, tablet) {
-		.sc-channels-modal {
-			margin: 60px auto 0;
-			width: 75%;
-		}
-	}
-
 	@include cd-media(desktop, mini) {
-		.sc-channels-modal {
-			margin: 40px auto 0;
-			width: 80%;
+		.sc-form {
+			.sc-form-fields {
+				.sc-button {
+					width: 100%;
 
-			// form
-			.sc-form {
-				// form fields
-				.sc-form-fields {
-					.sc-button {
-						width: 100%;
-
-						&.sc-cancel {
-							margin: 10px 0 15px;
-						}
+					&.sc-cancel {
+						margin: 10px 0 15px;
 					}
 				}
 			}

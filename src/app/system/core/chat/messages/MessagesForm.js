@@ -9,17 +9,19 @@ import i18n from '../../../../../assets/i18n/i18n';
 import Textarea from '@material-ui/core/InputBase/Textarea';
 import { regexEmptyString } from '../../../utilities/helpers/Regex';
 import Icon from '@material-ui/core/es/Icon/Icon';
+import FileUploadModal from './FileUploadModal';
 
 class MessagesForm extends Component {
 	state = {
 		currentChannel: this.props.currentChannel,
 		currentUser: this.props.currentUser,
 		message: '',
-		errors: []
+		errors: [],
+		modalOpen: null
 	};
 
 	render() {
-		const { message, errors } = this.state;
+		const { message, errors, modalOpen } = this.state;
 
 		return (
 			<section className="sc-message-form">
@@ -46,10 +48,16 @@ class MessagesForm extends Component {
 
 					{/* Buttons */}
 					<div className="sc-buttons">
-						<Icon>insert_photo</Icon>
+						<Icon onClick={this.handleClickFileModal}>insert_photo</Icon>
 						<Icon>insert_emoticon</Icon>
 					</div>
 				</div>
+
+				{/* File Upload Modal */}
+				<FileUploadModal
+					modalOpen={modalOpen}
+					onClick={this.handleCloseFileModal}
+				/>
 			</section>
 		);
 	}
@@ -141,6 +149,20 @@ class MessagesForm extends Component {
 	 * @returns {*}
 	 */
 	displayErrors = errors => errors.map((error, i) => <span key={i}>{error.message}</span>);
+
+	/**
+	 * handle open file modal
+	 */
+	handleClickFileModal = (event) => {
+		this.setState({ modalOpen: event.currentTarget });
+	};
+
+	/**
+	 * handle close file modal
+	 */
+	handleCloseFileModal = () => {
+		this.setState({ modalOpen: null });
+	};
 }
 
 export default MessagesForm;

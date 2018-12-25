@@ -69,8 +69,8 @@ class Channels extends Component {
 				<Modal
 					open={this.state.openModal}
 					onClose={this.handleCloseModal}>
-					<div className="sc-channels-modal-wrapper">
-						<div className="sc-channels-modal">
+					<div className="sc-modal-wrapper">
+						<div className="sc-modal sc-add-channel-modal">
 							{/* Header */}
 							<header className="sc-header">
 								<h3>{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.HEADER.CREATE_CHANNEL')}</h3>

@@ -16,12 +16,12 @@ import classNames from 'classnames/bind';
 
 class UserPanel extends Component {
 	state = {
-		menuOpen: null,
+		modalOpen: null,
 		usersRef: firebase.database().ref('users')
 	};
 
 	render() {
-		const { menuOpen } = this.state;
+		const { modalOpen } = this.state;
 		const { currentUser } = this.props;
 
 		const circleClass = classNames({
@@ -47,9 +47,9 @@ class UserPanel extends Component {
 				{/* Menu */}
 				<Menu
 					className="sc-user-panel-menu"
-					anchorEl={menuOpen}
+					anchorEl={modalOpen}
 					onClick={this.handleCloseMenu}
-					open={Boolean(menuOpen)}>
+					open={Boolean(modalOpen)}>
 					<MenuItem>
 						<div className="sc-status">
 							<button
@@ -105,14 +105,14 @@ class UserPanel extends Component {
 	 * @param event
 	 */
 	handleClickMenu = (event) => {
-		this.setState({ menuOpen: event.currentTarget });
+		this.setState({ modalOpen: event.currentTarget });
 	};
 
 	/**
 	 * handle close menu
 	 */
 	handleCloseMenu = () => {
-		this.setState({ menuOpen: null });
+		this.setState({ modalOpen: null });
 	};
 
 	/**
