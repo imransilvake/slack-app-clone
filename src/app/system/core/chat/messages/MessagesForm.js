@@ -5,11 +5,11 @@ import React, { Component } from 'react';
 import firebase from '../../../../../firebase';
 
 // app
+import FileUploadModal from './FileUploadModal';
 import i18n from '../../../../../assets/i18n/i18n';
 import Textarea from '@material-ui/core/InputBase/Textarea';
-import { regexEmptyString } from '../../../utilities/helpers/Regex';
 import Icon from '@material-ui/core/es/Icon/Icon';
-import FileUploadModal from './FileUploadModal';
+import { regexEmptyString, regexConvertUrlsToLinks } from '../../../utilities/helpers/Regex';
 
 class MessagesForm extends Component {
 	state = {
@@ -42,14 +42,28 @@ class MessagesForm extends Component {
 						rows="2"
 						value={message}
 						onChange={this.handleChange}
-						onKeyDown={this.handleSendMessage}
+						onKeyDown={this.prepareMessage}
 						placeholder={i18n.t('CHAT.MESSAGES_PANEL.FORM.TEXTAREA_PLACEHOLDER')}
 					/>
 
 					{/* Buttons */}
 					<div className="sc-buttons">
-						<Icon onClick={this.handleClickFileModal}>insert_photo</Icon>
-						<Icon>insert_emoticon</Icon>
+						<div className="cd-tooltip">
+							<div>
+								<Icon onClick={this.handleOpenFileModal}>insert_photo</Icon>
+							</div>
+							<span className="cd-arrow cd-top cd-fixed-right">
+								{i18n.t('CHAT.MESSAGES_PANEL.FORM.TOOLTIP.IMAGE')}
+							</span>
+						</div>
+						<div className="cd-tooltip">
+							<div>
+								<Icon>insert_emoticon</Icon>
+							</div>
+							<span className="cd-arrow cd-top cd-fixed-right">
+								{i18n.t('CHAT.MESSAGES_PANEL.FORM.TOOLTIP.EMOJI')}
+							</span>
+						</div>
 					</div>
 				</div>
 
@@ -57,8 +71,10 @@ class MessagesForm extends Component {
 					// File Upload Modal
 					openFileModal && (
 						<FileUploadModal
+							uploadPath="chat/public/"
 							openFileModal={openFileModal}
-							onClick={this.handleCloseFileModal}
+							handleCloseFileModal={this.handleCloseFileModal}
+							prepareMediaToUpload={this.prepareMediaToUpload}
 						/>
 					)
 				}
@@ -81,11 +97,11 @@ class MessagesForm extends Component {
 	};
 
 	/**
-	 * handle message send event
+	 * prepare message
 	 *
 	 * @param event
 	 */
-	handleSendMessage = (event) => {
+	prepareMessage = (event) => {
 		// pressed key: Enter
 		if (event.keyCode === 13 && this.isMessageValid()) {
 			// pressed key: Shift
@@ -101,19 +117,44 @@ class MessagesForm extends Component {
 				const { currentChannel } = this.state;
 
 				// send message
-				messagesRef
-					.child(currentChannel.id)
-					.push()
-					.set(this.createMessage())
-					.then(() => {
-						// empty errors
-						this.setState({ errors: [] });
-					})
-					.catch((error) => {
-						this.setState({ errors: [error] });
-					});
+				this.handleSendMessage(messagesRef, currentChannel);
 			}
 		}
+	};
+
+	/**
+	 * prepare message with media
+	 *
+	 * @param fileUrl
+	 */
+	prepareMediaToUpload = (fileUrl) => {
+		const { messagesRef } = this.props;
+		const { currentChannel } = this.state;
+
+		// send message
+		this.handleSendMessage(messagesRef, currentChannel, fileUrl);
+	};
+
+	/**
+	 * send message
+	 *
+	 * @param messagesRef
+	 * @param currentChannel
+	 * @param fileUrl
+	 */
+	handleSendMessage = (messagesRef, currentChannel, fileUrl = null) => {
+		// send message
+		messagesRef
+			.child(currentChannel.id)
+			.push()
+			.set(this.createMessage(fileUrl))
+			.then(() => {
+				// empty errors
+				this.setState({ errors: [] });
+			})
+			.catch((error) => {
+				this.setState({ errors: [error] });
+			});
 	};
 
 	/**
@@ -129,14 +170,14 @@ class MessagesForm extends Component {
 	/**
 	 * return message data
 	 *
+	 * @param fileUrl
 	 * @returns {{timestamp: Object, content: string, user: {id: string, name: *, avatar: string}}}
 	 */
-	createMessage = () => {
+	createMessage = (fileUrl = null) => {
 		const { currentUser, message } = this.state;
-
-		return {
+		const data = {
 			timestamp: firebase.database.ServerValue.TIMESTAMP,
-			content: message,
+			content: regexConvertUrlsToLinks(message),
 			user: {
 				id: currentUser.uid,
 				name: currentUser.displayName,
@@ -144,6 +185,13 @@ class MessagesForm extends Component {
 				avatar: currentUser.photoURL
 			}
 		};
+
+		// when image is uploaded
+		if (fileUrl !== null) {
+			data.image = fileUrl;
+		}
+
+		return data;
 	};
 
 	/**
@@ -157,7 +205,7 @@ class MessagesForm extends Component {
 	/**
 	 * handle open file modal
 	 */
-	handleClickFileModal = () => {
+	handleOpenFileModal = () => {
 		this.setState({ openFileModal: true });
 	};
 

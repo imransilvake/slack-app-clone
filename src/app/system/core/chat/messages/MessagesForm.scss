@@ -38,18 +38,22 @@
 			position: absolute;
 			right: 1px;
 
-			span {
-				color: cd-palette($cd-color, 1025);
-				font-size: 20px;
-				margin-right: 3px;
+			.cd-tooltip {
+				.material-icons {
+					color: cd-palette($cd-color, 1025);
+					font-size: 20px;
+					margin-right: 3px;
 
-				&:hover {
-					color: cd-palette($cd-color, 1021);
-					cursor: pointer;
+					&:hover {
+						color: cd-palette($cd-color, 1021);
+						cursor: pointer;
+					}
 				}
 
 				&:last-child {
-					margin-right: 0;
+					span {
+						margin-right: 0;
+					}
 				}
 			}
 		}

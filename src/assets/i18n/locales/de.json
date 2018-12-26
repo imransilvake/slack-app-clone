@@ -107,7 +107,11 @@
 				"EMPTY_CHANNEL": "Beginnen Sie noch heute eine Unterhaltung!"
 			},
 			"FORM": {
-				"TEXTAREA_PLACEHOLDER": "Eine Nachricht schreiben!"
+				"TEXTAREA_PLACEHOLDER": "Eine Nachricht schreiben!",
+				"TOOLTIP": {
+					"IMAGE": "Bild hochladen",
+					"EMOJI": "Füge Emoji hinzu"
+				}
 			},
 			"FILE_UPLOAD": {
 				"WRONG_TYPE": "Falscher Typ: {{ type }}",

@@ -317,8 +317,9 @@ class MessagesPanel extends Component {
 				});
 
 				// scroll to last message
-				if (loadedMessagesLength !== 0 && !messagesLength)
+				if (loadedMessagesLength !== 0 && !messagesLength) {
 					this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+				}
 			})
 			.catch();
 	};

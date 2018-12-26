@@ -107,7 +107,11 @@
 				"EMPTY_CHANNEL": "Start a Conversation Today!"
 			},
 			"FORM": {
-				"TEXTAREA_PLACEHOLDER": "Write a Message!"
+				"TEXTAREA_PLACEHOLDER": "Write a Message!",
+				"TOOLTIP": {
+					"IMAGE": "Upload Image",
+					"EMOJI": "Add Emoji"
+				}
 			},
 			"FILE_UPLOAD": {
 				"WRONG_TYPE": "Wrong Type: {{ type }}",

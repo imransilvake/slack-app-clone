@@ -2,6 +2,7 @@
 	position: relative;
 
 	.sc-close-modal {
+		cursor: pointer;
 		position: absolute;
 		right: 20px;
 		top: 15px;
@@ -44,7 +45,7 @@
 					}
 
 					.sc-upload-percentage {
-						margin-top: 5px;
+						margin-top: 2px;
 					}
 				}
 

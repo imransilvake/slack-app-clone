@@ -4,9 +4,16 @@ import React, { Component } from 'react';
 // app
 import classNames from 'classnames/bind';
 import formatMessageTime from '../../../utilities/helpers/Date';
+import Icon from '@material-ui/core/es/Icon/Icon';
 
 class MessageContent extends Component {
+	state = {
+		isImageZoom: false,
+		isImageLoaded: false
+	};
+
 	render() {
+		const { isImageZoom, isImageLoaded } = this.state;
 		const { message, currentUser, isMessageOnSameDay, isMessageOnSameDayBySameUser, isLastMessage } = this.props;
 		const messageContentClass = classNames({
 			'sc-message-content': true,
@@ -23,6 +30,10 @@ class MessageContent extends Component {
 		const selfMessageClass = classNames({
 			'sc-name': true,
 			'sc-self': this.isMessageByCurrentUser(message, currentUser) && !isMessageOnSameDayBySameUser
+		});
+
+		const imageLoadedClass = classNames({
+			'sc-loading': !isImageLoaded
 		});
 
 		return (
@@ -53,11 +64,51 @@ class MessageContent extends Component {
 					{isMessageOnSameDayBySameUser && this.continuousMessage(message.timestamp)}
 
 					{/* description */}
-					<p className="sc-description">{message.content}</p>
+					{
+						message.content && (
+							<p
+								className="sc-description"
+								dangerouslySetInnerHTML={{ __html: message.content }}
+							/>
+						)
+					}
+
+					{/* image */}
+					{
+						message.image && (
+							<button className="sc-image" type="button" onClick={this.handleShowImageZoom}>
+								<img
+									className={imageLoadedClass}
+									src={message.image}
+									onLoad={this.handleImageLoaded}
+									alt={`file-${message.timestamp}`}/>
+							</button>
+
+						)
+					}
+
+					{/* image loader */}
+					{
+						message.image && !isImageLoaded && (
+							<div className="sc-loader-wrapper">
+								<div className="sc-loader"/>
+							</div>
+						)
+					}
+
+					{/* image zoom */}
+					{isImageZoom && this.displayImageZoom(message.image, `file-${message.timestamp}`)}
 				</div>
 			</article>
 		);
 	}
+
+	/**
+	 * handle image loaded
+	 */
+	handleImageLoaded = () => {
+		this.setState({ isImageLoaded: true });
+	};
 
 	/**
 	 * detect if the message is from current user
@@ -102,6 +153,34 @@ class MessageContent extends Component {
 				{formatMessageTime(timestamp, 'llll')}
 			</span>
 		</p>
+	);
+
+	/**
+	 * handle show image in large size
+	 */
+	handleShowImageZoom = () => {
+		this.setState({ isImageZoom: true });
+	};
+
+	/**
+	 * handle close image in large size
+	 */
+	handleCloseImageZoom = () => {
+		this.setState({ isImageZoom: false });
+	};
+
+	/**
+	 * handle image zoom
+	 *
+	 * @param src
+	 * @param alt
+	 * @returns {*}
+	 */
+	displayImageZoom = (src, alt) => (
+		<section className="sc-preview-large">
+			<Icon onClick={this.handleCloseImageZoom}>close</Icon>
+			<img src={src} alt={alt}/>
+		</section>
 	);
 }
 

@@ -14,7 +14,7 @@ import InputLabel from '@material-ui/core/es/InputLabel/InputLabel';
 
 class FileUploadModal extends Component {
 	state = {
-		storageMessagesRef: firebase.storage().ref('messages'),
+		firebaseStorage: firebase.storage(),
 		file: null,
 		preview: null,
 		supportedTypes: ['image/jpeg', 'image/png'],
@@ -31,20 +31,20 @@ class FileUploadModal extends Component {
 
 	render() {
 		const { file, preview, isImageUploading, errors, uploadPercentage, isUploadPaused } = this.state;
-		const { openFileModal, onClick } = this.props;
+		const { openFileModal, handleCloseFileModal } = this.props;
 
 		return (
 			<Modal open={Boolean(openFileModal)}>
 				<section className="sc-modal-wrapper">
 					{/* Close Modal */}
 					<div className="sc-close-modal">
-						<Icon onClick={onClick}>close</Icon>
+						<Icon onClick={handleCloseFileModal}>close</Icon>
 					</div>
 
 					{/* Upload Image */}
 					<div className="sc-modal sc-file-upload-modal">
 						<div className="sc-image">
-							<img src={preview ? preview : NoImage} alt="file"/>
+							<img src={preview || NoImage} alt="file"/>
 						</div>
 
 						<div className="sc-content">
@@ -141,15 +141,18 @@ class FileUploadModal extends Component {
 	 * upload image to firebase
 	 */
 	handleSubmit = () => {
-		const { file, storageMessagesRef } = this.state;
+		const { file, firebaseStorage } = this.state;
+		const { uploadPath } = this.props;
+
 		if (file) {
 			// show loading
 			this.setState({ isImageUploading: true });
 
-			// upload
-			const name = (+new Date()) + '-' + file.name;
+			// upload file
+			const name = `${+new Date()}-${file.name}`;
 			const metadata = { contentType: file.type };
-			const task = storageMessagesRef.child(name).put(file, metadata);
+			const storageRef = firebaseStorage.ref(uploadPath);
+			const task = storageRef.child(name).put(file, metadata);
 			task.on('state_changed', (snapshot) => {
 				const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 				this.setState({ uploadTask: task, uploadPercentage: `${progress}%` });
@@ -186,13 +189,19 @@ class FileUploadModal extends Component {
 			}, () => {
 				task.snapshot.ref
 					.getDownloadURL()
-					.then(() => {
+					.then((url) => {
 						// upload percentage, hide loading, file, uploadTask
 						this.setState({
 							uploadPercentage: null,
 							isImageUploading: false,
 							uploadTask: null,
 							file: null
+						}, () => {
+							// upload media to upload
+							this.props.prepareMediaToUpload(url);
+
+							// close file modal
+							this.props.handleCloseFileModal();
 						});
 					});
 			});
