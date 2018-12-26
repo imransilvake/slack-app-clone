@@ -136,6 +136,10 @@ class MessagesPanel extends Component {
 			savedMessages.forEach((x) => {
 				// validate channel
 				if (x && x.channelId === channelId) {
+					// remove last message
+					x.messages.pop();
+
+					// set messages
 					this.setState({
 						messages: x.messages,
 						uniqueUsers: x.uniqueUsers,
@@ -214,7 +218,7 @@ class MessagesPanel extends Component {
 			.child(channelId)
 			.orderByChild('timestamp')
 			.limitToLast(1)
-			.on('child_changed', (snap) => {
+			.on('child_added', (snap) => {
 				const { messages, uniqueUsers } = this.state;
 				const previousSnapshot = messages.length && messages[messages.length - 1].snapshot;
 				const snapshot = snap.val();
@@ -275,6 +279,9 @@ class MessagesPanel extends Component {
 					messages
 						.slice(1) // remove first element
 						.forEach(message => snapshots.push(message.snapshot));
+
+					// remove last element
+					if (messages.length < messagesLimit) snapshots.pop();
 
 					// iterate snapshots
 					snapshots.forEach((snapshot, index) => {
