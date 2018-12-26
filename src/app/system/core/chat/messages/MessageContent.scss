@@ -176,7 +176,7 @@
 		text-align: center;
 		top: 0;
 		width: 100%;
-		z-index: cd-zIndex(float);
+		z-index: cd-zIndex(modal);
 
 		.material-icons {
 			background-color: cd-palette($cd-background, 2000, .6);

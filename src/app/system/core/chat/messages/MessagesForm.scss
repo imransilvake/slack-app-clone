@@ -41,7 +41,7 @@
 			.cd-tooltip {
 				.material-icons {
 					color: cd-palette($cd-color, 1025);
-					font-size: 20px;
+					font-size: cd-fontSize(s20);
 					margin-right: 3px;
 
 					&:hover {
