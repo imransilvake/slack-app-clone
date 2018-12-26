@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import firebase from '../../../../../firebase';
 
 // app
-import FileUploadModal from './FileUploadModal';
+import FileUploadModal from '../common/FileUploadModal';
 import i18n from '../../../../../assets/i18n/i18n';
 import Textarea from '@material-ui/core/InputBase/Textarea';
 import Icon from '@material-ui/core/es/Icon/Icon';
@@ -13,8 +13,6 @@ import { regexEmptyString, regexConvertUrlsToLinks } from '../../../utilities/he
 
 class MessagesForm extends Component {
 	state = {
-		currentChannel: this.props.currentChannel,
-		currentUser: this.props.currentUser,
 		message: '',
 		errors: [],
 		openFileModal: false
@@ -113,8 +111,7 @@ class MessagesForm extends Component {
 				this.setState({ message: '' });
 
 				// destructuring
-				const { messagesRef } = this.props;
-				const { currentChannel } = this.state;
+				const { messagesRef, currentChannel } = this.props;
 
 				// send message
 				this.handleSendMessage(messagesRef, currentChannel);
@@ -128,8 +125,7 @@ class MessagesForm extends Component {
 	 * @param fileUrl
 	 */
 	prepareMediaToUpload = (fileUrl) => {
-		const { messagesRef } = this.props;
-		const { currentChannel } = this.state;
+		const { messagesRef, currentChannel } = this.props;
 
 		// send message
 		this.handleSendMessage(messagesRef, currentChannel, fileUrl);
@@ -174,7 +170,9 @@ class MessagesForm extends Component {
 	 * @returns {{timestamp: Object, content: string, user: {id: string, name: *, avatar: string}}}
 	 */
 	createMessage = (fileUrl = null) => {
-		const { currentUser, message } = this.state;
+		const { message } = this.state;
+		const { currentUser } = this.props;
+
 		const data = {
 			timestamp: firebase.database.ServerValue.TIMESTAMP,
 			content: regexConvertUrlsToLinks(message),

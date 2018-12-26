@@ -13,15 +13,17 @@ import Icon from '@material-ui/core/es/Icon/Icon';
 import connect from 'react-redux/es/connect/connect';
 import { updateUser } from '../../../../store/actions';
 import classNames from 'classnames/bind';
+import FileUploadModal from '../common/FileUploadModal';
 
 class UserPanel extends Component {
 	state = {
-		modalOpen: null,
-		usersRef: firebase.database().ref('users')
+		usersRef: firebase.database().ref('users'),
+		openMenu: null,
+		openFileModal: false
 	};
 
 	render() {
-		const { modalOpen } = this.state;
+		const { openMenu, openFileModal } = this.state;
 		const { currentUser } = this.props;
 
 		const circleClass = classNames({
@@ -35,7 +37,7 @@ class UserPanel extends Component {
 		return (
 			<section className="sc-user-panel">
 				{/* Button */}
-				<Button onClick={this.handleClickMenu}>
+				<Button onClick={this.handleOpenMenu}>
 					<h5 className="sc-type sc-text-truncate">{currentUser.displayName}</h5>
 					<p className="sc-name">
 						<span className={circleClass}/>
@@ -47,15 +49,15 @@ class UserPanel extends Component {
 				{/* Menu */}
 				<Menu
 					className="sc-user-panel-menu"
-					anchorEl={modalOpen}
+					anchorEl={openMenu}
 					onClick={this.handleCloseMenu}
-					open={Boolean(modalOpen)}>
+					open={Boolean(openMenu)}>
 					<MenuItem>
 						<div className="sc-status">
 							<button
 								type="button"
 								className="sc-circle sc-1 cd-tooltip"
-								onClick={this.changeStatus}
+								onClick={this.handleChangeStatus}
 								value="1"
 								disabled={currentUser.code === '1'}>
 								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.1')}</span>
@@ -63,7 +65,7 @@ class UserPanel extends Component {
 							<button
 								type="button"
 								className="sc-circle sc-2 cd-tooltip"
-								onClick={this.changeStatus}
+								onClick={this.handleChangeStatus}
 								value="2"
 								disabled={currentUser.code === '2'}>
 								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.2')}</span>
@@ -71,7 +73,7 @@ class UserPanel extends Component {
 							<button
 								type="button"
 								className="sc-circle sc-3 cd-tooltip"
-								onClick={this.changeStatus}
+								onClick={this.handleChangeStatus}
 								value="3"
 								disabled={currentUser.code === '3'}>
 								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.3')}</span>
@@ -79,14 +81,14 @@ class UserPanel extends Component {
 							<button
 								type="button"
 								className="sc-circle sc-4 cd-tooltip"
-								onClick={this.changeStatus}
+								onClick={this.handleChangeStatus}
 								value="4"
 								disabled={currentUser.code === '4'}>
 								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.4')}</span>
 							</button>
 						</div>
 					</MenuItem>
-					<MenuItem onClick={this.handleCloseMenu}>
+					<MenuItem onClick={this.handleOpenFileModal}>
 						<Icon>supervised_user_circle</Icon>
 						{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.CHANGE_AVATAR')}
 					</MenuItem>
@@ -95,24 +97,36 @@ class UserPanel extends Component {
 						{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.LOGOUT')}
 					</MenuItem>
 				</Menu>
+
+				{
+					// File Upload Modal
+					openFileModal && (
+						<FileUploadModal
+							uploadPath="settings/profile/"
+							openFileModal={openFileModal}
+							handleCloseFileModal={this.handleCloseFileModal}
+							prepareMediaToUpload={this.handleChangeAvatar}
+						/>
+					)
+				}
 			</section>
 		);
 	}
 
 	/**
-	 * handle button click
+	 * handle open menu
 	 *
 	 * @param event
 	 */
-	handleClickMenu = (event) => {
-		this.setState({ modalOpen: event.currentTarget });
+	handleOpenMenu = (event) => {
+		this.setState({ openMenu: event.currentTarget });
 	};
 
 	/**
 	 * handle close menu
 	 */
 	handleCloseMenu = () => {
-		this.setState({ modalOpen: null });
+		this.setState({ openMenu: null });
 	};
 
 	/**
@@ -120,7 +134,7 @@ class UserPanel extends Component {
 	 *
 	 * @param event
 	 */
-	changeStatus = (event) => {
+	handleChangeStatus = (event) => {
 		const { usersRef } = this.state;
 		const { currentUser } = this.props;
 		const status = { code: event.target.value };
@@ -139,6 +153,35 @@ class UserPanel extends Component {
 	};
 
 	/**
+	 * handle change avatar
+	 *
+	 * @param fileUrl
+	 */
+	handleChangeAvatar = (fileUrl) => {
+		const { usersRef } = this.state;
+		const { currentUser } = this.props;
+		const status = { code: currentUser.code };
+
+		// upload image on storage
+		firebase
+			.auth()
+			.currentUser
+			.updateProfile({ photoURL: fileUrl })
+			.then(() => {
+				const updatedUser = firebase.auth().currentUser;
+
+				// update on redux
+				this.props.updateUser({ ...updatedUser, ...status });
+			});
+
+		// update image on database
+		usersRef
+			.child(currentUser.uid)
+			.update({ avatar: fileUrl })
+			.then();
+	};
+
+	/**
 	 * handle sign-out
 	 */
 	handleSignOut = () => {
@@ -146,6 +189,20 @@ class UserPanel extends Component {
 			.auth()
 			.signOut()
 			.then();
+	};
+
+	/**
+	 * handle open file modal
+	 */
+	handleOpenFileModal = () => {
+		this.setState({ openFileModal: true });
+	};
+
+	/**
+	 * handle close file modal
+	 */
+	handleCloseFileModal = () => {
+		this.setState({ openFileModal: false });
 	};
 }
 
