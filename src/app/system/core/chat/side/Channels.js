@@ -21,7 +21,6 @@ import LoadingAnimation from '../../../utilities/loading-animation/LoadingAnimat
 
 class Channels extends Component {
 	state = {
-		currentUser: this.props.currentUser,
 		openChannelModal: false,
 		channels: [],
 		channelName: '',
@@ -178,7 +177,8 @@ class Channels extends Component {
 		this.setState({ isAnimationLoading: true });
 
 		// create channel object
-		const { currentUser, channelsRef, channelName, channelDetails } = this.state;
+		const { channelsRef, channelName, channelDetails } = this.state;
+		const { currentUser } = this.props;
 		const keyId = channelsRef.push().key;
 		const newChannel = {
 			id: keyId,
