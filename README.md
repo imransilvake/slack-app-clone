@@ -27,7 +27,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] Implement Public Channels
 - [X] Implement Message System
 	- [X] Add Message to a Channel
-	- [ ] Show Messages
+	- [X] Show Messages
 		- [X] Layout Messages
 		- [X] Implement Infinite Scrolling
 	- [X] Add Media to Messages
@@ -38,6 +38,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [ ] Show Channel Information
 	- [ ] Show Top Posters
 	- [ ] Channel Description
+- [ ] Starred/Un-starred Public Channels
 
 
 ## Libraries and Frameworks
