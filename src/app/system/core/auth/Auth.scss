@@ -1,0 +1,92 @@
+.sc-auth-wrapper {
+	.cd-row {
+		background-color: cd-palette($cd-background, 2001);
+		box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4000, .07);
+		margin: 30px auto 0;
+		max-width: 350px;
+
+		// header
+		.sc-header {
+			border-bottom: 1px solid cd-palette($cd-border, 3004);
+			margin-top: 15px;
+			padding-bottom: 15px;
+			text-align: center;
+			width: 100%;
+
+			img {
+				width: 40px;
+			}
+		}
+
+		.cd-col {
+			padding: 0;
+
+			&.sc-form {
+				margin-bottom: 15px;
+
+				// error
+				.cd-error {
+					background-color: cd-palette($cd-background, 2009);
+					color: cd-palette($cd-color, 1001);
+					margin: 0;
+					padding: 5px;
+					text-align: center;
+				}
+
+				// form
+				.sc-form-fields {
+					padding: 15px 30px 0;
+
+					.sc-form-field {
+						margin-bottom: 15px;
+					}
+
+					.sc-button {
+						border-radius: 1px;
+						margin: 5px 0;
+
+						&:not(:disabled) {
+							color: cd-palette($cd-color, 1001);
+
+							&.sc-login {
+								background-color: cd-palette($cd-background, 2006);
+							}
+
+							&.sc-register {
+								background-color: cd-palette($cd-background, 2007);
+							}
+						}
+					}
+				}
+			}
+
+			&.sc-message {
+				padding: 15px;
+
+				p {
+					&:first-child {
+						color: cd-palette($cd-color, 1005);
+						font-weight: cd-fontWeight(700);
+						margin-bottom: 10px;
+					}
+				}
+			}
+		}
+
+		// footer
+		.sc-footer {
+			border-top: 1px solid cd-palette($cd-border, 3004);
+			padding: 10px 20px;
+			text-align: center;
+		}
+
+		// media
+		@include cd-media(desktop, smartphone) {
+			max-width: 300px;
+		}
+
+		@include cd-media(desktop, mini) {
+			margin: 15px auto 0;
+		}
+	}
+}

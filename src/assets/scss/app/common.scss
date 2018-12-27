@@ -1,0 +1,61 @@
+// circle
+.sc-circle {
+	border-radius: 50%;
+	display: block;
+	height: 8px;
+	left: 0;
+	position: absolute;
+	top: 4px;
+	width: 8px;
+
+	// active
+	&.sc-1 {
+		background-color: cd-palette($cd-background, 2005);
+	}
+
+	// away
+	&.sc-2 {
+		background-color: cd-palette($cd-background, 2007);
+	}
+
+	// busy
+	&.sc-3 {
+		background-color: cd-palette($cd-background, 2006);
+	}
+
+	// offline
+	&.sc-4 {
+		background-color: cd-palette($cd-background, 2004);
+	}
+}
+
+// modal
+.sc-modal-wrapper {
+	background-color: cd-palette($cd-background, 2001);
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	overflow: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	.sc-modal {
+		background-color: cd-palette($cd-background, 2001);
+		margin: 80px auto 0;
+		max-width: 700px;
+		outline: 0;
+		width: 70%;
+
+		// media
+		@include cd-media(desktop, tablet) {
+			margin: 60px auto 0;
+			width: 75%;
+		}
+
+		@include cd-media(desktop, mini) {
+			margin: 40px auto 0;
+			width: 80%;
+		}
+	}
+}

@@ -9,12 +9,13 @@ import { connect } from 'react-redux';
 import firebase from '../firebase';
 
 // app
-import Login from './system/core/auth/login';
-import Register from './system/core/auth/register';
-import Home from './system/frame/home/home';
-import Chat from './system/core/chat/chat';
+import Login from './system/core/auth/Login';
+import Register from './system/core/auth/Register';
+import Home from './system/frame/home/Home';
+import Chat from './system/core/chat/Chat';
+import ENV from '../environment/index';
 import { setUser, clearUser } from './store/actions';
-import LoadingAnimation from './system/utilities/loading-animation/loading-animation';
+import LoadingAnimation from './system/utilities/loading-animation/LoadingAnimation';
 
 class AppRouter extends Component {
 	componentDidMount() {
@@ -23,14 +24,29 @@ class AppRouter extends Component {
 			.auth()
 			.onAuthStateChanged((user) => {
 				if (user) {
-					// set user to store
-					this.props.setUser(user);
+					if (user.displayName) {
+						// real-time database user
+						firebase
+							.database()
+							.ref(`users/${user.uid}`)
+							.once('value')
+							.then((snap) => {
+								const snapshot = snap.val();
+								const status = { code: snapshot ? snapshot.code : '1' };
 
-					// navigate to chat route
-					this.props.history.push('/chat');
+								// set user to store
+								const userData = { ...user, ...status };
+								this.props.setUser(userData);
+
+								// navigate to chat route
+								if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
+									this.props.history.push(ENV.ROUTING.CHAT);
+								}
+							});
+					}
 				} else {
 					// navigate to home route
-					this.props.history.push('/');
+					this.props.history.push(ENV.ROUTING.HOME);
 
 					// clear user from store
 					this.props.clearUser();
@@ -39,12 +55,13 @@ class AppRouter extends Component {
 	}
 
 	render() {
-		return this.props.isAnimationLoading ? <LoadingAnimation/> : (
+		const { isAnimationLoading } = this.props;
+		return isAnimationLoading ? <LoadingAnimation/> : (
 			<Switch>
-				<Route exact path="/" component={Home}/>
-				<Route path="/login" component={Login}/>
-				<Route path="/register" component={Register}/>
-				<Route path="/chat" component={Chat}/>
+				<Route exact path={ENV.ROUTING.HOME} component={Home}/>
+				<Route path={ENV.ROUTING.AUTH.LOGIN} component={Login}/>
+				<Route path={ENV.ROUTING.AUTH.REGISTER} component={Register}/>
+				<Route path={ENV.ROUTING.CHAT} component={Chat}/>
 			</Switch>
 		);
 	}

@@ -1,0 +1,62 @@
+.sc-message-form {
+	background-color: cd-palette($cd-background, 2001);
+	bottom: -75px;
+	left: 0;
+	padding: 5px 15px 0;
+	position: absolute;
+	right: 0;
+	z-index: cd-zIndex(normal);
+
+	// error
+	.sc-error {
+		p {
+			background-color: cd-palette($cd-background, 2009);
+			border-radius: 2px;
+			color: cd-palette($cd-color, 1001);
+			margin-bottom: 3px;
+			padding: 3px 10px;
+		}
+	}
+
+	// form
+	.sc-form {
+		position: relative;
+
+		Textarea {
+			background-color: cd-palette($cd-background, 2001);
+			border: 1px solid cd-palette($cd-border, 3005);
+			color: cd-palette($cd-color, 1002);
+			max-height: 200px;
+			overflow: auto;
+			padding: 10px 60px 10px 10px;
+		}
+
+		.sc-buttons {
+			background-color: cd-palette($cd-background, 2010);
+			bottom: 7px;
+			height: 24px;
+			padding: 3px 6px;
+			position: absolute;
+			right: 1px;
+
+			.cd-tooltip {
+				.material-icons {
+					color: cd-palette($cd-color, 1003);
+					font-size: cd-fontSize(s20);
+					margin-right: 3px;
+
+					&:hover {
+						color: cd-palette($cd-color, 1006);
+						cursor: pointer;
+					}
+				}
+
+				&:last-child {
+					span {
+						margin-right: 0;
+					}
+				}
+			}
+		}
+	}
+}

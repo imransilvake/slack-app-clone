@@ -1,11 +1,14 @@
 // colors
 @import 'colors';
 
+// helpers
+@import 'helpers';
+
+// common
+@import 'common';
+
 // general
 @import 'general';
-
-// vendors
-@import 'vendors/material-ui';
 
 // layouts (components)
 @import 'layouts';

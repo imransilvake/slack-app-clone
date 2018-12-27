@@ -1,6 +1,14 @@
 // authentication
-@import 'auth/auth-form';
+@import 'auth/Auth';
 
 // chat
-@import 'chat/chat';
-@import 'chat/side-panel/user-panel';
+@import 'chat/Chat';
+@import 'chat/side/ColorPanel';
+@import 'chat/side/SidePanel';
+@import 'chat/side/UserPanel';
+@import 'chat/side/channels';
+@import 'chat/messages/MessagesPanel';
+@import 'chat/messages/MessagesHeader';
+@import 'chat/messages/MessageContent';
+@import 'chat/messages/MessagesForm';
+@import 'chat/common/FileUploadModal';

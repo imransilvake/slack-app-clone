@@ -1,0 +1,125 @@
+{
+	"HOME": {
+		"TITLE": "Slack",
+		"SUBTITLE": {
+			"T1": "Let",
+			"T2": "Work",
+			"T3": "Flow"
+		},
+		"BANNER_ALT": "Home Banner",
+		"CONTENT": "Slack creates alignment and shared understanding across your team, making you more productive, less stressed, and just a little bit happier.",
+		"BUTTONS": {
+			"T1": "Sign In",
+			"T2": "Sign Up"
+		}
+	},
+	"AUTH": {
+		"LOGIN": {
+			"HEADER": {
+				"LOGO": {
+					"ALT": "Slack Logo",
+					"TOOLTIP": "Go to Home"
+				}
+			},
+			"CONTENT": {
+				"FORM": {
+					"EMAIL": "Email",
+					"PASSWORD": "Password"
+				},
+				"BUTTON_TEXT": "Sign In"
+			},
+			"FOOTER": {
+				"T1": "Do not have an account? ",
+				"T2": "Register"
+			}
+		},
+		"REGISTER": {
+			"HEADER": {
+				"LOGO": {
+					"ALT": "Slack Logo",
+					"TOOLTIP": "Go to Home"
+				}
+			},
+			"CONTENT": {
+				"FORM": {
+					"NAME": "Name",
+					"EMAIL": "Email",
+					"PASSWORD": "Password",
+					"CONFIRM_PASSWORD": "Confirm Password"
+				},
+				"MESSAGE": {
+					"T1": "Your account has been created successfully!",
+					"T2": "Your are automatically redirecting back to the login page shortly or click: ",
+					"LINK": "App"
+				},
+				"BUTTON_TEXT": "Sign Up"
+			},
+			"FOOTER": {
+				"T1": "Already a user? ",
+				"T2": "Login"
+			}
+		}
+	},
+	"CHAT": {
+		"SIDE_PANEL": {
+			"USER_PANEL": {
+				"STATUS_CODE": {
+					"1": "Active",
+					"2": "Away",
+					"3": "Busy",
+					"4": "Offline"
+				},
+				"CHANGE_AVATAR": "Change Avatar",
+				"LOGOUT": "Logout"
+			},
+			"CHANNELS": {
+				"TITLE": "Channels",
+				"CREATE_CHANNEL": "Create a channel",
+				"MODAL": {
+					"HEADER": {
+						"CREATE_CHANNEL": "Create a channel",
+						"DESCRIPTION": "Channels are where your members communicate. They’re best when organized around a topic — #react, for example."
+					},
+					"FORM": {
+						"CHANNEL_NAME": {
+							"TITLE": "Channel Name",
+							"DESCRIPTION": "Name only contains: lowercase, numbers, characters between (2-20), hyphen"
+						},
+						"CHANNEL_DETAILS": {
+							"TITLE": "Channel Details",
+							"DESCRIPTION": "What’s this channel about?"
+						}
+					},
+					"BUTTONS": {
+						"T1": "Cancel",
+						"T2": "Create Channel"
+					}
+				}
+			}
+		},
+		"MESSAGES_PANEL": {
+			"MESSAGES": {
+				"CHANNEL_INTRO": {
+					"T1": "You created this channel on {{ date }}. ",
+					"T2": "This is the very beginning of the {{ name }} channel. ",
+					"T3": "This channel is for workspace-wide communication and announcements."
+				},
+				"EMPTY_CHANNEL": "Start a Conversation Today!"
+			},
+			"FORM": {
+				"TEXTAREA_PLACEHOLDER": "Write a Message!",
+				"TOOLTIP": {
+					"IMAGE": "Upload Image",
+					"EMOJI": "Add Emoji"
+				}
+			},
+			"FILE_UPLOAD": {
+				"WRONG_TYPE": "Wrong Type: {{ type }}",
+				"TOOLTIP": "Upload File",
+				"UPLOAD": {
+					"CANCELLED": "Upload is cancelled!"
+				}
+			}
+		}
+	}
+}

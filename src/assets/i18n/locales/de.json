@@ -1,0 +1,125 @@
+{
+	"HOME": {
+		"TITLE": "Slack",
+		"SUBTITLE": {
+			"T1": "Lassen",
+			"T2": "Arbeit",
+			"T3": "Fließen"
+		},
+		"BANNER_ALT": "Home Banner",
+		"CONTENT": "Slack schafft Ausrichtung und gemeinsames Verständnis in Ihrem Team. Dadurch werden Sie produktiver, weniger gestresst und nur ein bisschen glücklicher.",
+		"BUTTONS": {
+			"T1": "Einloggen",
+			"T2": "Anmelden"
+		}
+	},
+	"AUTH": {
+		"LOGIN": {
+			"HEADER": {
+				"LOGO": {
+					"ALT": "Slack Logo",
+					"TOOLTIP": "Zur Startseite"
+				}
+			},
+			"CONTENT": {
+				"FORM": {
+					"EMAIL": "Email",
+					"PASSWORD": "Passwort"
+				},
+				"BUTTON_TEXT": "Einloggen"
+			},
+			"FOOTER": {
+				"T1": "Haben Sie kein Konto? ",
+				"T2": "Registrieren"
+			}
+		},
+		"REGISTER": {
+			"HEADER": {
+				"LOGO": {
+					"ALT": "Slack Logo",
+					"TOOLTIP": "Zur Startseite"
+				}
+			},
+			"CONTENT": {
+				"FORM": {
+					"NAME": "Name",
+					"EMAIL": "Email",
+					"PASSWORD": "Passwort",
+					"CONFIRM_PASSWORD": "Passwort Bestätigen"
+				},
+				"MESSAGE": {
+					"T1": "Ihr Konto wurde erfolgreich erstellt!",
+					"T2": "Sie werden in Kürze automatisch zur Anmeldeseite zurückgeleitet oder klicken Sie auf: ",
+					"LINK": "App"
+				},
+				"BUTTON_TEXT": "Anmelden"
+			},
+			"FOOTER": {
+				"T1": "Schon ein Benutzer? ",
+				"T2": "Einloggen"
+			}
+		}
+	},
+	"CHAT": {
+		"SIDE_PANEL": {
+			"USER_PANEL": {
+				"STATUS_CODE": {
+					"1": "Aktiv",
+					"2": "Weg",
+					"3": "Beschäftigt",
+					"4": "Offline"
+				},
+				"CHANGE_AVATAR": "Avatar ändern",
+				"LOGOUT": "Ausloggen"
+			},
+			"CHANNELS": {
+				"TITLE": "Kanäle",
+				"CREATE_CHANNEL": "Erstellen Sie einen Kanal",
+				"MODAL": {
+					"HEADER": {
+						"CREATE_CHANNEL": "Erstellen Sie einen Kanal",
+						"DESCRIPTION": "In Channels kommunizieren Ihre Mitglieder. Sie sind am besten, wenn sie nach einem Thema organisiert sind - zum Beispiel #react."
+					},
+					"FORM": {
+						"CHANNEL_NAME": {
+							"TITLE": "Kanal Name",
+							"DESCRIPTION": "Der Name enthält nur: Kleinbuchstaben, Zahlen, Zeichen zwischen (2-20), Bindestrich"
+						},
+						"CHANNEL_DETAILS": {
+							"TITLE": "Kanal Einzelheiten",
+							"DESCRIPTION": "Worum geht es in diesem Kanal?"
+						}
+					},
+					"BUTTONS": {
+						"T1": "Stornieren",
+						"T2": "Kanal erstellen"
+					}
+				}
+			}
+		},
+		"MESSAGES_PANEL": {
+			"MESSAGES": {
+				"CHANNEL_INTRO": {
+					"T1": "Sie haben diesen Kanal am erstellt {{ date }}. ",
+					"T2": "Dies ist der Anfang des {{ name }} Kanals. ",
+					"T3": "Dieser Kanal ist für die Kommunikation und Ansagen im gesamten Arbeitsbereich vorgesehen."
+				},
+				"EMPTY_CHANNEL": "Beginnen Sie noch heute eine Unterhaltung!"
+			},
+			"FORM": {
+				"TEXTAREA_PLACEHOLDER": "Eine Nachricht schreiben!",
+				"TOOLTIP": {
+					"IMAGE": "Bild hochladen",
+					"EMOJI": "Füge Emoji hinzu"
+				}
+			},
+			"FILE_UPLOAD": {
+				"WRONG_TYPE": "Falscher Typ: {{ type }}",
+				"TOOLTIP": "Datei hochladen",
+				"UPLOAD": {
+					"CANCELLED": "Upload wird abgebrochen!"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+.sc-chat {
+	> .cd-row {
+		margin-left: 270px;
+
+		.cd-mobile-header {
+			background-color: cd-palette($cd-background, 2002);
+			padding: 6px;
+			width: 100%;
+
+			Button {
+				color: cd-palette($cd-color, 1001);
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, smartphone) {
+		.cd-row {
+			margin-left: 0;
+		}
+	}
+}
