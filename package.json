@@ -26,6 +26,7 @@
         "moment": "^2.23.0",
         "prop-types": "latest",
         "react": "^16.7.0",
+        "react-color": "^2.17.0",
         "react-dom": "^16.7.0",
         "react-i18next": "^8.4.0",
         "react-redux": "^6.0.0",

@@ -25,10 +25,15 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] Implement Message Form
 - [ ] Show Messages
 	- [X] Layout Messages
-	- [ ] Implement Infinite Scrolling
+	- [X] Implement Infinite Scrolling
 	- [ ] Edit/Delete Messages
-	- [ ] Add Media to Messages
-- [ ] Add User Status
+	- [X] Add Media to Messages
+- [X] Add User Status
+- [ ] Add Color Picker
+- [ ] Implement Search Functionality
+- [ ] Show Channel Information
+	- [ ] Show Top Posters
+	- [ ] Channel Description
 
 
 ## Libraries and Frameworks
@@ -45,6 +50,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] [Moment](https://momentjs.com/)
 - [X] [Classnames](https://github.com/JedWatson/classnames)
 - [X] [React Scroll](https://github.com/fisshy/react-scroll)
+- [X] [React Color](https://casesandberg.github.io/react-color/)
 
 
 ## Information
