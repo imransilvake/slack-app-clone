@@ -32,8 +32,14 @@ class MessageContent extends Component {
 			'sc-self': this.isMessageByCurrentUser(message, currentUser) && !isMessageOnSameDayBySameUser
 		});
 
+		const imageLoaderClass = classNames({
+			'sc-loader-wrapper': true,
+			'sc-image-loading': !isImageLoaded
+		});
+
 		const imageLoadedClass = classNames({
-			'sc-loading': !isImageLoaded
+			'sc-image': true,
+			'sc-image-loading': !isImageLoaded
 		});
 
 		return (
@@ -73,12 +79,20 @@ class MessageContent extends Component {
 						)
 					}
 
+					{/* image loader */}
+					{
+						message.image && !isImageLoaded && (
+							<div className={imageLoaderClass}>
+								<div className="sc-loader"/>
+							</div>
+						)
+					}
+
 					{/* image */}
 					{
 						message.image && (
-							<button className="sc-image" type="button" onClick={this.handleShowImageZoom}>
+							<button className={imageLoadedClass} type="button" onClick={this.handleShowImageZoom}>
 								<img
-									className={imageLoadedClass}
 									src={message.image}
 									onLoad={this.handleImageLoaded}
 									alt={`file-${message.timestamp}`}/>
@@ -87,17 +101,8 @@ class MessageContent extends Component {
 						)
 					}
 
-					{/* image loader */}
-					{
-						message.image && !isImageLoaded && (
-							<div className="sc-loader-wrapper">
-								<div className="sc-loader"/>
-							</div>
-						)
-					}
-
-					{/* image zoom */}
-					{isImageZoom && this.displayImageZoom(message.image, `file-${message.timestamp}`)}
+					{/* image - full size */}
+					{isImageZoom && this.displayImageFullSize(message.image, `file-${message.timestamp}`)}
 				</div>
 			</article>
 		);
@@ -170,13 +175,13 @@ class MessageContent extends Component {
 	};
 
 	/**
-	 * handle image zoom
+	 * display image full size
 	 *
 	 * @param src
 	 * @param alt
 	 * @returns {*}
 	 */
-	displayImageZoom = (src, alt) => (
+	displayImageFullSize = (src, alt) => (
 		<section className="sc-preview-image">
 			<img src={src} alt={alt} className="cd-vh-center"/>
 			<Icon onClick={this.handleCloseImageZoom}>close</Icon>

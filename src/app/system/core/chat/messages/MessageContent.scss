@@ -133,12 +133,10 @@
 			height: 150px;
 			max-height: 150px;
 			min-height: 150px;
+		}
 
-			&.sc-loading {
-				height: 0;
-				min-height: 0;
-				visibility: hidden;
-			}
+		&.sc-image-loading {
+			display: none;
 		}
 	}
 
@@ -152,6 +150,10 @@
 		max-height: 150px;
 		min-height: 150px;
 		width: 150px;
+
+		&.sc-image-loading {
+			margin: 5px 0;
+		}
 
 		.sc-loader {
 			animation: spin 2s linear infinite;
