@@ -61,20 +61,29 @@
 			}
 
 			&:last-child {
+				padding-right: 0;
 				text-align: right;
 
 				.sc-search {
-					margin-top: 14px;
-					position: relative;
-
-					input {
-						padding-right: 26px;
-					}
+					background-color: cd-palette($cd-background, 2011);
+					display: inline-block;
+					height: 58px;
+					padding: 5px 5px 0;
 
 					.material-icons {
-						position: absolute;
-						right: 0;
-						top: 4px;
+						color: cd-palette($cd-color, 1003);
+						cursor: pointer;
+						display: block;
+
+						&:last-child {
+							font-size: 20px;
+							margin-left: 2px;
+							margin-top: 4px;
+						}
+
+						&:hover {
+							color: cd-palette($cd-color, 1002);
+						}
 					}
 				}
 			}
