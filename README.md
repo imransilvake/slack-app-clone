@@ -5,6 +5,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Support Internationalization (i18n)
 - User authentication with Firebase (Sign-up & Login)
 - Form validation for our Login and Register forms
+- Create Public Channels
 - Sending and receiving messages instantly with the real-time Firebase Database
 - Edit and Delete Messages
 - Uploading and displaying image messages using Firebase Storage
@@ -13,7 +14,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Tracking / showing when users are online / offline
 - Searching messages within created channels
 - Custom animations to see when other users are typing in the same channel
-- Creating, cropping and uploading user avatars
+- Creating and uploading user avatars
 - The ability to favorite / un-favorite public channels
 - Add emojis to our messages with an Emoji Picker component
 - Securing our application with Firebase Rules
@@ -21,8 +22,8 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 
 ## Content
 - [X] Authentication with Firebase
-	- [X] Login
-	- [X] Registration
+	- [X] Sign-up with Form Validation
+	- [X] Login with Form Validation
 - [X] Implement Public Channels
 - [X] Implement Message System
 	- [X] Add Message to a Channel
