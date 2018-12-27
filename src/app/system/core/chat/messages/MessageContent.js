@@ -177,9 +177,9 @@ class MessageContent extends Component {
 	 * @returns {*}
 	 */
 	displayImageZoom = (src, alt) => (
-		<section className="sc-preview-large">
+		<section className="sc-preview-image">
+			<img src={src} alt={alt} className="cd-vh-center"/>
 			<Icon onClick={this.handleCloseImageZoom}>close</Icon>
-			<img src={src} alt={alt}/>
 		</section>
 	);
 }

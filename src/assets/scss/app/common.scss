@@ -10,22 +10,22 @@
 
 	// active
 	&.sc-1 {
-		background-color: cd-palette($cd-background, 2016);
+		background-color: cd-palette($cd-background, 2005);
 	}
 
 	// away
 	&.sc-2 {
-		background-color: cd-palette($cd-background, 2022);
+		background-color: cd-palette($cd-background, 2007);
 	}
 
 	// busy
 	&.sc-3 {
-		background-color: cd-palette($cd-background, 2021);
+		background-color: cd-palette($cd-background, 2006);
 	}
 
 	// offline
 	&.sc-4 {
-		background-color: cd-palette($cd-background, 2006);
+		background-color: cd-palette($cd-background, 2004);
 	}
 }
 

@@ -5,14 +5,14 @@
 
 		// time
 		.sc-time-one {
-			border-bottom: 1px solid cd-palette($cd-border, 3002, .8);
+			border-bottom: 1px solid cd-palette($cd-border, 3004, .8);
 			line-height: 0;
 			margin: 25px 0;
 			text-align: center;
 			width: 100%;
 
 			&.sc-border-dark {
-				border-bottom: 1px solid cd-palette($cd-border, 3003);
+				border-bottom: 1px solid cd-palette($cd-border, 3005);
 			}
 
 			span {
@@ -43,12 +43,12 @@
 
 					// time
 					&.sc-time {
-						background-color: cd-palette($cd-background, 2002);
+						background-color: cd-palette($cd-background, 2010);
 					}
 
 					// author
 					&.sc-author {
-						background-color: cd-palette($cd-background, 2016);
+						background-color: cd-palette($cd-background, 2005);
 						color: cd-palette($cd-color, 1001);
 					}
 				}
@@ -67,11 +67,11 @@
 			position: relative;
 
 			&:hover {
-				background-color: cd-palette($cd-background, 2002);
+				background-color: cd-palette($cd-background, 2010);
 
 				// time
 				.sc-time-two {
-					color: cd-palette($cd-color, 1006);
+					color: cd-palette($cd-color, 1004);
 					cursor: help;
 					display: block;
 					font-size: cd-fontSize(s10);
@@ -141,7 +141,7 @@
 	// loader
 	.sc-loader-wrapper {
 		align-items: center;
-		background-color: cd-palette($cd-background, 2002);
+		background-color: cd-palette($cd-background, 2010);
 		display: flex;
 		height: 150px;
 		justify-content: center;
@@ -155,7 +155,7 @@
 			border-left: 4px solid cd-palette($cd-border, 3001);
 			border-radius: 50%;
 			border-right: 4px solid cd-palette($cd-border, 3001);
-			border-top: 4px solid cd-palette($cd-border, 3024);
+			border-top: 4px solid cd-palette($cd-border, 3002);
 			height: 40px;
 			width: 40px;
 
@@ -166,8 +166,8 @@
 		}
 	}
 
-	// preview large image
-	.sc-preview-large {
+	// preview image
+	.sc-preview-image {
 		background-color: cd-palette($cd-background, 2001);
 		bottom: 0;
 		height: 100%;

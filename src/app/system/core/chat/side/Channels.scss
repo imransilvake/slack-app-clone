@@ -7,12 +7,12 @@
 		position: relative;
 
 		h6 {
-			border-bottom: 1px solid cd-palette($cd-border, 3025);
+			border-bottom: 1px solid cd-palette($cd-border, 3003);
 			font-weight: cd-fontWeight(700);
 			padding: 5px 0;
 
 			span {
-				background-color: cd-palette($cd-background, 2025);
+				background-color: cd-palette($cd-background, 2003);
 				border-radius: 2px;
 				display: inline-block;
 				font-size: cd-fontSize(s11);
@@ -56,7 +56,7 @@
 				border: none;
 				border-radius: 0;
 				box-shadow: none;
-				color: cd-palette($cd-color, 1006);
+				color: cd-palette($cd-color, 1004);
 				font-size: cd-fontSize(s15);
 				height: auto;
 				min-height: auto;
@@ -64,7 +64,7 @@
 				padding: 6px 8px;
 
 				&:hover {
-					background-color: cd-palette($cd-background, 2025);
+					background-color: cd-palette($cd-background, 2003);
 					color: cd-palette($cd-color, 1001);
 					cursor: pointer;
 				}
@@ -77,7 +77,7 @@
 
 			&.sc-active {
 				Button {
-					background-color: cd-palette($cd-background, 2025);
+					background-color: cd-palette($cd-background, 2003);
 					color: cd-palette($cd-color, 1001);
 				}
 			}
@@ -100,7 +100,7 @@
 		}
 
 		p {
-			color: cd-palette($cd-color, 1006);
+			color: cd-palette($cd-color, 1004);
 			margin-top: 10px;
 		}
 	}
@@ -111,7 +111,7 @@
 
 		// error
 		.cd-error {
-			background-color: cd-palette($cd-background, 2010);
+			background-color: cd-palette($cd-background, 2009);
 			color: cd-palette($cd-color, 1001);
 			margin: 0;
 			padding: 5px;
@@ -125,8 +125,16 @@
 			.sc-form-field {
 				margin-bottom: 15px;
 
+				label {
+					color: cd-palette($cd-color, 1003);
+				}
+
+				input {
+					color: cd-palette($cd-color, 1002);
+				}
+
 				.ts-note {
-					color: cd-palette($cd-color, 1006);
+					color: cd-palette($cd-color, 1004);
 					font-size: cd-fontSize(s12);
 					margin-top: 5px;
 				}
@@ -145,11 +153,11 @@
 					color: cd-palette($cd-color, 1001);
 
 					&.sc-cancel {
-						background-color: cd-palette($cd-background, 2021);
+						background-color: cd-palette($cd-background, 2006);
 					}
 
 					&.sc-create-channel {
-						background-color: cd-palette($cd-background, 2020);
+						background-color: cd-palette($cd-background, 2005);
 					}
 				}
 			}

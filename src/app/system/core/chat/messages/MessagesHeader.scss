@@ -3,7 +3,7 @@
 	height: 60px;
 
 	.cd-row {
-		box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4003);
+		box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4002);
 		height: 58px;
 
 		.cd-col {
@@ -111,14 +111,14 @@
 			padding: 5px 0;
 
 			li {
-				border-bottom: 1px solid cd-palette($cd-border, 3002);
+				border-bottom: 1px solid cd-palette($cd-border, 3004);
 				cursor: default;
 				display: block;
 				height: auto;
 				padding: 6px 15px;
 
 				&:hover {
-					background-color: cd-palette($cd-background, 2002);
+					background-color: cd-palette($cd-background, 2010);
 				}
 
 				&:last-child {

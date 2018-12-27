@@ -31,7 +31,7 @@
 		.st0 {
 			@include lineAnimation(shrinkIcon-1);
 			line {
-				stroke: cd-palette($cd-color, 1020);
+				stroke: cd-palette($cd-color, 1005);
 				transform: translateY(2px);
 			}
 		}
@@ -39,7 +39,7 @@
 		.st1 {
 			@include lineAnimation(shrinkIcon-2);
 			line {
-				stroke: cd-palette($cd-color, 1021);
+				stroke: cd-palette($cd-color, 1006);
 				transform: translateX(2px);
 			}
 		}
@@ -47,7 +47,7 @@
 		.st2 {
 			@include lineAnimation(shrinkIcon-3);
 			line {
-				stroke: cd-palette($cd-color, 1022);
+				stroke: cd-palette($cd-color, 1007);
 				transform: translateY(-2px);
 			}
 		}
@@ -55,7 +55,7 @@
 		.st3 {
 			@include lineAnimation(shrinkIcon-4);
 			line {
-				stroke: cd-palette($cd-color, 1023);
+				stroke: cd-palette($cd-color, 1008);
 				transform: translateX(-2px);
 			}
 		}

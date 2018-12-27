@@ -17,14 +17,14 @@
 		max-width: 320px !important;
 
 		.sc-image {
-			background-color: cd-palette($cd-background, 2002);
-			border-bottom: 1px solid cd-palette($cd-border, 3003);
+			background-color: cd-palette($cd-background, 2010);
+			border-bottom: 1px solid cd-palette($cd-border, 3005);
 			box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4000, .2);
 		}
 
 		.sc-content {
 			align-items: center;
-			background-color: cd-palette($cd-background, 2002);
+			background-color: cd-palette($cd-background, 2010);
 			box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4000, .2);
 			display: flex;
 			justify-content: space-between;
@@ -60,11 +60,11 @@
 
 				> span {
 					&:first-child {
-						color: cd-palette($cd-color, 1020);
+						color: cd-palette($cd-color, 1005);
 					}
 
 					&:nth-of-type(2) {
-						color: cd-palette($cd-color, 1021);
+						color: cd-palette($cd-color, 1006);
 					}
 				}
 
@@ -82,8 +82,8 @@
 			margin-top: 5px;
 
 			.sc-error {
-				background-color: cd-palette($cd-background, 2010);
-				box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4021);
+				background-color: cd-palette($cd-background, 2009);
+				box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4003);
 				color: cd-palette($cd-color, 1001);
 				padding: 5px 10px;
 			}

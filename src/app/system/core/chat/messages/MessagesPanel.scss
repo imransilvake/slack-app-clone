@@ -8,7 +8,7 @@
 		padding: 15px;
 
 		.sc-channel-info {
-			background-color: cd-palette($cd-background, 2002);
+			background-color: cd-palette($cd-background, 2010);
 			padding: 10px 15px;
 
 			h3 {
@@ -27,7 +27,7 @@
 				margin-top: 25px;
 
 				.sc-fake-la {
-					background-color: cd-palette($cd-background, 2003);
+					background-color: cd-palette($cd-background, 2011);
 				}
 
 				.sc-fake-el-la-one {
@@ -57,11 +57,11 @@
 		}
 
 		.sc-start-conversation {
-			border: 1px solid cd-palette($cd-border, 3003);
+			border: 1px solid cd-palette($cd-border, 3005);
 			margin-top: 20px;
 
 			p {
-				background-color: cd-palette($cd-background, 2002);
+				background-color: cd-palette($cd-background, 2010);
 				color: cd-palette($cd-color, 1003);
 				padding: 10px;
 				text-align: center;

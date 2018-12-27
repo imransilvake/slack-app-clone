@@ -10,7 +10,7 @@
 	// error
 	.sc-error {
 		p {
-			background-color: cd-palette($cd-background, 2010);
+			background-color: cd-palette($cd-background, 2009);
 			border-radius: 2px;
 			color: cd-palette($cd-color, 1001);
 			margin-bottom: 3px;
@@ -24,7 +24,7 @@
 
 		Textarea {
 			background-color: cd-palette($cd-background, 2001);
-			border: 1px solid cd-palette($cd-border, 3003);
+			border: 1px solid cd-palette($cd-border, 3005);
 			color: cd-palette($cd-color, 1002);
 			max-height: 200px;
 			overflow: auto;
@@ -32,7 +32,7 @@
 		}
 
 		.sc-buttons {
-			background-color: cd-palette($cd-background, 2002);
+			background-color: cd-palette($cd-background, 2010);
 			bottom: 7px;
 			height: 24px;
 			padding: 3px 6px;
@@ -46,7 +46,7 @@
 					margin-right: 3px;
 
 					&:hover {
-						color: cd-palette($cd-color, 1021);
+						color: cd-palette($cd-color, 1006);
 						cursor: pointer;
 					}
 				}
