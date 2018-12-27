@@ -24,7 +24,8 @@
 
 		Textarea {
 			background-color: cd-palette($cd-background, 2001);
-			border: 1px solid cd-palette($cd-border, 3005);
+			border: 1px solid cd-palette($cd-border, 3003);
+			color: cd-palette($cd-color, 1002);
 			max-height: 200px;
 			overflow: auto;
 			padding: 10px 60px 10px 10px;
@@ -40,7 +41,7 @@
 
 			.cd-tooltip {
 				.material-icons {
-					color: cd-palette($cd-color, 1025);
+					color: cd-palette($cd-color, 1003);
 					font-size: cd-fontSize(s20);
 					margin-right: 3px;
 

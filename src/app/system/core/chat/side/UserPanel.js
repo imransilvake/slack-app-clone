@@ -104,6 +104,7 @@ class UserPanel extends Component {
 						<FileUploadModal
 							uploadPath="settings/profile/"
 							openFileModal={openFileModal}
+							imagePreview={currentUser.photoURL}
 							handleCloseFileModal={this.handleCloseFileModal}
 							prepareMediaToUpload={this.handleChangeAvatar}
 						/>

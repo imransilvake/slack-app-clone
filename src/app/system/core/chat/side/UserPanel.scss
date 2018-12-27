@@ -17,11 +17,11 @@
 			}
 
 			.sc-name {
-				color: cd-palette($cd-color, 1005, .5);
-				font-size: cd-fontSize(s14);
-				padding-left: 15px;
+				color: cd-palette($cd-color, 1006);
+				font-size: cd-fontSize(s13);
+				padding-left: 12px;
 				position: relative;
-				text-transform: lowercase;
+				text-transform: capitalize;
 			}
 
 			.sc-avatar {
@@ -69,6 +69,7 @@
 							height: 15px;
 							outline: 0;
 							padding: 0;
+							top: 5px;
 							width: 15px;
 
 							// loop

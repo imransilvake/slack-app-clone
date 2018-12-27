@@ -50,7 +50,7 @@ class MessagesPanel extends Component {
 		const { currentChannel } = this.props;
 
 		// save loaded messages to redux
-		if (!isReduxMessagesAccessLocked) {
+		if (!isReduxMessagesAccessLocked && messages.length) {
 			this.props.setMessages({
 				channelId: currentChannel.id,
 				messages,
@@ -148,7 +148,7 @@ class MessagesPanel extends Component {
 						isMessagesLoading: false
 					}, () => {
 						// scroll to last message
-						if (x.messages && x.messages.length) this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+						if (x.messages && x.messages.length) this.scrollToLastMessage();
 
 						// update new message
 						this.updateNewMessage(channelId);
@@ -325,7 +325,7 @@ class MessagesPanel extends Component {
 
 				// scroll to last message
 				if (loadedMessagesLength !== 0 && !messagesLength) {
-					this.scrollToLastMessage({ delay: 0, duration: 0, smooth: false });
+					this.scrollToLastMessage();
 				}
 			})
 			.catch();
@@ -393,15 +393,12 @@ class MessagesPanel extends Component {
 
 	/**
 	 * scroll to the last message
-	 *
-	 * @param params
 	 */
-	scrollToLastMessage = (params) => {
+	scrollToLastMessage = () => {
 		const options = {
-			duration: 1000,
-			delay: 100,
-			smooth: true,
-			...params,
+			duration: 0,
+			delay: 0,
+			smooth: false,
 			containerId: 'sc-messages',
 			offset: 50 // scrolls to element + 50 pixels down the page
 		};

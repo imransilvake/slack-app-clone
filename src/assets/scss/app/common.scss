@@ -2,11 +2,11 @@
 .sc-circle {
 	border-radius: 50%;
 	display: block;
-	height: 10px;
+	height: 8px;
 	left: 0;
 	position: absolute;
 	top: 4px;
-	width: 10px;
+	width: 8px;
 
 	// active
 	&.sc-1 {
@@ -25,7 +25,7 @@
 
 	// offline
 	&.sc-4 {
-		background-color: cd-palette($cd-background, 2019);
+		background-color: cd-palette($cd-background, 2006);
 	}
 }
 

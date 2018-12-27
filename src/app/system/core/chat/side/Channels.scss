@@ -65,7 +65,7 @@
 
 				&:hover {
 					background-color: cd-palette($cd-background, 2025);
-					color: cd-palette($cd-color, 1005);
+					color: cd-palette($cd-color, 1001);
 					cursor: pointer;
 				}
 
@@ -78,7 +78,7 @@
 			&.sc-active {
 				Button {
 					background-color: cd-palette($cd-background, 2025);
-					color: cd-palette($cd-color, 1005);
+					color: cd-palette($cd-color, 1001);
 				}
 			}
 		}

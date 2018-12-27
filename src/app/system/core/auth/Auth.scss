@@ -7,7 +7,7 @@
 
 		// header
 		.sc-header {
-			border-bottom: 1px solid cd-palette($cd-border, 3018);
+			border-bottom: 1px solid cd-palette($cd-border, 3002);
 			margin-top: 15px;
 			padding-bottom: 15px;
 			text-align: center;
@@ -65,7 +65,7 @@
 
 				p {
 					&:first-child {
-						color: cd-palette($cd-color, 1016);
+						color: cd-palette($cd-color, 1020);
 						font-weight: cd-fontWeight(700);
 						margin-bottom: 10px;
 					}
@@ -75,7 +75,7 @@
 
 		// footer
 		.sc-footer {
-			border-top: 1px solid cd-palette($cd-border, 3018);
+			border-top: 1px solid cd-palette($cd-border, 3002);
 			padding: 10px 20px;
 			text-align: center;
 		}

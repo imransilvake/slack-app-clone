@@ -1,17 +1,22 @@
 .sc-messages-header {
-	background-color: cd-palette($cd-background, 2022);
+	background-color: cd-palette($cd-background, 2001);
 	height: 60px;
 
 	.cd-row {
+		box-shadow: 1px 1px 1px cd-palette($cd-shadow, 4003);
+		height: 58px;
+
 		.cd-col {
 			&:first-child {
 				.sc-title {
+					color: cd-palette($cd-color, 1003);
 					font-weight: cd-fontWeight(700);
 					padding-top: 3px;
 				}
 
 				.sc-info {
 					align-items: center;
+					color: cd-palette($cd-color, 1002);
 					display: flex;
 
 					> .sc-icon {
@@ -28,7 +33,7 @@
 
 							&.sc-active-button {
 								&:hover {
-									color: cd-palette($cd-color, 1021);
+									color: cd-palette($cd-color, 1003);
 									cursor: pointer;
 								}
 							}
@@ -44,7 +49,7 @@
 
 						&:not(:last-child) {
 							&::after {
-								color: cd-palette($cd-color, 1026);
+								color: cd-palette($cd-color, 1003);
 								content: '|';
 								margin-left: 5px;
 								padding-right: 5px;

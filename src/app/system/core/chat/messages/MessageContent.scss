@@ -17,6 +17,7 @@
 
 			span {
 				background-color: cd-palette($cd-background, 2001);
+				color: cd-palette($cd-color, 1002);
 				font-size: cd-fontSize(s13);
 				font-weight: cd-fontWeight(500);
 				padding: 0 10px;
@@ -25,6 +26,7 @@
 
 		// content
 		.sc-content {
+			color: cd-palette($cd-color, 1002);
 			display: inline-block;
 			margin-left: 10px;
 			width: calc(100% - 45px);
@@ -58,6 +60,7 @@
 	&.sc-continuous {
 		// content
 		.sc-content {
+			color: cd-palette($cd-color, 1002);
 			margin: 0 0 0 -15px;
 			padding-left: 60px;
 			padding-right: 5px;
@@ -165,7 +168,7 @@
 
 	// preview large image
 	.sc-preview-large {
-		background-color: cd-palette($cd-background, 2000);
+		background-color: cd-palette($cd-background, 2001);
 		bottom: 0;
 		height: 100%;
 		left: 0;

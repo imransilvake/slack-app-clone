@@ -31,7 +31,7 @@ class FileUploadModal extends Component {
 
 	render() {
 		const { file, preview, isImageUploading, errors, uploadPercentage, isUploadPaused } = this.state;
-		const { openFileModal, handleCloseFileModal } = this.props;
+		const { openFileModal, handleCloseFileModal, imagePreview } = this.props;
 
 		return (
 			<Modal open={Boolean(openFileModal)}>
@@ -44,7 +44,8 @@ class FileUploadModal extends Component {
 					{/* Upload Image */}
 					<div className="sc-modal sc-file-upload-modal">
 						<div className="sc-image">
-							<img src={preview || NoImage} alt="file"/>
+							{(preview || !imagePreview) && (<img src={preview || NoImage} alt="file"/>)}
+							{!preview && imagePreview && (<img src={imagePreview} alt="file"/>)}
 						</div>
 
 						<div className="sc-content">
