@@ -1,5 +1,6 @@
 // Color
 $cd-color: (
+	1000: #000000, // ns
 	1001: #ffffff,
 	1002: #4d394b,
 	1003: #3e313c,
@@ -7,7 +8,10 @@ $cd-color: (
 	1005: #62c2a0,
 	1006: #e01958,
 	1007: #ecb32c,
-	1008: #89d3e0
+	1008: #89d3e0,
+	1009: #e74c3c, // ns
+	1010: #f8f8f8, // ns
+	1011: #efefef
 );
 
 // Background Color
@@ -20,6 +24,7 @@ $cd-background: (
 	2005: #62c2a0,
 	2006: #e01958,
 	2007: #ecb32c,
+	2008: #89d3e0, // ns
 	2009: #e74c3c,
 	2010: #f8f8f8,
 	2011: #efefef
@@ -38,6 +43,7 @@ $cd-border: (
 // Box Shadow
 $cd-shadow: (
 	4000: #000000,
+	4001: #ffffff, // ns
 	4002: #efefef,
 	4003: #e01958
 );

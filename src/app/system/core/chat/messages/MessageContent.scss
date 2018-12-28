@@ -171,35 +171,35 @@
 			}
 		}
 	}
+}
 
-	// preview image
-	.sc-preview-image {
-		background-color: cd-palette($cd-background, 2001);
-		bottom: 0;
-		height: 100%;
-		left: 0;
-		overflow-y: auto;
-		padding: 0;
+// modal - preview image
+.sc-preview-image-modal {
+	background-color: cd-palette($cd-background, 2001);
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	overflow-y: auto;
+	padding: 0;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	top: 0;
+	width: 100%;
+	z-index: cd-zIndex(modal);
+
+	.material-icons {
+		background-color: cd-palette($cd-background, 2000, .6);
+		border-radius: 2px;
+		color: cd-palette($cd-color, 1001);
+		cursor: pointer;
+		font-size: cd-fontSize(s20);
 		position: fixed;
-		right: 0;
-		text-align: center;
-		top: 0;
-		width: 100%;
-		z-index: cd-zIndex(modal);
+		right: 15px;
+		top: 15px;
 
-		.material-icons {
-			background-color: cd-palette($cd-background, 2000, .6);
-			border-radius: 2px;
-			color: cd-palette($cd-color, 1001);
-			cursor: pointer;
-			font-size: cd-fontSize(s20);
-			position: fixed;
-			right: 15px;
-			top: 15px;
-
-			&:hover {
-				opacity: .9;
-			}
+		&:hover {
+			opacity: .9;
 		}
 	}
 }

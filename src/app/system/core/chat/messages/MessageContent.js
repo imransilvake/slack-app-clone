@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import formatMessageTime from '../../../utilities/helpers/Date';
 import Icon from '@material-ui/core/es/Icon/Icon';
+import Modal from '@material-ui/core/es/Modal/Modal';
 
 class MessageContent extends Component {
 	state = {
@@ -182,10 +183,12 @@ class MessageContent extends Component {
 	 * @returns {*}
 	 */
 	displayImageFullSize = (src, alt) => (
-		<section className="sc-preview-image">
-			<img src={src} alt={alt} className="cd-vh-center"/>
-			<Icon onClick={this.handleCloseImageZoom}>close</Icon>
-		</section>
+		<Modal open={this.state.isImageZoom}>
+			<section className="sc-modal-wrapper sc-preview-image-modal">
+				<img src={src} alt={alt} className="cd-vh-center"/>
+				<Icon onClick={this.handleCloseImageZoom}>close</Icon>
+			</section>
+		</Modal>
 	);
 }
 

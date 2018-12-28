@@ -1,3 +1,42 @@
 .sc-color-panel {
+	background-color: cd-palette($cd-background, 2002);
 	color: cd-palette($cd-color, 1001);
+	padding: 1px 0;
+
+	.material-icons {
+		color: cd-palette($cd-color, 1003);
+		cursor: pointer;
+		display: block;
+		font-size: 36px;
+		margin: 10px 0 10px 7px;
+
+		&:hover {
+			color: cd-palette($cd-color, 1010);
+		}
+	}
+
+	.sc-circle {
+		height: 5px;
+		width: 5px;
+
+		&.sc-1 {
+			left: 14px;
+			top: 24px;
+		}
+
+		&.sc-2 {
+			left: 19px;
+			top: 18px;
+		}
+
+		&.sc-3 {
+			left: 26px;
+			top: 18px;
+		}
+
+		&.sc-4 {
+			left: 31px;
+			top: 24px;
+		}
+	}
 }

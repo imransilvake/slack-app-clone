@@ -65,9 +65,7 @@ class Channels extends Component {
 				</ul>
 
 				{/* Channel Modal */}
-				<Modal
-					open={this.state.openChannelModal}
-					onClose={this.handleCloseModal}>
+				<Modal open={this.state.openChannelModal}>
 					<div className="sc-modal-wrapper">
 						<div className="sc-modal sc-add-channel-modal">
 							{/* Header */}
