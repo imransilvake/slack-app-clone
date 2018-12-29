@@ -187,19 +187,4 @@
 	top: 0;
 	width: 100%;
 	z-index: cd-zIndex(modal);
-
-	.material-icons {
-		background-color: cd-palette($cd-background, 2000, .6);
-		border-radius: 2px;
-		color: cd-palette($cd-color, 1001);
-		cursor: pointer;
-		font-size: cd-fontSize(s20);
-		position: fixed;
-		right: 15px;
-		top: 15px;
-
-		&:hover {
-			opacity: .9;
-		}
-	}
 }

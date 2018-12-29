@@ -186,7 +186,11 @@ class MessageContent extends Component {
 		<Modal open={this.state.isImageZoom}>
 			<section className="sc-modal-wrapper sc-preview-image-modal">
 				<img src={src} alt={alt} className="cd-vh-center"/>
-				<Icon onClick={this.handleCloseImageZoom}>close</Icon>
+				<Icon
+					className="sc-close-float sc-fixed sc-spacing-large bg-size-small bg-dark"
+					onClick={this.handleCloseImageZoom}>
+					close
+				</Icon>
 			</section>
 		</Modal>
 	);

@@ -18,7 +18,7 @@ export const CLEAR_USER = 'CLEAR_USER';
 	--------------------
 */
 
-// set user
+// set channel
 export const SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL';
 
 
@@ -27,5 +27,17 @@ export const SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL';
 	---------------------
 */
 
-// set user
+// set messages
 export const SET_MESSAGES = 'SET_MESSAGES';
+
+
+/* ---------------------
+	COLORS Action Types
+	-------------------
+*/
+
+// set color
+export const SET_SIDE_PANEL_COLORS = 'SET_SIDE_PANEL_COLORS';
+export const SET_SIDE_PANEL_BACKGROUND = 'SET_SIDE_PANEL_BACKGROUND';
+export const SET_SIDE_PANEL_COLOR_PRIMARY = 'SET_SIDE_PANEL_COLOR_PRIMARY';
+export const SET_SIDE_PANEL_COLOR_SECONDARY = 'SET_SIDE_PANEL_COLOR_SECONDARY';

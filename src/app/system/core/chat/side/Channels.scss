@@ -12,10 +12,9 @@
 			padding: 5px 0;
 
 			span {
-				background-color: cd-palette($cd-background, 2003);
 				border-radius: 2px;
 				display: inline-block;
-				font-size: cd-fontSize(s11);
+				font-size: cd-fontSize(s13);
 				height: 18px;
 				line-height: cd-lineHeight(1.9);
 				margin-left: 5px;
@@ -57,6 +56,7 @@
 				border-radius: 0;
 				box-shadow: none;
 				color: cd-palette($cd-color, 1004);
+				cursor: pointer;
 				font-size: cd-fontSize(s15);
 				height: auto;
 				min-height: auto;
@@ -64,9 +64,7 @@
 				padding: 6px 8px;
 
 				&:hover {
-					background-color: cd-palette($cd-background, 2003);
-					color: cd-palette($cd-color, 1001);
-					cursor: pointer;
+					color: cd-palette($cd-color, 1011);
 				}
 
 				span {
@@ -76,9 +74,12 @@
 			}
 
 			&.sc-active {
+				background-color: cd-palette($cd-background, 2003);
+
 				Button {
-					background-color: cd-palette($cd-background, 2003);
-					color: cd-palette($cd-color, 1001);
+					&:hover {
+						color: cd-palette($cd-color, 1004);
+					}
 				}
 			}
 		}

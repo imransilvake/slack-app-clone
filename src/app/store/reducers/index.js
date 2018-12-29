@@ -30,7 +30,7 @@ const userReducer = (state = initialUserState, action) => {
 			};
 		case actionTypes.CLEAR_USER:
 			return {
-				...initialUserState,
+				currentUser: null,
 				isAnimationLoading: false
 			};
 		default:
@@ -54,7 +54,6 @@ const channelReducer = (state = initialChannelState, action) => {
 	switch (action.type) {
 		case actionTypes.SET_CURRENT_CHANNEL:
 			return {
-				...initialChannelState,
 				currentChannel: action.payload.currentChannel
 			};
 		default:
@@ -68,7 +67,7 @@ const channelReducer = (state = initialChannelState, action) => {
 	----------------
 */
 
-// initial channel state
+// initial message state
 const initialMessageState = [];
 
 // reducer: Message
@@ -89,10 +88,52 @@ const messageReducer = (state = initialMessageState, action) => {
 	}
 };
 
+
+/* ---------------
+	Reducer: Color
+	--------------
+*/
+
+// initial color state
+const initialColorState = {
+	sidePanelBackground: {
+		primary: null,
+		secondary: null
+	},
+	sidePanelColorPrimary: null,
+	sidePanelColorSecondary: null
+};
+
+// reducer: Color
+const colorReducer = (state = initialColorState, action) => {
+	switch (action.type) {
+		case actionTypes.SET_SIDE_PANEL_COLORS:
+			return action.payload;
+		case actionTypes.SET_SIDE_PANEL_BACKGROUND:
+			return {
+				...state,
+				sidePanelBackground: action.payload
+			};
+		case actionTypes.SET_SIDE_PANEL_COLOR_PRIMARY:
+			return {
+				...state,
+				sidePanelColorPrimary: action.payload
+			};
+		case actionTypes.SET_SIDE_PANEL_COLOR_SECONDARY:
+			return {
+				...state,
+				sidePanelColorSecondary: action.payload
+			};
+		default:
+			return state;
+	}
+};
+
 const rootReducer = combineReducers({
 	user: userReducer,
 	channel: channelReducer,
-	message: messageReducer
+	message: messageReducer,
+	colors: colorReducer
 });
 
 export default rootReducer;

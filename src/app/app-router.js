@@ -14,7 +14,7 @@ import Register from './system/core/auth/Register';
 import Home from './system/frame/home/Home';
 import Chat from './system/core/chat/Chat';
 import ENV from '../environment/index';
-import { setUser, clearUser } from './store/actions';
+import { setUser, clearUser, setColor } from './store/actions';
 import LoadingAnimation from './system/utilities/loading-animation/LoadingAnimation';
 
 class AppRouter extends Component {
@@ -32,15 +32,20 @@ class AppRouter extends Component {
 							.once('value')
 							.then((snap) => {
 								const snapshot = snap.val();
-								const status = { code: snapshot ? snapshot.code : '1' };
+								if (snapshot) {
+									const status = { code: snapshot.code };
 
-								// set user to store
-								const userData = { ...user, ...status };
-								this.props.setUser(userData);
+									// set user to store
+									const userData = { ...user, ...status };
+									this.props.setUser(userData);
 
-								// navigate to chat route
-								if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
-									this.props.history.push(ENV.ROUTING.CHAT);
+									// set colors to store
+									this.props.setColor(0, snapshot.colors);
+
+									// navigate to chat route
+									if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
+										this.props.history.push(ENV.ROUTING.CHAT);
+									}
 								}
 							});
 					}
@@ -75,6 +80,6 @@ const mapStateFromProps = state => ({
 export default withRouter(
 	connect(
 		mapStateFromProps,
-		{ setUser, clearUser }
+		{ setUser, clearUser, setColor }
 	)(AppRouter)
 );

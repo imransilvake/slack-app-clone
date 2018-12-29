@@ -62,6 +62,14 @@
 	},
 	"CHAT": {
 		"SIDE_PANEL": {
+			"COLOR_PANEL": {
+				"TITLE": "Seitenwand",
+				"BACKGROUND": "Hintergrundfarbe",
+				"COLOR": {
+					"PRIMARY": "Farbe primär",
+					"SECONDARY": "Farbe sekundär"
+				}
+			},
 			"USER_PANEL": {
 				"STATUS_CODE": {
 					"1": "Aktiv",

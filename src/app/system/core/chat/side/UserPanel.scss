@@ -34,10 +34,6 @@
 				width: 30px;
 			}
 		}
-
-		&:hover {
-			background-color: cd-palette($cd-background, 2003);
-		}
 	}
 }
 
@@ -57,8 +53,12 @@
 				position: relative;
 
 				&:first-child {
-					background-color: cd-palette($cd-background, 2003);
+					border-bottom: 1px solid cd-palette($cd-border, 3005);
 					cursor: default;
+
+					&:hover {
+						background-color: transparent;
+					}
 
 					.sc-status {
 						height: 24px;
@@ -95,7 +95,7 @@
 									position: relative;
 
 									&::after {
-										background-color: cd-palette($cd-background, 2003);
+										background-color: cd-palette($cd-background, 2001);
 										border-radius: 50%;
 										bottom: 0;
 										content: '';

@@ -59,3 +59,46 @@
 		}
 	}
 }
+
+// close button - modal, popover
+.sc-close-float {
+	border-radius: 2px;
+	cursor: pointer;
+	right: 2px;
+	top: 2px;
+
+	&.sc-absolute {
+		position: absolute;
+	}
+
+	&.sc-fixed {
+		position: fixed;
+	}
+
+	&.sc-spacing-small {
+		right: 5px;
+		top: 5px;
+	}
+
+	&.sc-spacing-large {
+		right: 15px;
+		top: 15px;
+	}
+
+	&.bg-size-small {
+		font-size: cd-fontSize(s20);
+	}
+
+	&.bg-size-large {
+		font-size: cd-fontSize(se2);
+	}
+
+	&.bg-dark {
+		background-color: cd-palette($cd-background, 2000, .6);
+		color: cd-palette($cd-color, 1001);
+	}
+
+	&:hover {
+		opacity: .9;
+	}
+}

@@ -54,9 +54,41 @@ export const setChannel = (channel) => {
 	---------------------
 */
 
-export const setMessages = (data) => {
+export const setMessages = (messages) => {
 	return {
 		type: actionTypes.SET_MESSAGES,
-		payload: data
+		payload: messages
+	};
+};
+
+
+/* ---------------------
+	COLORS Action Types
+	-------------------
+*/
+
+export const setColor = (colorType, payload) => {
+	let cType = null;
+
+	switch (colorType) {
+		case 0:
+			cType = actionTypes.SET_SIDE_PANEL_COLORS;
+			break;
+		case 1:
+			cType = actionTypes.SET_SIDE_PANEL_BACKGROUND;
+			break;
+		case 2:
+			cType = actionTypes.SET_SIDE_PANEL_COLOR_PRIMARY;
+			break;
+		case 3:
+			cType = actionTypes.SET_SIDE_PANEL_COLOR_SECONDARY;
+			break;
+		default:
+			break;
+	}
+
+	return {
+		type: cType,
+		payload
 	};
 };

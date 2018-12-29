@@ -30,7 +30,7 @@ class Channels extends Component {
 		errors: [],
 		isFormEnabled: false,
 		isAnimationLoading: false,
-		firstLoad: true
+		isFirstLoad: true
 	};
 
 	componentDidMount() {
@@ -43,14 +43,18 @@ class Channels extends Component {
 
 	render() {
 		const { channels, channelName, channelDetails, isFormEnabled, errors, isAnimationLoading } = this.state;
+		const { colors } = this.props;
+		const sidePanelColorPrimary = { color: colors.sidePanelColorPrimary };
 
 		return isAnimationLoading ? <LoadingAnimation/> : (
 			<section className="sc-channels">
 				{/* Title */}
 				<div className="sc-title">
-					<h6>{i18n.t('CHAT.SIDE_PANEL.CHANNELS.TITLE')}<span>{channels.length}</span></h6>
+					<h6 style={sidePanelColorPrimary}>
+						{i18n.t('CHAT.SIDE_PANEL.CHANNELS.TITLE')}<span>{channels.length}</span>
+					</h6>
 					<div className="cd-tooltip sc-icon-wrapper">
-						<div className="sc-icon">
+						<div className="sc-icon" style={sidePanelColorPrimary}>
 							<Icon onClick={this.handleOpenModal}>add_circle</Icon>
 						</div>
 						<span className="cd-arrow cd-top cd-fixed-right">
@@ -61,7 +65,7 @@ class Channels extends Component {
 
 				{/* Channel */}
 				<ul className="cd-remove-bullets sc-channels-list">
-					{this.displayChannels(channels)}
+					{this.displayChannels(channels, colors)}
 				</ul>
 
 				{/* Channel Modal */}
@@ -273,14 +277,17 @@ class Channels extends Component {
 	 * display channels
 	 *
 	 * @param channels
+	 * @param colors
 	 */
-	displayChannels = channels => (
+	displayChannels = (channels, colors) => (
 		channels && channels.length > 0 && channels.map(channel => (
 			<li
 				key={channel.id}
 				name={channel.name}
-				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}>
+				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}
+				style={{ backgroundColor: this.state.activeChannel === channel.id ? colors.sidePanelBackground.primary : null }}>
 				<Button
+					style={{ color: colors.sidePanelColorSecondary }}
 					variant="contained"
 					type="button"
 					onClick={() => this.changeChannel(channel)}
@@ -308,11 +315,11 @@ class Channels extends Component {
 	 * set first channel
 	 */
 	setFirstChannel = () => {
-		const { channels, firstLoad } = this.state;
+		const { channels, isFirstLoad } = this.state;
 		const firstChannel = channels[0];
 
 		// set first channel
-		if (firstLoad && channels.length > 0) {
+		if (isFirstLoad && channels.length > 0) {
 			// set current channel
 			this.props.setChannel(firstChannel);
 
@@ -320,8 +327,8 @@ class Channels extends Component {
 			this.setActiveChannel(firstChannel);
 		}
 
-		// unset firstLoad
-		this.setState({ firstLoad: false })
+		// unset isFirstLoad
+		this.setState({ isFirstLoad: false })
 	};
 
 	/**

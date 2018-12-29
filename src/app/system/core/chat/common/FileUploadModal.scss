@@ -1,17 +1,6 @@
 .sc-modal-wrapper {
 	position: relative;
 
-	.sc-close-modal {
-		cursor: pointer;
-		position: absolute;
-		right: 20px;
-		top: 15px;
-
-		.material-icons {
-			font-size: cd-fontSize(se2);
-		}
-	}
-
 	.sc-file-upload-modal {
 		margin: 60px auto 0 !important;
 		max-width: 320px !important;

@@ -1,42 +1,74 @@
 .sc-color-panel {
 	background-color: cd-palette($cd-background, 2002);
-	color: cd-palette($cd-color, 1001);
+	color: cd-palette($cd-color, 1003);
 	padding: 1px 0;
 
-	.material-icons {
-		color: cd-palette($cd-color, 1003);
-		cursor: pointer;
-		display: block;
-		font-size: 36px;
-		margin: 10px 0 10px 7px;
+	.sc-palette {
+		.sc-icon {
+			cursor: pointer;
+			display: block;
+			font-size: 38px;
+			margin: 10px 0 10px 7px;
 
-		&:hover {
-			color: cd-palette($cd-color, 1010);
+			&:hover {
+				opacity: .9;
+			}
+		}
+
+		.sc-circle {
+			height: 5px;
+			width: 5px;
+
+			&.sc-1 {
+				left: 15px;
+				top: 25px;
+			}
+
+			&.sc-2 {
+				left: 19px;
+				top: 19px;
+			}
+
+			&.sc-3 {
+				left: 27px;
+				top: 19px;
+			}
+
+			&.sc-4 {
+				left: 32px;
+				top: 25px;
+			}
 		}
 	}
+}
 
-	.sc-circle {
-		height: 5px;
-		width: 5px;
+// popover - palette
+.sc-palette-popover {
+	> div {
+		border-radius: 1px;
+		padding: 0;
+		top: 58px !important;
 
-		&.sc-1 {
-			left: 14px;
-			top: 24px;
-		}
+		.sc-palette {
+			width: 246px;
 
-		&.sc-2 {
-			left: 19px;
-			top: 18px;
-		}
+			h5 {
+				background-color: cd-palette($cd-background, 2010);
+				font-size: cd-fontSize(s18);
+				margin-bottom: 10px;
+				padding: 5px 10px;
+				text-align: center;
+			}
 
-		&.sc-3 {
-			left: 26px;
-			top: 18px;
-		}
+			.sc-colors {
+				padding: 0 25px;
 
-		&.sc-4 {
-			left: 31px;
-			top: 24px;
+				.sc-block {
+					.sc-color {
+						padding: 10px 0 15px;
+					}
+				}
+			}
 		}
 	}
 }

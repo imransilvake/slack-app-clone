@@ -37,9 +37,11 @@ class FileUploadModal extends Component {
 			<Modal open={Boolean(openFileModal)}>
 				<section className="sc-modal-wrapper">
 					{/* Close Modal */}
-					<div className="sc-close-modal">
-						<Icon onClick={handleCloseFileModal}>close</Icon>
-					</div>
+					<Icon
+						className="sc-close-float sc-absolute sc-spacing-large bg-size-large"
+						onClick={handleCloseFileModal}>
+						close
+					</Icon>
 
 					{/* Upload Image */}
 					<div className="sc-modal sc-file-upload-modal">
