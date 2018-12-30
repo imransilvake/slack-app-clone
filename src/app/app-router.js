@@ -42,12 +42,14 @@ class AppRouter extends Component {
 
 									// set state: user colors
 									const initColors = {
-										sidePanelBackground: {
-											primary: '',
-											secondary: ''
-										},
-										sidePanelColorPrimary: '',
-										sidePanelColorSecondary: ''
+										side_panel: {
+											background: {
+												primary: '',
+												secondary: ''
+											},
+											color_primary: '',
+											color_secondary: ''
+										}
 									};
 									const colors = snapshot.colors ? snapshot.colors : initColors;
 									this.props.updateUserColors(colors);

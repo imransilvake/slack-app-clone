@@ -44,7 +44,7 @@ class Channels extends Component {
 	render() {
 		const { channels, channelName, channelDetails, isFormEnabled, errors, isAnimationLoading } = this.state;
 		const { userColors } = this.props;
-		const sidePanelColorPrimary = { color: userColors.sidePanelColorPrimary };
+		const sidePanelColorPrimary = { color: userColors.side_panel.color_primary };
 
 		return isAnimationLoading ? <LoadingAnimation/> : (
 			<section className="sc-channels">
@@ -285,9 +285,9 @@ class Channels extends Component {
 				key={channel.id}
 				name={channel.name}
 				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}
-				style={{ backgroundColor: this.state.activeChannel === channel.id ? userColors.sidePanelBackground.primary : null }}>
+				style={{ backgroundColor: this.state.activeChannel === channel.id ? userColors.side_panel.background.primary : null }}>
 				<Button
-					style={{ color: userColors.sidePanelColorSecondary }}
+					style={{ color: userColors.side_panel.color_secondary }}
 					variant="contained"
 					type="button"
 					onClick={() => this.changeChannel(channel)}

@@ -25,8 +25,8 @@ class UserPanel extends Component {
 	render() {
 		const { openMenu, openFileModal } = this.state;
 		const { currentUser, userStatus, userColors } = this.props;
-		const sidePanelColorPrimary = { color: userColors.sidePanelColorPrimary };
-		const sidePanelColorSecondary = { color: userColors.sidePanelColorSecondary };
+		const sidePanelColorPrimary = { color: userColors.side_panel.color_primary };
+		const sidePanelColorSecondary = { color: userColors.side_panel.color_secondary };
 
 		const circleClass = classNames({
 			'sc-circle': true,
