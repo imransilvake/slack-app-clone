@@ -33,14 +33,22 @@ class AppRouter extends Component {
 							.then((snap) => {
 								const snapshot = snap.val();
 								if (snapshot) {
-									const status = { code: snapshot.code };
+									const status = { code: snapshot.code ? snapshot.code : '1' };
 
 									// set user to store
 									const userData = { ...user, ...status };
 									this.props.setUser(userData);
 
 									// set colors to store
-									this.props.setColor(0, snapshot.colors);
+									const colors = {
+										sidePanelBackground: {
+											primary: '',
+											secondary: ''
+										},
+										sidePanelColorPrimary: '',
+										sidePanelColorSecondary: ''
+									};
+									this.props.setColor(0, snapshot.colors ? snapshot.colors : colors);
 
 									// navigate to chat route
 									if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
