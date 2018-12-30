@@ -33,8 +33,8 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 	- [X] Add Media to Messages
 	- [ ] Edit/Delete Message
 - [X] Add User Status
-- [ ] Add Color Picker
-- [ ] Implement Search Functionality
+- [X] Add Colors
+- [ ] Implement Search
 - [ ] Show Channel Information
 	- [ ] Show Top Posters
 	- [ ] Channel Description
