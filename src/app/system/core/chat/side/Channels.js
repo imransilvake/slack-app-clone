@@ -43,8 +43,8 @@ class Channels extends Component {
 
 	render() {
 		const { channels, channelName, channelDetails, isFormEnabled, errors, isAnimationLoading } = this.state;
-		const { colors } = this.props;
-		const sidePanelColorPrimary = { color: colors.sidePanelColorPrimary };
+		const { userColors } = this.props;
+		const sidePanelColorPrimary = { color: userColors.sidePanelColorPrimary };
 
 		return isAnimationLoading ? <LoadingAnimation/> : (
 			<section className="sc-channels">
@@ -65,7 +65,7 @@ class Channels extends Component {
 
 				{/* Channel */}
 				<ul className="cd-remove-bullets sc-channels-list">
-					{this.displayChannels(channels, colors)}
+					{this.displayChannels(channels, userColors)}
 				</ul>
 
 				{/* Channel Modal */}
@@ -277,17 +277,17 @@ class Channels extends Component {
 	 * display channels
 	 *
 	 * @param channels
-	 * @param colors
+	 * @param userColors
 	 */
-	displayChannels = (channels, colors) => (
+	displayChannels = (channels, userColors) => (
 		channels && channels.length > 0 && channels.map(channel => (
 			<li
 				key={channel.id}
 				name={channel.name}
 				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}
-				style={{ backgroundColor: this.state.activeChannel === channel.id ? colors.sidePanelBackground.primary : null }}>
+				style={{ backgroundColor: this.state.activeChannel === channel.id ? userColors.sidePanelBackground.primary : null }}>
 				<Button
-					style={{ color: colors.sidePanelColorSecondary }}
+					style={{ color: userColors.sidePanelColorSecondary }}
 					variant="contained"
 					type="button"
 					onClick={() => this.changeChannel(channel)}

@@ -1,28 +1,43 @@
 // app
 import * as actionTypes from './types';
 
-/* -------------------
-	USER Action Types
-	-----------------
-*/
+// =================
+// USER Action Types
+// =================
 
 // set user
 export const setUser = (user) => {
 	return {
-		type: actionTypes.SET_USER,
+		type: actionTypes.SET_CURRENT_USER,
 		payload: {
 			currentUser: user
 		}
 	};
 };
 
-// update user
-export const updateUser = (user) => {
+// update user avatar
+export const updateUserAvatar = (user) => {
 	return {
-		type: actionTypes.UPDATE_USER,
+		type: actionTypes.UPDATE_USER_AVATAR,
 		payload: {
 			currentUser: user
 		}
+	};
+};
+
+// update user status
+export const updateUserStatus = (status) => {
+	return {
+		type: actionTypes.UPDATE_USER_STATUS,
+		payload: status
+	};
+};
+
+// update user colors
+export const updateUserColors = (colors) => {
+	return {
+		type: actionTypes.UPDATE_USER_COLORS,
+		payload: colors
 	};
 };
 
@@ -34,10 +49,9 @@ export const clearUser = () => {
 };
 
 
-/* ----------------------
-	Channel Action Types
-	--------------------
-*/
+// ====================
+// Channel Action Types
+// ====================
 
 export const setChannel = (channel) => {
 	return {
@@ -49,46 +63,13 @@ export const setChannel = (channel) => {
 };
 
 
-/* -----------------------
-	Messages Action Types
-	---------------------
-*/
+// =====================
+// Messages Action Types
+// =====================
 
 export const setMessages = (messages) => {
 	return {
 		type: actionTypes.SET_MESSAGES,
 		payload: messages
-	};
-};
-
-
-/* ---------------------
-	COLORS Action Types
-	-------------------
-*/
-
-export const setColor = (colorType, payload) => {
-	let cType = null;
-
-	switch (colorType) {
-		case 0:
-			cType = actionTypes.SET_SIDE_PANEL_COLORS;
-			break;
-		case 1:
-			cType = actionTypes.SET_SIDE_PANEL_BACKGROUND;
-			break;
-		case 2:
-			cType = actionTypes.SET_SIDE_PANEL_COLOR_PRIMARY;
-			break;
-		case 3:
-			cType = actionTypes.SET_SIDE_PANEL_COLOR_SECONDARY;
-			break;
-		default:
-			break;
-	}
-
-	return {
-		type: cType,
-		payload
 	};
 };

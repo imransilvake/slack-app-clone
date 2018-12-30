@@ -14,7 +14,7 @@ import Register from './system/core/auth/Register';
 import Home from './system/frame/home/Home';
 import Chat from './system/core/chat/Chat';
 import ENV from '../environment/index';
-import { setUser, clearUser, setColor } from './store/actions';
+import { setUser, updateUserStatus, updateUserColors, clearUser } from './store/actions';
 import LoadingAnimation from './system/utilities/loading-animation/LoadingAnimation';
 
 class AppRouter extends Component {
@@ -33,14 +33,15 @@ class AppRouter extends Component {
 							.then((snap) => {
 								const snapshot = snap.val();
 								if (snapshot) {
-									const status = { code: snapshot.code ? snapshot.code : '1' };
+									// set state: user
+									this.props.setUser(user);
 
-									// set user to store
-									const userData = { ...user, ...status };
-									this.props.setUser(userData);
+									// set state: user status
+									const status = snapshot.code ? snapshot.code : '1';
+									this.props.updateUserStatus(status);
 
-									// set colors to store
-									const colors = {
+									// set state: user colors
+									const initColors = {
 										sidePanelBackground: {
 											primary: '',
 											secondary: ''
@@ -48,7 +49,8 @@ class AppRouter extends Component {
 										sidePanelColorPrimary: '',
 										sidePanelColorSecondary: ''
 									};
-									this.props.setColor(0, snapshot.colors ? snapshot.colors : colors);
+									const colors = snapshot.colors ? snapshot.colors : initColors;
+									this.props.updateUserColors(colors);
 
 									// navigate to chat route
 									if (this.props.location.pathname !== ENV.ROUTING.CHAT) {
@@ -88,6 +90,6 @@ const mapStateFromProps = state => ({
 export default withRouter(
 	connect(
 		mapStateFromProps,
-		{ setUser, clearUser, setColor }
+		{ setUser, updateUserStatus, updateUserColors, clearUser }
 	)(AppRouter)
 );

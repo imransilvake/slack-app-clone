@@ -26,16 +26,19 @@ class Chat extends Component {
 
 	render() {
 		const { mobileOpen } = this.state;
-		const { currentUser, currentChannel } = this.props;
+		const { currentUser, currentChannel, userStatus, userColors } = this.props;
 
-		return currentUser && (
+		return currentUser && userStatus && userColors && (
 			<section className="cd-container-fluid sc-chat">
 				{/*  Side Panel - Mobile */}
 				<Drawer
 					open={mobileOpen}
 					onClose={this.handleDrawerToggle}>
 					<SidePanel
+						key={currentUser.uid}
 						currentUser={currentUser}
+						userStatus={userStatus}
+						userColors={userColors}
 						isMobileView={false}
 					/>
 				</Drawer>
@@ -46,6 +49,8 @@ class Chat extends Component {
 						<SidePanel
 							key={currentUser.uid}
 							currentUser={currentUser}
+							userStatus={userStatus}
+							userColors={userColors}
 							isMobileView
 						/>
 					</div>
@@ -94,7 +99,9 @@ class Chat extends Component {
 // props
 const mapStateToProps = state => ({
 	currentUser: state.user.currentUser,
-	currentChannel: state.channel.currentChannel
+	currentChannel: state.channel.currentChannel,
+	userStatus: state.user.status,
+	userColors: state.user.colors
 });
 
 export default connect(mapStateToProps)(Chat);

@@ -6,13 +6,12 @@ import classNames from 'classnames/bind';
 import ColorPanel from './ColorPanel';
 import UserPanel from './UserPanel';
 import Channels from './Channels';
-import { connect } from 'react-redux';
 
 class SidePanel extends Component {
 	render() {
-		const { currentUser, isMobileView, colors } = this.props;
-		const sidePanelDarkStyle = { backgroundColor: colors.sidePanelBackground.primary };
-		const sidePanelLightStyle = { backgroundColor: colors.sidePanelBackground.secondary };
+		const { currentUser, userStatus, isMobileView, userColors } = this.props;
+		const sidePanelDarkStyle = { backgroundColor: userColors.sidePanelBackground.primary };
+		const sidePanelLightStyle = { backgroundColor: userColors.sidePanelBackground.secondary };
 		const sidePanelClass = classNames({
 			'cd-col sc-side-panel': true,
 			'sc-view-fixed': isMobileView
@@ -24,7 +23,7 @@ class SidePanel extends Component {
 				<div className="sc-color-panel-wrapper" style={sidePanelDarkStyle}>
 					<ColorPanel
 						currentUser={currentUser}
-						colors={colors}/>
+						userColors={userColors}/>
 				</div>
 
 				{/* Content */}
@@ -33,22 +32,18 @@ class SidePanel extends Component {
 					<header className="sc-header">
 						<UserPanel
 							currentUser={currentUser}
-							colors={colors}/>
+							userStatus={userStatus}
+							userColors={userColors}/>
 					</header>
 
 					{/* Channels */}
 					<Channels
 						currentUser={currentUser}
-						colors={colors}/>
+						userColors={userColors}/>
 				</div>
 			</section>
 		);
 	}
 }
 
-// props
-const mapStateToProps = state => ({
-	colors: state.colors
-});
-
-export default connect(mapStateToProps)(SidePanel);
+export default SidePanel;

@@ -4,32 +4,46 @@ import { combineReducers } from 'redux';
 // app
 import * as actionTypes from '../actions/types';
 
-/* ---------------
-	Reducer: User
-	-------------
-*/
+// =============
+// Reducer: User
+// =============
 
-// initial user state
-const initialUserState = {
+// init user state
+const initUserState = {
 	currentUser: null,
+	status: null,
+	colors: null,
 	isAnimationLoading: true
 };
 
 // reducer: User
-const userReducer = (state = initialUserState, action) => {
+const userReducer = (state = initUserState, action) => {
 	switch (action.type) {
-		case actionTypes.SET_USER:
+		case actionTypes.SET_CURRENT_USER:
 			return {
+				...state,
 				currentUser: action.payload.currentUser,
 				isAnimationLoading: false
 			};
-		case actionTypes.UPDATE_USER:
+		case actionTypes.UPDATE_USER_AVATAR:
 			return {
+				...state,
 				currentUser: action.payload.currentUser,
 				isAnimationLoading: false
+			};
+		case actionTypes.UPDATE_USER_STATUS:
+			return {
+				...state,
+				status: action.payload
+			};
+		case actionTypes.UPDATE_USER_COLORS:
+			return {
+				...state,
+				colors: action.payload
 			};
 		case actionTypes.CLEAR_USER:
 			return {
+				...state,
 				currentUser: null,
 				isAnimationLoading: false
 			};
@@ -39,18 +53,17 @@ const userReducer = (state = initialUserState, action) => {
 };
 
 
-/* ------------------
-	Reducer: Channel
-	----------------
-*/
+// ================
+// Reducer: Channel
+// ================
 
-// initial channel state
-const initialChannelState = {
+// init channel state
+const initChannelState = {
 	currentChannel: null
 };
 
 // reducer: Channel
-const channelReducer = (state = initialChannelState, action) => {
+const channelReducer = (state = initChannelState, action) => {
 	switch (action.type) {
 		case actionTypes.SET_CURRENT_CHANNEL:
 			return {
@@ -62,16 +75,15 @@ const channelReducer = (state = initialChannelState, action) => {
 };
 
 
-/* ------------------
-	Reducer: Message
-	----------------
-*/
+// ================
+// Reducer: Message
+// ================
 
-// initial message state
-const initialMessageState = [];
+// init message state
+const initMessageState = [];
 
 // reducer: Message
-const messageReducer = (state = initialMessageState, action) => {
+const messageReducer = (state = initMessageState, action) => {
 	switch (action.type) {
 		case actionTypes.SET_MESSAGES: {
 			const matchedIndex = state.findIndex(x => x.channelId === action.payload.channelId);
@@ -88,52 +100,11 @@ const messageReducer = (state = initialMessageState, action) => {
 	}
 };
 
-
-/* ---------------
-	Reducer: Color
-	--------------
-*/
-
-// initial color state
-const initialColorState = {
-	sidePanelBackground: {
-		primary: null,
-		secondary: null
-	},
-	sidePanelColorPrimary: null,
-	sidePanelColorSecondary: null
-};
-
-// reducer: Color
-const colorReducer = (state = initialColorState, action) => {
-	switch (action.type) {
-		case actionTypes.SET_SIDE_PANEL_COLORS:
-			return action.payload;
-		case actionTypes.SET_SIDE_PANEL_BACKGROUND:
-			return {
-				...state,
-				sidePanelBackground: action.payload
-			};
-		case actionTypes.SET_SIDE_PANEL_COLOR_PRIMARY:
-			return {
-				...state,
-				sidePanelColorPrimary: action.payload
-			};
-		case actionTypes.SET_SIDE_PANEL_COLOR_SECONDARY:
-			return {
-				...state,
-				sidePanelColorSecondary: action.payload
-			};
-		default:
-			return state;
-	}
-};
-
+// root reducer
 const rootReducer = combineReducers({
 	user: userReducer,
 	channel: channelReducer,
-	message: messageReducer,
-	colors: colorReducer
+	message: messageReducer
 });
 
 export default rootReducer;

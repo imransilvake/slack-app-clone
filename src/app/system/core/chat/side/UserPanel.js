@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button/Button';
 import i18n from '../../../../../assets/i18n/i18n';
 import Icon from '@material-ui/core/es/Icon/Icon';
 import connect from 'react-redux/es/connect/connect';
-import { updateUser } from '../../../../store/actions';
+import { updateUserAvatar, updateUserStatus } from '../../../../store/actions';
 import classNames from 'classnames/bind';
 import FileUploadModal from '../common/FileUploadModal';
 
@@ -24,16 +24,16 @@ class UserPanel extends Component {
 
 	render() {
 		const { openMenu, openFileModal } = this.state;
-		const { currentUser, colors } = this.props;
-		const sidePanelColorPrimary = { color: colors.sidePanelColorPrimary };
-		const sidePanelColorSecondary = { color: colors.sidePanelColorSecondary };
+		const { currentUser, userStatus, userColors } = this.props;
+		const sidePanelColorPrimary = { color: userColors.sidePanelColorPrimary };
+		const sidePanelColorSecondary = { color: userColors.sidePanelColorSecondary };
 
 		const circleClass = classNames({
 			'sc-circle': true,
-			'sc-1': currentUser.code === '1',
-			'sc-2': currentUser.code === '2',
-			'sc-3': currentUser.code === '3',
-			'sc-4': currentUser.code === '4'
+			'sc-1': userStatus === '1',
+			'sc-2': userStatus === '2',
+			'sc-3': userStatus === '3',
+			'sc-4': userStatus === '4'
 		});
 
 		return (
@@ -45,7 +45,7 @@ class UserPanel extends Component {
 					</h5>
 					<p className="sc-name" style={sidePanelColorSecondary}>
 						<span className={circleClass}/>
-						{i18n.t(`CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.${currentUser.code}`)}
+						{i18n.t(`CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.${userStatus}`)}
 					</p>
 					<img className="sc-avatar" src={currentUser.photoURL} alt={currentUser.displayName}/>
 				</Button>
@@ -63,7 +63,7 @@ class UserPanel extends Component {
 								className="sc-circle sc-1 cd-tooltip"
 								onClick={this.handleChangeStatus}
 								value="1"
-								disabled={currentUser.code === '1'}>
+								disabled={userStatus === '1'}>
 								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.1')}</span>
 							</button>
 							<button
@@ -71,7 +71,7 @@ class UserPanel extends Component {
 								className="sc-circle sc-2 cd-tooltip"
 								onClick={this.handleChangeStatus}
 								value="2"
-								disabled={currentUser.code === '2'}>
+								disabled={userStatus === '2'}>
 								<span className="cd-right">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.2')}</span>
 							</button>
 							<button
@@ -79,7 +79,7 @@ class UserPanel extends Component {
 								className="sc-circle sc-3 cd-tooltip"
 								onClick={this.handleChangeStatus}
 								value="3"
-								disabled={currentUser.code === '3'}>
+								disabled={userStatus === '3'}>
 								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.3')}</span>
 							</button>
 							<button
@@ -87,7 +87,7 @@ class UserPanel extends Component {
 								className="sc-circle sc-4 cd-tooltip"
 								onClick={this.handleChangeStatus}
 								value="4"
-								disabled={currentUser.code === '4'}>
+								disabled={userStatus === '4'}>
 								<span className="cd-left">{i18n.t('CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.4')}</span>
 							</button>
 						</div>
@@ -150,11 +150,11 @@ class UserPanel extends Component {
 			.update(status)
 			.then(() => {
 				// update on redux
-				this.props.updateUser({ ...currentUser, ...status });
-			});
+				this.props.updateUserStatus(status.code);
 
-		// close menu
-		this.handleCloseMenu();
+				// close menu
+				this.handleCloseMenu();
+			});
 	};
 
 	/**
@@ -165,7 +165,6 @@ class UserPanel extends Component {
 	handleChangeAvatar = (fileUrl) => {
 		const { usersRef } = this.state;
 		const { currentUser } = this.props;
-		const status = { code: currentUser.code };
 
 		// upload image on storage
 		firebase
@@ -176,7 +175,7 @@ class UserPanel extends Component {
 				const updatedUser = firebase.auth().currentUser;
 
 				// update on redux
-				this.props.updateUser({ ...updatedUser, ...status });
+				this.props.updateUserAvatar(updatedUser);
 			});
 
 		// update image on database
@@ -211,4 +210,4 @@ class UserPanel extends Component {
 	};
 }
 
-export default connect(null, { updateUser })(UserPanel);
+export default connect(null, { updateUserAvatar, updateUserStatus })(UserPanel);

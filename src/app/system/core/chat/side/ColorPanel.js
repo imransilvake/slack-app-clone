@@ -13,20 +13,28 @@ import Popover from '@material-ui/core/Popover';
 import connect from 'react-redux/es/connect/connect';
 import COLORS from '../../../../../assets/json/colors'
 import i18n from '../../../../../assets/i18n/i18n';
-import { setColor } from '../../../../store/actions';
+import { updateUserColors } from '../../../../store/actions';
 
 class ColorPanel extends Component {
 	state = {
 		openPaletteModal: false,
-		usersRef: firebase.database().ref('users')
+		usersRef: firebase.database().ref('users'),
+		colors: {
+			sidePanelBackground: {
+				primary: '',
+				secondary: ''
+			},
+			sidePanelColorPrimary: '',
+			sidePanelColorSecondary: ''
+		}
 	};
 
 	render() {
 		const { openPaletteModal } = this.state;
-		const { colors } = this.props;
+		const { userColors } = this.props;
 		const sidePanelLightStyle = {
-			backgroundColor: colors.sidePanelBackground.secondary,
-			color: colors.sidePanelBackground.primary
+			backgroundColor: userColors.sidePanelBackground.secondary,
+			color: userColors.sidePanelBackground.primary
 		};
 
 		return (
@@ -56,7 +64,7 @@ class ColorPanel extends Component {
 								<div className="sc-color">
 									<CirclePicker
 										colors={COLORS.SIDE_PANEL.BACKGROUND}
-										color={colors ? colors.sidePanelBackground.primary : null}
+										color={userColors ? userColors.sidePanelBackground.primary : null}
 										circleSize={16}
 										onChangeComplete={this.onChangeSidePanelBackground}/>
 								</div>
@@ -66,7 +74,7 @@ class ColorPanel extends Component {
 								<div className="sc-color">
 									<CirclePicker
 										colors={COLORS.SIDE_PANEL.COLOR.PRIMARY}
-										color={colors ? colors.sidePanelColorPrimary : null}
+										color={userColors ? userColors.sidePanelColorPrimary : null}
 										circleSize={16}
 										onChangeComplete={this.onChangeSidePanelColorPrimary}/>
 								</div>
@@ -76,7 +84,7 @@ class ColorPanel extends Component {
 								<div className="sc-color">
 									<CirclePicker
 										colors={COLORS.SIDE_PANEL.COLOR.SECONDARY}
-										color={colors ? colors.sidePanelColorSecondary : null}
+										color={userColors ? userColors.sidePanelColorSecondary : null}
 										circleSize={16}
 										onChangeComplete={this.onChangeSidePanelColorSecondary}/>
 								</div>
@@ -108,14 +116,22 @@ class ColorPanel extends Component {
 	 * @param selectedColor
 	 */
 	onChangeSidePanelBackground = (selectedColor) => {
+		const { userColors } = this.props;
+
+		// update state: colors
+		this.setState({ colors: userColors });
+
 		// payload
 		const payload = {
-			primary: selectedColor.hex,
-			secondary: this.colorLuminance(selectedColor.hex, 0.1)
+			...this.state.colors,
+			sidePanelBackground: {
+				primary: selectedColor.hex,
+				secondary: this.colorLuminance(selectedColor.hex, 0.1)
+			}
 		};
 
 		// update state to redux
-		this.props.setColor(1, payload);
+		this.props.updateUserColors(payload);
 
 		// update colors
 		this.updateColorsToDatabase();
@@ -127,8 +143,19 @@ class ColorPanel extends Component {
 	 * @param color
 	 */
 	onChangeSidePanelColorPrimary = (color) => {
+		const { userColors } = this.props;
+
+		// update state: colors
+		this.setState({ colors: userColors });
+
+		// payload
+		const payload = {
+			...this.state.colors,
+			sidePanelColorPrimary: color.hex
+		};
+
 		// update state to redux
-		this.props.setColor(2, color.hex);
+		this.props.updateUserColors(payload);
 
 		// update colors
 		this.updateColorsToDatabase();
@@ -140,8 +167,19 @@ class ColorPanel extends Component {
 	 * @param color
 	 */
 	onChangeSidePanelColorSecondary = (color) => {
+		const { userColors } = this.props;
+
+		// update state: colors
+		this.setState({ colors: userColors });
+
+		// payload
+		const payload = {
+			...this.state.colors,
+			sidePanelColorSecondary: color.hex
+		};
+
 		// update state to redux
-		this.props.setColor(3, color.hex);
+		this.props.updateUserColors(payload);
 
 		// update colors
 		this.updateColorsToDatabase();
@@ -152,12 +190,12 @@ class ColorPanel extends Component {
 	 */
 	updateColorsToDatabase = () => {
 		const { usersRef } = this.state;
-		const { currentUser, colors } = this.props;
+		const { currentUser, userColors } = this.props;
 
 		// update colors on users database
 		usersRef
 			.child(currentUser.uid)
-			.update({ colors })
+			.update({ colors: userColors })
 			.then();
 	};
 
@@ -185,4 +223,4 @@ class ColorPanel extends Component {
 	}
 }
 
-export default connect(null, { setColor })(ColorPanel);
+export default connect(null, { updateUserColors })(ColorPanel);
