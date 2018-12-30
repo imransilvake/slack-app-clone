@@ -172,10 +172,11 @@ class UserPanel extends Component {
 			.currentUser
 			.updateProfile({ photoURL: fileUrl })
 			.then(() => {
+				// updated user
 				const updatedUser = firebase.auth().currentUser;
 
 				// update on redux
-				this.props.updateUserAvatar(updatedUser);
+				this.props.updateUserAvatar({...updatedUser});
 			});
 
 		// update image on database
