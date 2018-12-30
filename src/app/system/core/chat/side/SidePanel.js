@@ -6,12 +6,14 @@ import classNames from 'classnames/bind';
 import ColorPanel from './ColorPanel';
 import UserPanel from './UserPanel';
 import Channels from './Channels';
+import Icon from '@material-ui/core/Icon';
 
 class SidePanel extends Component {
 	render() {
 		const { currentUser, userStatus, isMobileView, userColors } = this.props;
 		const sidePanelDarkStyle = { backgroundColor: userColors.side_panel.background.primary };
 		const sidePanelLightStyle = { backgroundColor: userColors.side_panel.background.secondary };
+		const sidePanelPrimaryColor = { color: userColors.side_panel.color_primary };
 		const sidePanelClass = classNames({
 			'cd-col sc-side-panel': true,
 			'sc-view-fixed': isMobileView
@@ -24,6 +26,12 @@ class SidePanel extends Component {
 					<ColorPanel
 						currentUser={currentUser}
 						userColors={userColors}/>
+
+					{/* Icons */}
+					<div className="sc-icons" style={sidePanelPrimaryColor}>
+						<Icon className="sc-icon">search</Icon>
+						<Icon className="sc-icon">error_outline</Icon>
+					</div>
 				</div>
 
 				{/* Content */}

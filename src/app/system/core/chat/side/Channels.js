@@ -44,7 +44,10 @@ class Channels extends Component {
 	render() {
 		const { channels, channelName, channelDetails, isFormEnabled, errors, isAnimationLoading } = this.state;
 		const { userColors } = this.props;
-		const sidePanelColorPrimary = { color: userColors.side_panel.color_primary };
+		const sidePanelColorPrimary = {
+			color: userColors.side_panel.color_primary,
+			borderColor: userColors.side_panel.background.primary
+		};
 
 		return isAnimationLoading ? <LoadingAnimation/> : (
 			<section className="sc-channels">

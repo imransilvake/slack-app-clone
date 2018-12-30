@@ -25,7 +25,7 @@ class MessagesHeader extends Component {
 			<section className="sc-messages-header">
 				<div className="cd-row">
 					{/* Information */}
-					<div className="cd-col cd-col-pm-m-9 cd-col-pm-s-9">
+					<div className="cd-col">
 						{/* Title */}
 						<h5 className="sc-title">#{currentChannel.name}</h5>
 
@@ -47,38 +47,28 @@ class MessagesHeader extends Component {
 							</span>
 						</div>
 					</div>
-
-					{/* Search */}
-					<div className="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
-						<div className="sc-search">
-							<div>
-								<Icon>search</Icon>
-								<Icon>error_outline</Icon>
-							</div>
-						</div>
-					</div>
-
-					{/* Menu - Users List */}
-					<Menu
-						className="sc-users-list-menu"
-						onClick={this.handleCloseMenu}
-						anchorEl={menuOpen}
-						open={Boolean(menuOpen)}>
-						{
-							uniqueUsers && uniqueUsers.map(user => (
-								<MenuItem key={user.id}>
-									<div className="sc-item cd-row">
-										<img className="sc-avatar" src={user.avatar} alt={user.name}/>
-										<div className="sc-content">
-											<h6 className="sc-name">{user.name}</h6>
-											<p className="sc-email"><span/>{user.email}</p>
-										</div>
-									</div>
-								</MenuItem>
-							))
-						}
-					</Menu>
 				</div>
+
+				{/* Menu - Users List */}
+				<Menu
+					className="sc-users-list-menu"
+					onClick={this.handleCloseMenu}
+					anchorEl={menuOpen}
+					open={Boolean(menuOpen)}>
+					{
+						uniqueUsers && uniqueUsers.map(user => (
+							<MenuItem key={user.id}>
+								<div className="sc-item cd-row">
+									<img className="sc-avatar" src={user.avatar} alt={user.name}/>
+									<div className="sc-content">
+										<h6 className="sc-name">{user.name}</h6>
+										<p className="sc-email"><span/>{user.email}</p>
+									</div>
+								</div>
+							</MenuItem>
+						))
+					}
+				</Menu>
 			</section>
 		);
 	}

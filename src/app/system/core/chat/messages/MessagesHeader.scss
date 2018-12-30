@@ -7,82 +7,52 @@
 		height: 58px;
 
 		.cd-col {
-			&:first-child {
-				.sc-title {
-					color: cd-palette($cd-color, 1003);
-					font-weight: cd-fontWeight(700);
-					padding-top: 3px;
-				}
+			.sc-title {
+				color: cd-palette($cd-color, 1003);
+				font-weight: cd-fontWeight(700);
+				padding-top: 3px;
+			}
 
-				.sc-info {
-					align-items: center;
-					color: cd-palette($cd-color, 1002);
-					display: flex;
+			.sc-info {
+				align-items: center;
+				color: cd-palette($cd-color, 1002);
+				display: flex;
 
-					> .sc-icon {
-						&.sc-l1 {
-							.material-icons {
-								font-size: cd-fontSize(s15);
-							}
+				> .sc-icon {
+					&.sc-l1 {
+						.material-icons {
+							font-size: cd-fontSize(s15);
+						}
+					}
+
+					&.sc-l2 {
+						.material-icons {
+							font-size: cd-fontSize(s18);
 						}
 
-						&.sc-l2 {
-							.material-icons {
-								font-size: cd-fontSize(s18);
-							}
-
-							&.sc-active-button {
-								&:hover {
-									color: cd-palette($cd-color, 1003);
-									cursor: pointer;
-								}
-							}
-						}
-
-						span {
-							vertical-align: middle;
-						}
-
-						.sc-value {
-							margin-right: 2px;
-						}
-
-						&:not(:last-child) {
-							&::after {
+						&.sc-active-button {
+							&:hover {
 								color: cd-palette($cd-color, 1003);
-								content: '|';
-								margin-left: 5px;
-								padding-right: 5px;
-								vertical-align: middle;
+								cursor: pointer;
 							}
 						}
 					}
-				}
-			}
 
-			&:last-child {
-				padding-right: 0;
-				text-align: right;
+					span {
+						vertical-align: middle;
+					}
 
-				.sc-search {
-					background-color: cd-palette($cd-background, 2011);
-					display: inline-block;
-					height: 58px;
-					padding: 5px 5px 0;
+					.sc-value {
+						margin-right: 2px;
+					}
 
-					.material-icons {
-						color: cd-palette($cd-color, 1003);
-						cursor: pointer;
-						display: block;
-
-						&:last-child {
-							font-size: 20px;
-							margin-left: 2px;
-							margin-top: 4px;
-						}
-
-						&:hover {
-							color: cd-palette($cd-color, 1002);
+					&:not(:last-child) {
+						&::after {
+							color: cd-palette($cd-color, 1003);
+							content: '|';
+							margin-left: 5px;
+							padding-right: 5px;
+							vertical-align: middle;
 						}
 					}
 				}
