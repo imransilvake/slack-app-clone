@@ -106,6 +106,9 @@
 			}
 		},
 		"MESSAGES_PANEL": {
+			"HEADER": {
+				"MESSAGES": "Mitteilungen"
+			},
 			"MESSAGES": {
 				"CHANNEL_INTRO": {
 					"T1": "Sie haben diesen Kanal am erstellt {{ date }}. ",

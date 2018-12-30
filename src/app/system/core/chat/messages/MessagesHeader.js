@@ -6,6 +6,7 @@ import Icon from '@material-ui/core/es/Icon/Icon';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import classNames from 'classnames/bind';
+import i18n from '../../../../../assets/i18n/i18n';
 
 class MessagesHeader extends Component {
 	state = {
@@ -36,7 +37,7 @@ class MessagesHeader extends Component {
 							</span>
 							<span className="sc-icon sc-l1">
 								<span className="sc-value">{totalMessages}</span>
-								<Icon>chat_bubble_outline</Icon>
+								<span>{i18n.t('CHAT.MESSAGES_PANEL.HEADER.MESSAGES')}</span>
 							</span>
 							<span
 								className={activeClick}
