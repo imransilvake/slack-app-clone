@@ -14,7 +14,7 @@ import MessagesForm from './MessagesForm';
 import i18n from '../../../../../assets/i18n/i18n';
 import moment from 'moment';
 import formatMessageTime from '../../../utilities/helpers/Date';
-import { setMessages } from '../../../../store/actions';
+import setMessages from '../../../../store/actions/MessageAction';
 import connect from 'react-redux/es/connect/connect';
 
 class MessagesPanel extends Component {

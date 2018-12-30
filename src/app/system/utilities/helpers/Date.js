@@ -8,10 +8,11 @@ import moment from 'moment';
  * @param format
  * @returns {string}
  */
-export default function formatMessageTime(timestamp, format) {
+const formatMessageTime = (timestamp, format) => {
 	if (format) {
 		return moment(timestamp).format(format);
 	}
-
 	return moment(timestamp).fromNow();
-}
+};
+
+export default formatMessageTime;

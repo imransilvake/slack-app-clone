@@ -14,7 +14,7 @@ import Register from './system/core/auth/Register';
 import Home from './system/frame/home/Home';
 import Chat from './system/core/chat/Chat';
 import ENV from '../environment/index';
-import { setUser, updateUserStatus, updateUserColors, clearUser } from './store/actions';
+import { setUser, updateUserStatus, updateUserColors, clearUser } from './store/actions/UserAction';
 import LoadingAnimation from './system/utilities/loading-animation/LoadingAnimation';
 
 class AppRouter extends Component {

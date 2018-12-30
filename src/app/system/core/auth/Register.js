@@ -17,7 +17,7 @@ import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/LoadingAnimation';
 import { regexEmailValidity } from '../../utilities/helpers/Regex';
 import connect from 'react-redux/es/connect/connect';
-import { setUser } from '../../../store/actions';
+import { setUser } from '../../../store/actions/UserAction';
 
 class Register extends Component {
 	state = {

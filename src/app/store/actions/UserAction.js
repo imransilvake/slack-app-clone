@@ -1,9 +1,5 @@
-// app
-import * as actionTypes from './types';
-
-// =================
-// USER Action Types
-// =================
+// action types
+import * as actionTypes from './ActionTypes';
 
 // set user
 export const setUser = (user) => {
@@ -46,30 +42,4 @@ export const clearUser = () => {
 	return {
 		type: actionTypes.CLEAR_USER
 	}
-};
-
-
-// ====================
-// Channel Action Types
-// ====================
-
-export const setChannel = (channel) => {
-	return {
-		type: actionTypes.SET_CURRENT_CHANNEL,
-		payload: {
-			currentChannel: channel
-		}
-	};
-};
-
-
-// =====================
-// Messages Action Types
-// =====================
-
-export const setMessages = (messages) => {
-	return {
-		type: actionTypes.SET_MESSAGES,
-		payload: messages
-	};
 };

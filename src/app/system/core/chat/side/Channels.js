@@ -16,7 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
 import { regexLNL } from '../../../utilities/helpers/Regex';
-import { setChannel } from '../../../../store/actions';
+import setChannel from '../../../../store/actions/ChannelAction';
 import LoadingAnimation from '../../../utilities/loading-animation/LoadingAnimation';
 
 class Channels extends Component {

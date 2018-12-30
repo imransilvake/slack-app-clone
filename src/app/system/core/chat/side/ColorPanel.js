@@ -13,7 +13,7 @@ import Popover from '@material-ui/core/Popover';
 import connect from 'react-redux/es/connect/connect';
 import COLORS from '../../../../../assets/json/colors'
 import i18n from '../../../../../assets/i18n/i18n';
-import { updateUserColors } from '../../../../store/actions';
+import { updateUserColors } from '../../../../store/actions/UserAction';
 
 class ColorPanel extends Component {
 	state = {
@@ -133,7 +133,7 @@ class ColorPanel extends Component {
 		};
 
 		// update state to redux
-		this.props.updateUserColors({ side_panel: payload});
+		this.props.updateUserColors({ side_panel: payload });
 
 		// update colors
 		this.updateColorsToDatabase();
@@ -157,7 +157,7 @@ class ColorPanel extends Component {
 		};
 
 		// update state to redux
-		this.props.updateUserColors({ side_panel: payload});
+		this.props.updateUserColors({ side_panel: payload });
 
 		// update colors
 		this.updateColorsToDatabase();
@@ -181,7 +181,7 @@ class ColorPanel extends Component {
 		};
 
 		// update state to redux
-		this.props.updateUserColors({ side_panel: payload});
+		this.props.updateUserColors({ side_panel: payload });
 
 		// update colors
 		this.updateColorsToDatabase();

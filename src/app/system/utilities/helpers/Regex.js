@@ -5,9 +5,9 @@
  * @returns {boolean}
  * @constructor
  */
-export function regexEmailValidity(value) {
+export const regexEmailValidity = (value) => {
 	return /\S+@\S+\.\S+/.test(value);
-}
+};
 
 /**
  * regex: lowercase, numbers, limit: 2-20, -
@@ -16,9 +16,9 @@ export function regexEmailValidity(value) {
  * @returns {boolean}
  * @constructor
  */
-export function regexLNL(value) {
+export const regexLNL = (value) => {
 	return /^([a-zA-Z0-9-]){2,20}$/.test(value);
-}
+};
 
 /**
  * regex: validate empty string
@@ -26,9 +26,9 @@ export function regexLNL(value) {
  * @param string
  * @returns {boolean}
  */
-export function regexEmptyString(string) {
+export const regexEmptyString = (string) => {
 	return string.replace(/\s+/, '').length;
-}
+};
 
 /**
  * convert url to link
@@ -36,7 +36,7 @@ export function regexEmptyString(string) {
  * @param text
  * @returns {*}
  */
-export function regexConvertUrlsToLinks(text) {
+export const regexConvertUrlsToLinks = (text) => {
 	let replacedText;
 
 	// URLs starting with http://, https://, or ftp://
@@ -47,9 +47,9 @@ export function regexConvertUrlsToLinks(text) {
 	const replacePattern2 = /(^|[^/])(www\.[\S]+(\b|$))/gim;
 	replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
 
-	// Change email addresses to mailto:: links.
+	// change email addresses to "mailto::" links
 	const replacePattern3 = /(([a-zA-Z0-9\-_.])+@[a-zA-Z_]+?(\.[a-zA-Z]{2,6})+)/gim;
 	replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
 
 	return replacedText;
-}
+};

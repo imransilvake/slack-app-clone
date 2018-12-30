@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // app
-import AppRouter from './app-router';
+import AppRouter from './AppRouter';
 import rootReducer from './store/reducers';
 
 // redux store
