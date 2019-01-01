@@ -83,12 +83,6 @@ class Channels extends Component {
 
 							{/* Form */}
 							<section className="cd-col sc-form">
-								{
-									errors && errors.length > 0 && (
-										/* Errors */
-										<p className="cd-error">{this.displayErrors(errors)}</p>
-									)
-								}
 								<form className="sc-form-fields" onSubmit={this.handleFormSubmit}>
 									<FormControl className="sc-form-field" fullWidth>
 										<InputLabel htmlFor="channel-name">
@@ -115,20 +109,29 @@ class Channels extends Component {
 										/>
 										<p className="ts-note">{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.FORM.CHANNEL_DETAILS.DESCRIPTION')}</p>
 									</FormControl>
-									<Button
-										className="sc-button sc-create-channel"
-										variant="contained"
-										type="submit"
-										disabled={!isFormEnabled}>
-										{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.BUTTONS.T2')}
-									</Button>
-									<Button
-										className="sc-button sc-cancel"
-										variant="contained"
-										type="button"
-										onClick={this.handleCloseModal}>
-										{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.BUTTONS.T1')}
-									</Button>
+									<div className="sc-buttons">
+										<Button
+											className="sc-button sc-create-channel"
+											variant="contained"
+											type="submit"
+											disabled={!isFormEnabled}>
+											{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.BUTTONS.T2')}
+										</Button>
+										<Button
+											className="sc-button sc-cancel"
+											variant="contained"
+											type="button"
+											onClick={this.handleCloseModal}>
+											{i18n.t('CHAT.SIDE_PANEL.CHANNELS.MODAL.BUTTONS.T1')}
+										</Button>
+
+										{
+											// Errors
+											errors && errors.length > 0 && (
+												<p className="cd-error">{this.displayErrors(errors)}</p>
+											)
+										}
+									</div>
 								</form>
 							</section>
 						</div>

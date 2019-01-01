@@ -110,15 +110,6 @@
 	.sc-form {
 		margin-bottom: 15px;
 
-		// error
-		.cd-error {
-			background-color: cd-palette($cd-background, 2009);
-			color: cd-palette($cd-color, 1001);
-			margin: 0;
-			padding: 5px;
-			text-align: center;
-		}
-
 		// form fields
 		.sc-form-fields {
 			padding: 15px 0 0;
@@ -141,25 +132,36 @@
 				}
 			}
 
-			.sc-button {
-				border-radius: 1px;
-				float: right;
-				margin: 15px 0 0;
+			.sc-buttons {
+				text-align: right;
 
-				&.sc-cancel {
-					margin-right: 5px;
-				}
-
-				&:not(:disabled) {
-					color: cd-palette($cd-color, 1001);
+				.sc-button {
+					border-radius: 1px;
+					margin: 15px 0 0;
 
 					&.sc-cancel {
-						background-color: cd-palette($cd-background, 2006);
+						margin-left: 5px;
 					}
 
-					&.sc-create-channel {
-						background-color: cd-palette($cd-background, 2005);
+					&:not(:disabled) {
+						color: cd-palette($cd-color, 1001);
+
+						&.sc-cancel {
+							background-color: cd-palette($cd-background, 2006);
+						}
+
+						&.sc-create-channel {
+							background-color: cd-palette($cd-background, 2005);
+						}
 					}
+				}
+
+				.cd-error {
+					background-color: cd-palette($cd-background, 2009);
+					color: cd-palette($cd-color, 1001);
+					margin: 15px 0;
+					padding: 5px;
+					text-align: center;
 				}
 			}
 		}
@@ -169,11 +171,13 @@
 	@include cd-media(desktop, mini) {
 		.sc-form {
 			.sc-form-fields {
-				.sc-button {
-					width: 100%;
+				.sc-buttons {
+					.sc-button {
+						width: 100%;
 
-					&.sc-cancel {
-						margin: 10px 0 15px;
+						&.sc-cancel {
+							margin: 5px 0 0;
+						}
 					}
 				}
 			}
