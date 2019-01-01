@@ -23,6 +23,7 @@ i18n
 		resources,
 		lng: 'en',
 		interpolation: { escapeValue: false } // react already safes from xss
-	});
+	})
+	.then();
 
 export default i18n;
