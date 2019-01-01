@@ -3,7 +3,7 @@ import development from './development';
 import staging from './staging';
 import production from './production';
 
-function ENV() {
+const ENV = () => {
 	switch (process.env.REACT_APP_ENV) {
 		case 'staging':
 			return staging;
@@ -12,6 +12,6 @@ function ENV() {
 		default:
 			return development;
 	}
-}
+};
 
 export default ENV();
