@@ -140,9 +140,6 @@ class MessagesPanel extends Component {
 			savedMessages.forEach((x) => {
 				// validate channel
 				if (x && x.channelId === channelId) {
-					// remove last message
-					x.messages.pop();
-
 					// set messages
 					this.setState({
 						messages: x.messages,
@@ -227,6 +224,9 @@ class MessagesPanel extends Component {
 				const previousSnapshot = messages.length && messages[messages.length - 1].snapshot;
 				const snapshot = snap.val();
 
+				// ignore same message
+				if (messages && messages.some(e => e.snapshot.timestamp === snapshot.timestamp)) return;
+
 				// message
 				const message = {
 					snapshot,
@@ -283,9 +283,6 @@ class MessagesPanel extends Component {
 					messages
 						.slice(1) // remove first element
 						.forEach(message => snapshots.push(message.snapshot));
-
-					// remove last element
-					if (messages.length < messagesLimit) snapshots.pop();
 
 					// iterate snapshots
 					snapshots.forEach((snapshot, index) => {

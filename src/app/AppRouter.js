@@ -41,7 +41,7 @@ class AppRouter extends Component {
 									this.props.updateUserStatus(status);
 
 									// set state: user stars
-									const starred = snapshot.starred ? Object.values(snapshot.starred) : null;
+									const starred = snapshot.starred ? Object.values(snapshot.starred) : [];
 									this.props.updateUserStarred(starred);
 
 									// set state: user colors

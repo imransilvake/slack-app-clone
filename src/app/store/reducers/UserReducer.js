@@ -36,7 +36,7 @@ const userReducer = (state = initUserState, action) => {
 			};
 		case actionTypes.UPDATE_USER_STARRED:
 			// array
-			if (Array.isArray(action.payload)) {
+			if (Array.isArray(action.payload) || action.payload === null) {
 				return {
 					...state,
 					starred: action.payload
@@ -60,7 +60,8 @@ const userReducer = (state = initUserState, action) => {
 		case actionTypes.CLEAR_USER:
 			return {
 				...state,
-				currentUser: null
+				currentUser: null,
+				isAnimationLoading: false
 			};
 		default:
 			return state;
