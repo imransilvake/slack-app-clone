@@ -12,9 +12,9 @@ import StarredChannels from './StarredChannels';
 class SidePanel extends Component {
 	render() {
 		const { currentUser, userStatus, isMobileView, userColors, userStarred } = this.props;
-		const sidePanelDarkStyle = { backgroundColor: userColors.side_panel.background.primary };
-		const sidePanelLightStyle = { backgroundColor: userColors.side_panel.background.secondary };
-		const sidePanelPrimaryColor = { color: userColors.side_panel.color_primary };
+		const sidePanelDarkStyle = { backgroundColor: userColors.background.primary };
+		const sidePanelLightStyle = { backgroundColor: userColors.background.secondary };
+		const sidePanelPrimaryColor = { color: userColors.color_primary };
 		const sidePanelClass = classNames({
 			'cd-col sc-side-panel': true,
 			'sc-view-fixed': isMobileView

@@ -15,8 +15,8 @@ class StarredChannels extends Component {
 		const { starredChannels } = this.state;
 		const { userColors, userStarred } = this.props;
 		const sidePanelColorPrimary = {
-			color: userColors.side_panel.color_primary,
-			borderColor: userColors.side_panel.background.primary
+			color: userColors.color_primary,
+			borderColor: userColors.background.primary
 		};
 
 		return (

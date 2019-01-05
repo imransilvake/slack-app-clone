@@ -33,7 +33,7 @@ const userReducer = (state = initUserState, action) => {
 		case actionTypes.UPDATE_USER_COLORS:
 			return {
 				...state,
-				colors: action.payload
+				colors: { ...state.colors, ...action.payload }
 			};
 		case actionTypes.UPDATE_USER_STARRED:
 			// array
