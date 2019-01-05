@@ -23,11 +23,8 @@ class MessagesHeader extends Component {
 	};
 
 	componentDidMount() {
-		const { currentChannel, userStarred } = this.props;
-
-		// validate: channel is starred
-		const isChannelStarred = userStarred && userStarred.some(e => e.id === currentChannel.id);
-		this.setState({ isChannelStarred: isChannelStarred });
+		// validate channel starred
+		this.validateChannelStarred();
 	}
 
 	render() {
@@ -48,9 +45,10 @@ class MessagesHeader extends Component {
 
 						{/* Icons */}
 						<div className="sc-info">
-							<span className="sc-icon sc-l2 sc-active-button"
-							      onClick={this.handleStarState}
-							      role="presentation">
+							<span
+								className="sc-icon sc-l2 sc-active-button"
+								onClick={this.handleStarState}
+								role="presentation">
 								{!isChannelStarred && (<Icon>star_border</Icon>)}
 								{isChannelStarred && (<Icon>star</Icon>)}
 							</span>
@@ -110,6 +108,15 @@ class MessagesHeader extends Component {
 	};
 
 	/**
+	 * validate channel starred
+	 */
+	validateChannelStarred = () => {
+		const { currentChannel, userStarred } = this.props;
+		const isChannelStarred = userStarred && userStarred.some(e => e.id === currentChannel.id);
+		this.setState({ isChannelStarred });
+	};
+
+	/**
 	 * set state: isChannelStarred
 	 */
 	handleStarState = () => {
@@ -142,20 +149,16 @@ class MessagesHeader extends Component {
 				.child(`${currentUser.uid}/starred`)
 				.update(star)
 				.then(() => {
-					// update in redux
+					// update user star state in redux
 					this.props.updateUserStarred(star[currentChannel.id]);
 				});
 		} else {
 			usersRef
 				.child(`${currentUser.uid}/starred`)
 				.child(currentChannel.id)
-				.remove(err => {
-					if (err !== null) {
-						console.error(err);
-					}
-				})
+				.remove()
 				.then(() => {
-					// update in redux
+					// update user star state in redux
 					this.props.updateUserStarred(star[currentChannel.id]);
 				})
 		}

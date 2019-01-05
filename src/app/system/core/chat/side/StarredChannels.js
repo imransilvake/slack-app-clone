@@ -46,7 +46,7 @@ class StarredChannels extends Component {
 	 *
 	 * @param userStarred
 	 */
-	displayStarredChannels = (userStarred) => (
+	displayStarredChannels = userStarred => (
 		userStarred && userStarred.length > 0 && userStarred.map(channel => (
 			<li
 				key={channel.id}
