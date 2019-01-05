@@ -80,6 +80,9 @@
 				"CHANGE_AVATAR": "Change Avatar",
 				"LOGOUT": "Logout"
 			},
+			"STARRED_CHANNELS": {
+				"TITLE": "Starred"
+			},
 			"CHANNELS": {
 				"TITLE": "Channels",
 				"CREATE_CHANNEL": "Create a channel",

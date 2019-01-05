@@ -37,6 +37,14 @@ export const updateUserColors = (colors) => {
 	};
 };
 
+// update user starred
+export const updateUserStarred = (star) => {
+	return {
+		type: actionTypes.UPDATE_USER_STARRED,
+		payload: star
+	};
+};
+
 // clear user
 export const clearUser = () => {
 	return {

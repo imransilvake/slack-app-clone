@@ -1,6 +1,9 @@
 // react
 import React, { Component } from 'react';
 
+// redux
+import connect from 'react-redux/es/connect/connect';
+
 // firebase
 import firebase from '../../../../../firebase';
 
@@ -10,7 +13,6 @@ import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Button from '@material-ui/core/Button/Button';
 import i18n from '../../../../../assets/i18n/i18n';
 import Icon from '@material-ui/core/es/Icon/Icon';
-import connect from 'react-redux/es/connect/connect';
 import { updateUserAvatar, updateUserStatus } from '../../../../store/actions/UserAction';
 import classNames from 'classnames/bind';
 import FileUploadModal from '../common/FileUploadModal';

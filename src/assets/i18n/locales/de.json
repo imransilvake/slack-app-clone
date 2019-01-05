@@ -80,6 +80,9 @@
 				"CHANGE_AVATAR": "Avatar ändern",
 				"LOGOUT": "Ausloggen"
 			},
+			"STARRED_CHANNELS": {
+				"TITLE": "Markierte"
+			},
 			"CHANNELS": {
 				"TITLE": "Kanäle",
 				"CREATE_CHANNEL": "Erstellen Sie einen Kanal",

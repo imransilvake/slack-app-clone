@@ -14,7 +14,7 @@ import Register from './system/core/auth/Register';
 import Home from './system/frame/home/Home';
 import Chat from './system/core/chat/Chat';
 import ENV from '../environment/index';
-import { setUser, updateUserStatus, updateUserColors, clearUser } from './store/actions/UserAction';
+import { setUser, updateUserStatus, updateUserColors, clearUser, updateUserStarred } from './store/actions/UserAction';
 import LoadingAnimation from './system/utilities/loading-animation/LoadingAnimation';
 
 class AppRouter extends Component {
@@ -39,6 +39,10 @@ class AppRouter extends Component {
 									// set state: user status
 									const status = snapshot.code ? snapshot.code : '1';
 									this.props.updateUserStatus(status);
+
+									// set state: user stars
+									const starred = snapshot.starred ? Object.values(snapshot.starred) : null;
+									this.props.updateUserStarred(starred);
 
 									// set state: user colors
 									const initColors = {
@@ -92,6 +96,6 @@ const mapStateFromProps = state => ({
 export default withRouter(
 	connect(
 		mapStateFromProps,
-		{ setUser, updateUserStatus, updateUserColors, clearUser }
+		{ setUser, updateUserStatus, updateUserColors, updateUserStarred, clearUser }
 	)(AppRouter)
 );

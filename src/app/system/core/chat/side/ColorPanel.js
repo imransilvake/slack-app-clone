@@ -1,6 +1,9 @@
 // react
 import React, { Component } from 'react';
 
+// redux
+import connect from 'react-redux/es/connect/connect';
+
 // firebase
 import firebase from '../../../../../firebase';
 
@@ -10,7 +13,6 @@ import { CirclePicker } from 'react-color';
 // app
 import Icon from '@material-ui/core/Icon';
 import Popover from '@material-ui/core/Popover';
-import connect from 'react-redux/es/connect/connect';
 import COLORS from '../../../../../assets/json/colors'
 import i18n from '../../../../../assets/i18n/i18n';
 import { updateUserColors } from '../../../../store/actions/UserAction';

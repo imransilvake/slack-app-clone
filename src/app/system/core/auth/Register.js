@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+// redux
+import connect from 'react-redux/es/connect/connect';
+
 // firebase
 import firebase from '../../../../firebase';
 
@@ -16,7 +19,6 @@ import i18n from '../../../../assets/i18n/i18n';
 import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/LoadingAnimation';
 import { regexEmailValidity } from '../../utilities/helpers/Regex';
-import connect from 'react-redux/es/connect/connect';
 import { setUser } from '../../../store/actions/UserAction';
 
 class Register extends Component {

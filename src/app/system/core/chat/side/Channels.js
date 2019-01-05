@@ -50,7 +50,7 @@ class Channels extends Component {
 		};
 
 		return isAnimationLoading ? <LoadingAnimation/> : (
-			<section className="sc-channels">
+			<section className="sc-side-panel-list-wrapper">
 				{/* Title */}
 				<div className="sc-title">
 					<h6 style={sidePanelColorPrimary}>
@@ -67,7 +67,7 @@ class Channels extends Component {
 				</div>
 
 				{/* Channel */}
-				<ul className="cd-remove-bullets sc-channels-list">
+				<ul className="cd-remove-bullets sc-list">
 					{this.displayChannels(channels, userColors)}
 				</ul>
 

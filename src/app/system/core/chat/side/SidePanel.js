@@ -7,10 +7,11 @@ import ColorPanel from './ColorPanel';
 import UserPanel from './UserPanel';
 import Channels from './Channels';
 import Icon from '@material-ui/core/Icon';
+import StarredChannels from './StarredChannels';
 
 class SidePanel extends Component {
 	render() {
-		const { currentUser, userStatus, isMobileView, userColors } = this.props;
+		const { currentUser, userStatus, isMobileView, userColors, userStarred } = this.props;
 		const sidePanelDarkStyle = { backgroundColor: userColors.side_panel.background.primary };
 		const sidePanelLightStyle = { backgroundColor: userColors.side_panel.background.secondary };
 		const sidePanelPrimaryColor = { color: userColors.side_panel.color_primary };
@@ -43,6 +44,12 @@ class SidePanel extends Component {
 							userStatus={userStatus}
 							userColors={userColors}/>
 					</header>
+
+					{/* Starred Channels */}
+					<StarredChannels
+						currentUser={currentUser}
+						userColors={userColors}
+						userStarred={userStarred}/>
 
 					{/* Channels */}
 					<Channels

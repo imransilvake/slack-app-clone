@@ -6,6 +6,7 @@ const initUserState = {
 	currentUser: null,
 	status: null,
 	colors: null,
+	starred: null,
 	isAnimationLoading: true
 };
 
@@ -33,6 +34,29 @@ const userReducer = (state = initUserState, action) => {
 			return {
 				...state,
 				colors: action.payload
+			};
+		case actionTypes.UPDATE_USER_STARRED:
+			// array
+			if (Array.isArray(action.payload)) {
+				return {
+					...state,
+					starred: action.payload
+				};
+			}
+
+			// object
+			// remove
+			if (state.starred && state.starred.some(e => e.id === action.payload.id)) {
+				return {
+					...state,
+					starred: state.starred.filter(e => e.id !== action.payload.id)
+				}
+			}
+
+			// add
+			return {
+				...state,
+				starred: [...state.starred, action.payload]
 			};
 		case actionTypes.CLEAR_USER:
 			return {

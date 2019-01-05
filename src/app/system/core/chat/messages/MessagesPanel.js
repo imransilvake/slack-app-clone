@@ -1,6 +1,9 @@
 // react
 import React, { Component } from 'react';
 
+// redux
+import connect from 'react-redux/es/connect/connect';
+
 // firebase
 import firebase from '../../../../../firebase';
 
@@ -15,7 +18,6 @@ import i18n from '../../../../../assets/i18n/i18n';
 import moment from 'moment';
 import formatMessageTime from '../../../utilities/helpers/Date';
 import setMessages from '../../../../store/actions/MessageAction';
-import connect from 'react-redux/es/connect/connect';
 
 class MessagesPanel extends Component {
 	state = {
@@ -68,16 +70,18 @@ class MessagesPanel extends Component {
 	}
 
 	render() {
-		const { currentChannel, currentUser } = this.props;
+		const { currentChannel, currentUser, userStarred } = this.props;
 		const { messagesRef, messages, uniqueUsers, isMessagesLoading } = this.state;
 
 		return messagesRef && messages && (
 			<section className="sc-message-panel">
 				{/* Header */}
 				<MessagesHeader
+					currentUser={currentUser}
 					currentChannel={currentChannel}
 					uniqueUsers={uniqueUsers}
 					totalMessages={messages.length}
+					userStarred={userStarred}
 				/>
 
 				{/* Content */}
