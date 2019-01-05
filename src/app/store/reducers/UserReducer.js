@@ -22,8 +22,7 @@ const userReducer = (state = initUserState, action) => {
 		case actionTypes.UPDATE_USER_AVATAR:
 			return {
 				...state,
-				currentUser: action.payload.currentUser,
-				isAnimationLoading: false
+				currentUser: action.payload.currentUser
 			};
 		case actionTypes.UPDATE_USER_STATUS:
 			return {
@@ -61,8 +60,7 @@ const userReducer = (state = initUserState, action) => {
 		case actionTypes.CLEAR_USER:
 			return {
 				...state,
-				currentUser: null,
-				isAnimationLoading: false
+				currentUser: null
 			};
 		default:
 			return state;
