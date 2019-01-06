@@ -23,7 +23,6 @@ class MessagesPanel extends Component {
 	state = {
 		messagesRef: firebase.database().ref('messages'),
 		messages: [],
-		uniqueUsers: [],
 		isMessagesLoading: true,
 		keyReference: null,
 		isInfiniteScrolling: true,
@@ -48,7 +47,7 @@ class MessagesPanel extends Component {
 	}
 
 	componentWillUnmount() {
-		const { messagesRef, messages, uniqueUsers, isInfiniteScrolling, keyReference, isReduxMessagesAccessLocked } = this.state;
+		const { messagesRef, messages, isInfiniteScrolling, keyReference, isReduxMessagesAccessLocked } = this.state;
 		const { currentChannel } = this.props;
 
 		// save loaded messages to redux
@@ -56,7 +55,6 @@ class MessagesPanel extends Component {
 			this.props.setMessages({
 				channelId: currentChannel.id,
 				messages,
-				uniqueUsers,
 				isInfiniteScrolling,
 				keyReference
 			});
@@ -71,7 +69,7 @@ class MessagesPanel extends Component {
 
 	render() {
 		const { currentChannel, currentUser, userStarred } = this.props;
-		const { messagesRef, messages, uniqueUsers, isMessagesLoading } = this.state;
+		const { messagesRef, messages, isMessagesLoading } = this.state;
 
 		return messagesRef && messages && (
 			<section className="sc-message-panel">
@@ -79,7 +77,6 @@ class MessagesPanel extends Component {
 				<MessagesHeader
 					currentUser={currentUser}
 					currentChannel={currentChannel}
-					uniqueUsers={uniqueUsers}
 					totalMessages={messages.length}
 					userStarred={userStarred}
 				/>
@@ -143,7 +140,6 @@ class MessagesPanel extends Component {
 					// set messages
 					this.setState({
 						messages: x.messages,
-						uniqueUsers: x.uniqueUsers,
 						keyReference: x.keyReference,
 						isInfiniteScrolling: x.isInfiniteScrolling,
 						isMessagesLoading: false
@@ -220,12 +216,15 @@ class MessagesPanel extends Component {
 			.orderByChild('timestamp')
 			.limitToLast(1)
 			.on('child_added', (snap) => {
-				const { messages, uniqueUsers } = this.state;
+				const { messages } = this.state;
 				const previousSnapshot = messages.length && messages[messages.length - 1].snapshot;
 				const snapshot = snap.val();
 
 				// ignore same message
-				if (messages && messages.some(e => e.snapshot.timestamp === snapshot.timestamp)) return;
+				if (messages && messages.some(e =>
+					e.snapshot.timestamp === snapshot.timestamp ||
+					e.snapshot.content === snapshot.content
+				)) return;
 
 				// message
 				const message = {
@@ -237,17 +236,10 @@ class MessagesPanel extends Component {
 				// push message
 				messages.push(message);
 
-				// unique users
-				if (uniqueUsers && !uniqueUsers.some(u => u.id === snapshot.user.id)) {
-					uniqueUsers.push(snapshot.user);
-				}
-
 				// set messages
-				// set unique users
 				// remove loading
 				this.setState({
 					messages,
-					uniqueUsers,
 					isMessagesLoading: false
 				}, () => {
 					// unlock redux access for storing new messages
@@ -264,7 +256,7 @@ class MessagesPanel extends Component {
 	 */
 	loadMessages = () => {
 		const { currentChannel } = this.props;
-		const { keyReference, messages, uniqueUsers, messagesRef } = this.state;
+		const { keyReference, messages, messagesRef } = this.state;
 		const messagesLimit = 51;
 		const loadedMessages = [];
 		let previousSnapshot = null;
@@ -303,11 +295,6 @@ class MessagesPanel extends Component {
 
 						// push message
 						loadedMessages.push(message);
-
-						// unique users
-						if (uniqueUsers && !uniqueUsers.some(u => u.id === snapshot.user.id)) {
-							uniqueUsers.push(snapshot.user);
-						}
 					});
 				}
 			})
@@ -316,11 +303,9 @@ class MessagesPanel extends Component {
 				const messagesLength = messages.length;
 
 				// set messages
-				// set unique users
 				// set infinite scrolling
 				this.setState({
 					messages: loadedMessages,
-					uniqueUsers,
 					isInfiniteScrolling: loadedMessagesLength !== messagesLength
 				});
 

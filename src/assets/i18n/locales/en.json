@@ -109,9 +109,6 @@
 			}
 		},
 		"MESSAGES_PANEL": {
-			"HEADER": {
-				"MESSAGES": "Messages"
-			},
 			"MESSAGES": {
 				"CHANNEL_INTRO": {
 					"T1": "You created this channel on {{ date }}. ",
