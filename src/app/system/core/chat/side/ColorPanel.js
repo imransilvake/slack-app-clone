@@ -26,13 +26,13 @@ class ColorPanel extends Component {
 	render() {
 		const { openPaletteModal } = this.state;
 		const { userColors } = this.props;
-		const sidePanelLightStyle = {
+		const colorPanelStyle = {
 			backgroundColor: userColors.background.secondary,
 			color: userColors.background.primary
 		};
 
 		return (
-			<section className="sc-color-panel" style={sidePanelLightStyle}>
+			<section className="sc-color-panel" style={colorPanelStyle}>
 				{/* Palette Icon */}
 				<div
 					className="sc-palette"

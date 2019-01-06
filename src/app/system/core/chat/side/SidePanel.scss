@@ -11,7 +11,7 @@
 		width: 50px;
 
 		.sc-icons {
-			bottom: 10px;
+			bottom: 0;
 			color: cd-palette($cd-color, 1001);
 			left: 0;
 			position: absolute;
@@ -20,7 +20,7 @@
 			.sc-icon {
 				cursor: pointer;
 				display: block;
-				margin: 5px auto 0;
+				margin: 8px auto;
 
 				&:hover {
 					opacity: .9;

@@ -27,8 +27,8 @@ class UserPanel extends Component {
 	render() {
 		const { openMenu, openFileModal } = this.state;
 		const { currentUser, userStatus, userColors } = this.props;
-		const sidePanelColorPrimary = { color: userColors.color_primary };
-		const sidePanelColorSecondary = { color: userColors.color_secondary };
+		const userTitleStyle = { color: userColors.color_primary };
+		const userSubTitleStyle = { color: userColors.color_secondary };
 
 		const circleClass = classNames({
 			'sc-circle': true,
@@ -42,10 +42,10 @@ class UserPanel extends Component {
 			<section className="sc-user-panel">
 				{/* Button */}
 				<Button onClick={this.handleOpenMenu}>
-					<h5 className="sc-type sc-text-truncate" style={sidePanelColorPrimary}>
+					<h5 className="sc-title sc-text-truncate" style={userTitleStyle}>
 						{currentUser.displayName}
 					</h5>
-					<p className="sc-name" style={sidePanelColorSecondary}>
+					<p className="sc-sub-title" style={userSubTitleStyle}>
 						<span className={circleClass}/>
 						{i18n.t(`CHAT.SIDE_PANEL.USER_PANEL.STATUS_CODE.${userStatus}`)}
 					</p>

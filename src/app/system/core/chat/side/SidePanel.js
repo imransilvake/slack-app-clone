@@ -12,9 +12,8 @@ import StarredChannels from './StarredChannels';
 class SidePanel extends Component {
 	render() {
 		const { currentUser, currentChannel, userStatus, isMobileView, userColors, userStarred } = this.props;
-		const sidePanelDarkStyle = { backgroundColor: userColors.background.primary };
-		const sidePanelLightStyle = { backgroundColor: userColors.background.secondary };
-		const sidePanelPrimaryColor = { color: userColors.color_primary };
+		const colorPanelStyle = { backgroundColor: userColors.background.primary };
+		const userPanelStyle = { backgroundColor: userColors.background.secondary };
 		const sidePanelClass = classNames({
 			'cd-col sc-side-panel': true,
 			'sc-view-fixed': isMobileView
@@ -23,20 +22,20 @@ class SidePanel extends Component {
 		return (
 			<section className="sc-side-panel-wrapper">
 				{/* Color Area */}
-				<div className="sc-color-panel-wrapper" style={sidePanelDarkStyle}>
+				<div className="sc-color-panel-wrapper" style={colorPanelStyle}>
 					<ColorPanel
 						currentUser={currentUser}
 						userColors={userColors}/>
 
 					{/* Icons */}
-					<div className="sc-icons" style={sidePanelPrimaryColor}>
+					<div className="sc-icons">
 						<Icon className="sc-icon">search</Icon>
-						<Icon className="sc-icon">error_outline</Icon>
+						<Icon className="sc-icon">info</Icon>
 					</div>
 				</div>
 
 				{/* Content */}
-				<div className={sidePanelClass} style={sidePanelLightStyle}>
+				<div className={sidePanelClass} style={userPanelStyle}>
 					{/* Header */}
 					<header className="sc-header">
 						<UserPanel

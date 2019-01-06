@@ -43,7 +43,7 @@ class Channels extends Component {
 	render() {
 		const { channels, channelName, channelDetails, isFormEnabled, errors, isAnimationLoading } = this.state;
 		const { userColors } = this.props;
-		const sidePanelColorPrimary = {
+		const channelTitleStyle = {
 			color: userColors.color_primary,
 			borderColor: userColors.background.primary
 		};
@@ -52,11 +52,11 @@ class Channels extends Component {
 			<section className="sc-side-panel-list-wrapper">
 				{/* Title */}
 				<div className="sc-title">
-					<h6 style={sidePanelColorPrimary}>
+					<h6 style={channelTitleStyle}>
 						{i18n.t('CHAT.SIDE_PANEL.CHANNELS.TITLE')}<span>{channels.length}</span>
 					</h6>
 					<div className="cd-tooltip sc-icon-wrapper">
-						<div className="sc-icon" style={sidePanelColorPrimary}>
+						<div className="sc-icon" style={channelTitleStyle}>
 							<Icon onClick={this.handleOpenModal}>add_circle</Icon>
 						</div>
 						<span className="cd-arrow cd-top cd-fixed-right">

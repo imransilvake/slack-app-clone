@@ -11,7 +11,7 @@ import setChannel from '../../../../store/actions/ChannelAction';
 class StarredChannels extends Component {
 	render() {
 		const { userColors, userStarred } = this.props;
-		const sidePanelColorPrimary = {
+		const starredTitleStyle = {
 			color: userColors.color_primary,
 			borderColor: userColors.background.primary
 		};
@@ -20,11 +20,11 @@ class StarredChannels extends Component {
 			<section className="sc-side-panel-list-wrapper">
 				{/* Title */}
 				<div className="sc-title">
-					<h6 style={sidePanelColorPrimary}>
+					<h6 style={starredTitleStyle}>
 						{i18n.t('CHAT.SIDE_PANEL.STARRED_CHANNELS.TITLE')}<span>{userStarred.length}</span>
 					</h6>
 					<div className="sc-icon-wrapper">
-						<div className="sc-icon" style={sidePanelColorPrimary}>
+						<div className="sc-icon" style={starredTitleStyle}>
 							<Icon onClick={this.handleOpenModal}>star</Icon>
 						</div>
 					</div>

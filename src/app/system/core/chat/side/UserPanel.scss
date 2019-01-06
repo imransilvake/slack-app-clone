@@ -11,12 +11,12 @@
 			color: cd-palette($cd-color, 1001);
 			display: block;
 
-			.sc-type {
+			.sc-title {
 				text-transform: capitalize;
 				width: 80%;
 			}
 
-			.sc-name {
+			.sc-sub-title {
 				color: cd-palette($cd-color, 1004);
 				font-size: cd-fontSize(s13);
 				margin-top: 1px;

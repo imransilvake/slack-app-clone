@@ -17,10 +17,18 @@ class Chat extends Component {
 	};
 
 	componentDidMount() {
+		// add class to body
+		document.body.classList.add('sc-body');
+
+		// add resize listener
 		window.addEventListener('resize', this.handleChangeOnResize);
 	}
 
 	componentWillUnmount() {
+		// remove class from body
+		document.body.classList.remove('sc-body');
+
+		// remove resize listener
 		window.removeEventListener('resize', this.handleChangeOnResize);
 	}
 
