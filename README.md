@@ -34,11 +34,13 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 	- [ ] Edit/Delete Message
 - [X] Add User Status
 - [X] Add Colors
+- [X] Starred/Un-starred Public Channels
 - [ ] Implement Search
 - [ ] Show Channel Information
 	- [ ] Show Top Posters
 	- [ ] Channel Description
-- [ ] Starred/Un-starred Public Channels
+- [ ] Send Private Messages
+- [ ] Add Message Notification
 
 
 ## Libraries and Frameworks
