@@ -45,5 +45,10 @@
 			right: 0;
 			top: 0;
 		}
+
+		.sc-content {
+			max-height: calc(100% - 60px);
+			overflow: auto;
+		}
 	}
 }

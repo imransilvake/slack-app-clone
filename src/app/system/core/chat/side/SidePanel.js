@@ -45,21 +45,24 @@ class SidePanel extends Component {
 							userColors={userColors}/>
 					</header>
 
-					{/* Starred Channels */}
-					{
-						userColors && userStarred && userStarred.length > 0 && (
-							<StarredChannels
-								currentChannel={currentChannel}
-								userColors={userColors}
-								userStarred={userStarred}/>
-						)
-					}
+					{/* Content */}
+					<div className="sc-content">
+						{/* Starred Channels */}
+						{
+							userColors && userStarred && userStarred.length > 0 && (
+								<StarredChannels
+									currentChannel={currentChannel}
+									userColors={userColors}
+									userStarred={userStarred}/>
+							)
+						}
 
-					{/* Channels */}
-					<Channels
-						currentUser={currentUser}
-						currentChannel={currentChannel}
-						userColors={userColors}/>
+						{/* Channels */}
+						<Channels
+							currentUser={currentUser}
+							currentChannel={currentChannel}
+							userColors={userColors}/>
+					</div>
 				</div>
 			</section>
 		);
