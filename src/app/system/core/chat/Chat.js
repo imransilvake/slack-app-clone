@@ -50,6 +50,7 @@ class Chat extends Component {
 						<SidePanel
 							key={currentUser.uid}
 							currentUser={currentUser}
+							currentChannel={currentChannel}
 							userStatus={userStatus}
 							userColors={userColors}
 							userStarred={userStarred}

@@ -11,7 +11,7 @@ import StarredChannels from './StarredChannels';
 
 class SidePanel extends Component {
 	render() {
-		const { currentUser, userStatus, isMobileView, userColors, userStarred } = this.props;
+		const { currentUser, currentChannel, userStatus, isMobileView, userColors, userStarred } = this.props;
 		const sidePanelDarkStyle = { backgroundColor: userColors.background.primary };
 		const sidePanelLightStyle = { backgroundColor: userColors.background.secondary };
 		const sidePanelPrimaryColor = { color: userColors.color_primary };
@@ -47,9 +47,9 @@ class SidePanel extends Component {
 
 					{/* Starred Channels */}
 					{
-						userStarred && userStarred.length > 0 && (
+						userColors && userStarred && userStarred.length > 0 && (
 							<StarredChannels
-								currentUser={currentUser}
+								currentChannel={currentChannel}
 								userColors={userColors}
 								userStarred={userStarred}/>
 						)
@@ -58,6 +58,7 @@ class SidePanel extends Component {
 					{/* Channels */}
 					<Channels
 						currentUser={currentUser}
+						currentChannel={currentChannel}
 						userColors={userColors}/>
 				</div>
 			</section>

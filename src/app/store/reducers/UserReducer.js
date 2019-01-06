@@ -55,7 +55,9 @@ const userReducer = (state = initUserState, action) => {
 			// add
 			return {
 				...state,
-				starred: [...state.starred, action.payload]
+				starred: [...state.starred, action.payload].sort((a, b) => {
+					return a.timestamp - b.timestamp;
+				})
 			};
 		case actionTypes.CLEAR_USER:
 			return {

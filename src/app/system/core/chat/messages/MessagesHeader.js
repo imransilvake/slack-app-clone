@@ -136,6 +136,7 @@ class MessagesHeader extends Component {
 				id: currentChannel.id,
 				name: currentChannel.name,
 				details: currentChannel.details,
+				timestamp: currentChannel.timestamp,
 				createdBy: {
 					name: currentUser.displayName,
 					avatar: currentUser.photoURL

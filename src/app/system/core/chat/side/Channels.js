@@ -26,7 +26,6 @@ class Channels extends Component {
 		channelName: '',
 		channelDetails: '',
 		channelsRef: firebase.database().ref('channels'),
-		activeChannel: '',
 		errors: [],
 		isFormEnabled: false,
 		isAnimationLoading: false,
@@ -290,8 +289,14 @@ class Channels extends Component {
 			<li
 				key={channel.id}
 				name={channel.name}
-				className={this.state.activeChannel === channel.id ? 'sc-item sc-active' : 'sc-item'}
-				style={{ backgroundColor: this.state.activeChannel === channel.id ? userColors.background.primary : null }}>
+				className={this.props.currentChannel && this.props.currentChannel.id === channel.id ? 'sc-item sc-active' : 'sc-item'}
+				style={
+					{
+						backgroundColor:
+							this.props.currentChannel &&
+							this.props.currentChannel.id === channel.id ? userColors.background.primary : null
+					}
+				}>
 				<Button
 					style={{ color: userColors.color_secondary }}
 					variant="contained"
@@ -312,9 +317,6 @@ class Channels extends Component {
 	changeChannel = (channel) => {
 		// set current channel
 		this.props.setChannel(channel);
-
-		// set active channel
-		this.setActiveChannel(channel);
 	};
 
 	/**
@@ -328,22 +330,10 @@ class Channels extends Component {
 		if (isFirstLoad && channels.length > 0) {
 			// set current channel
 			this.props.setChannel(firstChannel);
-
-			// set active channel
-			this.setActiveChannel(firstChannel);
 		}
 
 		// unset isFirstLoad
 		this.setState({ isFirstLoad: false })
-	};
-
-	/**
-	 * set active channel
-	 *
-	 * @param channel
-	 */
-	setActiveChannel = (channel) => {
-		this.setState({ activeChannel: channel.id });
 	};
 
 	/**
