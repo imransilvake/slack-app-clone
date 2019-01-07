@@ -10,6 +10,7 @@ import firebase from '../../../../../firebase';
 // app
 import Icon from '@material-ui/core/es/Icon/Icon';
 import { updateUserStarred } from '../../../../store/actions/UserAction';
+import _ from 'lodash';
 
 class MessagesHeader extends Component {
 	state = {
@@ -59,7 +60,7 @@ class MessagesHeader extends Component {
 	 */
 	validateChannelStarred = () => {
 		const { currentChannel, userStarred } = this.props;
-		const isChannelStarred = userStarred && userStarred.some(e => e.id === currentChannel.id);
+		const isChannelStarred = !!(userStarred && _.find(userStarred, e => e.id === currentChannel.id));
 		this.setState({ isChannelStarred });
 	};
 

@@ -20,6 +20,7 @@ import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/LoadingAnimation';
 import { regexEmailValidity } from '../../utilities/helpers/Regex';
 import { setUser } from '../../../store/actions/UserAction';
+import _ from 'lodash';
 
 class Register extends Component {
 	state = {
@@ -53,7 +54,13 @@ class Register extends Component {
 									<InputLabel htmlFor="name">
 										{i18n.t('AUTH.REGISTER.CONTENT.FORM.NAME')}
 									</InputLabel>
-									<Input id="name" name="name" value={name} onChange={this.handleChange}/>
+									<Input
+										id="name"
+										name="name"
+										type="text"
+										value={name}
+										onChange={this.handleChange}
+									/>
 								</FormControl>
 								<FormControl className="sc-form-field" fullWidth>
 									<InputLabel htmlFor="email">
@@ -62,6 +69,7 @@ class Register extends Component {
 									<Input
 										id="email"
 										name="email"
+										type="email"
 										value={email}
 										error={this.handleInputError(errors, 'email')}
 										onChange={this.handleChange}
@@ -277,11 +285,7 @@ class Register extends Component {
 	 * @returns {*|boolean}
 	 */
 	handleInputError = (errors, fieldName) => {
-		return (
-			errors && errors.some(
-				error => error.message.toLocaleLowerCase().includes(fieldName)
-			)
-		);
+		return !!(errors && _.find(errors, e => e.message.toLocaleLowerCase().includes(fieldName)));
 	};
 
 	/**

@@ -127,6 +127,9 @@ class MessagesForm extends Component {
 	prepareMediaToUpload = (fileUrl) => {
 		const { messagesRef, currentChannel } = this.props;
 
+		// empty message
+		this.setState({ message: '' });
+
 		// send message
 		this.handleSendMessage(messagesRef, currentChannel, fileUrl);
 	};

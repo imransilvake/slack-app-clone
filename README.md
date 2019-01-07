@@ -54,6 +54,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] [Translation](https://github.com/i18next/react-i18next)
 - [X] [Firebase](https://firebase.google.com/)
 - [X] [Material-UI](https://material-ui.com/)
+- [X] [Lodash](https://github.com/lodash/lodash)
 - [X] [Moment](https://momentjs.com/)
 - [X] [Classnames](https://github.com/JedWatson/classnames)
 - [X] [React Scroll](https://github.com/fisshy/react-scroll)

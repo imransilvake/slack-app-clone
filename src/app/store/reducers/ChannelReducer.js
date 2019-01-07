@@ -1,4 +1,4 @@
-// action types
+// app
 import * as actionTypes from '../actions/ActionTypes';
 
 // init channel state

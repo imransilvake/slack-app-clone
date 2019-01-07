@@ -7,17 +7,16 @@ import connect from 'react-redux/es/connect/connect';
 // firebase
 import firebase from '../../../../../firebase';
 
-// scroll
-import { scroller } from 'react-scroll'
-
 // app
 import MessagesHeader from './MessagesHeader';
 import MessageContent from './MessageContent';
 import MessagesForm from './MessagesForm';
 import i18n from '../../../../../assets/i18n/i18n';
-import moment from 'moment';
 import formatMessageTime from '../../../utilities/helpers/Date';
 import setMessages from '../../../../store/actions/MessageAction';
+import _ from 'lodash';
+import moment from 'moment';
+import { scroller } from 'react-scroll'
 
 class MessagesPanel extends Component {
 	state = {
@@ -41,7 +40,7 @@ class MessagesPanel extends Component {
 		if (this.messagesWrapper) this.messagesWrapper.addEventListener('scroll', this.addScrollListener);
 
 		// validate current channel data on redux
-		if (savedMessages && savedMessages.length && savedMessages.some(x => x.channelId === currentChannel.id)) {
+		if (savedMessages && savedMessages.length && !!(_.find(savedMessages, e => e.channelId === currentChannel.id))) {
 			this.setState({ isReduxMessagesAccessLocked: true });
 		}
 	}
@@ -133,7 +132,7 @@ class MessagesPanel extends Component {
 		const { savedMessages } = this.props;
 
 		// load cached redux state
-		if (savedMessages && savedMessages.length && savedMessages.some(x => x.channelId === channelId)) {
+		if (savedMessages && savedMessages.length && !!(_.find(savedMessages, e => e.channelId === channelId))) {
 			savedMessages.forEach((x) => {
 				// validate channel
 				if (x && x.channelId === channelId) {
@@ -221,10 +220,7 @@ class MessagesPanel extends Component {
 				const snapshot = snap.val();
 
 				// ignore same message
-				if (messages && messages.some(e =>
-					e.snapshot.timestamp === snapshot.timestamp ||
-					e.snapshot.content === snapshot.content
-				)) return;
+				if (_.isEqual(previousSnapshot, snapshot)) return;
 
 				// message
 				const message = {

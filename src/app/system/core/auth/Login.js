@@ -15,6 +15,7 @@ import i18n from '../../../../assets/i18n/i18n';
 import ENV from '../../../../environment/index';
 import LoadingAnimation from '../../utilities/loading-animation/LoadingAnimation';
 import { regexEmailValidity } from '../../utilities/helpers/Regex';
+import _ from 'lodash';
 
 class Login extends Component {
 	state = {
@@ -55,6 +56,7 @@ class Login extends Component {
 								<Input
 									id="email"
 									name="email"
+									type="email"
 									value={email}
 									error={this.handleInputError(errors, 'email')}
 									onChange={this.handleChange}
@@ -189,11 +191,7 @@ class Login extends Component {
 	 * @returns {*|boolean}
 	 */
 	handleInputError = (errors, fieldName) => {
-		return (
-			errors && errors.some(
-				error => error.message.toLocaleLowerCase().includes(fieldName)
-			)
-		);
+		return !!(errors && _.find(errors, e => e.message.toLocaleLowerCase().includes(fieldName)));
 	};
 }
 

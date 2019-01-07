@@ -1,5 +1,6 @@
-// action types
+// app
 import * as actionTypes from '../actions/ActionTypes';
+import _ from 'lodash';
 
 // init user state
 const initUserState = {
@@ -45,7 +46,7 @@ const userReducer = (state = initUserState, action) => {
 
 			// object
 			// remove
-			if (state.starred && state.starred.some(e => e.id === action.payload.id)) {
+			if (!!(state.starred && _.find(state.starred, e => e.id === action.payload.id))) {
 				return {
 					...state,
 					starred: state.starred.filter(e => e.id !== action.payload.id)
