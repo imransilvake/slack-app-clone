@@ -26,7 +26,8 @@ class MessagesPanel extends Component {
 		keyReference: null,
 		isInfiniteScrolling: true,
 		isReduxMessagesAccessLocked: false,
-		elementScrollTop: 0
+		elementScrollTop: 0,
+		skipFirstAddedChild: true
 	};
 
 	componentDidMount() {
@@ -129,6 +130,7 @@ class MessagesPanel extends Component {
 	 * @param channelId
 	 */
 	addMessageListener = (channelId) => {
+		const { messagesRef } = this.state;
 		const { savedMessages } = this.props;
 
 		// load cached redux state
@@ -152,7 +154,7 @@ class MessagesPanel extends Component {
 				}
 			});
 		} else {
-			this.state.messagesRef
+			messagesRef
 				.child(channelId)
 				.orderByChild('timestamp')
 				.limitToLast(1)
@@ -215,12 +217,15 @@ class MessagesPanel extends Component {
 			.orderByChild('timestamp')
 			.limitToLast(1)
 			.on('child_added', (snap) => {
-				const { messages } = this.state;
+				const { messages, skipFirstAddedChild } = this.state;
 				const previousSnapshot = messages.length && messages[messages.length - 1].snapshot;
 				const snapshot = snap.val();
 
-				// ignore same message
-				if (_.isEqual(previousSnapshot, snapshot)) return;
+				// skip first added child
+				if (skipFirstAddedChild) {
+					this.setState({ skipFirstAddedChild: false });
+					return;
+				}
 
 				// message
 				const message = {
