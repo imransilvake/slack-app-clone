@@ -131,20 +131,25 @@
 		}
 
 		.sc-icon-wrapper {
-			cursor: pointer;
 			height: 18px;
 			position: absolute;
 			right: 0;
 			top: 7px;
 			width: 18px;
 
+			&.sc-cursor-pointer {
+				cursor: pointer;
+
+				.sc-icon {
+					&:hover {
+						opacity: .9;
+					}
+				}
+			}
+
 			.sc-icon {
 				span {
 					font-size: cd-fontSize(s18);
-				}
-
-				&:hover {
-					opacity: .9;
 				}
 			}
 		}

@@ -33,20 +33,23 @@ class MessagesHeader extends Component {
 					{/* Information */}
 					<div className="cd-col">
 						{/* Title */}
-						<h5 className="sc-title"># {currentChannel.name}</h5>
+						<h5 className="sc-title"><span>#</span> {currentChannel.name}</h5>
 
 						{/* Icons */}
 						<div className="sc-info">
 							<span
-								className="sc-icon sc-l2 sc-active-button"
+								className="sc-icon-wrapper sc-l2"
 								onClick={this.handleStarState}
 								role="presentation">
-								{!isChannelStarred && (<Icon>star_border</Icon>)}
-								{isChannelStarred && (<Icon>star</Icon>)}
+								{!isChannelStarred && (<Icon className="sc-icon sc-hover">star_border</Icon>)}
+								{isChannelStarred && (<Icon className="sc-icon sc-hover sc-active">star</Icon>)}
 							</span>
-							<span className="sc-icon sc-l1">
+							<span className="sc-icon-wrapper sc-l1">
+								<Icon className="sc-icon">chat_bubble_outline</Icon>
 								<span className="sc-value">{totalMessages}</span>
-								<Icon>mode_comment</Icon>
+							</span>
+							<span className="sc-icon-wrapper sc-l3">
+								<Icon className="sc-icon">info_outline</Icon>
 							</span>
 						</div>
 					</div>

@@ -46,7 +46,7 @@ const userReducer = (state = initUserState, action) => {
 
 			// object
 			// remove
-			if (!!(state.starred && _.find(state.starred, e => e.id === action.payload.id))) {
+			if (state.starred && _.find(state.starred, e => e.id === action.payload.id)) {
 				return {
 					...state,
 					starred: state.starred.filter(e => e.id !== action.payload.id)

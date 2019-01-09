@@ -8,33 +8,42 @@
 
 		.cd-col {
 			.sc-title {
-				color: cd-palette($cd-color, 1003);
 				font-weight: cd-fontWeight(700);
 				padding-top: 3px;
 			}
 
 			.sc-info {
 				align-items: center;
-				color: cd-palette($cd-color, 1002);
+				color: cd-palette($cd-color, 1004);
 				display: flex;
 
-				> .sc-icon {
+				.sc-icon-wrapper {
 					&.sc-l1 {
-						.material-icons {
+						.sc-icon {
 							font-size: cd-fontSize(s15);
 						}
 					}
 
 					&.sc-l2 {
-						.material-icons {
+						.sc-icon {
 							font-size: cd-fontSize(s18);
-						}
 
-						&.sc-active-button {
-							&:hover {
-								color: cd-palette($cd-color, 1003);
-								cursor: pointer;
+							&.sc-active {
+								color: cd-palette($cd-color, 1007);
 							}
+
+							&.sc-hover {
+								&:hover {
+									cursor: pointer;
+									opacity: .9;
+								}
+							}
+						}
+					}
+
+					&.sc-l3 {
+						.sc-icon {
+							font-size: cd-fontSize(s16);
 						}
 					}
 
@@ -43,15 +52,16 @@
 					}
 
 					.sc-value {
-						margin-right: 2px;
+						font-size: cd-fontSize(s14);
+						margin-left: 4px;
 					}
 
 					&:not(:last-child) {
 						&::after {
-							color: cd-palette($cd-color, 1003);
+							color: cd-palette($cd-color, 1011);
 							content: '|';
-							margin-left: 5px;
-							padding-right: 5px;
+							margin-left: 6px;
+							padding-right: 6px;
 							vertical-align: middle;
 						}
 					}

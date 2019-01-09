@@ -30,7 +30,6 @@ class SidePanel extends Component {
 					{/* Icons */}
 					<div className="sc-icons">
 						<Icon className="sc-icon">search</Icon>
-						<Icon className="sc-icon">info</Icon>
 					</div>
 				</div>
 
