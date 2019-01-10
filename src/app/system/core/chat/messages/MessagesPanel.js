@@ -85,7 +85,7 @@ class MessagesPanel extends Component {
 				<section className="sc-messages" id="sc-messages">
 					{/* Channel Information */}
 					<div className="sc-channel-info">
-						<h3># {currentChannel.name}</h3>
+						<h3>#{currentChannel.name}</h3>
 						<p>
 							{i18n.t('CHAT.MESSAGES_PANEL.MESSAGES.CHANNEL_INTRO.T1', {
 								date: formatMessageTime(currentChannel.timestamp, 'MMMM Do, YYYY')
