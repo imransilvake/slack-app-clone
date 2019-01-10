@@ -27,17 +27,6 @@
 					&.sc-l2 {
 						.sc-icon {
 							font-size: cd-fontSize(s18);
-
-							&.sc-active {
-								color: cd-palette($cd-color, 1007);
-							}
-
-							&.sc-hover {
-								&:hover {
-									cursor: pointer;
-									opacity: .9;
-								}
-							}
 						}
 					}
 
@@ -45,6 +34,17 @@
 						.sc-icon {
 							font-size: cd-fontSize(s16);
 						}
+					}
+
+					.sc-hover {
+						&:hover {
+							cursor: pointer;
+							opacity: .9;
+						}
+					}
+
+					.sc-active {
+						color: cd-palette($cd-color, 1007);
 					}
 
 					span {

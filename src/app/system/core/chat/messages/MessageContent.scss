@@ -3,7 +3,6 @@
 	&.sc-different {
 		position: relative;
 
-		// time
 		.sc-time-one {
 			border-bottom: 1px solid cd-palette($cd-border, 3004, .8);
 			line-height: 0;
@@ -17,16 +16,13 @@
 
 			span {
 				background-color: cd-palette($cd-background, 2001);
-				color: cd-palette($cd-color, 1002);
 				font-size: cd-fontSize(s13);
 				font-weight: cd-fontWeight(500);
 				padding: 0 10px;
 			}
 		}
 
-		// content
 		.sc-content {
-			color: cd-palette($cd-color, 1002);
 			display: inline-block;
 			margin-left: 10px;
 			width: calc(100% - 45px);
@@ -41,12 +37,10 @@
 					margin-left: 5px;
 					padding: 1px 5px;
 
-					// time
 					&.sc-time {
 						background-color: cd-palette($cd-background, 2010);
 					}
 
-					// author
 					&.sc-author {
 						background-color: cd-palette($cd-background, 2005);
 						color: cd-palette($cd-color, 1001);
@@ -62,9 +56,7 @@
 
 	// continuous user
 	&.sc-continuous {
-		// content
 		.sc-content {
-			color: cd-palette($cd-color, 1002);
 			margin: 0 0 0 -15px;
 			padding-left: 60px;
 			padding-right: 5px;
@@ -73,7 +65,6 @@
 			&:hover {
 				background-color: cd-palette($cd-background, 2010);
 
-				// time
 				.sc-time-two {
 					color: cd-palette($cd-color, 1004);
 					cursor: help;
@@ -87,12 +78,10 @@
 				}
 			}
 
-			// time - hidden initially
 			.sc-time-two {
 				display: none;
 			}
 
-			// description
 			.sc-description {
 				display: inline-block;
 				font-size: cd-fontSize(s14);
