@@ -53,6 +53,9 @@ class MessagesHeader extends Component {
 								role="presentation">
 								<Icon className="sc-icon sc-hover">info_outline</Icon>
 							</span>
+							<span className="sc-icon-wrapper sc-l2">
+								<Icon className="sc-icon sc-hover">search</Icon>
+							</span>
 							<span className="sc-icon-wrapper sc-l1">
 								<Icon className="sc-icon">chat_bubble_outline</Icon>
 								<span className="sc-value">{totalMessages}</span>
