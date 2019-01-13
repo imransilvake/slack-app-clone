@@ -16,7 +16,7 @@ export const setChannelTopUsers = (channelTopUsers) => {
 	return {
 		type: actionTypes.SET_CHANNEL_TOP_USERS,
 		payload: {
-			channelTopUsers: channelTopUsers
+			channelTopUsers
 		}
 	};
 };

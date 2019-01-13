@@ -154,10 +154,10 @@ class ChannelInfoPopover extends Component {
 							.slice(0, 5);
 
 						// set top users
-						this.setState({ topUsers: topUsers }, () => {
+						this.setState({ topUsers }, () => {
 							const userInfo = {
 								channelId: currentChannel.id,
-								topUsers: topUsers
+								topUsers
 							};
 
 							// set top users to redux
