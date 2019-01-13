@@ -102,26 +102,24 @@ class MessagesHeader extends Component {
 		const { currentUser, currentChannel } = this.props;
 		const star = { [currentChannel.id]: currentChannel };
 
-		if (currentUser && currentChannel) {
-			// star / un-star
-			if (isChannelStarred) {
-				usersRef
-					.child(`${currentUser.uid}/starred`)
-					.update(star)
-					.then(() => {
-						// update user star state in redux
-						this.props.updateUserStarred(star[currentChannel.id]);
-					});
-			} else {
-				usersRef
-					.child(`${currentUser.uid}/starred`)
-					.child(currentChannel.id)
-					.remove()
-					.then(() => {
-						// update user star state in redux
-						this.props.updateUserStarred(star[currentChannel.id]);
-					})
-			}
+		// star / un-star
+		if (isChannelStarred) {
+			usersRef
+				.child(`${currentUser.uid}/starred`)
+				.update(star)
+				.then(() => {
+					// update user star state in redux
+					this.props.updateUserStarred(star[currentChannel.id]);
+				});
+		} else {
+			usersRef
+				.child(`${currentUser.uid}/starred`)
+				.child(currentChannel.id)
+				.remove()
+				.then(() => {
+					// update user star state in redux
+					this.props.updateUserStarred(star[currentChannel.id]);
+				})
 		}
 	};
 

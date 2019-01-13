@@ -75,6 +75,7 @@ class MessagesPanel extends Component {
 			<section className="sc-message-panel">
 				{/* Header */}
 				<MessagesHeader
+					currentUser={currentUser}
 					currentChannel={currentChannel}
 					totalMessages={messages.length}
 					userStarred={userStarred}
