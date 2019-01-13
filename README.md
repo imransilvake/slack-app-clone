@@ -1,23 +1,23 @@
 # Slack App Clone
 A Full-stack Chat application from Frontend to Backend with React, Redux, Firebase, and custom SCSS Framework.
 - State management with Redux, with simple, straightforward patterns
-- Essential features of React Router 4 (Switch component, withRouter HOC, history object)
+- Essential features of React Router 4 (Switch component, withRouter HOC, History object)
 - Support Internationalization (i18n)
-- User authentication with Firebase (Sign-up & Login)
-- Form validation for our Login and Register forms
+- User authentication with Firebase (Register & Login)
+- Form validations for our Register & Login forms
 - Create Public Channels
-- Sending and receiving messages instantly with the real-time Firebase Database
-- Edit and Delete Messages
-- Uploading and displaying image messages using Firebase Storage
-- Notifications to display new messages in other channels
-- Sending Direct Messages to other users in our chat
+- Send and receive messages instantly with the real-time Firebase Database
+- Upload and Display Image in messages using Firebase Storage
+- Creating and uploading user avatars
+- Starred / un-starred public channels
 - Tracking / showing when users are online / offline
 - Searching messages within created channels
 - Custom animations to see when other users are typing in the same channel
-- Creating and uploading user avatars
-- The ability to favorite / un-favorite public channels
 - Add emojis to our messages with an Emoji Picker component
 - Securing our application with Firebase Rules
+- Edit and Delete Messages
+- Notifications to display new messages in other channels
+- Sending Direct Messages to other users in our chat
 
 
 ## Content
