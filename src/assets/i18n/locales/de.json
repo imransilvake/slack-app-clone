@@ -109,6 +109,14 @@
 			}
 		},
 		"MESSAGES_PANEL": {
+			"HEADER": {
+				"CHANNEL_INFO": {
+					"INFO": "Informationen",
+					"AUTHOR": "autor",
+					"TOP_USERS": "Top-Benutzer",
+					"POSTS": "{{ count }} posts"
+				}
+			},
 			"MESSAGES": {
 				"CHANNEL_INTRO": {
 					"T1": "Sie haben diesen Kanal am erstellt {{ date }}. ",

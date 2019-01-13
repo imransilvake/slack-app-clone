@@ -16,7 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import Input from '@material-ui/core/Input/Input';
 import Button from '@material-ui/core/Button/Button';
 import { regexLNL } from '../../../utilities/helpers/Regex';
-import setChannel from '../../../../store/actions/ChannelAction';
+import { setChannel } from '../../../../store/actions/ChannelAction';
 import LoadingAnimation from '../../../utilities/loading-animation/LoadingAnimation';
 
 class Channels extends Component {
@@ -59,7 +59,7 @@ class Channels extends Component {
 						<div className="sc-icon" style={channelTitleStyle}>
 							<Icon onClick={this.handleOpenModal}>add_circle</Icon>
 						</div>
-						<span className="cd-arrow cd-top cd-fixed-right">
+						<span className="cd-arrow cd-bottom cd-fixed-right">
 							{i18n.t('CHAT.SIDE_PANEL.CHANNELS.CREATE_CHANNEL')}
 						</span>
 					</div>
@@ -194,6 +194,7 @@ class Channels extends Component {
 			timestamp: firebase.database.ServerValue.TIMESTAMP,
 			createdBy: {
 				name: currentUser.displayName,
+				email: currentUser.email,
 				avatar: currentUser.photoURL
 			}
 		};

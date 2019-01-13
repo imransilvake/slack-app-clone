@@ -34,7 +34,7 @@ class Chat extends Component {
 
 	render() {
 		const { mobileOpen } = this.state;
-		const { currentUser, currentChannel, userStatus, userColors, userStarred } = this.props;
+		const { currentUser, currentChannel, userStatus, userColors, userStarred, channelTopUsers } = this.props;
 
 		return currentUser && userStatus && userColors && userStarred && (
 			<section className="cd-container-fluid sc-chat">
@@ -81,6 +81,7 @@ class Chat extends Component {
 								currentChannel={currentChannel}
 								currentUser={currentUser}
 								userStarred={userStarred}
+								channelTopUsers={channelTopUsers}
 							/>
 						)
 					}
@@ -114,7 +115,8 @@ const mapStateToProps = state => ({
 	currentChannel: state.channel.currentChannel,
 	userStatus: state.user.status,
 	userColors: state.user.colors,
-	userStarred: state.user.starred
+	userStarred: state.user.starred,
+	channelTopUsers: state.channel.channelTopUsers
 });
 
 export default connect(mapStateToProps)(Chat);

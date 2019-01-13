@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // redux
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 
 // firebase
 import firebase from '../../../../../firebase';
@@ -68,17 +68,17 @@ class MessagesPanel extends Component {
 	}
 
 	render() {
-		const { currentChannel, currentUser, userStarred } = this.props;
 		const { messagesRef, messages, isMessagesLoading } = this.state;
+		const { currentChannel, currentUser, userStarred, channelTopUsers } = this.props;
 
 		return messagesRef && messages && (
 			<section className="sc-message-panel">
 				{/* Header */}
 				<MessagesHeader
-					currentUser={currentUser}
 					currentChannel={currentChannel}
 					totalMessages={messages.length}
 					userStarred={userStarred}
+					channelTopUsers={channelTopUsers}
 				/>
 
 				{/* Content */}

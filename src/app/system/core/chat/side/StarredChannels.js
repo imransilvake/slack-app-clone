@@ -1,12 +1,14 @@
 // react
 import React, { Component } from 'react';
 
+// redux
+import { connect } from 'react-redux';
+
 // app
 import i18n from '../../../../../assets/i18n/i18n';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
-import setChannel from '../../../../store/actions/ChannelAction';
+import { setChannel } from '../../../../store/actions/ChannelAction';
 
 class StarredChannels extends Component {
 	render() {

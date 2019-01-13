@@ -102,8 +102,8 @@ class MessageContent extends Component {
 						)
 					}
 
-					{/* image - full size */}
-					{isImageZoom && this.displayImageFullSize(message.image, `file-${message.timestamp}`)}
+					{/* image - full screen */}
+					{isImageZoom && this.displayImageFullscreen(message.image, `file-${message.timestamp}`)}
 				</div>
 			</article>
 		);
@@ -182,7 +182,7 @@ class MessageContent extends Component {
 	 * @param alt
 	 * @returns {*}
 	 */
-	displayImageFullSize = (src, alt) => (
+	displayImageFullscreen = (src, alt) => (
 		<Modal open={this.state.isImageZoom}>
 			<section className="sc-modal-wrapper sc-preview-image-modal">
 				<img src={src} alt={alt} className="cd-vh-center"/>

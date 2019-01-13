@@ -2,20 +2,23 @@
 import React, { Component } from 'react';
 
 // redux
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 
 // firebase
 import firebase from '../../../../../firebase';
 
 // app
+import ChannelInfoPopover from './ChannelInfoPopover';
 import Icon from '@material-ui/core/es/Icon/Icon';
+import Popover from '@material-ui/core/Popover';
 import { updateUserStarred } from '../../../../store/actions/UserAction';
 import _ from 'lodash';
 
 class MessagesHeader extends Component {
 	state = {
 		usersRef: firebase.database().ref('users'),
-		isChannelStarred: false
+		isChannelStarred: false,
+		openChannelInfoPopover: null
 	};
 
 	componentDidMount() {
@@ -24,8 +27,8 @@ class MessagesHeader extends Component {
 	}
 
 	render() {
-		const { isChannelStarred } = this.state;
-		const { currentChannel, totalMessages } = this.props;
+		const { isChannelStarred, openChannelInfoPopover } = this.state;
+		const { currentChannel, totalMessages, channelTopUsers } = this.props;
 
 		return (
 			<section className="sc-messages-header">
@@ -44,7 +47,10 @@ class MessagesHeader extends Component {
 								{!isChannelStarred && (<Icon className="sc-icon sc-hover">star_border</Icon>)}
 								{isChannelStarred && (<Icon className="sc-icon sc-hover sc-active">star</Icon>)}
 							</span>
-							<span className="sc-icon-wrapper sc-l3">
+							<span
+								className="sc-icon-wrapper sc-l3"
+								onClick={this.handleOpenChannelInfoPopover}
+								role="presentation">
 								<Icon className="sc-icon sc-hover">info_outline</Icon>
 							</span>
 							<span className="sc-icon-wrapper sc-l1">
@@ -54,6 +60,18 @@ class MessagesHeader extends Component {
 						</div>
 					</div>
 				</div>
+
+				{/* Channel Info Popover */}
+				<Popover
+					className="sc-channel-info-popover"
+					anchorEl={openChannelInfoPopover}
+					open={Boolean(openChannelInfoPopover)}
+					onClose={this.handleCloseChannelInfoPopover}>
+					<ChannelInfoPopover
+						currentChannel={currentChannel}
+						channelTopUsers={channelTopUsers}
+					/>
+				</Popover>
 			</section>
 		);
 	}
@@ -82,38 +100,45 @@ class MessagesHeader extends Component {
 	toggleStarChannel = () => {
 		const { isChannelStarred, usersRef } = this.state;
 		const { currentUser, currentChannel } = this.props;
-		const star = {
-			[currentChannel.id]: {
-				id: currentChannel.id,
-				name: currentChannel.name,
-				details: currentChannel.details,
-				timestamp: currentChannel.timestamp,
-				createdBy: {
-					name: currentUser.displayName,
-					avatar: currentUser.photoURL
-				}
-			}
-		};
+		const star = { [currentChannel.id]: currentChannel };
 
-		// star / un-star
-		if (isChannelStarred) {
-			usersRef
-				.child(`${currentUser.uid}/starred`)
-				.update(star)
-				.then(() => {
-					// update user star state in redux
-					this.props.updateUserStarred(star[currentChannel.id]);
-				});
-		} else {
-			usersRef
-				.child(`${currentUser.uid}/starred`)
-				.child(currentChannel.id)
-				.remove()
-				.then(() => {
-					// update user star state in redux
-					this.props.updateUserStarred(star[currentChannel.id]);
-				})
+		if (currentUser && currentChannel) {
+			// star / un-star
+			if (isChannelStarred) {
+				usersRef
+					.child(`${currentUser.uid}/starred`)
+					.update(star)
+					.then(() => {
+						// update user star state in redux
+						this.props.updateUserStarred(star[currentChannel.id]);
+					});
+			} else {
+				usersRef
+					.child(`${currentUser.uid}/starred`)
+					.child(currentChannel.id)
+					.remove()
+					.then(() => {
+						// update user star state in redux
+						this.props.updateUserStarred(star[currentChannel.id]);
+					})
+			}
 		}
+	};
+
+	/**
+	 * handle open channel info popover
+	 *
+	 * @param event
+	 */
+	handleOpenChannelInfoPopover = (event) => {
+		this.setState({ openChannelInfoPopover: event.currentTarget });
+	};
+
+	/**
+	 * handle close channel info popover
+	 */
+	handleCloseChannelInfoPopover = () => {
+		this.setState({ openChannelInfoPopover: null });
 	};
 }
 

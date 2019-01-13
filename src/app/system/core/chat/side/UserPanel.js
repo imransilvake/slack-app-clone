@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // redux
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 
 // firebase
 import firebase from '../../../../../firebase';

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 // redux
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 
 // firebase
 import firebase from '../../../../firebase';
