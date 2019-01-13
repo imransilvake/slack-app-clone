@@ -113,6 +113,7 @@
 				"CHANNEL_INFO": {
 					"INFO": "Information",
 					"AUTHOR": "author",
+					"CREATED_DATE": "created",
 					"TOP_USERS": "Top Users",
 					"POSTS": "{{ count }} posts"
 				}

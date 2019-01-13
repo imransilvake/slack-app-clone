@@ -13,12 +13,12 @@ const channelReducer = (state = initChannelState, action) => {
 		case actionTypes.SET_CURRENT_CHANNEL:
 			return {
 				...state,
-				currentChannel: action.payload.currentChannel
+				currentChannel: action.payload
 			};
 		case actionTypes.SET_CHANNEL_TOP_USERS:
 			return {
 				...state,
-				channelTopUsers: [...state.channelTopUsers, action.payload.channelTopUsers]
+				channelTopUsers: [...state.channelTopUsers, action.payload]
 			};
 		default:
 			return state;

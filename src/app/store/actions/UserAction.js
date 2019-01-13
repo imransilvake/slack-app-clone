@@ -5,9 +5,7 @@ import * as actionTypes from './ActionTypes';
 export const setUser = (user) => {
 	return {
 		type: actionTypes.SET_CURRENT_USER,
-		payload: {
-			currentUser: user
-		}
+		payload: user
 	};
 };
 
@@ -15,9 +13,7 @@ export const setUser = (user) => {
 export const updateUserAvatar = (user) => {
 	return {
 		type: actionTypes.UPDATE_USER_AVATAR,
-		payload: {
-			currentUser: user
-		}
+		payload: user
 	};
 };
 

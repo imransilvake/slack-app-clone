@@ -14,6 +14,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import i18n from '../../../../../assets/i18n/i18n';
 import { setChannelTopUsers } from '../../../../store/actions/ChannelAction';
 import _ from 'lodash';
+import formatMessageTime from '../../../utilities/helpers/Date';
 
 class ChannelInfoPopover extends Component {
 	state = {
@@ -43,17 +44,24 @@ class ChannelInfoPopover extends Component {
 						<div className="sc-channel">
 							<p>{currentChannel.details}</p>
 						</div>
-						<div className="sc-user">
-							<h6 className="sc-title">
-								{i18n.t('CHAT.MESSAGES_PANEL.HEADER.CHANNEL_INFO.AUTHOR')}
-							</h6>
+						<div className="sc-user sc-border">
 							<div className="sc-desc">
-								<img className="sc-avatar" src={currentChannel.createdBy.avatar} alt="channel-author"/>
-								<div className="sc-content">
-									<a href={`mailto:${currentChannel.createdBy.email}`}>
-										<h6>{currentChannel.createdBy.name}</h6>
-									</a>
-								</div>
+								<h6>
+									{i18n.t('CHAT.MESSAGES_PANEL.HEADER.CHANNEL_INFO.AUTHOR')}:&nbsp;
+									<span>
+										<a href={`mailto:${currentChannel.createdBy.email}`}>
+											{currentChannel.createdBy.name}
+										</a>
+									</span>
+								</h6>
+								<h6>
+									{i18n.t('CHAT.MESSAGES_PANEL.HEADER.CHANNEL_INFO.CREATED_DATE')}:&nbsp;
+									<span>
+										{
+											formatMessageTime(currentChannel.timestamp, 'MMMM Do, YYYY')
+										}
+									</span>
+								</h6>
 							</div>
 						</div>
 					</ExpansionPanelDetails>
@@ -70,7 +78,7 @@ class ChannelInfoPopover extends Component {
 							<ExpansionPanelDetails className="sc-details">
 								{
 									topUsers.map((user, index) => (
-										<ul className="sc-user" key={index}>
+										<ul className="sc-user sc-border" key={index}>
 											<li className="sc-desc">
 												<img className="sc-avatar" src={user.avatar} alt="channel-author"/>
 												<div className="sc-content">

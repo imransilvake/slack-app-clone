@@ -17,13 +17,13 @@ const userReducer = (state = initUserState, action) => {
 		case actionTypes.SET_CURRENT_USER:
 			return {
 				...state,
-				currentUser: action.payload.currentUser,
+				currentUser: action.payload,
 				isAnimationLoading: false
 			};
 		case actionTypes.UPDATE_USER_AVATAR:
 			return {
 				...state,
-				currentUser: action.payload.currentUser
+				currentUser: action.payload
 			};
 		case actionTypes.UPDATE_USER_STATUS:
 			return {
