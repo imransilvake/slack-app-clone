@@ -19,6 +19,8 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Notifications to display new messages in other channels
 - Sending Direct Messages to other users in our chat
 
+![Alt text](preview.png?raw=true "slack-clone")
+
 
 ## Content
 - [X] Authentication with Firebase
