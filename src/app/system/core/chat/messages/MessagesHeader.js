@@ -73,6 +73,7 @@ class MessagesHeader extends Component {
 					<ChannelInfoPopover
 						currentChannel={currentChannel}
 						channelTopUsers={channelTopUsers}
+						totalMessages={totalMessages}
 					/>
 				</Popover>
 			</section>

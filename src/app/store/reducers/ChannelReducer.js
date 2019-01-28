@@ -1,5 +1,6 @@
 // app
 import * as actionTypes from '../actions/ActionTypes';
+import _ from 'lodash';
 
 // init channel state
 const initChannelState = {
@@ -16,6 +17,13 @@ const channelReducer = (state = initChannelState, action) => {
 				currentChannel: action.payload
 			};
 		case actionTypes.SET_CHANNEL_TOP_USERS:
+			if (state.channelTopUsers && _.find(state.channelTopUsers, e => e.channelId === action.payload.channelId)) {
+				return {
+					...state,
+					channelTopUsers: [...state.channelTopUsers.filter(e => e.id !== action.payload.id), action.payload]
+				}
+			}
+
 			return {
 				...state,
 				channelTopUsers: [...state.channelTopUsers, action.payload]
