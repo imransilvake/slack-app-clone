@@ -57,9 +57,7 @@ class ChannelInfoPopover extends Component {
 								<h6>
 									{i18n.t('CHAT.MESSAGES_PANEL.HEADER.CHANNEL_INFO.CREATED_DATE')}:&nbsp;
 									<span>
-										{
-											formatMessageTime(currentChannel.timestamp, 'MMMM Do, YYYY')
-										}
+										{formatMessageTime(currentChannel.timestamp, 'MMMM Do, YYYY')}
 									</span>
 								</h6>
 							</div>
@@ -118,9 +116,9 @@ class ChannelInfoPopover extends Component {
 	 * add top users listener
 	 */
 	addTopUsersListener = () => {
-		const { channelTopUsers, currentChannel } = this.props;
+		const { channelTopUsers, currentChannel, totalMessages } = this.props;
 
-		if (channelTopUsers && !!(_.find(channelTopUsers, e => e.channelId === currentChannel.id))) {
+		if (channelTopUsers && !!(_.find(channelTopUsers, e => e.channelId === currentChannel.id && e.totalMessages === totalMessages))) {
 			const data = channelTopUsers.find(e => e.channelId === currentChannel.id);
 			this.setState({ topUsers: data.topUsers });
 		} else {
@@ -133,7 +131,7 @@ class ChannelInfoPopover extends Component {
 	 */
 	accumulateTopUsers = () => {
 		const { messagesRef } = this.state;
-		const { currentChannel } = this.props;
+		const { currentChannel, totalMessages } = this.props;
 
 		messagesRef
 			.child(currentChannel.id)
@@ -164,6 +162,7 @@ class ChannelInfoPopover extends Component {
 						// set top users
 						this.setState({ topUsers }, () => {
 							const userInfo = {
+								totalMessages,
 								channelId: currentChannel.id,
 								topUsers
 							};

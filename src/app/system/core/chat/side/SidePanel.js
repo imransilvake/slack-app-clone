@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 import ColorPanel from './ColorPanel';
 import UserPanel from './UserPanel';
 import Channels from './Channels';
-import Icon from '@material-ui/core/Icon';
 import StarredChannels from './StarredChannels';
 
 class SidePanel extends Component {
@@ -26,11 +25,6 @@ class SidePanel extends Component {
 					<ColorPanel
 						currentUser={currentUser}
 						userColors={userColors}/>
-
-					{/* Icons */}
-					<div className="sc-icons">
-						<Icon className="sc-icon">search</Icon>
-					</div>
 				</div>
 
 				{/* Content */}
