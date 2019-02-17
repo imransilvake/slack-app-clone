@@ -1,6 +1,7 @@
 // react
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 // redux
 import { createStore } from 'redux';
@@ -20,12 +21,7 @@ class App extends Component {
 			<Provider store={store}>
 				<BrowserRouter>
 					<React.Fragment>
-						{/* Header */}
-
-						{/* Router */}
 						<AppRouter/>
-
-						{/* Footer */}
 					</React.Fragment>
 				</BrowserRouter>
 			</Provider>
@@ -33,4 +29,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default withTranslation()(App);
