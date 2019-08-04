@@ -39,7 +39,7 @@ class MessagesForm extends Component {
 						className="textarea"
 						name="message"
 						rows="2"
-						multiline="true"
+						multiline
 						value={message}
 						onChange={this.handleChange}
 						onKeyDown={this.prepareMessage}

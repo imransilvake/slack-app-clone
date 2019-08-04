@@ -19,7 +19,7 @@ import { updateUserColors } from '../../../../store/actions/UserAction';
 
 class ColorPanel extends Component {
 	state = {
-		openPaletteModal: false,
+		openPaletteModal: null,
 		usersRef: firebase.database().ref('users')
 	};
 
@@ -48,7 +48,8 @@ class ColorPanel extends Component {
 				{/* Palette Popover */}
 				<Popover
 					className="sc-palette-popover"
-					open={openPaletteModal}
+					anchorEl={openPaletteModal}
+					open={Boolean(openPaletteModal)}
 					onClose={this.handleClosePaletteModal}>
 					<div className="sc-palette">
 						<h5>{i18n.t('CHAT.SIDE_PANEL.COLOR_PANEL.TITLE')}</h5>
@@ -93,15 +94,15 @@ class ColorPanel extends Component {
 	/**
 	 * handle open palette modal
 	 */
-	handleOpenPaletteModal = () => {
-		this.setState({ openPaletteModal: true });
+	handleOpenPaletteModal = (event) => {
+		this.setState({ openPaletteModal: event.currentTarget });
 	};
 
 	/**
 	 * handle close palette modal
 	 */
 	handleClosePaletteModal = () => {
-		this.setState({ openPaletteModal: false });
+		this.setState({ openPaletteModal: null });
 	};
 
 	/**

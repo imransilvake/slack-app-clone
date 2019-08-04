@@ -12,10 +12,11 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Starred / un-starred public channels
 - Tracking / showing when users are online / offline
 
-![Alt text](login.png?raw=true "login-register")
+![Alt text](home.png?raw=true "home")
 
 ![Alt text](preview.png?raw=true "slack-clone")
 
+check out more preview images here: [Gallery](/preview)
 
 ## Content
 - [X] Authentication with Firebase

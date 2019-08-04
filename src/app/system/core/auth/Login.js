@@ -9,7 +9,7 @@ import firebase from '../../../../firebase';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
-import Button from '@material-ui/core/Button/Button';
+import Button from '@material-ui/core/Button';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import i18n from '../../../../assets/i18n/i18n';
 import ENV from '../../../../environment/index';
