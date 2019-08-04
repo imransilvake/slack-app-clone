@@ -325,10 +325,11 @@ class Channels extends Component {
 	 */
 	setFirstChannel = () => {
 		const { channels, isFirstLoad } = this.state;
+		const { currentChannel } = this.props;
 		const firstChannel = channels[0];
 
 		// set first channel
-		if (isFirstLoad && channels.length > 0) {
+		if (isFirstLoad && channels.length > 0 && !currentChannel) {
 			// set current channel
 			this.props.setChannel(firstChannel);
 		}

@@ -28,7 +28,7 @@ class MessagesHeader extends Component {
 
 	render() {
 		const { isChannelStarred, openChannelInfoPopover } = this.state;
-		const { currentChannel, totalMessages, channelTopUsers } = this.props;
+		const { currentChannel, totalMessages, channelTopUsers, isUpdateChannelInfo } = this.props;
 
 		return (
 			<section className="sc-messages-header">
@@ -73,7 +73,7 @@ class MessagesHeader extends Component {
 					<ChannelInfoPopover
 						currentChannel={currentChannel}
 						channelTopUsers={channelTopUsers}
-						totalMessages={totalMessages}
+						isUpdateChannelInfo={isUpdateChannelInfo}
 					/>
 				</Popover>
 			</section>

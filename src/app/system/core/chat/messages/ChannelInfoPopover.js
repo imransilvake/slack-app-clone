@@ -116,9 +116,9 @@ class ChannelInfoPopover extends Component {
 	 * add top users listener
 	 */
 	addTopUsersListener = () => {
-		const { channelTopUsers, currentChannel, totalMessages } = this.props;
+		const { channelTopUsers, currentChannel, isUpdateChannelInfo } = this.props;
 
-		if (channelTopUsers && !!(_.find(channelTopUsers, e => e.channelId === currentChannel.id && e.totalMessages === totalMessages))) {
+		if (channelTopUsers && !!(_.find(channelTopUsers, e => e.channelId === currentChannel.id && !isUpdateChannelInfo))) {
 			const data = channelTopUsers.find(e => e.channelId === currentChannel.id);
 			this.setState({ topUsers: data.topUsers });
 		} else {
@@ -131,7 +131,7 @@ class ChannelInfoPopover extends Component {
 	 */
 	accumulateTopUsers = () => {
 		const { messagesRef } = this.state;
-		const { currentChannel, totalMessages } = this.props;
+		const { currentChannel } = this.props;
 
 		messagesRef
 			.child(currentChannel.id)
@@ -162,7 +162,6 @@ class ChannelInfoPopover extends Component {
 						// set top users
 						this.setState({ topUsers }, () => {
 							const userInfo = {
-								totalMessages,
 								channelId: currentChannel.id,
 								topUsers
 							};

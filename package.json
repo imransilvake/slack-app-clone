@@ -15,24 +15,24 @@
         "eject": "react-scripts eject"
     },
     "dependencies": {
-        "@imransilvake/scss-framework": "^2.0.7",
+        "@imransilvake/scss-framework": "^2.0.8",
         "@material-ui/core": "latest",
         "@material-ui/icons": "^3.0.2",
         "classnames": "^2.2.6",
-        "firebase": "^5.8.3",
-        "i18next": "^15.0.4",
-        "i18next-browser-languagedetector": "^3.0.0",
+        "firebase": "^5.9.2",
+        "i18next": "^15.0.8",
+        "i18next-browser-languagedetector": "^3.0.1",
         "lodash": "^4.17.11",
         "md5": "^2.2.1",
         "moment": "^2.24.0",
         "prop-types": "latest",
-        "react": "^16.8.2",
+        "react": "^16.8.6",
         "react-color": "^2.17.0",
-        "react-dom": "^16.8.2",
-        "react-i18next": "^10.1.2",
-        "react-redux": "^6.0.0",
-        "react-router-dom": "^4.3.1",
-        "react-scripts": "2.1.5",
+        "react-dom": "^16.8.6",
+        "react-i18next": "^10.6.1",
+        "react-redux": "^6.0.1",
+        "react-router-dom": "^5.0.0",
+        "react-scripts": "2.1.8",
         "react-scroll": "^1.7.11",
         "redux": "^4.0.1",
         "redux-devtools-extension": "^2.13.8"
@@ -42,7 +42,7 @@
         "eslint-plugin-react": "^7.12.4",
         "node-sass": "^4.11.0",
         "stylelint": "^9.10.1",
-        "stylelint-order": "^2.0.0"
+        "stylelint-order": "^2.1.0"
     },
     "browserslist": [
         ">0.2%",

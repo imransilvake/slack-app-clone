@@ -27,7 +27,8 @@ class MessagesPanel extends Component {
 		isInfiniteScrolling: true,
 		isReduxMessagesAccessLocked: false,
 		elementScrollTop: 0,
-		skipFirstAddedChild: true
+		skipFirstAddedChild: true,
+		isUpdateChannelInfo: false
 	};
 
 	componentDidMount() {
@@ -68,7 +69,7 @@ class MessagesPanel extends Component {
 	}
 
 	render() {
-		const { messagesRef, messages, isMessagesLoading } = this.state;
+		const { messagesRef, messages, isMessagesLoading, isUpdateChannelInfo } = this.state;
 		const { currentChannel, currentUser, userStarred, channelTopUsers } = this.props;
 
 		return messagesRef && messages && (
@@ -77,9 +78,10 @@ class MessagesPanel extends Component {
 				<MessagesHeader
 					currentUser={currentUser}
 					currentChannel={currentChannel}
-					totalMessages={messages.length}
 					userStarred={userStarred}
 					channelTopUsers={channelTopUsers}
+					totalMessages={messages.length}
+					isUpdateChannelInfo={isUpdateChannelInfo}
 				/>
 
 				{/* Content */}
@@ -119,7 +121,6 @@ class MessagesPanel extends Component {
 					messagesRef={messagesRef}
 					currentChannel={currentChannel}
 					currentUser={currentUser}
-					totalMessages={messages.length}
 				/>
 			</section>
 		);
@@ -242,7 +243,8 @@ class MessagesPanel extends Component {
 				// remove loading
 				this.setState({
 					messages,
-					isMessagesLoading: false
+					isMessagesLoading: false,
+					isUpdateChannelInfo: true
 				}, () => {
 					// unlock redux access for storing new messages
 					this.setState({ isReduxMessagesAccessLocked: false });
