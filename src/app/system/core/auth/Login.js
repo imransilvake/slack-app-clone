@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import firebase from '../../../../firebase';
 
 // app
-import FormControl from '@material-ui/core/FormControl/FormControl';
-import InputLabel from '@material-ui/core/InputLabel/InputLabel';
-import Input from '@material-ui/core/Input/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button/Button';
 import SlackLogo from '../../../../assets/svg/general/slack-logo.svg';
 import i18n from '../../../../assets/i18n/i18n';

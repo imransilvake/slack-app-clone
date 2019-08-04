@@ -7,9 +7,9 @@ import firebase from '../../../../../firebase';
 // app
 import FileUploadModal from '../common/FileUploadModal';
 import i18n from '../../../../../assets/i18n/i18n';
-import Textarea from '@material-ui/core/InputBase/Textarea';
 import Icon from '@material-ui/core/es/Icon/Icon';
 import { regexEmptyString, regexConvertUrlsToLinks } from '../../../utilities/helpers/Regex';
+import TextField from '@material-ui/core/TextField';
 
 class MessagesForm extends Component {
 	state = {
@@ -35,9 +35,11 @@ class MessagesForm extends Component {
 				{/* Form */}
 				<div className="sc-form">
 					{/* Textarea */}
-					<Textarea
+					<TextField
+						className="textarea"
 						name="message"
 						rows="2"
+						multiline="true"
 						value={message}
 						onChange={this.handleChange}
 						onKeyDown={this.prepareMessage}
