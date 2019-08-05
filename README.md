@@ -16,7 +16,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 
 ![Alt text](preview.png?raw=true "slack-clone")
 
-check out more preview images here: [Gallery](/preview)
+Check out more preview images: [Gallery](/preview)
 
 ## Content
 - [X] Authentication with Firebase
