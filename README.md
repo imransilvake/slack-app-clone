@@ -1,5 +1,4 @@
 # Slack App Clone
-###### `For Learning and Fun`
 A Full-stack Chat application from Frontend to Backend with React, Redux, Firebase, and custom SCSS Framework.
 - State management with Redux, with simple, straightforward patterns
 - Essential features of React Router 4 (Switch component, withRouter HOC, History object)
