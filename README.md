@@ -10,7 +10,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Upload and Display Image in messages using Firebase Storage
 - Creating and uploading user avatars
 - Starred / un-starred public channels
-- Tracking / showing when users are online / offline
+- Show Channel Information with top active users
 
 ![Alt text](home.png?raw=true "home")
 
