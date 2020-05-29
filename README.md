@@ -7,10 +7,12 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Form validations for our Register & Login forms
 - Create Public Channels
 - Send and receive messages instantly with the real-time Firebase Database
-- Upload and Display Image in messages using Firebase Storage
-- Creating and uploading user avatars
+- Upload and Display image in messages using Firebase Storage
 - Starred / un-starred public channels
 - Show Channel Information with top active users
+- Create and Upload user avatars
+- Allow user to change their status: Active, Away, Busy, Offline
+- Change App theme using React Color picker.
 
 ![Alt text](home.png?raw=true "home")
 
@@ -28,7 +30,7 @@ Check out more preview images: [Gallery](/preview)
 	- [X] Show Messages
 		- [X] Layout Messages
 		- [X] Implement Infinite Scrolling
-	- [X] Add Media to Messages
+	- [X] Add Image to Messages
 - [X] Add User Status
 - [X] Add Colors
 - [X] Starred/Un-starred Public Channels
