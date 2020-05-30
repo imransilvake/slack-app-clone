@@ -14,8 +14,12 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Allow user to change their status: Active, Away, Busy, Offline
 - Change App theme using React Color picker.
 
-![Alt text](preview-01.png?raw=true "home")
-![Alt text](preview-02.png?raw=true "slack-clone")
+<p align="center">
+	<img src="preview-01.png" width="80%">
+</p>
+<p align="center">
+	<img src="preview-02.png" width="80%">
+</p>
 
 ## Content
 - [X] Authentication with Firebase
