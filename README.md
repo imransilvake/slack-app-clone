@@ -15,10 +15,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Change App theme using React Color picker.
 
 ![Alt text](preview-01.png?raw=true "home")
-
 ![Alt text](preview-02.png?raw=true "slack-clone")
-
-Check out more preview images: [Gallery](/preview)
 
 ## Content
 - [X] Authentication with Firebase
