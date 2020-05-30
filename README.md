@@ -21,6 +21,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 	<img src="preview-02.png" width="100%">
 </p>
 
+
 ## Content
 - [X] Authentication with Firebase
 	- [X] Sign-up with Form Validation
