@@ -15,7 +15,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Change App theme using React Color picker.
 
 <p align="center">
-	<img src="preview-01.png" width="90%">
+	<img src="preview-01.png" width="100%">
 </p>
 <p align="center">
 	<img src="preview-02.png" width="100%">
