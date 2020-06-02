@@ -24,21 +24,21 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 
 ## Content
 - [X] Authentication with Firebase
-	- [X] Sign-up with Form Validation
-	- [X] Login with Form Validation
+	- Sign-up with Form Validation
+	- Login with Form Validation
 - [X] Implement Public Channels
 - [X] Implement Message System
-	- [X] Add Message to a Channel
-	- [X] Show Messages
-		- [X] Layout Messages
-		- [X] Implement Infinite Scrolling
-	- [X] Add Image to Messages
+	- Add Message to a Channel
+	- Show a List of Messages in a Channel
+		- Layout Design
+		- Implement Infinite Scrolling
+	- Add Image with Message to a Channel
 - [X] Add User Status
 - [X] Add Colors
 - [X] Starred/Un-starred Public Channels
 - [X] Show Channel Information
-	- [X] Show Top Posters
-	- [X] Channel Description
+	- Show Top Posters
+	- Channel Description
 
 
 ## Libraries and Frameworks
