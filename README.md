@@ -32,7 +32,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 	- Show a List of Messages in a Channel
 		- Layout Design
 		- Implement Infinite Scrolling
-	- Add Image with Message to a Channel
+	- Add Image with/without Message to a Channel
 - [X] Add User Status
 - [X] Add Colors
 - [X] Starred/Un-starred Public Channels
