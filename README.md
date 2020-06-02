@@ -2,7 +2,6 @@
 A Full-stack Chat application from Frontend to Backend with React, Redux, Firebase, and custom SCSS Framework.
 - State management with Redux, with simple, straightforward patterns
 - Essential features of React Router 4 (Switch component, withRouter HOC, History object)
-- Support Internationalization (i18n)
 - User authentication with Firebase (Register & Login)
 - Form validations for our Register & Login forms
 - Create Public Channels
@@ -13,6 +12,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Create and Upload user avatars
 - Allow user to change their status: Active, Away, Busy, Offline
 - Change App theme using React Color picker
+- Add support for Internationalization (i18n)
 
 <p align="center">
 	<img src="preview-01.png" width="100%">
