@@ -12,7 +12,6 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - Create and Upload user avatars
 - Allow user to change their status: Active, Away, Busy, Offline
 - Change App theme using React Color picker
-- Add support for Internationalization (i18n)
 
 <p align="center">
 	<img src="preview-01.png" width="100%">
@@ -39,6 +38,7 @@ A Full-stack Chat application from Frontend to Backend with React, Redux, Fireba
 - [X] Show Channel Information
 	- Show Top Posters
 	- Channel Description
+- [X] Support Internationalization (i18n)
 
 
 ## Libraries and Frameworks
