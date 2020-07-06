@@ -1,12 +1,8 @@
+// app
+import appRoutes from './app-routes';
+
 const production = {
-	ROUTING: {
-		HOME: '/',
-		CHAT: '/chat',
-		AUTH: {
-			LOGIN: '/login',
-			REGISTER: '/register'
-		}
-	}
+	ROUTING: appRoutes
 };
 
 export default production;

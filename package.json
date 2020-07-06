@@ -6,7 +6,7 @@
         "start": "REACT_APP_ENV=development react-scripts start",
         "build": "sh -ac './src/environment/ .env.${REACT_APP_ENV}; react-scripts build'",
         "build:development": "REACT_APP_ENV=development npm run build",
-        "build:staging": "REACT_APP_ENV=staging npm run build",
+        "build:next": "REACT_APP_ENV=next npm run build",
         "build:production": "REACT_APP_ENV=production npm run build",
         "serve": "serve -s build",
         "lint:scss": "stylelint '**/*.scss'; exit 0",
