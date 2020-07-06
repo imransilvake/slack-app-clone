@@ -22,7 +22,7 @@ class MessagesPanel extends Component {
 	state = {
 		messagesRef: firebase.database().ref('messages'),
 		messages: [],
-		isMessagesLoading: true,
+		isMessagesLoading: false,
 		keyReference: null,
 		isInfiniteScrolling: true,
 		isReduxMessagesAccessLocked: false,

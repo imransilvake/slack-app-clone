@@ -66,7 +66,8 @@ class Chat extends Component {
 							isDesktopView
 						/>
 					</div>
-					<div className="cd-hide-on-t-up cd-mobile-header">
+					<div className="cd-hide-on-t-up cd-mobile-header"
+						 style={{ backgroundColor: userColors.background.primary }}>
 						<IconButton onClick={this.handleDrawerToggle}>
 							<MenuIcon/>
 						</IconButton>

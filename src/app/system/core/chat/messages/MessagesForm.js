@@ -56,14 +56,6 @@ class MessagesForm extends Component {
 								{i18n.t('CHAT.MESSAGES_PANEL.FORM.TOOLTIP.IMAGE')}
 							</span>
 						</div>
-						<div className="cd-tooltip">
-							<div>
-								<Icon>insert_emoticon</Icon>
-							</div>
-							<span className="cd-arrow cd-top cd-fixed-right">
-								{i18n.t('CHAT.MESSAGES_PANEL.FORM.TOOLTIP.EMOJI')}
-							</span>
-						</div>
 					</div>
 				</div>
 
