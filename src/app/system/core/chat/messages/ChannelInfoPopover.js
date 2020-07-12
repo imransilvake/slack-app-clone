@@ -19,6 +19,7 @@ import formatMessageTime from '../../../utilities/helpers/Date';
 class ChannelInfoPopover extends Component {
 	state = {
 		expanded: 'sc-panel1',
+		usersRef: firebase.database().ref('users'),
 		messagesRef: firebase.database().ref('messages'),
 		topUsers: null
 	};
@@ -115,12 +116,35 @@ class ChannelInfoPopover extends Component {
 	/**
 	 * add top users listener
 	 */
-	addTopUsersListener = () => {
+	addTopUsersListener = async () => {
+		const { usersRef } = this.state;
 		const { channelTopUsers, currentChannel, isUpdateChannelInfo } = this.props;
 
+		// get saved list
 		if (channelTopUsers && !!(_.find(channelTopUsers, e => e.channelId === currentChannel.id && !isUpdateChannelInfo))) {
+			// fetch user avatar from firebase
 			const data = channelTopUsers.find(e => e.channelId === currentChannel.id);
-			this.setState({ topUsers: data.topUsers });
+			if (data && data.topUsers) {
+				const list = await Promise.all(data.topUsers.map(async user => {
+					// user id
+					if (user.id) {
+						const snap = await usersRef
+							.child(`${user.id}`)
+							.once('value');
+
+						// validate: value exists
+						if (snap.exists()) {
+							return {
+								...user,
+								avatar: snap.val().avatar
+							};
+						}
+					}
+				}));
+
+				// set state
+				this.setState({ topUsers: list });
+			}
 		} else {
 			this.accumulateTopUsers();
 		}
@@ -130,7 +154,7 @@ class ChannelInfoPopover extends Component {
 	 * accumulate top users
 	 */
 	accumulateTopUsers = () => {
-		const { messagesRef } = this.state;
+		const { messagesRef, usersRef } = this.state;
 		const { currentChannel } = this.props;
 
 		messagesRef
@@ -143,15 +167,26 @@ class ChannelInfoPopover extends Component {
 						const topUsers = Object
 							.values(
 								loadedMessages.reduce((acc, message) => {
-									if (message.user.email in acc) {
-										acc[message.user.email].count += 1;
-									} else {
-										acc[message.user.email] = {
-											name: message.user.name,
-											email: message.user.email,
-											avatar: message.user.avatar,
-											count: 1
-										}
+									// fetch user avatar from firebase
+									const userId = message.user.id;
+									if (userId) {
+										usersRef
+											.child(`${userId}`)
+											.once('value', (snap) => {
+												if (snap.exists()) {
+													if (message.user.email in acc) {
+														acc[message.user.email].count += 1;
+													} else {
+														acc[message.user.email] = {
+															id: userId,
+															name: message.user.name,
+															email: message.user.email,
+															avatar: snap.val().avatar,
+															count: 1
+														}
+													}
+												}
+											});
 									}
 									return acc;
 								}, {})

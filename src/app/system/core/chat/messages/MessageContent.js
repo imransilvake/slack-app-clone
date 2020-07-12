@@ -1,6 +1,9 @@
 // react
 import React, { Component } from 'react';
 
+// firebase
+import firebase from '../../../../../firebase';
+
 // app
 import classNames from 'classnames/bind';
 import formatMessageTime from '../../../utilities/helpers/Date';
@@ -9,13 +12,43 @@ import Modal from '@material-ui/core/es/Modal/Modal';
 
 class MessageContent extends Component {
 	state = {
+		usersRef: firebase.database().ref('users'),
 		isImageZoom: false,
 		isImageLoaded: false
 	};
 
+	componentDidMount() {
+		const { usersRef } = this.state;
+		const { message, isMessageOnSameDayBySameUser } = this.props;
+
+		// fetch user avatar from firebase
+		const userId = message.user.id;
+		if (userId && !isMessageOnSameDayBySameUser) {
+			usersRef
+				.child(`${userId}`)
+				.on('value', (snap) => {
+					if (snap.exists()) {
+						this.setState({
+							userAvatar: snap.val().avatar
+						});
+					}
+				});
+		}
+	}
+
+	componentWillUnmount() {
+		const { usersRef } = this.state;
+		const { message } = this.props;
+
+		// remove listener
+		const userId = message.user.id;
+		usersRef.child(userId).off();
+	}
+
 	render() {
-		const { isImageZoom, isImageLoaded } = this.state;
+		const { isImageZoom, isImageLoaded, userAvatar } = this.state;
 		const { message, currentUser, isMessageOnSameDay, isMessageOnSameDayBySameUser, isLastMessage } = this.props;
+
 		const messageContentClass = classNames({
 			'sc-message-content': true,
 			'sc-different': !isMessageOnSameDayBySameUser,
@@ -43,6 +76,11 @@ class MessageContent extends Component {
 			'sc-image-loading': !isImageLoaded
 		});
 
+		const avatarLoadedClass = classNames({
+			'sc-content': true,
+			'sc-avatar-loaded': userAvatar
+		});
+
 		return (
 			<article className={messageContentClass}>
 				{/* message time */}
@@ -59,11 +97,12 @@ class MessageContent extends Component {
 				}
 
 				{/* avatar */}
-				{!isMessageOnSameDayBySameUser &&
-				<img className="sc-avatar" src={message.user.avatar} alt={message.user.name}/>}
+				{!isMessageOnSameDayBySameUser && userAvatar && (
+					<img className="sc-avatar" src={userAvatar} alt='user-avatar'/>
+				)}
 
 				{/* content */}
-				<div className="sc-content">
+				<div className={avatarLoadedClass}>
 					{/* non-continuous message */}
 					{!isMessageOnSameDayBySameUser && this.nonContinuousMessage(message, selfMessageClass)}
 

@@ -164,7 +164,7 @@ class MessagesForm extends Component {
 	 * return message data
 	 *
 	 * @param fileUrl
-	 * @returns {{timestamp: Object, content: string, user: {id: string, name: *, avatar: string}}}
+	 * @returns {{timestamp: Object, content: string, user: {id: string, name: *}}}
 	 */
 	createMessage = (fileUrl = null) => {
 		const { message } = this.state;
@@ -176,8 +176,7 @@ class MessagesForm extends Component {
 			user: {
 				id: currentUser.uid,
 				name: currentUser.displayName,
-				email: currentUser.email,
-				avatar: currentUser.photoURL
+				email: currentUser.email
 			}
 		};
 

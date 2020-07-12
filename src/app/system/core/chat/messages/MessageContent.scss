@@ -24,8 +24,12 @@
 
 		.sc-content {
 			display: inline-block;
-			margin-left: 10px;
+			margin-left: 45px;
 			width: calc(100% - 45px);
+
+			&.sc-avatar-loaded {
+				margin-left: 10px;
+			}
 
 			.sc-name {
 				margin-top: -2px;

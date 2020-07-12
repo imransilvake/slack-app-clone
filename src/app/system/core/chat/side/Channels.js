@@ -194,8 +194,7 @@ class Channels extends Component {
 			timestamp: firebase.database.ServerValue.TIMESTAMP,
 			createdBy: {
 				name: currentUser.displayName,
-				email: currentUser.email,
-				avatar: currentUser.photoURL
+				email: currentUser.email
 			}
 		};
 

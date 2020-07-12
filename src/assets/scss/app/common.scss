@@ -119,11 +119,11 @@
 			padding: 5px 0;
 
 			span {
+				background-color: cd-palette($cd-background, 2000, .07);
 				border-radius: 2px;
 				display: inline-block;
 				font-size: cd-fontSize(s13);
 				height: 18px;
-				line-height: cd-lineHeight(1.9);
 				margin-left: 5px;
 				text-align: center;
 				width: 18px;
