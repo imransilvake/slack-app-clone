@@ -49,8 +49,8 @@
 				},
 				"MESSAGE": {
 					"T1": "Your account has been created successfully!",
-					"T2": "Your are automatically redirecting back to the login page shortly or click: ",
-					"LINK": "App"
+					"T2": "You will be automatically redirected back to the chat shortly. You can also open chat with: ",
+					"LINK": "Open Chat"
 				},
 				"BUTTON_TEXT": "Sign Up"
 			},

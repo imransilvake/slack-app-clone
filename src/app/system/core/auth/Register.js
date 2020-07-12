@@ -142,16 +142,6 @@ class Register extends Component {
 						/* Form | Success Message */
 						content()
 					}
-
-					{/* Footer */}
-					<footer className="cd-col sc-footer">
-						<p>
-							{i18n.t('AUTH.REGISTER.FOOTER.T1')}
-							<Link className="cd-link" to={ENV.ROUTING.AUTH.LOGIN}>
-								{i18n.t('AUTH.REGISTER.FOOTER.T2')}
-							</Link>
-						</p>
-					</footer>
 				</div>
 			</section>
 		);
@@ -199,15 +189,15 @@ class Register extends Component {
 				}).then(() => {
 					this.saveUser(createdUser)
 						.then(() => {
+							// set user to redux
+							this.props.setUser({ ...createdUser.user, code: '1' });
+
 							// remove errors, show success message, remove loading animation
 							this.setState({ errors: null, isAccountCreated: true, isAnimationLoading: false }, () => {
 								setTimeout(() => {
-									// set user to redux
-									this.props.setUser({ ...createdUser.user, code: '1' });
-
 									// navigate to chat route
 									this.props.history.push(ENV.ROUTING.CHAT);
-								}, 3000);
+								}, 5000);
 							});
 						})
 						.catch((error) => {

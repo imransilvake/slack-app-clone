@@ -49,8 +49,8 @@
 				},
 				"MESSAGE": {
 					"T1": "Ihr Konto wurde erfolgreich erstellt!",
-					"T2": "Sie werden in Kürze automatisch zur Anmeldeseite zurückgeleitet oder klicken Sie auf: ",
-					"LINK": "App"
+					"T2": "Sie werden in Kürze automatisch zum Chat zurückgeleitet. Sie können auch den Chat mit öffnen: ",
+					"LINK": "Chat öffnen"
 				},
 				"BUTTON_TEXT": "Anmelden"
 			},
