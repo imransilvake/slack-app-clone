@@ -59,5 +59,11 @@ A Full-stack chat application from Frontend to Backend with React, Redux, Fireba
 - [X] [React Color](https://casesandberg.github.io/react-color/)
 
 
+## Requirements
+```
+node version 10
+```
+
+
 ## Information
 Check [React-Seed](https://github.com/imransilvake/React-Seed) to understand how to build and serve this project as well as how to use SCSS and JS linting.
