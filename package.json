@@ -40,7 +40,7 @@
     "devDependencies": {
         "eslint-config-airbnb": "17.1.1",
         "eslint-plugin-react": "7.14.3",
-        "node-sass": "4.12.0",
+        "node-sass": "4.14.1",
         "stylelint": "10.1.0",
         "stylelint-order": "3.0.1"
     },
